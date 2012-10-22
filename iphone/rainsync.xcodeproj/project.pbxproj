@@ -1,0 +1,494 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5570A909163550A5008E2F50 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A908163550A5008E2F50 /* UIKit.framework */; };
+		5570A90B163550A5008E2F50 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A90A163550A5008E2F50 /* Foundation.framework */; };
+		5570A90D163550A5008E2F50 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A90C163550A5008E2F50 /* CoreGraphics.framework */; };
+		5570A913163550A5008E2F50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5570A911163550A5008E2F50 /* InfoPlist.strings */; };
+		5570A915163550A5008E2F50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5570A914163550A5008E2F50 /* main.m */; };
+		5570A919163550A5008E2F50 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5570A918163550A5008E2F50 /* AppDelegate.m */; };
+		5570A91B163550A5008E2F50 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5570A91A163550A5008E2F50 /* Default.png */; };
+		5570A91D163550A5008E2F50 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5570A91C163550A5008E2F50 /* Default@2x.png */; };
+		5570A91F163550A5008E2F50 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5570A91E163550A5008E2F50 /* Default-568h@2x.png */; };
+		5570A922163550A5008E2F50 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5570A921163550A5008E2F50 /* ViewController.m */; };
+		5570A925163550A5008E2F50 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5570A923163550A5008E2F50 /* ViewController.xib */; };
+		5570A92D163550A5008E2F50 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A92C163550A5008E2F50 /* SenTestingKit.framework */; };
+		5570A92E163550A5008E2F50 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A908163550A5008E2F50 /* UIKit.framework */; };
+		5570A92F163550A5008E2F50 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A90A163550A5008E2F50 /* Foundation.framework */; };
+		5570A937163550A5008E2F50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5570A935163550A5008E2F50 /* InfoPlist.strings */; };
+		5570A93A163550A5008E2F50 /* rainsyncTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5570A939163550A5008E2F50 /* rainsyncTests.m */; };
+		5570A94616355152008E2F50 /* DashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5570A94416355152008E2F50 /* DashBoardViewController.m */; };
+		5570A94716355152008E2F50 /* DashBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5570A94516355152008E2F50 /* DashBoardViewController.xib */; };
+		5570A94B16355489008E2F50 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5570A94916355489008E2F50 /* MapViewController.m */; };
+		5570A94C16355489008E2F50 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5570A94A16355489008E2F50 /* MapViewController.xib */; };
+		5570A94E1635574F008E2F50 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A94D1635574F008E2F50 /* CoreLocation.framework */; };
+		5570A955163557FD008E2F50 /* CoreLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5570A954163557FC008E2F50 /* CoreLocationController.m */; };
+		5570A9571635765D008E2F50 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A9561635765D008E2F50 /* MapKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5570A930163550A5008E2F50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5570A8FB163550A5008E2F50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5570A903163550A5008E2F50;
+			remoteInfo = rainsync;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5570A904163550A5008E2F50 /* rainsync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rainsync.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5570A908163550A5008E2F50 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5570A90A163550A5008E2F50 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5570A90C163550A5008E2F50 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5570A910163550A5008E2F50 /* rainsync-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "rainsync-Info.plist"; sourceTree = "<group>"; };
+		5570A912163550A5008E2F50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5570A914163550A5008E2F50 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5570A916163550A5008E2F50 /* rainsync-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rainsync-Prefix.pch"; sourceTree = "<group>"; };
+		5570A917163550A5008E2F50 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5570A918163550A5008E2F50 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5570A91A163550A5008E2F50 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		5570A91C163550A5008E2F50 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		5570A91E163550A5008E2F50 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		5570A920163550A5008E2F50 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		5570A921163550A5008E2F50 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		5570A924163550A5008E2F50 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		5570A92B163550A5008E2F50 /* rainsyncTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rainsyncTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5570A92C163550A5008E2F50 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		5570A934163550A5008E2F50 /* rainsyncTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "rainsyncTests-Info.plist"; sourceTree = "<group>"; };
+		5570A936163550A5008E2F50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5570A938163550A5008E2F50 /* rainsyncTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rainsyncTests.h; sourceTree = "<group>"; };
+		5570A939163550A5008E2F50 /* rainsyncTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rainsyncTests.m; sourceTree = "<group>"; };
+		5570A94316355152008E2F50 /* DashBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashBoardViewController.h; sourceTree = "<group>"; };
+		5570A94416355152008E2F50 /* DashBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashBoardViewController.m; sourceTree = "<group>"; };
+		5570A94516355152008E2F50 /* DashBoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DashBoardViewController.xib; sourceTree = "<group>"; };
+		5570A94816355489008E2F50 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		5570A94916355489008E2F50 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		5570A94A16355489008E2F50 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		5570A94D1635574F008E2F50 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5570A953163557EE008E2F50 /* CoreLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreLocationController.h; sourceTree = "<group>"; };
+		5570A954163557FC008E2F50 /* CoreLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreLocationController.m; sourceTree = "<group>"; };
+		5570A9561635765D008E2F50 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5570A901163550A5008E2F50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5570A9571635765D008E2F50 /* MapKit.framework in Frameworks */,
+				5570A94E1635574F008E2F50 /* CoreLocation.framework in Frameworks */,
+				5570A909163550A5008E2F50 /* UIKit.framework in Frameworks */,
+				5570A90B163550A5008E2F50 /* Foundation.framework in Frameworks */,
+				5570A90D163550A5008E2F50 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5570A927163550A5008E2F50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5570A92D163550A5008E2F50 /* SenTestingKit.framework in Frameworks */,
+				5570A92E163550A5008E2F50 /* UIKit.framework in Frameworks */,
+				5570A92F163550A5008E2F50 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5570A8F9163550A5008E2F50 = {
+			isa = PBXGroup;
+			children = (
+				5570A9561635765D008E2F50 /* MapKit.framework */,
+				5570A90E163550A5008E2F50 /* rainsync */,
+				5570A932163550A5008E2F50 /* rainsyncTests */,
+				5570A907163550A5008E2F50 /* Frameworks */,
+				5570A905163550A5008E2F50 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5570A905163550A5008E2F50 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5570A904163550A5008E2F50 /* rainsync.app */,
+				5570A92B163550A5008E2F50 /* rainsyncTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5570A907163550A5008E2F50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5570A94D1635574F008E2F50 /* CoreLocation.framework */,
+				5570A908163550A5008E2F50 /* UIKit.framework */,
+				5570A90A163550A5008E2F50 /* Foundation.framework */,
+				5570A90C163550A5008E2F50 /* CoreGraphics.framework */,
+				5570A92C163550A5008E2F50 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5570A90E163550A5008E2F50 /* rainsync */ = {
+			isa = PBXGroup;
+			children = (
+				5570A953163557EE008E2F50 /* CoreLocationController.h */,
+				5570A954163557FC008E2F50 /* CoreLocationController.m */,
+				5570A917163550A5008E2F50 /* AppDelegate.h */,
+				5570A918163550A5008E2F50 /* AppDelegate.m */,
+				5570A920163550A5008E2F50 /* ViewController.h */,
+				5570A921163550A5008E2F50 /* ViewController.m */,
+				5570A923163550A5008E2F50 /* ViewController.xib */,
+				5570A90F163550A5008E2F50 /* Supporting Files */,
+				5570A94316355152008E2F50 /* DashBoardViewController.h */,
+				5570A94416355152008E2F50 /* DashBoardViewController.m */,
+				5570A94516355152008E2F50 /* DashBoardViewController.xib */,
+				5570A94816355489008E2F50 /* MapViewController.h */,
+				5570A94916355489008E2F50 /* MapViewController.m */,
+				5570A94A16355489008E2F50 /* MapViewController.xib */,
+			);
+			path = rainsync;
+			sourceTree = "<group>";
+		};
+		5570A90F163550A5008E2F50 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5570A910163550A5008E2F50 /* rainsync-Info.plist */,
+				5570A911163550A5008E2F50 /* InfoPlist.strings */,
+				5570A914163550A5008E2F50 /* main.m */,
+				5570A916163550A5008E2F50 /* rainsync-Prefix.pch */,
+				5570A91A163550A5008E2F50 /* Default.png */,
+				5570A91C163550A5008E2F50 /* Default@2x.png */,
+				5570A91E163550A5008E2F50 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5570A932163550A5008E2F50 /* rainsyncTests */ = {
+			isa = PBXGroup;
+			children = (
+				5570A938163550A5008E2F50 /* rainsyncTests.h */,
+				5570A939163550A5008E2F50 /* rainsyncTests.m */,
+				5570A933163550A5008E2F50 /* Supporting Files */,
+			);
+			path = rainsyncTests;
+			sourceTree = "<group>";
+		};
+		5570A933163550A5008E2F50 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5570A934163550A5008E2F50 /* rainsyncTests-Info.plist */,
+				5570A935163550A5008E2F50 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5570A903163550A5008E2F50 /* rainsync */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5570A93D163550A5008E2F50 /* Build configuration list for PBXNativeTarget "rainsync" */;
+			buildPhases = (
+				5570A900163550A5008E2F50 /* Sources */,
+				5570A901163550A5008E2F50 /* Frameworks */,
+				5570A902163550A5008E2F50 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = rainsync;
+			productName = rainsync;
+			productReference = 5570A904163550A5008E2F50 /* rainsync.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5570A92A163550A5008E2F50 /* rainsyncTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5570A940163550A5008E2F50 /* Build configuration list for PBXNativeTarget "rainsyncTests" */;
+			buildPhases = (
+				5570A926163550A5008E2F50 /* Sources */,
+				5570A927163550A5008E2F50 /* Frameworks */,
+				5570A928163550A5008E2F50 /* Resources */,
+				5570A929163550A5008E2F50 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5570A931163550A5008E2F50 /* PBXTargetDependency */,
+			);
+			name = rainsyncTests;
+			productName = rainsyncTests;
+			productReference = 5570A92B163550A5008E2F50 /* rainsyncTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5570A8FB163550A5008E2F50 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = rainsync;
+			};
+			buildConfigurationList = 5570A8FE163550A5008E2F50 /* Build configuration list for PBXProject "rainsync" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5570A8F9163550A5008E2F50;
+			productRefGroup = 5570A905163550A5008E2F50 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5570A903163550A5008E2F50 /* rainsync */,
+				5570A92A163550A5008E2F50 /* rainsyncTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5570A902163550A5008E2F50 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5570A913163550A5008E2F50 /* InfoPlist.strings in Resources */,
+				5570A91B163550A5008E2F50 /* Default.png in Resources */,
+				5570A91D163550A5008E2F50 /* Default@2x.png in Resources */,
+				5570A91F163550A5008E2F50 /* Default-568h@2x.png in Resources */,
+				5570A925163550A5008E2F50 /* ViewController.xib in Resources */,
+				5570A94716355152008E2F50 /* DashBoardViewController.xib in Resources */,
+				5570A94C16355489008E2F50 /* MapViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5570A928163550A5008E2F50 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5570A937163550A5008E2F50 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5570A929163550A5008E2F50 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5570A900163550A5008E2F50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5570A915163550A5008E2F50 /* main.m in Sources */,
+				5570A919163550A5008E2F50 /* AppDelegate.m in Sources */,
+				5570A922163550A5008E2F50 /* ViewController.m in Sources */,
+				5570A94616355152008E2F50 /* DashBoardViewController.m in Sources */,
+				5570A94B16355489008E2F50 /* MapViewController.m in Sources */,
+				5570A955163557FD008E2F50 /* CoreLocationController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5570A926163550A5008E2F50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5570A93A163550A5008E2F50 /* rainsyncTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5570A931163550A5008E2F50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5570A903163550A5008E2F50 /* rainsync */;
+			targetProxy = 5570A930163550A5008E2F50 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5570A911163550A5008E2F50 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5570A912163550A5008E2F50 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5570A923163550A5008E2F50 /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5570A924163550A5008E2F50 /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+		5570A935163550A5008E2F50 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5570A936163550A5008E2F50 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5570A93B163550A5008E2F50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		5570A93C163550A5008E2F50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5570A93E163550A5008E2F50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "rainsync/rainsync-Prefix.pch";
+				INFOPLIST_FILE = "rainsync/rainsync-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5570A93F163550A5008E2F50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "rainsync/rainsync-Prefix.pch";
+				INFOPLIST_FILE = "rainsync/rainsync-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		5570A941163550A5008E2F50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/rainsync.app/rainsync";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "rainsync/rainsync-Prefix.pch";
+				INFOPLIST_FILE = "rainsyncTests/rainsyncTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		5570A942163550A5008E2F50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/rainsync.app/rainsync";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "rainsync/rainsync-Prefix.pch";
+				INFOPLIST_FILE = "rainsyncTests/rainsyncTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5570A8FE163550A5008E2F50 /* Build configuration list for PBXProject "rainsync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5570A93B163550A5008E2F50 /* Debug */,
+				5570A93C163550A5008E2F50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5570A93D163550A5008E2F50 /* Build configuration list for PBXNativeTarget "rainsync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5570A93E163550A5008E2F50 /* Debug */,
+				5570A93F163550A5008E2F50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		5570A940163550A5008E2F50 /* Build configuration list for PBXNativeTarget "rainsyncTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5570A941163550A5008E2F50 /* Debug */,
+				5570A942163550A5008E2F50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5570A8FB163550A5008E2F50 /* Project object */;
+}
