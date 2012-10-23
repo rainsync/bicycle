@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DashBoardViewController.h"
+#import "MapViewController.h"
+#import "ProfileViewController.h"
 
 @interface ViewController : UIViewController <UIScrollViewDelegate>
 {

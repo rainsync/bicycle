@@ -7,8 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "DashBoardViewController.h"
-#import "MapViewController.h"
+
 
 @interface ViewController ()
 
@@ -19,7 +18,7 @@
 @synthesize tabBar, pageControl, scrollView;
 
 
-static int kNumberOfPages=2;
+static int kNumberOfPages=3;
 
 - (void)viewDidLoad
 {
@@ -96,6 +95,8 @@ static int kNumberOfPages=2;
                 controller = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
                 break;
                 
+            case 2:
+                controller = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
             default:
                 break;
         }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		552BD57616365ECB00D89652 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552BD57416365ECB00D89652 /* ProfileViewController.m */; };
+		552BD57716365ECB00D89652 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 552BD57516365ECB00D89652 /* ProfileViewController.xib */; };
+		552BD57B1636609500D89652 /* NetUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 552BD57A1636609500D89652 /* NetUtility.m */; };
 		5570A909163550A5008E2F50 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A908163550A5008E2F50 /* UIKit.framework */; };
 		5570A90B163550A5008E2F50 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A90A163550A5008E2F50 /* Foundation.framework */; };
 		5570A90D163550A5008E2F50 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A90C163550A5008E2F50 /* CoreGraphics.framework */; };
@@ -43,6 +46,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		552BD57316365ECB00D89652 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		552BD57416365ECB00D89652 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		552BD57516365ECB00D89652 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		552BD5791636609400D89652 /* NetUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetUtility.h; sourceTree = "<group>"; };
+		552BD57A1636609500D89652 /* NetUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetUtility.m; sourceTree = "<group>"; };
 		5570A904163550A5008E2F50 /* rainsync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rainsync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5570A908163550A5008E2F50 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5570A90A163550A5008E2F50 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -152,6 +160,11 @@
 				5570A94816355489008E2F50 /* MapViewController.h */,
 				5570A94916355489008E2F50 /* MapViewController.m */,
 				5570A94A16355489008E2F50 /* MapViewController.xib */,
+				552BD57316365ECB00D89652 /* ProfileViewController.h */,
+				552BD57416365ECB00D89652 /* ProfileViewController.m */,
+				552BD57516365ECB00D89652 /* ProfileViewController.xib */,
+				552BD5791636609400D89652 /* NetUtility.h */,
+				552BD57A1636609500D89652 /* NetUtility.m */,
 			);
 			path = rainsync;
 			sourceTree = "<group>";
@@ -267,6 +280,7 @@
 				5570A925163550A5008E2F50 /* ViewController.xib in Resources */,
 				5570A94716355152008E2F50 /* DashBoardViewController.xib in Resources */,
 				5570A94C16355489008E2F50 /* MapViewController.xib in Resources */,
+				552BD57716365ECB00D89652 /* ProfileViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +321,8 @@
 				5570A94616355152008E2F50 /* DashBoardViewController.m in Sources */,
 				5570A94B16355489008E2F50 /* MapViewController.m in Sources */,
 				5570A955163557FD008E2F50 /* CoreLocationController.m in Sources */,
+				552BD57616365ECB00D89652 /* ProfileViewController.m in Sources */,
+				552BD57B1636609500D89652 /* NetUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,7 +393,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -397,7 +413,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -410,7 +426,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rainsync/rainsync-Prefix.pch";
 				INFOPLIST_FILE = "rainsync/rainsync-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -421,7 +439,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rainsync/rainsync-Prefix.pch";
 				INFOPLIST_FILE = "rainsync/rainsync-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -479,6 +499,7 @@
 				5570A93F163550A5008E2F50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5570A940163550A5008E2F50 /* Build configuration list for PBXNativeTarget "rainsyncTests" */ = {
 			isa = XCConfigurationList;
@@ -487,6 +508,7 @@
 				5570A942163550A5008E2F50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
