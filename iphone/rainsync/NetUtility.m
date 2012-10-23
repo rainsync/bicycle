@@ -27,10 +27,11 @@
     
 }
 
--(void) postURL:(NSString*)url withStream:(NSInputStream*)stream withBlock:(void (^)(NSData*))block{
+-(void) postURL:(NSString*)url withData:(NSData*)data withBlock:(void (^)(NSData*))block{
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] ];
     [req setHTTPMethod:@"POST"];
-    [req setHTTPBodyStream:stream];
+    [req setHTTPBody:data];
+
     [[[NSURLConnection alloc] initWithRequest:req delegate:self] autorelease];
     //[req release];
     self.block = block;

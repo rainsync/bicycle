@@ -17,6 +17,6 @@
 @property (nonatomic, strong) NSMutableData* responseData;
 @property (nonatomic, strong) void (^block)(NSData*);
 -(void) getURL:(NSString *)url withBlock:(void (^)(NSData*))block;
--(void) postURL:(NSString*)url withStream:(NSInputStream*)stream withBlock:(void (^)(NSData*))block;
+-(void) postURL:(NSString*)url withData:(NSData*)data withBlock:(void (^)(NSData*))block;
 
 @end

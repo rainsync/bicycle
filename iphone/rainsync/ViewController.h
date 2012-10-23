@@ -19,9 +19,11 @@
     UIScrollView* scrollView;
     BOOL pageControlUsed;
     
+    
 }
 @property (nonatomic, retain) IBOutlet UITabBar* tabBar;
 @property (nonatomic, retain) IBOutlet UIPageControl* pageControl;
+//@property (nonatomic, retain) IBOutlet DDPageControl *pageControl;
 @property (nonatomic, retain) IBOutlet UIScrollView* scrollView;
 
 @end

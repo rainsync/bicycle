@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "NetUtility.h"
+#import "AppDelegate.h"
 @interface ProfileViewController : UIViewController
-
+{
+    
+    
+}
+@property IBOutlet UIButton* fbloginbutton;
 @end

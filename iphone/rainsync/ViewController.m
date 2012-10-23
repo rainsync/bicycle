@@ -15,7 +15,7 @@
 
 @implementation ViewController
 
-@synthesize tabBar, pageControl, scrollView;
+@synthesize tabBar, scrollView, pageControl;
 
 
 static int kNumberOfPages=3;
@@ -25,6 +25,8 @@ static int kNumberOfPages=3;
     
     
     [super viewDidLoad];
+    
+    
 	[self awakeFromNib];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -65,6 +67,7 @@ static int kNumberOfPages=3;
     pageControl.numberOfPages = kNumberOfPages;
     pageControl.currentPage = 0;
     
+
     // pages are created on demand
     // load the visible page
     // load the page on either side to avoid flashes when the user starts scrolling
@@ -134,6 +137,7 @@ static int kNumberOfPages=3;
     CGFloat pageWidth = scrollView.frame.size.width;
     int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     pageControl.currentPage = page;
+    //page;
     
     // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
     [self loadScrollViewWithPage:page - 1];
