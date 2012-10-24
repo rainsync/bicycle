@@ -23,7 +23,6 @@
 		5570A91D163550A5008E2F50 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5570A91C163550A5008E2F50 /* Default@2x.png */; };
 		5570A91F163550A5008E2F50 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5570A91E163550A5008E2F50 /* Default-568h@2x.png */; };
 		5570A922163550A5008E2F50 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5570A921163550A5008E2F50 /* ViewController.m */; };
-		5570A925163550A5008E2F50 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5570A923163550A5008E2F50 /* ViewController.xib */; };
 		5570A92D163550A5008E2F50 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A92C163550A5008E2F50 /* SenTestingKit.framework */; };
 		5570A92E163550A5008E2F50 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A908163550A5008E2F50 /* UIKit.framework */; };
 		5570A92F163550A5008E2F50 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A90A163550A5008E2F50 /* Foundation.framework */; };
@@ -38,6 +37,16 @@
 		5570A9571635765D008E2F50 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A9561635765D008E2F50 /* MapKit.framework */; };
 		55910F931637F4E800B007CA /* RidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55910F911637F4E800B007CA /* RidingViewController.m */; };
 		55910F941637F4E800B007CA /* RidingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55910F921637F4E800B007CA /* RidingViewController.xib */; };
+		559110011638207700B007CA /* GroupRideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55910FFF1638207100B007CA /* GroupRideViewController.m */; };
+		559110021638207700B007CA /* GroupRideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559110001638207300B007CA /* GroupRideViewController.xib */; };
+		55911006163823E100B007CA /* StaticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55911004163823E000B007CA /* StaticViewController.m */; };
+		55911007163823E100B007CA /* StaticViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55911005163823E100B007CA /* StaticViewController.xib */; };
+		5591100B1638241500B007CA /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 559110091638241500B007CA /* SettingViewController.m */; };
+		5591100C1638241500B007CA /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5591100A1638241500B007CA /* SettingViewController.xib */; };
+		5591100D163825A900B007CA /* StaticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55911004163823E000B007CA /* StaticViewController.m */; };
+		5591100E163825AE00B007CA /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 559110091638241500B007CA /* SettingViewController.m */; };
+		5591100F1638260200B007CA /* StaticViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55911005163823E100B007CA /* StaticViewController.xib */; };
+		559110101638260600B007CA /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5591100A1638241500B007CA /* SettingViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +83,6 @@
 		5570A91E163550A5008E2F50 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5570A920163550A5008E2F50 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		5570A921163550A5008E2F50 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		5570A924163550A5008E2F50 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		5570A92B163550A5008E2F50 /* rainsyncTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rainsyncTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5570A92C163550A5008E2F50 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		5570A934163550A5008E2F50 /* rainsyncTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "rainsyncTests-Info.plist"; sourceTree = "<group>"; };
@@ -94,6 +102,15 @@
 		55910F901637F4E800B007CA /* RidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RidingViewController.h; sourceTree = "<group>"; };
 		55910F911637F4E800B007CA /* RidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RidingViewController.m; sourceTree = "<group>"; };
 		55910F921637F4E800B007CA /* RidingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RidingViewController.xib; sourceTree = "<group>"; };
+		55910FFE1638207000B007CA /* GroupRideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupRideViewController.h; sourceTree = "<group>"; };
+		55910FFF1638207100B007CA /* GroupRideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupRideViewController.m; sourceTree = "<group>"; };
+		559110001638207300B007CA /* GroupRideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupRideViewController.xib; sourceTree = "<group>"; };
+		55911003163823E000B007CA /* StaticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticViewController.h; sourceTree = "<group>"; };
+		55911004163823E000B007CA /* StaticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticViewController.m; sourceTree = "<group>"; };
+		55911005163823E100B007CA /* StaticViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StaticViewController.xib; sourceTree = "<group>"; };
+		559110081638241400B007CA /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		559110091638241500B007CA /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		5591100A1638241500B007CA /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,7 +186,6 @@
 				5570A918163550A5008E2F50 /* AppDelegate.m */,
 				5570A920163550A5008E2F50 /* ViewController.h */,
 				5570A921163550A5008E2F50 /* ViewController.m */,
-				5570A923163550A5008E2F50 /* ViewController.xib */,
 				5570A90F163550A5008E2F50 /* Supporting Files */,
 				5570A94316355152008E2F50 /* DashBoardViewController.h */,
 				5570A94416355152008E2F50 /* DashBoardViewController.m */,
@@ -185,6 +201,15 @@
 				55910F901637F4E800B007CA /* RidingViewController.h */,
 				55910F911637F4E800B007CA /* RidingViewController.m */,
 				55910F921637F4E800B007CA /* RidingViewController.xib */,
+				55910FFE1638207000B007CA /* GroupRideViewController.h */,
+				55910FFF1638207100B007CA /* GroupRideViewController.m */,
+				559110001638207300B007CA /* GroupRideViewController.xib */,
+				55911003163823E000B007CA /* StaticViewController.h */,
+				55911004163823E000B007CA /* StaticViewController.m */,
+				55911005163823E100B007CA /* StaticViewController.xib */,
+				559110081638241400B007CA /* SettingViewController.h */,
+				559110091638241500B007CA /* SettingViewController.m */,
+				5591100A1638241500B007CA /* SettingViewController.xib */,
 			);
 			path = rainsync;
 			sourceTree = "<group>";
@@ -293,15 +318,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				559110101638260600B007CA /* SettingViewController.xib in Resources */,
+				5591100F1638260200B007CA /* StaticViewController.xib in Resources */,
 				5570A913163550A5008E2F50 /* InfoPlist.strings in Resources */,
 				5570A91B163550A5008E2F50 /* Default.png in Resources */,
 				5570A91D163550A5008E2F50 /* Default@2x.png in Resources */,
 				5570A91F163550A5008E2F50 /* Default-568h@2x.png in Resources */,
-				5570A925163550A5008E2F50 /* ViewController.xib in Resources */,
 				5570A94716355152008E2F50 /* DashBoardViewController.xib in Resources */,
 				5570A94C16355489008E2F50 /* MapViewController.xib in Resources */,
 				552BD57716365ECB00D89652 /* ProfileViewController.xib in Resources */,
 				55910F941637F4E800B007CA /* RidingViewController.xib in Resources */,
+				559110021638207700B007CA /* GroupRideViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +337,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5570A937163550A5008E2F50 /* InfoPlist.strings in Resources */,
+				55911007163823E100B007CA /* StaticViewController.xib in Resources */,
+				5591100C1638241500B007CA /* SettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +365,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5591100E163825AE00B007CA /* SettingViewController.m in Sources */,
+				5591100D163825A900B007CA /* StaticViewController.m in Sources */,
 				5570A915163550A5008E2F50 /* main.m in Sources */,
 				5570A919163550A5008E2F50 /* AppDelegate.m in Sources */,
 				5570A922163550A5008E2F50 /* ViewController.m in Sources */,
@@ -345,6 +376,7 @@
 				552BD57616365ECB00D89652 /* ProfileViewController.m in Sources */,
 				552BD57B1636609500D89652 /* NetUtility.m in Sources */,
 				55910F931637F4E800B007CA /* RidingViewController.m in Sources */,
+				559110011638207700B007CA /* GroupRideViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +385,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5570A93A163550A5008E2F50 /* rainsyncTests.m in Sources */,
+				55911006163823E100B007CA /* StaticViewController.m in Sources */,
+				5591100B1638241500B007CA /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,14 +407,6 @@
 				5570A912163550A5008E2F50 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		5570A923163550A5008E2F50 /* ViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5570A924163550A5008E2F50 /* en */,
-			);
-			name = ViewController.xib;
 			sourceTree = "<group>";
 		};
 		5570A935163550A5008E2F50 /* InfoPlist.strings */ = {

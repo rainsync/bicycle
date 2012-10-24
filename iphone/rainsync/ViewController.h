@@ -8,15 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "ProfileViewController.h"
+#import "GroupRideViewController.h"
+#import "RidingViewController.h"
+#import "StaticViewController.h"
+#import "SettingViewController.h"
 
-@interface ViewController : UIViewController <UITabBarDelegate>
+
+@interface ViewController : UITabBarController
 {
 
-    UITabBar* tabBar;
     
     
 }
-@property (nonatomic, retain) IBOutlet UITabBar* tabBar;
 
 
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DashBoardViewController.h"
 #import "MapViewController.h"
-
+#import "ProfileViewController.h"
 
 @interface RidingViewController : UIViewController <UIScrollViewDelegate>
 {

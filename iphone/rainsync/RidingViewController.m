@@ -23,6 +23,8 @@ static int kNumberOfPages=3;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.title = NSLocalizedString(@"라이딩", @"라이딩");
+        //self.tabBarItem.image = [UIImag]
         // Custom initialization
     }
     return self;

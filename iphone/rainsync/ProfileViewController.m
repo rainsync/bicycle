@@ -23,7 +23,8 @@
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-
+        self.tabBarItem.title = NSLocalizedString(@"프로필", @"프로필");
+        
         // Custom initialization
     }
     return self;

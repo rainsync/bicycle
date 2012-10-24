@@ -15,14 +15,26 @@
 
 @implementation ViewController
 
-@synthesize tabBar;
+- (id)init
+{
+    [super init];
+    ProfileViewController* profile = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
+    GroupRideViewController* groupriding = [[GroupRideViewController alloc]initWithNibName:@"GroupRideViewController" bundle:nil];
+    RidingViewController* riding = [[RidingViewController alloc]initWithNibName:@"RidingViewController" bundle:nil];
+    StaticViewController* statics = [[StaticViewController alloc]initWithNibName:@"StaticViewController" bundle:nil];
+    SettingViewController* setting = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
 
+    
+    self.viewControllers = @[profile, groupriding, riding,statics, setting];
+    return self;
+    
+}
 - (void)viewDidLoad
 {
     
     
     [super viewDidLoad];
-    
+
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -32,45 +44,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
-    NSLog([NSString stringWithFormat:@"test %d", item.tag]);
-    
-    ProfileViewController* view = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
-    
-    
-    //1 프로필 2 떼라 3 라이딩 시작 4 통계 5 설정
-    switch(item.tag){
-        case 1:
-            self.view.
-            break;
-            
-        case 2:
-            
-            break;
-            
-        case 3:
-            
-            break;
-            
-        case 4:
-            
-            break;
-            
-        case 5:
-            
-            break;
-            
-    }
-    
-}
-
 - (void)dealloc {
-    [tabBar release];
     [super dealloc];
 }
 - (void)viewDidUnload {
-    [tabBar release];
-    tabBar = nil;
     [super viewDidUnload];
 }
 @end
