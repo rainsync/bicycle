@@ -19,10 +19,11 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    
+
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+
         // Custom initialization
     }
     return self;
@@ -35,6 +36,7 @@
     [self test];
     [self updateView];
     
+    /*
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     if (!appDelegate.session.isOpen) {
         // create a fresh session object
@@ -53,6 +55,7 @@
             }];
         }
     }
+     */
     
 }
 
@@ -62,13 +65,16 @@
 - (void)test
 {
     NetUtility* net = [[[NetUtility alloc] init] autorelease];
-    [net getURL:@"http://www.search.twitter.com/search.json?q=from:nathanhjones" withBlock:^(NSData* result){
+    [net getURL:@"https://graph.facebook.com/me/friends?access_token=BAABtL16bpQsBAH2jv0Ig5MSW45JKkdXTIHHai8SUxyIyS7cwHi3XNSGOKfXekjdHO9QNLILMbuXc9kNScQ3neQ2xkqGqlyF7B8jQtY2ObQU5Dvuq9u92w4PTS7gZAZBOI3RlBl2ktGYgQom76ZC" withBlock:^(NSData* result){
         
         //NSString* test= [[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding ];
         
          // convert to JSON
          NSError *myError = nil;
          NSDictionary *res = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&myError];
+        NSLog(@"test! %@", [[[res objectForKey:@"data"] objectAtIndex:0] objectForKey:@"name"]);
+        
+        
         NSLog(@"error %@", myError);
         
          // show all values
@@ -98,6 +104,7 @@
     }];
     
     
+    /*
     NSDictionary * json = [NSDictionary dictionaryWithObjectsAndKeys:@"method", @"setGPS", @"seq", @"1", nil];
     NSData* data = [NSJSONSerialization dataWithJSONObject:json options:NSUTF8StringEncoding error:nil];
     
@@ -108,7 +115,7 @@
         
         
     }];
-    
+    */
     /*
     [data release];
     [json release];
@@ -122,11 +129,12 @@
 // main helper method to update the UI to reflect the current state of the session.
 - (void)updateView {
     // get the app delegate, so that we can reference the session property
-    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    if (appDelegate.session.isOpen) {
+
+
+    if (FBSession.activeSession.isOpen) {
         // valid account UI is shown whenever the session is open
         [self.fbloginbutton setTitle:@"Log out" forState:UIControlStateNormal];
-         NSLog([NSString stringWithFormat:@"https://graph.facebook.com/me/friends?access_token=%@", appDelegate.session.accessToken]);
+         NSLog([NSString stringWithFormat:@"https://graph.facebook.com/me/friends?access_token=%@", FBSession.activeSession.accessToken]);
     } else {
         // login-needed account UI is shown whenever the session is closed
         [self.fbloginbutton setTitle:@"Log in" forState:UIControlStateNormal];
@@ -137,32 +145,41 @@
 - (IBAction)fblogin:(id)sender{
     // get the app delegate so that we can access the session property
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    
+
     // this button's job is to flip-flop the session from open to closed
-    if (appDelegate.session.isOpen) {
+    if (FBSession.activeSession.isOpen) {
         // if a user logs out explicitly, we delete any cached token information, and next
         // time they run the applicaiton they will be presented with log in UX again; most
         // users will simply close the app or switch away, without logging out; this will
         // cause the implicit cached-token login to occur on next launch of the application
-        [appDelegate.session closeAndClearTokenInformation];
+        [FBSession.activeSession closeAndClearTokenInformation];
         
     } else {
-        if (appDelegate.session.state != FBSessionStateCreated) {
+        /*
+        if (FBSession.activeSession.state != FBSessionStateCreated) {
             // Create a new, logged out session.
             appDelegate.session = [[FBSession alloc] init];
         }
+         */
         
         // if the session isn't open, let's open it now and present the login UX to the user
-        [appDelegate.session openWithCompletionHandler:^(FBSession *session,
+        [FBSession.activeSession openWithCompletionHandler:^(FBSession *session,
                                                          FBSessionState status,
                                                          NSError *error) {
+            
+                [self updateView];
+            
+            }];
+            
             // and here we make sure to update our UX according to the new session state
-            [self updateView];
-        }];
+            
+            
+        
     }
     
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {

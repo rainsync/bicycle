@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "NetUtility.h"
-#import "AppDelegate.h"
-@interface ProfileViewController : UIViewController
+#import <FacebookSDK/FacebookSDK.h>
+
+@interface ProfileViewController : UIViewController <FBRequestDelegate>
 {
+
+    @private FBProfilePictureView* profileview;
     
     
 }

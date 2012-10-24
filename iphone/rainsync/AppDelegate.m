@@ -12,7 +12,7 @@
 #import "DashBoardViewController.h"
 @implementation AppDelegate
 
-@synthesize session;
+
 
 - (void)dealloc
 {
@@ -60,7 +60,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [self.session close];
+    [FBSession.activeSession close];
 }
 
 // FBSample logic
@@ -78,7 +78,7 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     // attempt to extract a token from the url
-    return [self.session handleOpenURL:url];
+    return [FBSession.activeSession handleOpenURL:url];
 }
 
 
