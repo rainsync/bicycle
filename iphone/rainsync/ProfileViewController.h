@@ -10,12 +10,7 @@
 #import "NetUtility.h"
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface ProfileViewController : UIViewController <FBRequestDelegate>
-{
-
-    @private FBProfilePictureView* profileview;
-    
-    
-}
+@interface ProfileViewController : UIViewController
 @property IBOutlet UIButton* fbloginbutton;
+@property (retain,nonatomic) IBOutlet  FBProfilePictureView* profileview;
 @end

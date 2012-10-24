@@ -15,7 +15,7 @@
 
 @implementation ProfileViewController
 
-@synthesize fbloginbutton;
+@synthesize fbloginbutton, profileview;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -133,9 +133,19 @@
 
 
     if (FBSession.activeSession.isOpen) {
+        
         // valid account UI is shown whenever the session is open
         [self.fbloginbutton setTitle:@"Log out" forState:UIControlStateNormal];
          NSLog([NSString stringWithFormat:@"https://graph.facebook.com/me/friends?access_token=%@", FBSession.activeSession.accessToken]);
+        FBRequest* req = [[FBRequest alloc]initWithSession:FBSession.activeSession graphPath:@"me"];
+        [req startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+            //NSLog([NSString stringWithFormat:@"facebook id %@",[result objectForKey:@"id"]]);
+            
+            
+            profileview.profileID= [result objectForKey:@"id"];
+            
+        }];
+        
     } else {
         // login-needed account UI is shown whenever the session is closed
         [self.fbloginbutton setTitle:@"Log in" forState:UIControlStateNormal];
@@ -156,12 +166,12 @@
         [FBSession.activeSession closeAndClearTokenInformation];
         
     } else {
-        /*
+        
         if (FBSession.activeSession.state != FBSessionStateCreated) {
             // Create a new, logged out session.
-            appDelegate.session = [[FBSession alloc] init];
+            FBSession.activeSession= [[FBSession alloc] init];
         }
-         */
+        
         
         // if the session isn't open, let's open it now and present the login UX to the user
         [FBSession.activeSession openWithCompletionHandler:^(FBSession *session,
