@@ -25,9 +25,25 @@
     return self;
 }
 
+- (IBAction)ridingChange:(id)sender {
+    if(_GroupRiding.on)
+        [[NSUserDefaults standardUserDefaults]  setValue:@"Group" forKey:@"RidingType"];
+    else
+        [[NSUserDefaults standardUserDefaults]  setValue:@"Single" forKey:@"RidingType"];
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSString* RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
+    if([RidingType isEqualToString:@"Single"])
+        [_GroupRiding setOn:FALSE];
+    else
+        [_GroupRiding setOn:TRUE];
+    
+        
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -37,4 +53,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    [_GroupRiding release];
+    [super dealloc];
+}
+- (void)viewDidUnload {
+    [self setGroupRiding:nil];
+    [super viewDidUnload];
+}
 @end

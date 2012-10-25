@@ -17,7 +17,7 @@
 @synthesize scrollView, pageControl;
 
 
-static int kNumberOfPages=3;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,6 +37,11 @@ static int kNumberOfPages=3;
 - (void)awakeFromNib
 {
     
+    RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
+    if([RidingType isEqualToString:@"Single"])
+        kNumberOfPages=2;
+    else
+        kNumberOfPages=3;
     
     
     
@@ -92,7 +97,6 @@ static int kNumberOfPages=3;
             case 1:
                 controller = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
                 break;
-                
             case 2:
                 controller = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
             default:
@@ -173,11 +177,14 @@ static int kNumberOfPages=3;
     pageControlUsed = YES;
 }
 
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self awakeFromNib];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self awakeFromNib];
+    
     // Do any additional setup after loading the view from its nib.
 }
 

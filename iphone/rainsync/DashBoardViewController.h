@@ -11,10 +11,6 @@
 @interface DashBoardViewController : UIViewController <CoreLocationControllerDelegate>
 {
     CoreLocationController *CLController;
-    UILabel *speedLabel;
-    UILabel *latitudeLabel;
-    UILabel *longitudeLabel;
-    UILabel *altitudeLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *speedLabel;

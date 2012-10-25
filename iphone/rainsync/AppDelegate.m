@@ -21,10 +21,26 @@
     [super dealloc];
 }
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [FBProfilePictureView class];
     
+    NSString* RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
+    if(!RidingType){
+        RidingType = @"Single";
+        [[NSUserDefaults standardUserDefaults] setValue:RidingType forKey:@"RidingType"];
+    }
+    
+    NSString* IsRiding = [[NSUserDefaults standardUserDefaults] stringForKey:@"IsRiding"];
+    if(!IsRiding){
+        IsRiding = @"Stop";
+        [[NSUserDefaults standardUserDefaults] setValue:IsRiding forKey:@"IsRiding"];
+        
+    }
+    
+    
+    [FBProfilePictureView class];
+
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     

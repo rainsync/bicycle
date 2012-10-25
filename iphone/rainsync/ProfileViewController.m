@@ -34,21 +34,21 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self test];
+    //[self test];
     [self updateView];
     
-    /*
-    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    if (!appDelegate.session.isOpen) {
+    
+
+    if (!FBSession.activeSession.isOpen) {
         // create a fresh session object
-        appDelegate.session = [[FBSession alloc] init];
+        FBSession.activeSession = [[FBSession alloc] init];
         
         // if we don't have a cached token, a call to open here would cause UX for login to
         // occur; we don't want that to happen unless the user clicks the login button, and so
         // we check here to make sure we have a token before calling open
-        if (appDelegate.session.state == FBSessionStateCreatedTokenLoaded) {
+        if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
             // even though we had a cached token, we need to login to make the session usable
-            [appDelegate.session openWithCompletionHandler:^(FBSession *session,
+            [FBSession.activeSession openWithCompletionHandler:^(FBSession *session,
                                                              FBSessionState status,
                                                              NSError *error) {
                 // we recurse here, in order to update buttons and labels
@@ -56,7 +56,7 @@
             }];
         }
     }
-     */
+     
     
 }
 
@@ -143,6 +143,7 @@
             
             
             profileview.profileID= [result objectForKey:@"id"];
+            [_Name setText:[result objectForKey:@"name"]];
             
         }];
         
@@ -167,11 +168,11 @@
         
     } else {
         
+        
         if (FBSession.activeSession.state != FBSessionStateCreated) {
             // Create a new, logged out session.
             FBSession.activeSession= [[FBSession alloc] init];
         }
-        
         
         // if the session isn't open, let's open it now and present the login UX to the user
         [FBSession.activeSession openWithCompletionHandler:^(FBSession *session,
@@ -198,4 +199,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    [_Name release];
+    [super dealloc];
+}
+- (void)viewDidUnload {
+    [self setName:nil];
+    [super viewDidUnload];
+}
 @end

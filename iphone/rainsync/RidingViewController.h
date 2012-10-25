@@ -14,9 +14,11 @@
 @interface RidingViewController : UIViewController <UIScrollViewDelegate>
 {
     NSMutableArray* controllers;
-    UIPageControl* pageControl;
-    UIScrollView* scrollView;
     @private BOOL pageControlUsed;
+    @private NSString* RidingType;
+    @private int kNumberOfPages;
+    
+    
     
 }
 @property (nonatomic, retain) IBOutlet UIPageControl* pageControl;

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface GroupRideViewController : UIViewController
+@property (retain, nonatomic) IBOutlet UISwitch *GroupRiding;
 
 @end

@@ -23,7 +23,8 @@
     RidingViewController* riding = [[RidingViewController alloc]initWithNibName:@"RidingViewController" bundle:nil];
     StaticViewController* statics = [[StaticViewController alloc]initWithNibName:@"StaticViewController" bundle:nil];
     SettingViewController* setting = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
-
+    
+    //[self.tabBarItem]
     
     self.viewControllers = @[profile, groupriding, riding,statics, setting];
     return self;
