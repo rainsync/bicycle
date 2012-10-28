@@ -23,7 +23,7 @@
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.tabBarItem.title = NSLocalizedString(@"프로필", @"프로필");
+        self.title = NSLocalizedString(@"프로필", @"프로필");
         
         // Custom initialization
     }
@@ -33,6 +33,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // 네비게이션 바 색깔 검정 스타일로 변경
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    
     // Do any additional setup after loading the view from its nib.
     //[self test];
     [self updateView];
