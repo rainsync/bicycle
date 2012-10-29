@@ -23,7 +23,7 @@
     
     GroupRideViewController* groupriding = [[GroupRideViewController alloc]initWithNibName:@"GroupRideViewController" bundle:nil];
 
-    RidingViewController* riding = [[RidingViewController alloc]initWithNibName:@"RidingViewController" bundle:nil];
+//    RidingViewController* riding = [[RidingViewController alloc]initWithNibName:@"RidingViewController" bundle:nil];
 
     StaticViewController* statics = [[StaticViewController alloc]initWithNibName:@"StaticViewController" bundle:nil];
     UINavigationController *staticsNavController = [[UINavigationController alloc] initWithRootViewController:statics];
