@@ -38,6 +38,7 @@
         
     }
     
+    [[NSUserDefaults standardUserDefaults]synchronize];
     
     [FBProfilePictureView class];
 
@@ -45,7 +46,8 @@
     // Override point for customization after application launch.
     
     
-    self.viewController = [[ViewController alloc] init];
+    //self.viewController = [[ViewController alloc] init];
+    self.viewController = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
@@ -76,9 +78,19 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+
+    
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [FBSession.activeSession close];
 }
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    NSLog(url.absoluteString);
+    
+    // Do something with the url here
+}
+
 
 // FBSample logic
 // The native facebook application transitions back to an authenticating application when the user

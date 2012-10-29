@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
-
+#import "FirstViewController.h"
 @class ViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

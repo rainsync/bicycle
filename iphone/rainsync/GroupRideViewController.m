@@ -31,6 +31,8 @@
     else
         [[NSUserDefaults standardUserDefaults]  setValue:@"Single" forKey:@"RidingType"];
     
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
 }
 
 - (void)viewDidLoad

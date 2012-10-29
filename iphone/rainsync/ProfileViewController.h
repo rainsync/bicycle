@@ -11,7 +11,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 @interface ProfileViewController : UIViewController
-@property IBOutlet UIButton* fbloginbutton;
+@property (retain, nonatomic) IBOutlet UIButton* fbloginbutton;
 @property (retain,nonatomic) IBOutlet  FBProfilePictureView* profileview;
 @property (retain, nonatomic) IBOutlet UILabel *Name;
 @end

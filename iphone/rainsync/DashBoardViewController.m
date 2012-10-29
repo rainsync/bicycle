@@ -57,6 +57,10 @@
 
 - (void)dealloc {
 	[CLController release];
+    [speedLabel release];
+    [latitudeLabel release];
+    [longitudeLabel release];
+    [altitudeLabel release];
     [super dealloc];
 }
  

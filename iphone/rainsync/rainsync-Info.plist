@@ -44,6 +44,14 @@
 				<string>fb120050218149131</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>http</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>kr.jmm.app</string>
+		</dict>
 	</array>
 </dict>
 </plist>

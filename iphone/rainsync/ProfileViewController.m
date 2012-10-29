@@ -105,7 +105,7 @@
     }];
     
     
-    /*
+
     NSDictionary * json = [NSDictionary dictionaryWithObjectsAndKeys:@"method", @"setGPS", @"seq", @"1", nil];
     NSData* data = [NSJSONSerialization dataWithJSONObject:json options:NSUTF8StringEncoding error:nil];
     
@@ -116,7 +116,7 @@
         
         
     }];
-    */
+    
     /*
     [data release];
     [json release];
