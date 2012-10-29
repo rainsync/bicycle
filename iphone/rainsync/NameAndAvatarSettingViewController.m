@@ -8,7 +8,7 @@
 
 #import "NameAndAvatarSettingViewController.h"
 #import "CompletionSettingViewController.h"
-
+#import "FirstSettingViewController.h"
 @interface NameAndAvatarSettingViewController ()
 
 @end
@@ -19,16 +19,19 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    //[super initWithRootViewController:self.view];
+    
     if (self) {
         // Custom initialization
         self.title = @"내 정보 설정";
         self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-        CGRect r;
-        r.origin.x=0;
-        r.origin.y=0;
+        UIBarButtonItem *prev = [[UIBarButtonItem alloc] initWithTitle:@"이전" style: UIBarButtonItemStyleBordered target:self action:@selector(goToPrevSetting)];
+        self.navigationItem.leftBarButtonItem = prev;
+        [prev release];
         
-        self.navigationController.navigationBar.frame = r;
-        
+        UIBarButtonItem *next = [[UIBarButtonItem alloc] initWithTitle:@"다음" style: UIBarButtonItemStyleBordered target:self action:@selector(goToNextSetting)];
+        self.navigationItem.rightBarButtonItem = next;
+        [next release];
         
         
     }
@@ -66,9 +69,19 @@
     [sender resignFirstResponder];
 }
 
-- (IBAction)goToNextSetting:(id)sender {
+- (void)goToPrevSetting {
+    FirstSettingViewController *firstController = [[FirstSettingViewController alloc]initWithNibName:@"FirstSettingViewController" bundle:nil];
+    [[[UIApplication sharedApplication] keyWindow] setRootViewController:firstController];
+    [firstController release];
+    [self.view removeFromSuperview];
+    
+    
+}
+
+- (void)goToNextSetting {
     CompletionSettingViewController *completionSettingViewController = [[CompletionSettingViewController alloc] initWithNibName:@"CompletionSettingViewController" bundle:nil];
-    [self.view addSubview:completionSettingViewController.view];
+    [self.navigationController pushViewController:completionSettingViewController animated:nil];
+    
 }
 
 #pragma mark -

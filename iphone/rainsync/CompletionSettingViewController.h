@@ -11,5 +11,6 @@
 @interface CompletionSettingViewController : UIViewController
 @property (retain, nonatomic) IBOutlet UIButton *completionBtn;
 - (IBAction)completeSetting:(id)sender;
-
+- (void) Done;
+- (void) goToPrevSetting;
 @end

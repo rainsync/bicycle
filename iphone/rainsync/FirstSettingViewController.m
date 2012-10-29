@@ -74,10 +74,12 @@
 }
 - (IBAction)generalLogin:(id)sender {
     NameAndAvatarSettingViewController *nameAndAvatarSettingViewController = [[NameAndAvatarSettingViewController alloc] initWithNibName:@"NameAndAvatarSettingViewController" bundle:nil];
-//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:nameAndAvatarSettingViewController];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:nameAndAvatarSettingViewController];
 //    [self.view addSubview:navController.view];
-    [self.view addSubview:nameAndAvatarSettingViewController.view];
+    //[self.view addSubview:nameAndAvatarSettingViewController.view];
+    [[[UIApplication sharedApplication] keyWindow] setRootViewController:navController];
     
+    //[[UIApplication sharedApplication]]
 }
 
 - (void)dealloc {

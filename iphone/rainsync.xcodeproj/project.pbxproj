@@ -164,7 +164,6 @@
 			isa = PBXGroup;
 			children = (
 				0483FE1B163E5FA8005D804F /* FirstSettingViewController.h */,
-				0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */,
 				0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */,
 				04ADF5A8163E9A4900F825B4 /* NameAndAvatarSettingViewController.h */,
 				04ADF5A9163E9A4900F825B4 /* NameAndAvatarSettingViewController.m */,
@@ -215,6 +214,7 @@
 		5570A90E163550A5008E2F50 /* rainsync */ = {
 			isa = PBXGroup;
 			children = (
+				0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */,
 				5570A953163557EE008E2F50 /* CoreLocationController.h */,
 				5570A954163557FC008E2F50 /* CoreLocationController.m */,
 				5570A917163550A5008E2F50 /* AppDelegate.h */,

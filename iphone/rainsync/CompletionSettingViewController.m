@@ -8,7 +8,7 @@
 
 #import "CompletionSettingViewController.h"
 #import "ViewController.h"
-
+#import "NameAndAvatarSettingViewController.h"
 @interface CompletionSettingViewController ()
 
 @end
@@ -19,9 +19,26 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        UIBarButtonItem *prev = [[UIBarButtonItem alloc] initWithTitle:@"이전" style: UIBarButtonItemStyleBordered target:self action:@selector(goToPrevSetting)];
+        self.navigationItem.leftBarButtonItem = prev;
+        [prev release];
+        
+        UIBarButtonItem *next = [[UIBarButtonItem alloc] initWithTitle:@"완료" style: UIBarButtonItemStyleDone target:self action:@selector(Done)];
+        self.navigationItem.rightBarButtonItem = next;
+        [next release];
     }
     return self;
+}
+
+- (void)goToPrevSetting{
+    NameAndAvatarSettingViewController *nameAndAvartarSettingViewController = [[NameAndAvatarSettingViewController alloc] initWithNibName:@"NameAndAvatarSettingViewController" bundle:nil];
+    [self.navigationController pushViewController:nameAndAvartarSettingViewController animated:nil];
+}
+
+- (void)Done{
+    ViewController *viewController = [[ViewController alloc] init];
+    [[[UIApplication sharedApplication] keyWindow]setRootViewController:viewController];
+    [self.view removeFromSuperview];
 }
 
 - (void)viewDidLoad
@@ -46,6 +63,7 @@
 }
 - (IBAction)completeSetting:(id)sender {
     ViewController *viewController = [[ViewController alloc] init];
-    [self.view addSubview:viewController.view];
+    [[[UIApplication sharedApplication] keyWindow]setRootViewController:viewController];
+    [self.view removeFromSuperview];
 }
 @end
