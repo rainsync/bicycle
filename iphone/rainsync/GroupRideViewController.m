@@ -13,6 +13,8 @@
 @end
 
 @implementation GroupRideViewController
+@synthesize ridingViewController;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +33,14 @@
     else
         [[NSUserDefaults standardUserDefaults]  setValue:@"Single" forKey:@"RidingType"];
     
+}
+
+- (IBAction)startRiding:(id)sender {
+    RidingViewController *ridingController = [[RidingViewController alloc] initWithNibName:@"RidingViewController" bundle:nil];
+	self.ridingViewController = ridingController;
+//	[self.view insertSubview:ridingController.view atIndex:0];
+    [self.view addSubview:ridingController.view];
+	[ridingController release];
 }
 
 - (void)viewDidLoad

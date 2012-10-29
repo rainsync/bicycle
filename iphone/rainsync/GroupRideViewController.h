@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RidingViewController.h"
 
-@interface GroupRideViewController : UIViewController
+@interface GroupRideViewController : UIViewController {
+    RidingViewController *ridingViewController;
+}
+@property (retain, nonatomic) RidingViewController *ridingViewController;
+@property (retain, nonatomic) IBOutlet UIButton *startRdingBtn;
 @property (retain, nonatomic) IBOutlet UISwitch *GroupRiding;
 
+- (IBAction)startRiding:(id)sender;
 @end

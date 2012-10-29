@@ -35,7 +35,7 @@
     
     
     // 네이비게이션 바가 필요한 프로필 탭, 통계 탭, 설정 탭은 네비게이션 컨트롤러에 뷰 삽입하여 탭바 컨트롤러에 삽임한다.
-    self.viewControllers = @[profileNavController, groupriding, riding, staticsNavController, settingNavController];
+    self.viewControllers = @[profileNavController, groupriding, staticsNavController, settingNavController];
     
     
     return self;
