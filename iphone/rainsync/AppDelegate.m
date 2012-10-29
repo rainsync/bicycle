@@ -10,9 +10,9 @@
 
 #import "ViewController.h"
 #import "DashBoardViewController.h"
+#import "FirstSettingViewController.h"
+
 @implementation AppDelegate
-
-
 
 - (void)dealloc
 {
@@ -25,6 +25,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
+    [FBProfilePictureView class];
+    
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    
+
     NSString* RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
     if(!RidingType){
         RidingType = @"Single";
@@ -38,14 +43,14 @@
         
     }
     
-    
-    [FBProfilePictureView class];
+    NSString *IsStart = [[NSUserDefaults standardUserDefaults] stringForKey:@"IsStart"];
+    if(!IsStart){
+        self.viewController = [[FirstSettingViewController alloc] initWithNibName:@"FirstSettingViewController" bundle:nil];
 
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
+    } else {
+        self.viewController = [[ViewController alloc] init];
+    }
     
-    
-    self.viewController = [[ViewController alloc] init];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
