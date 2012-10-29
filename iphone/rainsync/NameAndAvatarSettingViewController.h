@@ -7,13 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
-@interface NameAndAvatarSettingViewController : UIViewController
+@interface NameAndAvatarSettingViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+{
+    BOOL newMedia;
+}
+@property (retain, nonatomic) IBOutlet UIImageView *imageView;
 @property (retain, nonatomic) IBOutlet UITextField *nameTextField;
 @property (retain, nonatomic) IBOutlet UIButton *cameraRollBtn;
 @property (retain, nonatomic) IBOutlet UIButton *nextBtn;
 
 - (IBAction)textFieldDoneEditing:(id)sender;
+- (IBAction)useCamera:(id)sender;
 - (IBAction)callCameraRoll:(id)sender;
 - (IBAction)goToNextSetting:(id)sender;
 

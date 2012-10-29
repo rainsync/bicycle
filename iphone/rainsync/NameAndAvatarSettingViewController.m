@@ -14,6 +14,7 @@
 @end
 
 @implementation NameAndAvatarSettingViewController
+@synthesize imageView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,17 +59,69 @@
     [self setNameTextField:nil];
     [self setCameraRollBtn:nil];
     [self setNextBtn:nil];
+    self.imageView = nil;
     [super viewDidUnload];
 }
 - (IBAction)textFieldDoneEditing:(id)sender {
     [sender resignFirstResponder];
 }
 
-- (IBAction)callCameraRoll:(id)sender {
-}
-
 - (IBAction)goToNextSetting:(id)sender {
     CompletionSettingViewController *completionSettingViewController = [[CompletionSettingViewController alloc] initWithNibName:@"CompletionSettingViewController" bundle:nil];
     [self.view addSubview:completionSettingViewController.view];
 }
+
+#pragma mark -
+#pragma mark Camera delegate
+- (IBAction)useCamera:(id)sender {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
+        imagePicker.allowsEditing = NO;
+        [self presentModalViewController:imagePicker animated:YES];
+        newMedia = YES;
+    }
+}
+- (IBAction)callCameraRoll:(id)sender {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
+        picker.allowsEditing = NO;
+        [self presentModalViewController:picker animated:YES];
+        newMedia = NO;
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    [self dismissModalViewControllerAnimated:YES];
+    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+        UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+        
+        imageView.image = image;
+        if (newMedia) {
+            UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:finishedSavingWithError:contextInfo:), nil);
+        }
+        else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie]){
+            
+        }
+    }
+}
+
+- (void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (error) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save failed" message:@"Failed to save image" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+
 @end
