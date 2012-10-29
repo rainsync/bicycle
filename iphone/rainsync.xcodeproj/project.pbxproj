@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0483FE1E163E5FA8005D804F /* FirstSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */; };
+		0483FE1F163E5FA8005D804F /* FirstSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */; };
+		04ADF5AB163E9A4900F825B4 /* NameAndAvatarSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ADF5A9163E9A4900F825B4 /* NameAndAvatarSettingViewController.m */; };
+		04ADF5AC163E9A4900F825B4 /* NameAndAvatarSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04ADF5AA163E9A4900F825B4 /* NameAndAvatarSettingViewController.xib */; };
+		04ADF5B4163E9FC400F825B4 /* CompletionSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ADF5B2163E9FC300F825B4 /* CompletionSettingViewController.m */; };
+		04ADF5B5163E9FC400F825B4 /* CompletionSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04ADF5B3163E9FC400F825B4 /* CompletionSettingViewController.xib */; };
 		5501C13F1636C5A90073ACB1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C13E1636C5A90073ACB1 /* FacebookSDK.framework */; };
 		5501C14D1636D26F0073ACB1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C14C1636D26F0073ACB1 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5501C14F1636D4210073ACB1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C14E1636D4210073ACB1 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -60,6 +66,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0483FE1B163E5FA8005D804F /* FirstSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstSettingViewController.h; sourceTree = "<group>"; };
+		0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstSettingViewController.m; sourceTree = "<group>"; };
+		0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstSettingViewController.xib; sourceTree = "<group>"; };
+		04ADF5A8163E9A4900F825B4 /* NameAndAvatarSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameAndAvatarSettingViewController.h; sourceTree = "<group>"; };
+		04ADF5A9163E9A4900F825B4 /* NameAndAvatarSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameAndAvatarSettingViewController.m; sourceTree = "<group>"; };
+		04ADF5AA163E9A4900F825B4 /* NameAndAvatarSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameAndAvatarSettingViewController.xib; sourceTree = "<group>"; };
+		04ADF5B1163E9FC300F825B4 /* CompletionSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompletionSettingViewController.h; sourceTree = "<group>"; };
+		04ADF5B2163E9FC300F825B4 /* CompletionSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompletionSettingViewController.m; sourceTree = "<group>"; };
+		04ADF5B3163E9FC400F825B4 /* CompletionSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompletionSettingViewController.xib; sourceTree = "<group>"; };
 		5501C13E1636C5A90073ACB1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		5501C14C1636D26F0073ACB1 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		5501C14E1636D4210073ACB1 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -142,6 +157,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0483FE20163E646E005D804F /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				0483FE1B163E5FA8005D804F /* FirstSettingViewController.h */,
+				0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */,
+				0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */,
+				04ADF5A8163E9A4900F825B4 /* NameAndAvatarSettingViewController.h */,
+				04ADF5A9163E9A4900F825B4 /* NameAndAvatarSettingViewController.m */,
+				04ADF5AA163E9A4900F825B4 /* NameAndAvatarSettingViewController.xib */,
+				04ADF5B1163E9FC300F825B4 /* CompletionSettingViewController.h */,
+				04ADF5B2163E9FC300F825B4 /* CompletionSettingViewController.m */,
+				04ADF5B3163E9FC400F825B4 /* CompletionSettingViewController.xib */,
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
 		5570A8F9163550A5008E2F50 = {
 			isa = PBXGroup;
 			children = (
@@ -184,13 +215,14 @@
 				5570A954163557FC008E2F50 /* CoreLocationController.m */,
 				5570A917163550A5008E2F50 /* AppDelegate.h */,
 				5570A918163550A5008E2F50 /* AppDelegate.m */,
+				0483FE20163E646E005D804F /* New Group */,
 				5570A920163550A5008E2F50 /* ViewController.h */,
 				5570A921163550A5008E2F50 /* ViewController.m */,
-				5570A90F163550A5008E2F50 /* Supporting Files */,
 				55911012163826DF00B007CA /* RidingSubView */,
 				55911011163826C400B007CA /* TabBar */,
 				552BD5791636609400D89652 /* NetUtility.h */,
 				552BD57A1636609500D89652 /* NetUtility.m */,
+				5570A90F163550A5008E2F50 /* Supporting Files */,
 			);
 			path = rainsync;
 			sourceTree = "<group>";
@@ -345,6 +377,9 @@
 				552BD57716365ECB00D89652 /* ProfileViewController.xib in Resources */,
 				55910F941637F4E800B007CA /* RidingViewController.xib in Resources */,
 				559110021638207700B007CA /* GroupRideViewController.xib in Resources */,
+				0483FE1F163E5FA8005D804F /* FirstSettingViewController.xib in Resources */,
+				04ADF5AC163E9A4900F825B4 /* NameAndAvatarSettingViewController.xib in Resources */,
+				04ADF5B5163E9FC400F825B4 /* CompletionSettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +428,9 @@
 				552BD57B1636609500D89652 /* NetUtility.m in Sources */,
 				55910F931637F4E800B007CA /* RidingViewController.m in Sources */,
 				559110011638207700B007CA /* GroupRideViewController.m in Sources */,
+				0483FE1E163E5FA8005D804F /* FirstSettingViewController.m in Sources */,
+				04ADF5AB163E9A4900F825B4 /* NameAndAvatarSettingViewController.m in Sources */,
+				04ADF5B4163E9FC400F825B4 /* CompletionSettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
