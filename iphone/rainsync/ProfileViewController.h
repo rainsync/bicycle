@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NetUtility.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @interface ProfileViewController : UIViewController
 @property IBOutlet UIButton* fbloginbutton;

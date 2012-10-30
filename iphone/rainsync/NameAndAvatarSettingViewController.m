@@ -33,6 +33,7 @@
         self.navigationItem.rightBarButtonItem = next;
         [next release];
         
+
         
     }
     return self;
@@ -56,6 +57,7 @@
     [_nameTextField release];
     [_cameraRollBtn release];
     [_nextBtn release];
+    [_profileImageBtn release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -63,6 +65,7 @@
     [self setCameraRollBtn:nil];
     [self setNextBtn:nil];
     self.imageView = nil;
+    [self setProfileImageBtn:nil];
     [super viewDidUnload];
 }
 - (IBAction)textFieldDoneEditing:(id)sender {
@@ -89,28 +92,6 @@
 
 #pragma mark -
 #pragma mark Camera delegate
-- (IBAction)useCamera:(id)sender {
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.delegate = self;
-        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
-        imagePicker.allowsEditing = NO;
-        [self presentModalViewController:imagePicker animated:YES];
-        newMedia = YES;
-    }
-}
-- (IBAction)callCameraRoll:(id)sender {
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        picker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
-        picker.allowsEditing = NO;
-        [self presentModalViewController:picker animated:YES];
-        newMedia = NO;
-    }
-}
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
@@ -118,7 +99,11 @@
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
         
-        imageView.image = image;
+//        imageView.image = image;
+        
+        // 프로필 사진 버튼의 이미지를 선택된 사진으로 지정
+        [_profileImageBtn setBackgroundImage:image forState:UIControlStateNormal];
+        [_profileImageBtn setBackgroundImage:image forState:UIControlStateHighlighted];
         if (newMedia) {
             UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:finishedSavingWithError:contextInfo:), nil);
         }
@@ -140,4 +125,43 @@
 }
 
 
+// 프로필사진 터치 시에 액션 시트로 카메라 메뉴 출력
+- (IBAction)callCameraAction:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"취소" destructiveButtonTitle:nil otherButtonTitles:@"사진촬영", @"앨범에서 사진 선택", @"삭제", nil];
+    [actionSheet showInView:self.view];
+}
+
+// 액션 시트 이벤트 핸들러
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    // 사진 촬영
+    if (buttonIndex == 0) {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
+            imagePicker.allowsEditing = NO;
+            [self presentModalViewController:imagePicker animated:YES];
+            newMedia = YES;
+        }
+    }
+    // 앨범에서 선택하기
+    else if (buttonIndex == 1) {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            picker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
+            picker.allowsEditing = NO;
+            [self presentModalViewController:picker animated:YES];
+            newMedia = NO;
+        }
+    }
+    // 삭제하기
+    else {
+        [_profileImageBtn setImage:nil forState:UIControlStateNormal];
+        [_profileImageBtn setImage:nil forState:UIControlStateHighlighted];
+    }
+}
 @end

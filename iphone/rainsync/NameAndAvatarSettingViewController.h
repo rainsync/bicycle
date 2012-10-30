@@ -9,20 +9,18 @@
 #import <UIKit/UIKit.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 
-@interface NameAndAvatarSettingViewController : UIViewController <UIImagePickerControllerDelegate>
+@interface NameAndAvatarSettingViewController : UIViewController <UIImagePickerControllerDelegate, UIActionSheetDelegate>
 {
-    BOOL newMedia;
+    BOOL newMedia;  // 새로운 사진인지 판단하는 불린값
 }
 @property (retain, nonatomic) IBOutlet UIImageView *imageView;
 @property (retain, nonatomic) IBOutlet UITextField *nameTextField;
-@property (retain, nonatomic) IBOutlet UIButton *cameraRollBtn;
-@property (retain, nonatomic) IBOutlet UIButton *nextBtn;
+@property (retain, nonatomic) IBOutlet UIButton *profileImageBtn;
 - (void)goToNextSetting;
 - (void)goToPrevSetting;
 
-- (IBAction)textFieldDoneEditing:(id)sender;
-- (IBAction)useCamera:(id)sender;
-- (IBAction)callCameraRoll:(id)sender;
-//- (IBAction)goToNextSetting:(id)sender;
+- (IBAction)textFieldDoneEditing:(id)sender;    // 키보드 감추기
+- (IBAction)callCameraAction:(id)sender;        // 카메라 메뉴 호출
+
 
 @end

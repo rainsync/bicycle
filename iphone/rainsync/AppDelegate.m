@@ -43,7 +43,7 @@
         
     }
     
-    [[NSUserDefaults standardUserDefaults] setValue:@"NO" forKey:@"IsStart"];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"IsStart"];
     
     NSString *IsStart = [[NSUserDefaults standardUserDefaults] stringForKey:@"IsStart"];
     if(!IsStart){
