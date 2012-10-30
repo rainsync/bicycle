@@ -70,10 +70,13 @@
 }
 
 - (void)goToPrevSetting {
-    FirstSettingViewController *firstController = [[FirstSettingViewController alloc]initWithNibName:@"FirstSettingViewController" bundle:nil];
-    [[[UIApplication sharedApplication] keyWindow] setRootViewController:firstController];
-    [firstController release];
-    [self.view removeFromSuperview];
+    
+    //FirstSettingViewController *firstController = [[FirstSettingViewController alloc]initWithNibName:@"FirstSettingViewController" bundle:nil];
+    [self.navigationController popViewControllerAnimated:FALSE];
+    
+    //[[[UIApplication sharedApplication] keyWindow] setRootViewController:firstController];
+    //[firstController release];
+    //[self.view removeFromSuperview];
     
     
 }

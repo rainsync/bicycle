@@ -10,9 +10,9 @@
 #import "RidingViewController.h"
 
 @interface GroupRideViewController : UIViewController {
-    RidingViewController *ridingViewController;
+//RidingViewController *ridingViewController;
 }
-@property (retain, nonatomic) RidingViewController *ridingViewController;
+//@property (retain, nonatomic) RidingViewController *ridingViewController;
 @property (retain, nonatomic) IBOutlet UIButton *startRdingBtn;
 @property (retain, nonatomic) IBOutlet UISwitch *GroupRiding;
 

@@ -163,6 +163,7 @@
 		0483FE20163E646E005D804F /* New Group */ = {
 			isa = PBXGroup;
 			children = (
+				0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */,
 				0483FE1B163E5FA8005D804F /* FirstSettingViewController.h */,
 				0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */,
 				04ADF5A8163E9A4900F825B4 /* NameAndAvatarSettingViewController.h */,
@@ -178,7 +179,6 @@
 		5570A8F9163550A5008E2F50 = {
 			isa = PBXGroup;
 			children = (
-				04ADF5B6163EABE000F825B4 /* MobileCoreServices.framework */,
 				5570A90E163550A5008E2F50 /* rainsync */,
 				5570A932163550A5008E2F50 /* rainsyncTests */,
 				5570A907163550A5008E2F50 /* Frameworks */,
@@ -198,6 +198,7 @@
 		5570A907163550A5008E2F50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04ADF5B6163EABE000F825B4 /* MobileCoreServices.framework */,
 				5501C14E1636D4210073ACB1 /* AdSupport.framework */,
 				5501C14C1636D26F0073ACB1 /* Accounts.framework */,
 				5501C13E1636C5A90073ACB1 /* FacebookSDK.framework */,
@@ -214,7 +215,6 @@
 		5570A90E163550A5008E2F50 /* rainsync */ = {
 			isa = PBXGroup;
 			children = (
-				0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */,
 				5570A953163557EE008E2F50 /* CoreLocationController.h */,
 				5570A954163557FC008E2F50 /* CoreLocationController.m */,
 				5570A917163550A5008E2F50 /* AppDelegate.h */,
@@ -270,9 +270,6 @@
 				552BD57316365ECB00D89652 /* ProfileViewController.h */,
 				552BD57416365ECB00D89652 /* ProfileViewController.m */,
 				552BD57516365ECB00D89652 /* ProfileViewController.xib */,
-				55910F901637F4E800B007CA /* RidingViewController.h */,
-				55910F911637F4E800B007CA /* RidingViewController.m */,
-				55910F921637F4E800B007CA /* RidingViewController.xib */,
 				55910FFE1638207000B007CA /* GroupRideViewController.h */,
 				55910FFF1638207100B007CA /* GroupRideViewController.m */,
 				559110001638207300B007CA /* GroupRideViewController.xib */,
@@ -289,12 +286,15 @@
 		55911012163826DF00B007CA /* RidingSubView */ = {
 			isa = PBXGroup;
 			children = (
-				5570A94316355152008E2F50 /* DashBoardViewController.h */,
-				5570A94416355152008E2F50 /* DashBoardViewController.m */,
-				5570A94516355152008E2F50 /* DashBoardViewController.xib */,
 				5570A94816355489008E2F50 /* MapViewController.h */,
 				5570A94916355489008E2F50 /* MapViewController.m */,
 				5570A94A16355489008E2F50 /* MapViewController.xib */,
+				55910F901637F4E800B007CA /* RidingViewController.h */,
+				55910F911637F4E800B007CA /* RidingViewController.m */,
+				55910F921637F4E800B007CA /* RidingViewController.xib */,
+				5570A94316355152008E2F50 /* DashBoardViewController.h */,
+				5570A94416355152008E2F50 /* DashBoardViewController.m */,
+				5570A94516355152008E2F50 /* DashBoardViewController.xib */,
 			);
 			name = RidingSubView;
 			sourceTree = "<group>";

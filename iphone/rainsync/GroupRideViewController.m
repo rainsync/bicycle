@@ -13,14 +13,12 @@
 @end
 
 @implementation GroupRideViewController
-@synthesize ridingViewController;
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.tabBarItem.title = @"그룹라이딩";
+        self.title = NSLocalizedString(@"그룹라이딩", @"그룹라이딩");
         
         // Custom initialization
     }
@@ -36,17 +34,22 @@
 }
 
 - (IBAction)startRiding:(id)sender {
-    RidingViewController *ridingController = [[RidingViewController alloc] initWithNibName:@"RidingViewController" bundle:nil];
-	self.ridingViewController = ridingController;
+
+//    RidingViewController *ridingController = [[RidingViewController alloc] initWithNibName:@"RidingViewController" bundle:nil];
+    //[self.view.superview addSubview:ridingController.view];
+    
+  //  [[[UIApplication sharedApplication] keyWindow] setRootViewController:ridingController];
+    
+    //	self.ridingViewController = ridingController;
 //	[self.view insertSubview:ridingController.view atIndex:0];
-    [self.view addSubview:ridingController.view];
-	[ridingController release];
+//    [self.view addSubview:ridingController.view];
+//	[ridingController release];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     NSString* RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
     if([RidingType isEqualToString:@"Single"])
         [_GroupRiding setOn:FALSE];

@@ -43,11 +43,18 @@
         
     }
     
+    [[NSUserDefaults standardUserDefaults] setValue:@"NO" forKey:@"IsStart"];
+    
     NSString *IsStart = [[NSUserDefaults standardUserDefaults] stringForKey:@"IsStart"];
     if(!IsStart){
-        self.viewController = [[FirstSettingViewController alloc] initWithNibName:@"FirstSettingViewController" bundle:nil];
-
+        FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:@"FirstSettingViewController" bundle:nil];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:firstSettingViewController];
+        [navController.navigationBar setBarStyle:UIBarStyleBlack];
+        
+        self.viewController = navController;
+        
     } else {
+        
         self.viewController = [[ViewController alloc] init];
     }
     

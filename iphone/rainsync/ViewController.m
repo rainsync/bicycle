@@ -18,6 +18,10 @@
 - (id)init
 {
     [super init];
+    ridingViewController = [[RidingViewController alloc] initWithNibName:@"RidingViewController" bundle:nil];
+    [self addChildViewController:ridingViewController];
+    
+    
     ProfileViewController* profile = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
     UINavigationController *profileNavController = [[UINavigationController alloc] initWithRootViewController:profile];
     

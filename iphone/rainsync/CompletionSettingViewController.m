@@ -31,11 +31,14 @@
 }
 
 - (void)goToPrevSetting{
-    NameAndAvatarSettingViewController *nameAndAvartarSettingViewController = [[NameAndAvatarSettingViewController alloc] initWithNibName:@"NameAndAvatarSettingViewController" bundle:nil];
-    [self.navigationController pushViewController:nameAndAvartarSettingViewController animated:nil];
+    [self.navigationController popViewControllerAnimated:FALSE];
+    
+    //NameAndAvatarSettingViewController *nameAndAvartarSettingViewController = [[NameAndAvatarSettingViewController alloc] initWithNibName:@"NameAndAvatarSettingViewController" bundle:nil];
+    //[self.navigationController pushViewController:nameAndAvartarSettingViewController animated:nil];
 }
 
 - (void)Done{
+    
     ViewController *viewController = [[ViewController alloc] init];
     [[[UIApplication sharedApplication] keyWindow]setRootViewController:viewController];
     [self.view removeFromSuperview];

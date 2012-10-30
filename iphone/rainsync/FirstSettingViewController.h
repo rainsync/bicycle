@@ -15,5 +15,6 @@
 
 @property (retain, nonatomic) IBOutlet UIView *selectFbOrGeneralView;
 @property (retain, nonatomic) IBOutlet UIView *compeletionSettingView;
+- (void)viewWillAppear:(BOOL)animated;
 
 @end

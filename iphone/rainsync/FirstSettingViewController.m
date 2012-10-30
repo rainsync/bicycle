@@ -19,12 +19,26 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
     return self;
 }
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [super viewWillDisappear:animated];
+}
+
 
 - (void)viewDidLoad
 {
@@ -71,13 +85,20 @@
         
         
     }
+    
 }
 - (IBAction)generalLogin:(id)sender {
-    NameAndAvatarSettingViewController *nameAndAvatarSettingViewController = [[NameAndAvatarSettingViewController alloc] initWithNibName:@"NameAndAvatarSettingViewController" bundle:nil];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:nameAndAvatarSettingViewController];
+
+    NameAndAvatarSettingViewController* nameAndAvatarSettingViewController= [[NameAndAvatarSettingViewController alloc]initWithNibName:@"NameAndAvatarSettingViewController" bundle:nil];
+    
+    [self.navigationController pushViewController:nameAndAvatarSettingViewController animated:FALSE];
+    [nameAndAvatarSettingViewController release];
+    
+//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:nameAndAvatarSettingViewController];
+
 //    [self.view addSubview:navController.view];
     //[self.view addSubview:nameAndAvatarSettingViewController.view];
-    [[[UIApplication sharedApplication] keyWindow] setRootViewController:navController];
+  //  [[[UIApplication sharedApplication] keyWindow] setRootViewController:navController];
     
     //[[UIApplication sharedApplication]]
 }
