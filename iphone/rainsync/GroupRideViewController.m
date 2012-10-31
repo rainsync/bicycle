@@ -7,6 +7,7 @@
 //
 
 #import "GroupRideViewController.h"
+#import "InviteUserViewController.h"
 
 @interface GroupRideViewController ()
 
@@ -18,12 +19,39 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"그룹라이딩", @"그룹라이딩");
-        
+        self.title = @"그룹라이딩";
+        self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+
         // Custom initialization
     }
     return self;
 }
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    NSString* RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
+    if([RidingType isEqualToString:@"Single"])
+        [_GroupRiding setOn:FALSE];
+    else
+        [_GroupRiding setOn:TRUE];
+    
+    
+    // Do any additional setup after loading the view from its nib.
+}
+    
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [super viewWillDisappear:animated];
+}
+
 
 - (IBAction)ridingChange:(id)sender {
     if(_GroupRiding.on)
@@ -31,6 +59,21 @@
     else
         [[NSUserDefaults standardUserDefaults]  setValue:@"Single" forKey:@"RidingType"];
     
+}
+
+- (IBAction)inviteUser:(id)sender {
+    InviteUserViewController *inviteUserViewController = [[InviteUserViewController alloc] initWithNibName:@"InviteUserViewController" bundle:nil];
+
+    [self.navigationController pushViewController:inviteUserViewController animated:FALSE];
+    [inviteUserViewController release];
+
+
+//    [UIView beginAnimations:@"left flip" context:nil];
+//    [UIView setAnimationDuration:0.5];
+//    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView: self.view.superview cache:YES];
+//    [self.view addSubview:inviteUserViewController.view];
+//    [UIView commitAnimations];
 }
 
 - (IBAction)startRiding:(id)sender {
@@ -46,20 +89,6 @@
 //	[ridingController release];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    NSString* RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
-    if([RidingType isEqualToString:@"Single"])
-        [_GroupRiding setOn:FALSE];
-    else
-        [_GroupRiding setOn:TRUE];
-    
-        
-    // Do any additional setup after loading the view from its nib.
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -68,10 +97,12 @@
 
 - (void)dealloc {
     [_GroupRiding release];
+    [_inviteUserBtn release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setGroupRiding:nil];
+    [self setInviteUserBtn:nil];
     [super viewDidUnload];
 }
 @end

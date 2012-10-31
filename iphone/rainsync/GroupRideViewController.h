@@ -14,7 +14,9 @@
 }
 //@property (retain, nonatomic) RidingViewController *ridingViewController;
 @property (retain, nonatomic) IBOutlet UIButton *startRdingBtn;
+@property (retain, nonatomic) IBOutlet UIButton *inviteUserBtn;
 @property (retain, nonatomic) IBOutlet UISwitch *GroupRiding;
 
+- (IBAction)inviteUser:(id)sender;
 - (IBAction)startRiding:(id)sender;
 @end

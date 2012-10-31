@@ -17,8 +17,6 @@
 @interface ViewController : UITabBarController
 {
     RidingViewController *ridingViewController;
-    
-
 }
 
 - (void) changeToRiding;

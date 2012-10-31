@@ -14,6 +14,8 @@
 		04ADF5B4163E9FC400F825B4 /* CompletionSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ADF5B2163E9FC300F825B4 /* CompletionSettingViewController.m */; };
 		04ADF5B5163E9FC400F825B4 /* CompletionSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04ADF5B3163E9FC400F825B4 /* CompletionSettingViewController.xib */; };
 		04ADF5B7163EABE000F825B4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04ADF5B6163EABE000F825B4 /* MobileCoreServices.framework */; };
+		04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */; };
+		04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */; };
 		5501C13F1636C5A90073ACB1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C13E1636C5A90073ACB1 /* FacebookSDK.framework */; };
 		5501C14D1636D26F0073ACB1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C14C1636D26F0073ACB1 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5501C14F1636D4210073ACB1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C14E1636D4210073ACB1 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -77,6 +79,9 @@
 		04ADF5B2163E9FC300F825B4 /* CompletionSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompletionSettingViewController.m; sourceTree = "<group>"; };
 		04ADF5B3163E9FC400F825B4 /* CompletionSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompletionSettingViewController.xib; sourceTree = "<group>"; };
 		04ADF5B6163EABE000F825B4 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
+		04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
+		04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteUserViewController.xib; sourceTree = "<group>"; };
 		5501C13E1636C5A90073ACB1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		5501C14C1636D26F0073ACB1 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		5501C14E1636D4210073ACB1 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -160,11 +165,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0483FE20163E646E005D804F /* New Group */ = {
+		0483FE20163E646E005D804F /* FirstUserView */ = {
 			isa = PBXGroup;
 			children = (
-				0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */,
 				0483FE1B163E5FA8005D804F /* FirstSettingViewController.h */,
+				0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */,
 				0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */,
 				04ADF5A8163E9A4900F825B4 /* NameAndAvatarSettingViewController.h */,
 				04ADF5A9163E9A4900F825B4 /* NameAndAvatarSettingViewController.m */,
@@ -173,7 +178,7 @@
 				04ADF5B2163E9FC300F825B4 /* CompletionSettingViewController.m */,
 				04ADF5B3163E9FC400F825B4 /* CompletionSettingViewController.xib */,
 			);
-			name = "New Group";
+			name = FirstUserView;
 			sourceTree = "<group>";
 		};
 		5570A8F9163550A5008E2F50 = {
@@ -219,9 +224,9 @@
 				5570A954163557FC008E2F50 /* CoreLocationController.m */,
 				5570A917163550A5008E2F50 /* AppDelegate.h */,
 				5570A918163550A5008E2F50 /* AppDelegate.m */,
-				0483FE20163E646E005D804F /* New Group */,
 				5570A920163550A5008E2F50 /* ViewController.h */,
 				5570A921163550A5008E2F50 /* ViewController.m */,
+				0483FE20163E646E005D804F /* FirstUserView */,
 				55911012163826DF00B007CA /* RidingSubView */,
 				55911011163826C400B007CA /* TabBar */,
 				552BD5791636609400D89652 /* NetUtility.h */,
@@ -270,9 +275,6 @@
 				552BD57316365ECB00D89652 /* ProfileViewController.h */,
 				552BD57416365ECB00D89652 /* ProfileViewController.m */,
 				552BD57516365ECB00D89652 /* ProfileViewController.xib */,
-				55910FFE1638207000B007CA /* GroupRideViewController.h */,
-				55910FFF1638207100B007CA /* GroupRideViewController.m */,
-				559110001638207300B007CA /* GroupRideViewController.xib */,
 				55911003163823E000B007CA /* StaticViewController.h */,
 				55911004163823E000B007CA /* StaticViewController.m */,
 				55911005163823E100B007CA /* StaticViewController.xib */,
@@ -286,15 +288,21 @@
 		55911012163826DF00B007CA /* RidingSubView */ = {
 			isa = PBXGroup;
 			children = (
+				5570A94316355152008E2F50 /* DashBoardViewController.h */,
+				5570A94416355152008E2F50 /* DashBoardViewController.m */,
+				5570A94516355152008E2F50 /* DashBoardViewController.xib */,
+				55910FFE1638207000B007CA /* GroupRideViewController.h */,
+				55910FFF1638207100B007CA /* GroupRideViewController.m */,
+				559110001638207300B007CA /* GroupRideViewController.xib */,
+				04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */,
+				04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */,
+				04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */,
 				5570A94816355489008E2F50 /* MapViewController.h */,
 				5570A94916355489008E2F50 /* MapViewController.m */,
 				5570A94A16355489008E2F50 /* MapViewController.xib */,
 				55910F901637F4E800B007CA /* RidingViewController.h */,
 				55910F911637F4E800B007CA /* RidingViewController.m */,
 				55910F921637F4E800B007CA /* RidingViewController.xib */,
-				5570A94316355152008E2F50 /* DashBoardViewController.h */,
-				5570A94416355152008E2F50 /* DashBoardViewController.m */,
-				5570A94516355152008E2F50 /* DashBoardViewController.xib */,
 			);
 			name = RidingSubView;
 			sourceTree = "<group>";
@@ -384,6 +392,7 @@
 				0483FE1F163E5FA8005D804F /* FirstSettingViewController.xib in Resources */,
 				04ADF5AC163E9A4900F825B4 /* NameAndAvatarSettingViewController.xib in Resources */,
 				04ADF5B5163E9FC400F825B4 /* CompletionSettingViewController.xib in Resources */,
+				04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +444,7 @@
 				0483FE1E163E5FA8005D804F /* FirstSettingViewController.m in Sources */,
 				04ADF5AB163E9A4900F825B4 /* NameAndAvatarSettingViewController.m in Sources */,
 				04ADF5B4163E9FC400F825B4 /* CompletionSettingViewController.m in Sources */,
+				04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

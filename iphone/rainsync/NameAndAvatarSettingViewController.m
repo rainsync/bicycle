@@ -55,15 +55,11 @@
 
 - (void)dealloc {
     [_nameTextField release];
-    [_cameraRollBtn release];
-    [_nextBtn release];
     [_profileImageBtn release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setNameTextField:nil];
-    [self setCameraRollBtn:nil];
-    [self setNextBtn:nil];
     self.imageView = nil;
     [self setProfileImageBtn:nil];
     [super viewDidUnload];
