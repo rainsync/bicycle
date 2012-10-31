@@ -7,7 +7,7 @@
 //
 
 #import "ProfileViewController.h"
-
+#import "ProfileEditViewController.h"
 
 @interface ProfileViewController ()
 
@@ -26,6 +26,10 @@
         self.title = NSLocalizedString(@"프로필", @"프로필");
         
         // Custom initialization
+        
+        UIBarButtonItem *edit = [[UIBarButtonItem alloc] initWithTitle:@"수정" style: UIBarButtonItemStyleBordered target:self action:@selector(editProfile)];
+        self.navigationItem.rightBarButtonItem = edit;
+        [edit release];
     }
     return self;
 }
@@ -34,14 +38,14 @@
 {
     [super viewDidLoad];
     
+    // Do any additional setup after loading the view from its nib.
+    
     // 네비게이션 바 색깔 검정 스타일로 변경
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
-    // Do any additional setup after loading the view from its nib.
+    
     //[self test];
     [self updateView];
-    
-    
 
     if (!FBSession.activeSession.isOpen) {
         // create a fresh session object
@@ -129,6 +133,12 @@
 
     
 }
+
+- (void)editProfile {
+    ProfileEditViewController *profileEditViewController = [[ProfileEditViewController alloc] initWithNibName:@"ProfileEditViewController" bundle:nil];
+    [self.navigationController pushViewController:profileEditViewController animated:NO];
+}
+
 
 // FBSample logic
 // main helper method to update the UI to reflect the current state of the session.

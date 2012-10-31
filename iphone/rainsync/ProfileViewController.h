@@ -15,4 +15,6 @@
 @property IBOutlet UIButton* fbloginbutton;
 @property (retain,nonatomic) IBOutlet  FBProfilePictureView* profileview;
 @property (retain, nonatomic) IBOutlet UILabel *Name;
+
+- (void)editProfile;     // 프로필 수정 함수
 @end

@@ -16,6 +16,8 @@
 		04ADF5B7163EABE000F825B4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04ADF5B6163EABE000F825B4 /* MobileCoreServices.framework */; };
 		04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */; };
 		04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */; };
+		04EC923C1641183100E99EB5 /* ProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC923A1641183100E99EB5 /* ProfileEditViewController.m */; };
+		04EC923D1641183100E99EB5 /* ProfileEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC923B1641183100E99EB5 /* ProfileEditViewController.xib */; };
 		5501C13F1636C5A90073ACB1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C13E1636C5A90073ACB1 /* FacebookSDK.framework */; };
 		5501C14D1636D26F0073ACB1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C14C1636D26F0073ACB1 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5501C14F1636D4210073ACB1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C14E1636D4210073ACB1 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -82,6 +84,9 @@
 		04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
 		04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
 		04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteUserViewController.xib; sourceTree = "<group>"; };
+		04EC92391641183100E99EB5 /* ProfileEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileEditViewController.h; sourceTree = "<group>"; };
+		04EC923A1641183100E99EB5 /* ProfileEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileEditViewController.m; sourceTree = "<group>"; };
+		04EC923B1641183100E99EB5 /* ProfileEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileEditViewController.xib; sourceTree = "<group>"; };
 		5501C13E1636C5A90073ACB1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		5501C14C1636D26F0073ACB1 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		5501C14E1636D4210073ACB1 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -181,6 +186,39 @@
 			name = FirstUserView;
 			sourceTree = "<group>";
 		};
+		04EC923E16411A6600E99EB5 /* Profile Menu */ = {
+			isa = PBXGroup;
+			children = (
+				552BD57316365ECB00D89652 /* ProfileViewController.h */,
+				552BD57416365ECB00D89652 /* ProfileViewController.m */,
+				552BD57516365ECB00D89652 /* ProfileViewController.xib */,
+				04EC92391641183100E99EB5 /* ProfileEditViewController.h */,
+				04EC923A1641183100E99EB5 /* ProfileEditViewController.m */,
+				04EC923B1641183100E99EB5 /* ProfileEditViewController.xib */,
+			);
+			name = "Profile Menu";
+			sourceTree = "<group>";
+		};
+		04EC923F16411A7200E99EB5 /* Statics Menu */ = {
+			isa = PBXGroup;
+			children = (
+				55911003163823E000B007CA /* StaticViewController.h */,
+				55911004163823E000B007CA /* StaticViewController.m */,
+				55911005163823E100B007CA /* StaticViewController.xib */,
+			);
+			name = "Statics Menu";
+			sourceTree = "<group>";
+		};
+		04EC924016411A7B00E99EB5 /* Setting Menu */ = {
+			isa = PBXGroup;
+			children = (
+				559110081638241400B007CA /* SettingViewController.h */,
+				559110091638241500B007CA /* SettingViewController.m */,
+				5591100A1638241500B007CA /* SettingViewController.xib */,
+			);
+			name = "Setting Menu";
+			sourceTree = "<group>";
+		};
 		5570A8F9163550A5008E2F50 = {
 			isa = PBXGroup;
 			children = (
@@ -227,7 +265,6 @@
 				5570A920163550A5008E2F50 /* ViewController.h */,
 				5570A921163550A5008E2F50 /* ViewController.m */,
 				0483FE20163E646E005D804F /* FirstUserView */,
-				55911012163826DF00B007CA /* RidingSubView */,
 				55911011163826C400B007CA /* TabBar */,
 				552BD5791636609400D89652 /* NetUtility.h */,
 				552BD57A1636609500D89652 /* NetUtility.m */,
@@ -272,20 +309,15 @@
 		55911011163826C400B007CA /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				552BD57316365ECB00D89652 /* ProfileViewController.h */,
-				552BD57416365ECB00D89652 /* ProfileViewController.m */,
-				552BD57516365ECB00D89652 /* ProfileViewController.xib */,
-				55911003163823E000B007CA /* StaticViewController.h */,
-				55911004163823E000B007CA /* StaticViewController.m */,
-				55911005163823E100B007CA /* StaticViewController.xib */,
-				559110081638241400B007CA /* SettingViewController.h */,
-				559110091638241500B007CA /* SettingViewController.m */,
-				5591100A1638241500B007CA /* SettingViewController.xib */,
+				04EC923E16411A6600E99EB5 /* Profile Menu */,
+				55911012163826DF00B007CA /* Riding Menu */,
+				04EC923F16411A7200E99EB5 /* Statics Menu */,
+				04EC924016411A7B00E99EB5 /* Setting Menu */,
 			);
 			name = TabBar;
 			sourceTree = "<group>";
 		};
-		55911012163826DF00B007CA /* RidingSubView */ = {
+		55911012163826DF00B007CA /* Riding Menu */ = {
 			isa = PBXGroup;
 			children = (
 				5570A94316355152008E2F50 /* DashBoardViewController.h */,
@@ -304,7 +336,7 @@
 				55910F911637F4E800B007CA /* RidingViewController.m */,
 				55910F921637F4E800B007CA /* RidingViewController.xib */,
 			);
-			name = RidingSubView;
+			name = "Riding Menu";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -393,6 +425,7 @@
 				04ADF5AC163E9A4900F825B4 /* NameAndAvatarSettingViewController.xib in Resources */,
 				04ADF5B5163E9FC400F825B4 /* CompletionSettingViewController.xib in Resources */,
 				04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */,
+				04EC923D1641183100E99EB5 /* ProfileEditViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +478,7 @@
 				04ADF5AB163E9A4900F825B4 /* NameAndAvatarSettingViewController.m in Sources */,
 				04ADF5B4163E9FC400F825B4 /* CompletionSettingViewController.m in Sources */,
 				04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */,
+				04EC923C1641183100E99EB5 /* ProfileEditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

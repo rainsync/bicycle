@@ -64,7 +64,7 @@
 - (IBAction)inviteUser:(id)sender {
     InviteUserViewController *inviteUserViewController = [[InviteUserViewController alloc] initWithNibName:@"InviteUserViewController" bundle:nil];
 
-    [self.navigationController pushViewController:inviteUserViewController animated:FALSE];
+    [self.navigationController pushViewController:inviteUserViewController animated:YES];
     [inviteUserViewController release];
 
 

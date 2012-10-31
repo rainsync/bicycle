@@ -64,8 +64,13 @@
     [self setProfileImageBtn:nil];
     [super viewDidUnload];
 }
+
 - (IBAction)textFieldDoneEditing:(id)sender {
     [sender resignFirstResponder];
+}
+
+- (IBAction)backgroundTap:(id)sender {
+    [_nameTextField resignFirstResponder];
 }
 
 - (void)goToPrevSetting {
