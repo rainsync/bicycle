@@ -7,7 +7,7 @@
 //
 
 #import "FirstSettingViewController.h"
-#import "NameAndAvatarSettingViewController.h"
+#import "ViewController.h"
 
 @interface FirstSettingViewController ()
 
@@ -26,19 +26,6 @@
     }
     return self;
 }
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
-    [super viewWillAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
-    [super viewWillDisappear:animated];
-}
-
 
 - (void)viewDidLoad
 {
@@ -89,18 +76,9 @@
 }
 - (IBAction)generalLogin:(id)sender {
 
-    NameAndAvatarSettingViewController* nameAndAvatarSettingViewController= [[NameAndAvatarSettingViewController alloc]initWithNibName:@"NameAndAvatarSettingViewController" bundle:nil];
-    
-    [self.navigationController pushViewController:nameAndAvatarSettingViewController animated:FALSE];
-    [nameAndAvatarSettingViewController release];
-    
-//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:nameAndAvatarSettingViewController];
-
-//    [self.view addSubview:navController.view];
-    //[self.view addSubview:nameAndAvatarSettingViewController.view];
-  //  [[[UIApplication sharedApplication] keyWindow] setRootViewController:navController];
-    
-    //[[UIApplication sharedApplication]]
+    ViewController *viewController = [[ViewController alloc] init];
+    [[[UIApplication sharedApplication] keyWindow]setRootViewController:viewController];
+    [self.view removeFromSuperview];
 }
 
 - (void)dealloc {

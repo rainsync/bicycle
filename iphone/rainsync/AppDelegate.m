@@ -48,10 +48,10 @@
     NSString *IsStart = [[NSUserDefaults standardUserDefaults] stringForKey:@"IsStart"];
     if(!IsStart){
         FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:@"FirstSettingViewController" bundle:nil];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:firstSettingViewController];
-        [navController.navigationBar setBarStyle:UIBarStyleBlack];
+//        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:firstSettingViewController];
+//        [navController.navigationBar setBarStyle:UIBarStyleBlack];
         
-        self.viewController = navController;
+        self.viewController = firstSettingViewController;
         
     } else {
         
