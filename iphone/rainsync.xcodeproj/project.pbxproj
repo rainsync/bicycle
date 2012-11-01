@@ -12,10 +12,6 @@
 		045789691642703E008E56CA /* default_profile_img.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 045789681642703E008E56CA /* default_profile_img.jpeg */; };
 		0483FE1E163E5FA8005D804F /* FirstSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */; };
 		0483FE1F163E5FA8005D804F /* FirstSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */; };
-		04ADF5AB163E9A4900F825B4 /* NameAndAvatarSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ADF5A9163E9A4900F825B4 /* NameAndAvatarSettingViewController.m */; };
-		04ADF5AC163E9A4900F825B4 /* NameAndAvatarSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04ADF5AA163E9A4900F825B4 /* NameAndAvatarSettingViewController.xib */; };
-		04ADF5B4163E9FC400F825B4 /* CompletionSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ADF5B2163E9FC300F825B4 /* CompletionSettingViewController.m */; };
-		04ADF5B5163E9FC400F825B4 /* CompletionSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04ADF5B3163E9FC400F825B4 /* CompletionSettingViewController.xib */; };
 		04ADF5B7163EABE000F825B4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04ADF5B6163EABE000F825B4 /* MobileCoreServices.framework */; };
 		04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */; };
 		04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */; };
@@ -79,12 +75,6 @@
 		0483FE1B163E5FA8005D804F /* FirstSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstSettingViewController.h; sourceTree = "<group>"; };
 		0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstSettingViewController.m; sourceTree = "<group>"; };
 		0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstSettingViewController.xib; sourceTree = "<group>"; };
-		04ADF5A8163E9A4900F825B4 /* NameAndAvatarSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameAndAvatarSettingViewController.h; sourceTree = "<group>"; };
-		04ADF5A9163E9A4900F825B4 /* NameAndAvatarSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameAndAvatarSettingViewController.m; sourceTree = "<group>"; };
-		04ADF5AA163E9A4900F825B4 /* NameAndAvatarSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameAndAvatarSettingViewController.xib; sourceTree = "<group>"; };
-		04ADF5B1163E9FC300F825B4 /* CompletionSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompletionSettingViewController.h; sourceTree = "<group>"; };
-		04ADF5B2163E9FC300F825B4 /* CompletionSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompletionSettingViewController.m; sourceTree = "<group>"; };
-		04ADF5B3163E9FC400F825B4 /* CompletionSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompletionSettingViewController.xib; sourceTree = "<group>"; };
 		04ADF5B6163EABE000F825B4 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
 		04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
@@ -189,12 +179,6 @@
 				0483FE1B163E5FA8005D804F /* FirstSettingViewController.h */,
 				0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */,
 				0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */,
-				04ADF5A8163E9A4900F825B4 /* NameAndAvatarSettingViewController.h */,
-				04ADF5A9163E9A4900F825B4 /* NameAndAvatarSettingViewController.m */,
-				04ADF5AA163E9A4900F825B4 /* NameAndAvatarSettingViewController.xib */,
-				04ADF5B1163E9FC300F825B4 /* CompletionSettingViewController.h */,
-				04ADF5B2163E9FC300F825B4 /* CompletionSettingViewController.m */,
-				04ADF5B3163E9FC400F825B4 /* CompletionSettingViewController.xib */,
 			);
 			name = FirstUserView;
 			sourceTree = "<group>";
@@ -435,8 +419,6 @@
 				55910F941637F4E800B007CA /* RidingViewController.xib in Resources */,
 				559110021638207700B007CA /* GroupRideViewController.xib in Resources */,
 				0483FE1F163E5FA8005D804F /* FirstSettingViewController.xib in Resources */,
-				04ADF5AC163E9A4900F825B4 /* NameAndAvatarSettingViewController.xib in Resources */,
-				04ADF5B5163E9FC400F825B4 /* CompletionSettingViewController.xib in Resources */,
 				04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */,
 				04EC923D1641183100E99EB5 /* ProfileEditViewController.xib in Resources */,
 				0457896116426744008E56CA /* Default@2x.png in Resources */,
@@ -491,8 +473,6 @@
 				55910F931637F4E800B007CA /* RidingViewController.m in Sources */,
 				559110011638207700B007CA /* GroupRideViewController.m in Sources */,
 				0483FE1E163E5FA8005D804F /* FirstSettingViewController.m in Sources */,
-				04ADF5AB163E9A4900F825B4 /* NameAndAvatarSettingViewController.m in Sources */,
-				04ADF5B4163E9FC400F825B4 /* CompletionSettingViewController.m in Sources */,
 				04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */,
 				04EC923C1641183100E99EB5 /* ProfileEditViewController.m in Sources */,
 			);
