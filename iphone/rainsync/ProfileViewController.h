@@ -12,9 +12,8 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface ProfileViewController : UIViewController
-@property IBOutlet UIButton* fbloginbutton;
-@property (retain,nonatomic) IBOutlet  FBProfilePictureView* profileview;
-@property (retain, nonatomic) IBOutlet UILabel *Name;
 
+@property (retain, nonatomic) IBOutlet UILabel *Name;
+@property (retain, nonatomic) IBOutlet UIImageView *profileImageView;
 - (void)editProfile;     // 프로필 수정 함수
 @end
