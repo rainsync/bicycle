@@ -10,9 +10,9 @@
 
 #import "ViewController.h"
 #import "DashBoardViewController.h"
+#import "FirstSettingViewController.h"
+
 @implementation AppDelegate
-
-
 
 - (void)dealloc
 {
@@ -25,6 +25,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
+    [FBProfilePictureView class];
+    
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    
+
     NSString* RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
     if(!RidingType){
         RidingType = @"Single";
@@ -39,15 +44,21 @@
     }
     
     [[NSUserDefaults standardUserDefaults]synchronize];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"IsStart"];
     
-    [FBProfilePictureView class];
-
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
+    NSString *IsStart = [[NSUserDefaults standardUserDefaults] stringForKey:@"IsStart"];
+    if(!IsStart){
+        FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:@"FirstSettingViewController" bundle:nil];
+//        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:firstSettingViewController];
+//        [navController.navigationBar setBarStyle:UIBarStyleBlack];
+        
+        self.viewController = firstSettingViewController;
+        
+    } else {
+        
+        self.viewController = [[ViewController alloc] init];
+    }
     
-    
-    //self.viewController = [[ViewController alloc] init];
-    self.viewController = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
