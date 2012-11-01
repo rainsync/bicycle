@@ -46,6 +46,9 @@
 		5570A94E1635574F008E2F50 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A94D1635574F008E2F50 /* CoreLocation.framework */; };
 		5570A955163557FD008E2F50 /* CoreLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5570A954163557FC008E2F50 /* CoreLocationController.m */; };
 		5570A9571635765D008E2F50 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A9561635765D008E2F50 /* MapKit.framework */; };
+		558A5A321642389C00BC22ED /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A5A311642389C00BC22ED /* Queue.m */; };
+		558A5A3316423F5E00BC22ED /* Queue.h in Sources */ = {isa = PBXBuildFile; fileRef = 558A5A301642389C00BC22ED /* Queue.h */; };
+		558A5A3416423F5E00BC22ED /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A5A311642389C00BC22ED /* Queue.m */; };
 		55910F931637F4E800B007CA /* RidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55910F911637F4E800B007CA /* RidingViewController.m */; };
 		55910F941637F4E800B007CA /* RidingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55910F921637F4E800B007CA /* RidingViewController.xib */; };
 		559110011638207700B007CA /* GroupRideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55910FFF1638207100B007CA /* GroupRideViewController.m */; };
@@ -126,6 +129,8 @@
 		5570A953163557EE008E2F50 /* CoreLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreLocationController.h; sourceTree = "<group>"; };
 		5570A954163557FC008E2F50 /* CoreLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreLocationController.m; sourceTree = "<group>"; };
 		5570A9561635765D008E2F50 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		558A5A301642389C00BC22ED /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
+		558A5A311642389C00BC22ED /* Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Queue.m; sourceTree = "<group>"; };
 		55910F901637F4E800B007CA /* RidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RidingViewController.h; sourceTree = "<group>"; };
 		55910F911637F4E800B007CA /* RidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RidingViewController.m; sourceTree = "<group>"; };
 		55910F921637F4E800B007CA /* RidingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RidingViewController.xib; sourceTree = "<group>"; };
@@ -268,6 +273,8 @@
 				55911011163826C400B007CA /* TabBar */,
 				552BD5791636609400D89652 /* NetUtility.h */,
 				552BD57A1636609500D89652 /* NetUtility.m */,
+				558A5A301642389C00BC22ED /* Queue.h */,
+				558A5A311642389C00BC22ED /* Queue.m */,
 				5570A90F163550A5008E2F50 /* Supporting Files */,
 			);
 			path = rainsync;
@@ -462,6 +469,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				558A5A3316423F5E00BC22ED /* Queue.h in Sources */,
+				558A5A3416423F5E00BC22ED /* Queue.m in Sources */,
 				5591100E163825AE00B007CA /* SettingViewController.m in Sources */,
 				5591100D163825A900B007CA /* StaticViewController.m in Sources */,
 				5570A915163550A5008E2F50 /* main.m in Sources */,
@@ -489,6 +498,7 @@
 				5570A93A163550A5008E2F50 /* rainsyncTests.m in Sources */,
 				55911006163823E100B007CA /* StaticViewController.m in Sources */,
 				5591100B1638241500B007CA /* SettingViewController.m in Sources */,
+				558A5A321642389C00BC22ED /* Queue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
