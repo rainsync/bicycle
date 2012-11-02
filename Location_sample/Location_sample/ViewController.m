@@ -18,7 +18,6 @@
 @synthesize startLocation;
 @synthesize recordingTime;
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -91,6 +90,11 @@
     [recordingTime setText:@"00:00:00"];
     [_currentSpeed setText:@"0"];
     [self resetDistance];
+}
+
+- (void)saveRidingData:(float)time ridingDistance:(float)distance averageSpeed:(float)speed burnedCalories:(float)calories {
+    // 메서드 정의
+    
 }
 
 - (void)checkTime:(NSTimer *)timer {
