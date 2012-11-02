@@ -152,7 +152,7 @@
     }
     
     NSLog(@"%f", kcalConstant);
-    
+    NSLog(@"아아아..");
     return kcalConstant;
 }
 
