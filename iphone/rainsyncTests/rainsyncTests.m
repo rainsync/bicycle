@@ -48,19 +48,42 @@
 }
 
 
+- (void)Auth
+{
+    NetUtility *net =[[NetUtility alloc] initwithBlock:^(int msg, NSDictionary * dic) {
+        switch(msg){
+            case account_auth:{
+                NSInteger state=[[dic objectForKey:@"state"] intValue];
+                NSString *sessid=[dic objectForKey:@"sessid"];
+                NSLog([NSString stringWithFormat:@"STATE %d SESSION %@", state, sessid]);
+                STAssertEquals(state, 0, @"account-auth success", nil);
+                break;
+            }
+                
+                
+        }
+    }];
+    
+    
+    [net account_auth:@"AAAE46WaL6mcBAN6pnhAW4R5SzdZCd3tEHmnrPquouPkWfjDZAgpx7Atgq9GM1FpaTtGHcseZAKVhe9yIyPmZCUT47cKz5QAZChNVoC4ZCfGgZDZD"];
+    [net end];
+    
+}
+
 
 - (void)testExample
 {
 
     [self Register];
+    [self Auth];
     
     
 
-    /*
+    
     while(true){
         [[NSRunLoop currentRunLoop] run];
     }
-     */
+    
      
 }
 
