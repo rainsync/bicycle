@@ -24,39 +24,43 @@
     [super tearDown];
 }
 
+- (void)Register
+{
+    NetUtility *net =[[NetUtility alloc] initwithBlock:^(int msg, NSDictionary * dic) {
+        switch(msg){
+            case account_register:{
+                NSInteger state=[[dic objectForKey:@"state"] intValue];
+                NSInteger uid=[[dic objectForKey:@"uid"] intValue];
+                NSString *passkey=[dic objectForKey:@"passkey"];
+                NSLog([NSString stringWithFormat:@"STATE %d UID %d PASSKEY %@", state, uid, passkey]);
+                STAssertEquals(state, 0, @"account-register success", nil);
+                break;
+            }
+                
+                
+        }
+    }];
+    
+    
+    [net account_registerwithAcessToken:@"AAAE46WaL6mcBAN6pnhAW4R5SzdZCd3tEHmnrPquouPkWfjDZAgpx7Atgq9GM1FpaTtGHcseZAKVhe9yIyPmZCUT47cKz5QAZChNVoC4ZCfGgZDZD" withNick:@"KAI" withPhoto:@""];
+    [net end];
+    
+}
+
+
+
 - (void)testExample
 {
-    NSLog(@"GG");
-    /*
-    NetUtility *net =[[NetUtility alloc] init];
-    //[net getURL:@"http://api.bicy.kr"];
-    
-    [net postURL:@"http://api.bicy.kr" withData:[@"[{\"type\":\"test\"},{\"type\":\"test\"},{\"type\":\"test\"}]" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
-    NSError *error;
 
-    while(TRUE){
+    [self Register];
+    
+    
+
+    /*
+    while(true){
         [[NSRunLoop currentRunLoop] run];
-    };
-    
-    id *test=[NSJSONSerialization JSONObjectWithData:[@"[{\"id\":1},{\"id\":2},{\"id\":3}]" dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
-    
-    if([test isKindOfClass:[NSMutableArray class]]){
-        NSLog(@"AA");
-    }else{
-        NSLog(@"BB");
     }
-    NSDictionary *dic = test[0];
-    NSLog(@"gg %@", [dic objectForKey:@"id"]);
-    */
-    
-    STAssertEqualObjects(@"AA", @"BB", @"string", nil);
-    STAssertEqualObjects(@"AA", @"AA", @"string", nil);
-    //STAssertEqualObjects(1, 1, @"test");
-    //STAssertEqualObjects(1, 1, @"test");
-    //STAssertEqualObjects(3, 1, @"test");
-    //STFail(@"Unit tests are not implemented yet in rainsyncTests");
+     */
      
 }
 
