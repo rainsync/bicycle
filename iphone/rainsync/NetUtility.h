@@ -10,10 +10,11 @@
 #import "Queue.h"
 
 enum req_type{
-    account_register=0,
-    account_login=1,
+    account_register=1,
+    account_login=2,
     
 };
+
 
 
 @interface NetUtility : NSObject <NSURLConnectionDelegate>

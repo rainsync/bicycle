@@ -61,8 +61,8 @@
 }
 
 -(void) account_registerwithAcessToken:(NSString*)accesstoken withNick:(NSString*)nick withPhoto:(NSString*)photo{
-    [queue push:account_register];
-    [arr addObject:[[[NSDictionary alloc] initWithObjects:@[nick,accesstoken, photo] forKeys:@[@"nick", @"accesstoken", @"photo"]] autorelease]];
+    [queue push:[[NSNumber alloc]initWithInt:account_register]];
+    [arr addObject:[[[NSDictionary alloc] initWithObjects:@[@"account-register", nick,accesstoken, photo] forKeys:@[@"type", @"nick", @"accesstoken", @"photo"]] autorelease]];
     
 }
 
@@ -99,7 +99,7 @@
     NSMutableArray *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableContainers error:&error];
     for(NSDictionary* dic in res){
         if([queue count]){
-            self.block((int)[queue pop], dic);
+            self.block([[queue pop] intValue], dic);
         }
     }
 
