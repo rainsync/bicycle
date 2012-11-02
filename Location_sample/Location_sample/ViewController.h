@@ -26,7 +26,7 @@
     BOOL isPaused;
     BOOL isEnded;
     int timeCounter;
-    float speed;
+    float avgSpeed;
 
 }
 @property (strong, nonatomic) CLLocationManager *locationManger;
@@ -45,12 +45,17 @@
 @property (strong, nonatomic) IBOutlet UILabel *recordingTime;
 @property (strong, nonatomic) IBOutlet UILabel *currentSpeed;
 @property (strong, nonatomic) IBOutlet UILabel *averageSpeed;
+@property (strong, nonatomic) IBOutlet UILabel *calorie;
+@property (strong, nonatomic) IBOutlet UISlider *weightSlider;
+@property (strong, nonatomic) IBOutlet UILabel *weight;
 
 - (IBAction)resetDistance;
 - (IBAction)startRecording:(id)sender;
 - (IBAction)resumeRecording:(id)sender;
 - (IBAction)pauseRecording:(id)sender;
 - (IBAction)endRecording:(id)sender;
+- (IBAction)sliderChanged:(id)sender;
 
 - (void)checkTime:(NSTimer *)timer;
+
 @end
