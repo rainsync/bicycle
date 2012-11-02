@@ -40,6 +40,39 @@
     _endRecordBtn.hidden = YES;
     
     [_weight setText:@"70"];
+    
+    
+    // db 생성 및 확인
+    NSString *docsDir;
+    NSArray *dirPaths;
+    
+    // documents 디렉토리 확인하기
+    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    docsDir = [dirPaths objectAtIndex:0];
+    
+    // 데이터베이스 파일 경로 구성하기
+    databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"ridings.db"]];
+    
+    NSFileManager *filemgr = [NSFileManager defaultManager];
+    
+    if ([filemgr fileExistsAtPath: databasePath] == NO) {
+        const char *dbpath = [databasePath UTF8String];
+        if (sqlite3_open(dbpath, &ridingDB) == SQLITE_OK) {
+            char *errMsg;
+            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS RIDINGS (ID INTEGER PRIMARY KEY AUTOINCREMENT, TIME TEXT, DISTANCE TEXT, SPEED TEXT, ALTITUDE TEXT, CALORIE TEXT";
+            if (sqlite3_exec(ridingDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
+                _dbStatusLabel.text = @"Failed to create table";
+                NSLog(@"failed to create table");
+            }
+            sqlite3_close(ridingDB);
+        }
+        else {
+            _dbStatusLabel.text = @"Failed to open/create database";
+        }
+    }
+    else {
+        _dbStatusLabel.text = @"already exist db";
+    }
 }
 
 - (void)resetDistance
@@ -93,7 +126,10 @@
 }
 
 - (void)saveRidingData:(float)time ridingDistance:(float)distance averageSpeed:(float)speed burnedCalories:(float)calories {
-    // 메서드 정의
+        
+}
+
+- (IBAction)saveRecord:(id)sender {
     
 }
 
@@ -175,6 +211,8 @@
 }
 
 - (void)viewDidUnload {
+    [self setDbStatusLabel:nil];
+    [self setSaveRidingBtn:nil];
     [self setWeightSlider:nil];
     [self setWeight:nil];
     [self setCalorie:nil];
