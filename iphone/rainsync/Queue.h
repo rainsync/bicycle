@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Queue : NSMutableArray{
-    //NSMutableArray *contents;
+@interface Queue : NSObject{
+    NSMutableArray *contents;
     
 }
 - (id) pop;
 - (void) push:(id)object;
+- (NSUInteger) count;
+
+- (id) init;
 
 @end

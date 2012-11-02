@@ -10,21 +10,29 @@
 
 @implementation Queue
 
+- (id)init{
+    contents = [[[NSMutableArray alloc]init] autorelease];
+    return [super init];
 
+}
 
 - (id)pop
 {
     // nil if [self count] == 0
-    id lastObject = [[[self lastObject] retain] autorelease];
+    id lastObject = [[[contents lastObject] retain] autorelease];
     if (lastObject)
-        [self removeLastObject];
+        [contents removeLastObject];
     return lastObject;
 }
 
+- (NSUInteger)count{
+    return [contents count];
+    
+}
 
 - (void)push:(id)obj
 {
-    [self addObject: obj];
+    [contents addObject: obj];
 }
 
 
