@@ -101,8 +101,61 @@
         [recordingTime setText:[NSString stringWithFormat:@"%d", ++timeCounter]];
         avgSpeed = ([distance.text floatValue] / 1000.0) / ((float)timeCounter / 3600.0) ;
         [_averageSpeed setText:[NSString stringWithFormat:@"%.6f", avgSpeed]];
+        
+        [_calorie setText:[NSString stringWithFormat:@"%.6f", [_weight.text intValue] * [self calculateCalorie:avgSpeed] * (timeCounter / 60.0)]];
+        NSLog(@"%d", [_weight.text intValue]);
+        NSLog(@"%f", [self calculateCalorie:avgSpeed]);
+        NSLog(@"%f", timeCounter / 60.0);
     }
 }
+
+- (float)calculateCalorie:(float)avgSpd {
+    float kcalConstant = 0.0f;
+    if (avgSpd <= 13) {
+        kcalConstant = 0.065f;
+    }
+    else if (avgSpd <= 16) {
+        kcalConstant = 0.0783f;
+    }
+    else if (avgSpd <= 19) {
+        kcalConstant = 0.0939f;
+    }
+    else if (avgSpd <= 22) {
+        kcalConstant = 0.113f;
+    }
+    else if (avgSpd <= 24) {
+        kcalConstant = 0.124f;
+    }
+    else if (avgSpeed <= 26) {
+        kcalConstant = 0.136f;
+    }
+    else if (avgSpeed <= 27) {
+        kcalConstant = 0.149f;
+    }
+    else if (avgSpeed <= 29) {
+        kcalConstant = 0.163f;
+    }
+    else if (avgSpeed <= 31) {
+        kcalConstant = 0.179f;
+    }
+    else if (avgSpeed <= 32) {
+        kcalConstant = 0.196f;
+    }
+    else if (avgSpeed <= 34) {
+        kcalConstant = 0.215f;
+    }
+    else if (avgSpeed <= 37) {
+        kcalConstant = 0.259f;
+    }
+    else {  // avgSpeed 40km/h 이상
+        kcalConstant = 0.311f;
+    }
+    
+    NSLog(@"%f", kcalConstant);
+    
+    return kcalConstant;
+}
+
 - (void)sliderChanged:(id)sender {
 	int progressAsInt = (int)(_weightSlider.value + 0.5f);
 	NSString *newText = [[NSString alloc]
