@@ -44,6 +44,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *endRecordBtn;
 @property (strong, nonatomic) IBOutlet UILabel *recordingTime;
 @property (strong, nonatomic) IBOutlet UILabel *currentSpeed;
+@property (strong, nonatomic) IBOutlet UILabel *averageSpeed;
 
 - (IBAction)resetDistance;
 - (IBAction)startRecording:(id)sender;

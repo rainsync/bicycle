@@ -98,7 +98,7 @@
     else if (isPaused == NO) {
         [recordingTime setText:[NSString stringWithFormat:@"%d", ++timeCounter]];
         speed = [distance.text floatValue] / (float)timeCounter;
-        [_currentSpeed setText:[NSString stringWithFormat:@"%.2f", speed]];
+        [_averageSpeed setText:[NSString stringWithFormat:@"%.2f", speed]];
     }
 }
 
@@ -109,6 +109,7 @@
 }
 
 - (void)viewDidUnload {
+    [self setCurrentSpeed:nil];
     [self setCurrentSpeed:nil];
     [self setResumeRecordBtn:nil];
     [self setEndRecordBtn:nil];
@@ -144,6 +145,9 @@
     
     NSString *currentVerticalAccuracy = [[NSString alloc] initWithFormat:@"%g", newLocation.verticalAccuracy];
     verticalAccuracy.text = currentVerticalAccuracy;
+    
+    NSString *currentSpeed = [[NSString alloc] initWithFormat:@"%g", newLocation.speed];
+    _currentSpeed.text = currentSpeed;
     
     if (startLocation == nil) {
         self.startLocation = newLocation;
