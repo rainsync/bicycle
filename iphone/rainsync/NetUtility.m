@@ -66,6 +66,12 @@
     
 }
 
+-(void) account_auth:(NSString*)accesstoken{
+    [queue push:[[NSNumber alloc]initWithInt:account_auth]];
+    [arr addObject:[[[NSDictionary alloc] initWithObjects:@[@"account-auth", accesstoken] forKeys:@[@"type", @"accesstoken"]] autorelease]];
+    
+}
+
 -(void) end{
     NSError* error;
     NSData* data = [NSJSONSerialization dataWithJSONObject:arr options:NSJSONReadingMutableLeaves error:&error];

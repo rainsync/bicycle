@@ -11,7 +11,7 @@
 
 enum req_type{
     account_register=1,
-    account_login=2,
+    account_auth=2,
     
 };
 
@@ -36,5 +36,6 @@ enum req_type{
 -(void) getURL:(NSString *)url;
 -(void) postURL:(NSString*)url withData:(NSData*)data;
 -(void) account_registerwithAcessToken:(NSString*)accesstoken withNick:(NSString*)nick withPhoto:(NSString*)photo;
+-(void) account_auth:(NSString*)accesstoken;
 -(void) end;
 @end
