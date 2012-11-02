@@ -67,6 +67,6 @@
 - (IBAction)saveRecord:(id)sender;      // 측정된 기록 데이터베이스에 저장 이벤트
 
 - (void)checkTime:(NSTimer *)timer;     // 기록 측정 시간 카운터 동작 메서드
-- (void)saveRidingData:(float)time ridingDistance:(float)distance averageSpeed:(float)speed burnedCalories:(float)calories; // 기록 저장 메서드 선언
+- (void)saveRidingData; // 기록 저장 메서드 선언
 
 @end

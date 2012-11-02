@@ -59,7 +59,7 @@
         const char *dbpath = [databasePath UTF8String];
         if (sqlite3_open(dbpath, &ridingDB) == SQLITE_OK) {
             char *errMsg;
-            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS RIDINGS (ID INTEGER PRIMARY KEY AUTOINCREMENT, TIME TEXT, DISTANCE TEXT, SPEED TEXT, ALTITUDE TEXT, CALORIE TEXT";
+            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS RIDINGS (ID INTEGER PRIMARY KEY AUTOINCREMENT, TIME TEXT, DISTANCE TEXT, SPEED TEXT, ALTITUDE TEXT, CALORIE TEXT)";
             if (sqlite3_exec(ridingDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
                 _dbStatusLabel.text = @"Failed to create table";
                 NSLog(@"failed to create table");
@@ -125,12 +125,27 @@
     [self resetDistance];
 }
 
-- (void)saveRidingData:(float)time ridingDistance:(float)distance averageSpeed:(float)speed burnedCalories:(float)calories {
-        
+- (void)saveRidingData {
+    sqlite3_stmt *statement;
+    const char *dbpath = [databasePath UTF8String];
+    
+    if (sqlite3_open(dbpath, &ridingDB) == SQLITE_OK) {
+        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO RIDINGS (time, distance, speed, altitude, calorie) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", recordingTime.text, distance.text, _averageSpeed.text, altitude.text, _calorie.text];
+        const char *insert_stmt = [insertSQL UTF8String];
+        sqlite3_prepare_v2(ridingDB, insert_stmt, -1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+            _dbStatusLabel.text = @"Record Added";
+        }
+        else {
+            _dbStatusLabel.text = @"Failed to add Record";
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(ridingDB);
+    }
 }
 
 - (IBAction)saveRecord:(id)sender {
-    
+    [self saveRidingData];
 }
 
 - (void)checkTime:(NSTimer *)timer {
