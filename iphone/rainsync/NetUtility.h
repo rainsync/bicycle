@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Queue.h"
+#import "AFJSONRequestOperation.h"
 
 enum req_type{
     account_register=1,
@@ -17,8 +18,7 @@ enum req_type{
 
 
 
-@interface NetUtility : NSObject <NSURLConnectionDelegate>
-{
+@interface NetUtility : NSObject{
     @private NSMutableData* responseData;
     //@private void (^ block)(NSData*);
     
