@@ -14,10 +14,24 @@
 
 @implementation ViewController
 
+- (void)applicationWillResignActive {
+    NSLog(@"VC: %@", NSStringFromSelector(_cmd));
+    _animate = NO;
+}
+
+- (void)applicationDidBecomeActive {
+    NSLog(@"VC: %@", NSStringFromSelector(_cmd));
+    _animate = YES;
+    [self rotateLabelDown];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive) name:UIApplicationWillResignActiveNotification object:[UIApplication sharedApplication]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
     
     CGRect bounds = self.view.bounds;
     CGRect labelFrame = CGRectMake(bounds.origin.x, CGRectGetMidX(bounds)+150, bounds.size.width, 100);
@@ -28,7 +42,6 @@
     _label.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_label];
     
-    [self rotateLabelDown];
 }
 
 - (void)didReceiveMemoryWarning
@@ -102,7 +115,9 @@
                         _label.transform = CGAffineTransformMakeRotation(0);
                      }
                      completion:^(BOOL finished){
-                         [self rotateLabelDown];
+                         if (_animate) {
+                             [self rotateLabelDown];
+                         }
                      }];
 }
 

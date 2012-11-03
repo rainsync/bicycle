@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *resultsTextView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (strong, nonatomic) IBOutlet UILabel *label;
+@property (assign, nonatomic) BOOL animate;
 
 - (IBAction)doWork:(id)sender;
 - (void)rotateLabelUp;
