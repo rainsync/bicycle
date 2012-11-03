@@ -24,6 +24,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    CGRect bounds = self.view.bounds;
+    CGRect labelFrame = CGRectMake(bounds.origin.x, CGRectGetMidX(bounds)-50, bounds.size.width, 100);
+    _label = [[UILabel alloc] initWithFrame:labelFrame];
+    _label.font = [UIFont fontWithName:@"Helvietica" size:70];
+    _label.text = @"Olleh!";
+    _label.textAlignment = UITextAlignmentCenter;
+    _label.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_label];
 }
 
 - (void)doWork:(id)sender {
@@ -79,5 +88,9 @@
 - (NSString *)calculateSecondResult:(NSString *)data {
     [NSThread sleepForTimeInterval:4];
     return [data stringByReplacingOccurrencesOfString:@"E" withString:@"e"];
+}
+- (void)viewDidUnload {
+    [self setLabel:nil];
+    [super viewDidUnload];
 }
 @end
