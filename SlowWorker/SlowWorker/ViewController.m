@@ -27,15 +27,27 @@
 }
 
 - (void)doWork:(id)sender {
+    _startButton.enabled = NO;
+    _startButton.alpha = 0.5f;
+    [_spinner startAnimating];
+    
     NSDate *startTime = [NSDate date];
-    NSString *fetchedData = [self fetchSomethingFromServer];
-    NSString *processedData = [self processData:fetchedData];
-    NSString *firstResult = [self calculateFirstResult:processedData];
-    NSString *secondResult = [self calculateSecondResult:processedData];
-    NSString *resultsSummary = [NSString stringWithFormat:@"First: [%@]\nSecond: [%@]", firstResult, secondResult];
-    _resultsTextView.text = resultsSummary;
-    NSDate *endTime = [NSDate date];
-    NSLog(@"Completed in %f seconds", [endTime timeIntervalSinceDate:startTime]);
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    // 항상 존재하는 전역 큐를 호출한다. 첫째인자는 우선 순위를 지정하는 인자고 두번째는 지금 사용하지 않으므로 항상 0으로 지정해야한다.
+        NSString *fetchedData = [self fetchSomethingFromServer];
+        NSString *processedData = [self processData:fetchedData];
+        NSString *firstResult = [self calculateFirstResult:processedData];
+        NSString *secondResult = [self calculateSecondResult:processedData];
+        NSString *resultsSummary = [NSString stringWithFormat:@"First: [%@]\nSecond: [%@]", firstResult, secondResult];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _startButton.enabled = YES;
+            _startButton.alpha = 1.0f;
+            [_spinner stopAnimating];
+            _resultsTextView.text = resultsSummary;
+        });
+        NSDate *endTime = [NSDate date];
+        NSLog(@"Completed in %f seconds", [endTime timeIntervalSinceDate:startTime]);
+    });
 }
 
 - (NSString *)fetchSomethingFromServer {
