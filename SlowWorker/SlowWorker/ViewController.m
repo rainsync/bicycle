@@ -25,6 +25,19 @@
     [self rotateLabelDown];
 }
 
+- (void)applicationDidEnterBackground {
+    NSLog(@"VC: %@", NSStringFromSelector(_cmd));
+    _primary = nil;
+    _primaryView.image = nil;
+}
+
+- (void)applicationWillEnterForeground {
+    NSLog(@"VC: %@", NSStringFromSelector(_cmd));
+    NSString *primaryPath = [[NSBundle mainBundle] pathForResource:@"primary" ofType:@"jpg"];
+    _primary = [UIImage imageWithContentsOfFile:primaryPath];
+    _primaryView.image = _primary;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -32,15 +45,27 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive) name:UIApplicationWillResignActiveNotification object:[UIApplication sharedApplication]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:[UIApplication sharedApplication]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:[UIApplication sharedApplication]];
     
     CGRect bounds = self.view.bounds;
     CGRect labelFrame = CGRectMake(bounds.origin.x, CGRectGetMidX(bounds)+150, bounds.size.width, 100);
     _label = [[UILabel alloc] initWithFrame:labelFrame];
     _label.font = [UIFont fontWithName:@"Helvietica" size:70];
-    _label.text = @"Olleh!";
+    _label.text = @"Primary!";
     _label.textAlignment = UITextAlignmentCenter;
     _label.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_label];
+    
+    CGRect primaryFrame = CGRectMake(140, 280, 40, 38);
+    _primaryView = [[UIImageView alloc] initWithFrame:primaryFrame];
+    _primaryView.contentMode = UIViewContentModeCenter;
+    NSString *primaryPath = [[NSBundle mainBundle] pathForResource:@"primaryImg" ofType:@"jpg"];
+    _primary = [UIImage imageWithContentsOfFile:primaryPath];
+    _primaryView.image = _primary;
+    
+    
+    [self.view addSubview:_primaryView];
     
 }
 

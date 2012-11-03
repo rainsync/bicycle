@@ -12,7 +12,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *startButton;
 @property (strong, nonatomic) IBOutlet UITextView *resultsTextView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
-@property (strong, nonatomic) IBOutlet UILabel *label;
+@property (strong, nonatomic) UILabel *label;
+@property (strong, nonatomic) UIImage *primary;
+@property (strong, nonatomic) UIImageView *primaryView;
 @property (assign, nonatomic) BOOL animate;
 
 - (IBAction)doWork:(id)sender;
