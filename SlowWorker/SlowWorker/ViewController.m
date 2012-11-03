@@ -36,17 +36,28 @@
     // 항상 존재하는 전역 큐를 호출한다. 첫째인자는 우선 순위를 지정하는 인자고 두번째는 지금 사용하지 않으므로 항상 0으로 지정해야한다.
         NSString *fetchedData = [self fetchSomethingFromServer];
         NSString *processedData = [self processData:fetchedData];
-        NSString *firstResult = [self calculateFirstResult:processedData];
-        NSString *secondResult = [self calculateSecondResult:processedData];
-        NSString *resultsSummary = [NSString stringWithFormat:@"First: [%@]\nSecond: [%@]", firstResult, secondResult];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            _startButton.enabled = YES;
-            _startButton.alpha = 1.0f;
-            [_spinner stopAnimating];
-            _resultsTextView.text = resultsSummary;
+//        NSString *firstResult = [self calculateFirstResult:processedData];
+//        NSString *secondResult = [self calculateSecondResult:processedData];
+        __block NSString *firstResult;
+        __block NSString *secondResult;
+        dispatch_group_t group = dispatch_group_create();
+        dispatch_group_async(group, dispatch_get_global_queue(0, 0), ^{
+            firstResult = [self calculateFirstResult:processedData];
         });
-        NSDate *endTime = [NSDate date];
-        NSLog(@"Completed in %f seconds", [endTime timeIntervalSinceDate:startTime]);
+        dispatch_group_async(group, dispatch_get_global_queue(0, 0), ^{
+            secondResult = [self calculateSecondResult:processedData];
+        });
+        dispatch_group_notify(group, dispatch_get_global_queue(0, 0), ^{
+            NSString *resultsSummary = [NSString stringWithFormat:@"First: [%@]\nSecond: [%@]", firstResult, secondResult];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _startButton.enabled = YES;
+                _startButton.alpha = 1.0f;
+                [_spinner stopAnimating];
+                _resultsTextView.text = resultsSummary;
+            });
+            NSDate *endTime = [NSDate date];
+            NSLog(@"Completed in %f seconds", [endTime timeIntervalSinceDate:startTime]);
+        });
     });
 }
 
