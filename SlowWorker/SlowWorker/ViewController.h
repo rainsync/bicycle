@@ -15,4 +15,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *label;
 
 - (IBAction)doWork:(id)sender;
+- (void)rotateLabelUp;
+- (void)rotateLabelDown;
 @end

@@ -18,21 +18,23 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
     
     CGRect bounds = self.view.bounds;
-    CGRect labelFrame = CGRectMake(bounds.origin.x, CGRectGetMidX(bounds)-50, bounds.size.width, 100);
+    CGRect labelFrame = CGRectMake(bounds.origin.x, CGRectGetMidX(bounds)+150, bounds.size.width, 100);
     _label = [[UILabel alloc] initWithFrame:labelFrame];
     _label.font = [UIFont fontWithName:@"Helvietica" size:70];
     _label.text = @"Olleh!";
     _label.textAlignment = UITextAlignmentCenter;
     _label.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_label];
+    
+    [self rotateLabelDown];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 - (void)doWork:(id)sender {
@@ -92,5 +94,24 @@
 - (void)viewDidUnload {
     [self setLabel:nil];
     [super viewDidUnload];
+}
+
+- (void)rotateLabelUp {
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                        _label.transform = CGAffineTransformMakeRotation(0);
+                     }
+                     completion:^(BOOL finished){
+                         [self rotateLabelDown];
+                     }];
+}
+
+- (void)rotateLabelDown {
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         _label.transform = CGAffineTransformMakeRotation(M_PI);
+                     }completion:^(BOOL finished){
+                         [self rotateLabelUp];
+                     }];
 }
 @end
