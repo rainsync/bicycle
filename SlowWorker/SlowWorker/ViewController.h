@@ -16,6 +16,7 @@
 @property (strong, nonatomic) UIImage *primary;
 @property (strong, nonatomic) UIImageView *primaryView;
 @property (assign, nonatomic) BOOL animate;
+@property (strong, nonatomic) UISegmentedControl *segmentedControl;
 
 - (IBAction)doWork:(id)sender;
 - (void)rotateLabelUp;
