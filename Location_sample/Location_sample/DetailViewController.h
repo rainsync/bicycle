@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface DetailViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UILabel *recordingTime;
+@property (strong, nonatomic) IBOutlet UILabel *distance;
+@property (strong, nonatomic) IBOutlet UILabel *altitude;
+@property (strong, nonatomic) IBOutlet UILabel *averageSpeed;
+@property (strong, nonatomic) IBOutlet UILabel *calorie;
 
 @end
