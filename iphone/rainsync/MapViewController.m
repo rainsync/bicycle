@@ -55,6 +55,9 @@
 - (IBAction)changeToSatellite:(id)sender {
     self.mapView.mapType = MKMapTypeSatellite;
 }
+- (IBAction)changeToHybrid:(id)sender {
+    self.mapView.mapType = MKMapTypeHybrid;
+}
 
 - (void)didReceiveMemoryWarning
 {
