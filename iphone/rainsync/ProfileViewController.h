@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "NetUtility.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "UIImageView+AFNetworking.h"
 
 @interface ProfileViewController : UIViewController
 

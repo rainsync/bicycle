@@ -85,11 +85,19 @@
     
 }
 
--(void) account_auth:(NSString*)accesstoken{
-    [queue push:[[NSNumber alloc]initWithInt:account_auth]];
-    [arr addObject:[[[NSDictionary alloc] initWithObjects:@[@"account-auth", accesstoken] forKeys:@[@"type", @"accesstoken"]] autorelease]];
+-(void) account_profile_get:(NSString*)sid{
+    [queue push:[[NSNumber alloc]initWithInt:account_profile_get]];
+    [arr addObject:[[[NSDictionary alloc] initWithObjects:@[@"account-profile-get", sid] forKeys:@[@"type", @"sid"]] autorelease]];
     
 }
+
+-(void) account_auth:(NSString*)accesstoken{
+
+    [queue push:[[NSNumber alloc]initWithInt:account_auth]];
+    [arr addObject:[[[NSDictionary alloc] initWithObjects:@[@"account-auth", accesstoken] forKeys:@[@"type", @"accesstoken"]] autorelease]];
+
+}
+
 
 -(void) end{
     NSError* error;

@@ -36,12 +36,8 @@
         [[NSUserDefaults standardUserDefaults] setValue:RidingType forKey:@"RidingType"];
     }
     
-    NSString* IsRiding = [[NSUserDefaults standardUserDefaults] stringForKey:@"IsRiding"];
-    if(!IsRiding){
-        IsRiding = @"Stop";
-        [[NSUserDefaults standardUserDefaults] setValue:IsRiding forKey:@"IsRiding"];
-        
-    }
+    BOOL IsRiding = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsRiding"];
+
     
     [[NSUserDefaults standardUserDefaults]synchronize];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"IsStart"];

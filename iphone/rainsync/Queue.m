@@ -16,6 +16,11 @@
 
 }
 
+- (void)dealloc{
+    [contents release];
+    [super dealloc];
+}
+
 - (id)pop
 {
     // nil if [self count] == 0
@@ -26,6 +31,7 @@
 }
 
 - (NSUInteger)count{
+
     return [contents count];
     
 }
