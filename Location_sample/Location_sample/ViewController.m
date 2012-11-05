@@ -34,6 +34,8 @@
     isEnded = NO;
     timeCounter = 0;
     avgSpeed = 0.0f;
+    _averageSpeed.text = @"0";
+    _highestSpeed.text = @"0";
     
     _resumeRecordBtn.hidden = YES;
     _pauseRecordBtn.hidden = YES;
@@ -226,6 +228,7 @@
 }
 
 - (void)viewDidUnload {
+    [self setHighestSpeed:nil];
     [self setDbStatusLabel:nil];
     [self setSaveRidingBtn:nil];
     [self setWeightSlider:nil];
@@ -270,7 +273,18 @@
     
     NSString *currentSpeed = [[NSString alloc] initWithFormat:@"%g", newLocation.speed];
     NSString *kmhSpeed = [NSString stringWithFormat:@"%f", [currentSpeed floatValue] * 3.6];    // m/s -> km/h 변환
-    _currentSpeed.text = kmhSpeed;
+    
+    if ([currentSpeed floatValue] <= -1) {
+        _currentSpeed.text = @"Can't check";
+    }
+    else {
+        _currentSpeed.text = kmhSpeed;
+        
+        if ([kmhSpeed floatValue] > [_highestSpeed.text floatValue]) {
+            _highestSpeed.text = kmhSpeed;      // 최고 속도 반영
+        }
+        
+    }
     
     if (startLocation == nil) {
         self.startLocation = newLocation;
