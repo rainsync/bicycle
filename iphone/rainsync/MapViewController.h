@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MKMapView.h>
+#import "RidingManager.h"
+#import "CSRouteAnnotation.h"
+#import "CSRouteView.h"
 
 @interface MapViewController : UIViewController <MKMapViewDelegate>
+{
+    NSMutableDictionary* _routeViews;
+    RidingManager *ridingManager;
+    bool t;
 
+    
+}
+@property (retain, nonatomic) IBOutlet MKMapView *mapView;
 
 @end
