@@ -20,28 +20,46 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+
+
         // Custom initialization
     }
     return self;
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    CLLocation *location = newLocation;
+    
+        speedLabel.text = [NSString stringWithFormat:@"SPEED: %f", location.speed];
+        latitudeLabel.text = [NSString stringWithFormat:@"LATITUDE: %f", location.coordinate.latitude];
+        longitudeLabel.text = [NSString stringWithFormat:@"LONGITUDE: %f", location.coordinate.longitude];
+        altitudeLabel.text = [NSString stringWithFormat:@"ALTITUDE: %f", location.altitude];
+
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
+{
+    
+    
+}
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    RidingManager *ridingManager = [RidingManager getInstance];
+    [ridingManager addTarget:self];
+    [ridingManager startRiding];
     // Do any additional setup after loading the view from its nib.
     
-    CLController = [[CoreLocationController alloc] init];
-	CLController.delegate = self;
-	[CLController.locMgr startUpdatingLocation];
-     
+
 }
 
 
 - (void)locationUpdate:(CLLocation *)location {
-	speedLabel.text = [NSString stringWithFormat:@"SPEED: %f", [location speed]];
-	latitudeLabel.text = [NSString stringWithFormat:@"LATITUDE: %f", location.coordinate.latitude];
-	longitudeLabel.text = [NSString stringWithFormat:@"LONGITUDE: %f", location.coordinate.longitude];
-	altitudeLabel.text = [NSString stringWithFormat:@"ALTITUDE: %f", [location altitude]];
+
 }
 
 - (void)locationError:(NSError *)error {
@@ -56,7 +74,6 @@
 
 
 - (void)dealloc {
-	[CLController release];
     [speedLabel release];
     [latitudeLabel release];
     [longitudeLabel release];

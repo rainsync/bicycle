@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "CoreLocationController.h"
+#import "RidingManager.h"
+
+
 @interface DashBoardViewController : UIViewController <CoreLocationControllerDelegate>
-{
-    CoreLocationController *CLController;
-}
+- (void)locationUpdate:(CLLocationManager*)manager WithLocations:(NSArray*)locations;
+- (void)headingUpdate:(CLLocationManager*)manager WithLocations:(CLHeading*)heading;
 
 @property (nonatomic, retain) IBOutlet UILabel *speedLabel;
 @property (nonatomic, retain) IBOutlet UILabel *latitudeLabel;
