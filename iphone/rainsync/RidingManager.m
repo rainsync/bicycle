@@ -10,14 +10,24 @@
 
 @implementation RidingManager
 
-- (id)initWithLocation:(void(^)(CLLocationManager*, NSArray*))locblock WithHeading:(void(^)(CLLocationManager*, CLHeading*))headblock
+- (id)init
 {
-    manager = [[CLLocationManager alloc] init];
-    manager.delegate = self;
-    location = locblock;
-    heading = headblock;
+    locmanager = [[CLLocationManager alloc] init];
+    locmanager.delegate = self;
+    locationUpdate = @selector(locationUpdate:location:);
+    HeadingUpdate = @selector(headingUpdate:heading:);
+    
     return self;
 }
+
+
+
+- (void)addTarget:(id)obj
+{
+    [targets addObject:obj];
+}
+
+
 
 - (void)startRiding
 {
@@ -28,18 +38,21 @@
         //load previous path
         
         //reInvoke previous path
-        NSArray* locations;
+
         
-        location(manager, locations);
+        location(locmanager, locations);
         
 
         
     }
-    else
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsRiding"];
+    else{
+        locations = [[NSMutableArray alloc] init];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsRiding"];
+    }
     
-    [manager startUpdatingLocation];
-    [manager startUpdatingHeading];
+    
+    [locmanager startUpdatingLocation];
+    [locmanager startUpdatingHeading];
     
     
 }
@@ -53,11 +66,14 @@
 + (BOOL)isRiding
 {
    return [[NSUserDefaults standardUserDefaults] boolForKey:@"IsRiding"];
+
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    
+    for (id obj in targets) {
+        [obj performSelector:locationUpdate withObject:@[manager, locations]];
+    }
     
 }
 
@@ -79,7 +95,10 @@
         default:
             break;
     }
-    
+
+    for (id obj in targets){
+        [obj performSelector:HeadingUpdate withObject:@[manager,error]];
+    }
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
