@@ -45,6 +45,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *recordingTime;
 @property (strong, nonatomic) IBOutlet UILabel *currentSpeed;
 @property (strong, nonatomic) IBOutlet UILabel *averageSpeed;
+@property (strong, nonatomic) IBOutlet UILabel *highestSpeed;
 @property (strong, nonatomic) IBOutlet UILabel *calorie;
 
 @property (strong, nonatomic) IBOutlet UIButton *resetButton;

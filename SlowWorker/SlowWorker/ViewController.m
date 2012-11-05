@@ -27,8 +27,31 @@
 
 - (void)applicationDidEnterBackground {
     NSLog(@"VC: %@", NSStringFromSelector(_cmd));
-    _primary = nil;
-    _primaryView.image = nil;
+    UIApplication *app = [UIApplication sharedApplication];
+    
+    __block UIBackgroundTaskIdentifier taskId;
+    taskId = [app beginBackgroundTaskWithExpirationHandler:^{
+        NSLog(@"Background task ran out of time and was terminated.");
+        [app endBackgroundTask:taskId];
+    }];
+    
+    if (taskId == UIBackgroundTaskInvalid) {
+        NSLog(@"Failed to start background task!");
+        return;
+    }
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSLog(@"Starting background task with %f seconds remaining", app.backgroundTimeRemaining);
+        _primary = nil;
+        _primaryView.image = nil;
+    
+        NSInteger selectedIndex = _segmentedControl.selectedSegmentIndex;
+        [[NSUserDefaults standardUserDefaults] setInteger:selectedIndex forKey:@"selectedIndex"];
+        // 오랜 시간(25초)이 걸리는 작업을 시뮬레이션
+        [NSThread sleepForTimeInterval:25];
+        NSLog(@"Finishing background task with %f seconds remaining", app.backgroundTimeRemaining);
+        [app endBackgroundTask:taskId];
+    });
 }
 
 - (void)applicationWillEnterForeground {
@@ -68,6 +91,12 @@
     _segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"One", @"Two", @"Three", @"Four", nil]];
     _segmentedControl.frame = CGRectMake(bounds.origin.x + 20, CGRectGetMaxY(bounds) - 50, bounds.size.width - 40, 30);
     [self.view addSubview:_segmentedControl];
+    
+    NSNumber *indexNumber;
+    if (indexNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedIndex"]) {
+        NSInteger selectedIndex = [indexNumber intValue];
+        _segmentedControl.selectedSegmentIndex = selectedIndex;
+    }
 }
 
 - (void)didReceiveMemoryWarning
