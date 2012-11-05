@@ -269,7 +269,8 @@
     verticalAccuracy.text = currentVerticalAccuracy;
     
     NSString *currentSpeed = [[NSString alloc] initWithFormat:@"%g", newLocation.speed];
-    _currentSpeed.text = currentSpeed;
+    NSString *kmhSpeed = [NSString stringWithFormat:@"%f", [currentSpeed floatValue] * 3.6];    // m/s -> km/h 변환
+    _currentSpeed.text = kmhSpeed;
     
     if (startLocation == nil) {
         self.startLocation = newLocation;
