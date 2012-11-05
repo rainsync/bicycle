@@ -29,6 +29,9 @@
     NSLog(@"VC: %@", NSStringFromSelector(_cmd));
     _primary = nil;
     _primaryView.image = nil;
+    
+    NSInteger selectedIndex = _segmentedControl.selectedSegmentIndex;
+    [[NSUserDefaults standardUserDefaults] setInteger:selectedIndex forKey:@"selectedIndex"];
 }
 
 - (void)applicationWillEnterForeground {
@@ -68,6 +71,12 @@
     _segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"One", @"Two", @"Three", @"Four", nil]];
     _segmentedControl.frame = CGRectMake(bounds.origin.x + 20, CGRectGetMaxY(bounds) - 50, bounds.size.width - 40, 30);
     [self.view addSubview:_segmentedControl];
+    
+    NSNumber *indexNumber;
+    if (indexNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedIndex"]) {
+        NSInteger selectedIndex = [indexNumber intValue];
+        _segmentedControl.selectedSegmentIndex = selectedIndex;
+    }
 }
 
 - (void)didReceiveMemoryWarning
