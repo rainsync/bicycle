@@ -63,10 +63,11 @@
     NSString *primaryPath = [[NSBundle mainBundle] pathForResource:@"primaryImg" ofType:@"jpg"];
     _primary = [UIImage imageWithContentsOfFile:primaryPath];
     _primaryView.image = _primary;
-    
-    
     [self.view addSubview:_primaryView];
     
+    _segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"One", @"Two", @"Three", @"Four", nil]];
+    _segmentedControl.frame = CGRectMake(bounds.origin.x + 20, CGRectGetMaxY(bounds) - 50, bounds.size.width - 40, 30);
+    [self.view addSubview:_segmentedControl];
 }
 
 - (void)didReceiveMemoryWarning
