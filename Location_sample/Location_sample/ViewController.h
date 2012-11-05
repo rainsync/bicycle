@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "/usr/include/sqlite3.h"    //sqlite3 헤더파일 추가
+#import <sqlite3.h>    //sqlite3 헤더파일 추가
 
 @interface ViewController : UIViewController <CLLocationManagerDelegate, UIAlertViewDelegate>
 {

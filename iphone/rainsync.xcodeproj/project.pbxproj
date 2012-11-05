@@ -20,7 +20,12 @@
 		5501C13F1636C5A90073ACB1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C13E1636C5A90073ACB1 /* FacebookSDK.framework */; };
 		5501C14D1636D26F0073ACB1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C14C1636D26F0073ACB1 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5501C14F1636D4210073ACB1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C14E1636D4210073ACB1 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		5517E90C164777AF00E2CDD3 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E90B164777AF00E2CDD3 /* LocationManager.m */; };
+		5517E91C1647973200E2CDD3 /* RidingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E91B1647973200E2CDD3 /* RidingManager.m */; };
+		5517E91D1647973200E2CDD3 /* RidingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E91B1647973200E2CDD3 /* RidingManager.m */; };
+		5517E9231647985400E2CDD3 /* RidingDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E9221647985400E2CDD3 /* RidingDB.m */; };
+		5517E9241647985400E2CDD3 /* RidingDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E9221647985400E2CDD3 /* RidingDB.m */; };
+		5517E9261647987A00E2CDD3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5517E9251647987A00E2CDD3 /* libsqlite3.dylib */; };
+		5517E9271647988600E2CDD3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5517E9251647987A00E2CDD3 /* libsqlite3.dylib */; };
 		552BD57616365ECB00D89652 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552BD57416365ECB00D89652 /* ProfileViewController.m */; };
 		552BD57716365ECB00D89652 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 552BD57516365ECB00D89652 /* ProfileViewController.xib */; };
 		552BD57B1636609500D89652 /* NetUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 552BD57A1636609500D89652 /* NetUtility.m */; };
@@ -110,8 +115,11 @@
 		5508B8FE163A55FE0030ED0A /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		5508B8FF163A55FE0030ED0A /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		5508B900163A55FE0030ED0A /* FirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstViewController.xib; sourceTree = "<group>"; };
-		5517E90A164777AF00E2CDD3 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
-		5517E90B164777AF00E2CDD3 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		5517E91A1647973100E2CDD3 /* RidingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RidingManager.h; sourceTree = "<group>"; };
+		5517E91B1647973200E2CDD3 /* RidingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RidingManager.m; sourceTree = "<group>"; };
+		5517E9211647985400E2CDD3 /* RidingDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RidingDB.h; path = ../RidingDB.h; sourceTree = "<group>"; };
+		5517E9221647985400E2CDD3 /* RidingDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RidingDB.m; path = ../RidingDB.m; sourceTree = "<group>"; };
+		5517E9251647987A00E2CDD3 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		552BD57316365ECB00D89652 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		552BD57416365ECB00D89652 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		552BD57516365ECB00D89652 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -187,6 +195,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5517E9271647988600E2CDD3 /* libsqlite3.dylib in Frameworks */,
 				04ADF5B7163EABE000F825B4 /* MobileCoreServices.framework in Frameworks */,
 				5501C14F1636D4210073ACB1 /* AdSupport.framework in Frameworks */,
 				5501C14D1636D26F0073ACB1 /* Accounts.framework in Frameworks */,
@@ -203,6 +212,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5517E9261647987A00E2CDD3 /* libsqlite3.dylib in Frameworks */,
 				5570A92D163550A5008E2F50 /* SenTestingKit.framework in Frameworks */,
 				5570A92E163550A5008E2F50 /* UIKit.framework in Frameworks */,
 				5570A92F163550A5008E2F50 /* Foundation.framework in Frameworks */,
@@ -294,6 +304,7 @@
 		5570A8F9163550A5008E2F50 = {
 			isa = PBXGroup;
 			children = (
+				5517E9251647987A00E2CDD3 /* libsqlite3.dylib */,
 				5570A90E163550A5008E2F50 /* rainsync */,
 				5570A932163550A5008E2F50 /* rainsyncTests */,
 				5545FD751644DA4A00D9E4ED /* AFNetworking */,
@@ -344,11 +355,13 @@
 				55911011163826C400B007CA /* TabBar */,
 				552BD5791636609400D89652 /* NetUtility.h */,
 				552BD57A1636609500D89652 /* NetUtility.m */,
+				5517E9211647985400E2CDD3 /* RidingDB.h */,
+				5517E9221647985400E2CDD3 /* RidingDB.m */,
+				5517E91A1647973100E2CDD3 /* RidingManager.h */,
+				5517E91B1647973200E2CDD3 /* RidingManager.m */,
 				558A5A301642389C00BC22ED /* Queue.h */,
 				558A5A311642389C00BC22ED /* Queue.m */,
 				5570A90F163550A5008E2F50 /* Supporting Files */,
-				5517E90A164777AF00E2CDD3 /* LocationManager.h */,
-				5517E90B164777AF00E2CDD3 /* LocationManager.m */,
 			);
 			path = rainsync;
 			sourceTree = "<group>";
@@ -569,7 +582,8 @@
 				5545FD961644DA7F00D9E4ED /* AFURLConnectionOperation.m in Sources */,
 				5545FD981644DA7F00D9E4ED /* AFXMLRequestOperation.m in Sources */,
 				5545FD9A1644DA7F00D9E4ED /* UIImageView+AFNetworking.m in Sources */,
-				5517E90C164777AF00E2CDD3 /* LocationManager.m in Sources */,
+				5517E91C1647973200E2CDD3 /* RidingManager.m in Sources */,
+				5517E9231647985400E2CDD3 /* RidingDB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,6 +604,8 @@
 				5545FD971644DA7F00D9E4ED /* AFURLConnectionOperation.m in Sources */,
 				5545FD991644DA7F00D9E4ED /* AFXMLRequestOperation.m in Sources */,
 				5545FD9B1644DA7F00D9E4ED /* UIImageView+AFNetworking.m in Sources */,
+				5517E91D1647973200E2CDD3 /* RidingManager.m in Sources */,
+				5517E9241647985400E2CDD3 /* RidingDB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
