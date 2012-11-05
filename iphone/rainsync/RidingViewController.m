@@ -25,13 +25,13 @@
     if (self) {
         self.title = NSLocalizedString(@"라이딩", @"라이딩");
 
+        
+        
         //self.tabBarItem.image = [UIImag]
         // Custom initialization
     }
     return self;
 }
-
-
 
 
 
@@ -180,13 +180,13 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self awakeFromNib];
+    
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-
+    [self awakeFromNib];
     // Do any additional setup after loading the view from its nib.
 }
 

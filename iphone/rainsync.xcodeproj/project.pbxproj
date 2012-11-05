@@ -26,6 +26,10 @@
 		5517E9241647985400E2CDD3 /* RidingDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E9221647985400E2CDD3 /* RidingDB.m */; };
 		5517E9261647987A00E2CDD3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5517E9251647987A00E2CDD3 /* libsqlite3.dylib */; };
 		5517E9271647988600E2CDD3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5517E9251647987A00E2CDD3 /* libsqlite3.dylib */; };
+		5517E93A1647C28600E2CDD3 /* CSRouteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E9391647C28600E2CDD3 /* CSRouteView.m */; };
+		5517E93B1647C28600E2CDD3 /* CSRouteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E9391647C28600E2CDD3 /* CSRouteView.m */; };
+		5517E93E1647C29500E2CDD3 /* CSRouteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E93D1647C29500E2CDD3 /* CSRouteAnnotation.m */; };
+		5517E93F1647C29500E2CDD3 /* CSRouteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E93D1647C29500E2CDD3 /* CSRouteAnnotation.m */; };
 		552BD57616365ECB00D89652 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552BD57416365ECB00D89652 /* ProfileViewController.m */; };
 		552BD57716365ECB00D89652 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 552BD57516365ECB00D89652 /* ProfileViewController.xib */; };
 		552BD57B1636609500D89652 /* NetUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 552BD57A1636609500D89652 /* NetUtility.m */; };
@@ -112,14 +116,15 @@
 		5501C13E1636C5A90073ACB1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		5501C14C1636D26F0073ACB1 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		5501C14E1636D4210073ACB1 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		5508B8FE163A55FE0030ED0A /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		5508B8FF163A55FE0030ED0A /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		5508B900163A55FE0030ED0A /* FirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstViewController.xib; sourceTree = "<group>"; };
 		5517E91A1647973100E2CDD3 /* RidingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RidingManager.h; sourceTree = "<group>"; };
 		5517E91B1647973200E2CDD3 /* RidingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RidingManager.m; sourceTree = "<group>"; };
 		5517E9211647985400E2CDD3 /* RidingDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RidingDB.h; path = ../RidingDB.h; sourceTree = "<group>"; };
 		5517E9221647985400E2CDD3 /* RidingDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RidingDB.m; path = ../RidingDB.m; sourceTree = "<group>"; };
 		5517E9251647987A00E2CDD3 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		5517E9381647C28600E2CDD3 /* CSRouteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRouteView.h; sourceTree = "<group>"; };
+		5517E9391647C28600E2CDD3 /* CSRouteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRouteView.m; sourceTree = "<group>"; };
+		5517E93C1647C29500E2CDD3 /* CSRouteAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRouteAnnotation.h; sourceTree = "<group>"; };
+		5517E93D1647C29500E2CDD3 /* CSRouteAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRouteAnnotation.m; sourceTree = "<group>"; };
 		552BD57316365ECB00D89652 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		552BD57416365ECB00D89652 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		552BD57516365ECB00D89652 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -274,6 +279,35 @@
 			name = "Setting Menu";
 			sourceTree = "<group>";
 		};
+		5517E9311647C12B00E2CDD3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5517E91A1647973100E2CDD3 /* RidingManager.h */,
+				5517E91B1647973200E2CDD3 /* RidingManager.m */,
+				552BD5791636609400D89652 /* NetUtility.h */,
+				552BD57A1636609500D89652 /* NetUtility.m */,
+				5517E9221647985400E2CDD3 /* RidingDB.m */,
+				5517E9211647985400E2CDD3 /* RidingDB.h */,
+				558A5A301642389C00BC22ED /* Queue.h */,
+				558A5A311642389C00BC22ED /* Queue.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		5517E9371647C27100E2CDD3 /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				5517E93C1647C29500E2CDD3 /* CSRouteAnnotation.h */,
+				5517E93D1647C29500E2CDD3 /* CSRouteAnnotation.m */,
+				5517E9381647C28600E2CDD3 /* CSRouteView.h */,
+				5517E9391647C28600E2CDD3 /* CSRouteView.m */,
+				5570A94816355489008E2F50 /* MapViewController.h */,
+				5570A94916355489008E2F50 /* MapViewController.m */,
+				5570A94A16355489008E2F50 /* MapViewController.xib */,
+			);
+			name = MapView;
+			sourceTree = "<group>";
+		};
 		5545FD751644DA4A00D9E4ED /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,9 +376,6 @@
 		5570A90E163550A5008E2F50 /* rainsync */ = {
 			isa = PBXGroup;
 			children = (
-				5508B8FE163A55FE0030ED0A /* FirstViewController.h */,
-				5508B8FF163A55FE0030ED0A /* FirstViewController.m */,
-				5508B900163A55FE0030ED0A /* FirstViewController.xib */,
 				5570A953163557EE008E2F50 /* CoreLocationController.h */,
 				5570A954163557FC008E2F50 /* CoreLocationController.m */,
 				5570A917163550A5008E2F50 /* AppDelegate.h */,
@@ -353,14 +384,7 @@
 				5570A921163550A5008E2F50 /* ViewController.m */,
 				0483FE20163E646E005D804F /* FirstUserView */,
 				55911011163826C400B007CA /* TabBar */,
-				552BD5791636609400D89652 /* NetUtility.h */,
-				552BD57A1636609500D89652 /* NetUtility.m */,
-				5517E9211647985400E2CDD3 /* RidingDB.h */,
-				5517E9221647985400E2CDD3 /* RidingDB.m */,
-				5517E91A1647973100E2CDD3 /* RidingManager.h */,
-				5517E91B1647973200E2CDD3 /* RidingManager.m */,
-				558A5A301642389C00BC22ED /* Queue.h */,
-				558A5A311642389C00BC22ED /* Queue.m */,
+				5517E9311647C12B00E2CDD3 /* Model */,
 				5570A90F163550A5008E2F50 /* Supporting Files */,
 			);
 			path = rainsync;
@@ -414,6 +438,7 @@
 		55911012163826DF00B007CA /* Riding Menu */ = {
 			isa = PBXGroup;
 			children = (
+				5517E9371647C27100E2CDD3 /* MapView */,
 				5570A94316355152008E2F50 /* DashBoardViewController.h */,
 				5570A94416355152008E2F50 /* DashBoardViewController.m */,
 				5570A94516355152008E2F50 /* DashBoardViewController.xib */,
@@ -423,9 +448,6 @@
 				04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */,
 				04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */,
 				04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */,
-				5570A94816355489008E2F50 /* MapViewController.h */,
-				5570A94916355489008E2F50 /* MapViewController.m */,
-				5570A94A16355489008E2F50 /* MapViewController.xib */,
 				55910F901637F4E800B007CA /* RidingViewController.h */,
 				55910F911637F4E800B007CA /* RidingViewController.m */,
 				55910F921637F4E800B007CA /* RidingViewController.xib */,
@@ -584,6 +606,8 @@
 				5545FD9A1644DA7F00D9E4ED /* UIImageView+AFNetworking.m in Sources */,
 				5517E91C1647973200E2CDD3 /* RidingManager.m in Sources */,
 				5517E9231647985400E2CDD3 /* RidingDB.m in Sources */,
+				5517E93A1647C28600E2CDD3 /* CSRouteView.m in Sources */,
+				5517E93E1647C29500E2CDD3 /* CSRouteAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,6 +630,8 @@
 				5545FD9B1644DA7F00D9E4ED /* UIImageView+AFNetworking.m in Sources */,
 				5517E91D1647973200E2CDD3 /* RidingManager.m in Sources */,
 				5517E9241647985400E2CDD3 /* RidingDB.m in Sources */,
+				5517E93B1647C28600E2CDD3 /* CSRouteView.m in Sources */,
+				5517E93F1647C29500E2CDD3 /* CSRouteAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

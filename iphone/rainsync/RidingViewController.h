@@ -10,6 +10,7 @@
 #import "DashBoardViewController.h"
 #import "MapViewController.h"
 #import "ProfileViewController.h"
+#import "RidingManager.h"
 
 @interface RidingViewController : UIViewController <UIScrollViewDelegate>
 {
@@ -17,10 +18,11 @@
     @private BOOL pageControlUsed;
     @private NSString* RidingType;
     @private int kNumberOfPages;
-    
+
     
     
 }
+
 @property (nonatomic, retain) IBOutlet UIPageControl* pageControl;
 @property (nonatomic, retain) IBOutlet UIScrollView* scrollView;
 @end
