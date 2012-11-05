@@ -18,6 +18,7 @@
 		042471E316443CE400D2567D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 042471E216443CE400D2567D /* Default-568h@2x.png */; };
 		042471E616443CE400D2567D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042471E516443CE400D2567D /* ViewController.m */; };
 		042471E916443CE400D2567D /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042471E716443CE400D2567D /* ViewController.xib */; };
+		042D4CD01645325E00CE6BA0 /* primaryImg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 042D4CCF1645325E00CE6BA0 /* primaryImg.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		042471E416443CE400D2567D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		042471E516443CE400D2567D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		042471E816443CE400D2567D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		042D4CCF1645325E00CE6BA0 /* primaryImg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = primaryImg.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 		042471D316443CE400D2567D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				042D4CCF1645325E00CE6BA0 /* primaryImg.jpg */,
 				042471D416443CE400D2567D /* SlowWorker-Info.plist */,
 				042471D516443CE400D2567D /* InfoPlist.strings */,
 				042471D816443CE400D2567D /* main.m */,
@@ -163,6 +166,7 @@
 				042471E116443CE400D2567D /* Default@2x.png in Resources */,
 				042471E316443CE400D2567D /* Default-568h@2x.png in Resources */,
 				042471E916443CE400D2567D /* ViewController.xib in Resources */,
+				042D4CD01645325E00CE6BA0 /* primaryImg.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,10 +258,13 @@
 		042471ED16443CE400D2567D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Seung won Kim (7N6DQM42MS)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SlowWorker/SlowWorker-Prefix.pch";
 				INFOPLIST_FILE = "SlowWorker/SlowWorker-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "C2E24698-499E-42C6-8520-0199EF7C5DEA";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -265,10 +272,13 @@
 		042471EE16443CE400D2567D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Seung won Kim (7N6DQM42MS)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SlowWorker/SlowWorker-Prefix.pch";
 				INFOPLIST_FILE = "SlowWorker/SlowWorker-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "C2E24698-499E-42C6-8520-0199EF7C5DEA";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -292,6 +302,7 @@
 				042471EE16443CE400D2567D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
