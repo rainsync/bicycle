@@ -140,7 +140,7 @@
 						<bool key="IBUIOn">YES</bool>
 					</object>
 				</array>
-				<string key="NSFrame">{{0, 20}, {320, 441}}</string>
+				<string key="NSFrame">{{0, 20}, {320, 413}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="846470225"/>

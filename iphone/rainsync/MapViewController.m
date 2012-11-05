@@ -25,6 +25,8 @@
         t=false;
         
 
+         
+
         
         
         // Custom initialization
@@ -41,7 +43,17 @@
     [self.mapView addAnnotation:routeAnnotation];
         t=true;
     }
+    
+
         // Do any additional setup after loading the view from its nib.
+}
+
+
+- (IBAction)changeToMap:(id)sender {
+    self.mapView.mapType = MKMapTypeStandard;
+}
+- (IBAction)changeToSatellite:(id)sender {
+    self.mapView.mapType = MKMapTypeSatellite;
 }
 
 - (void)didReceiveMemoryWarning

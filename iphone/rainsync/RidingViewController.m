@@ -180,7 +180,13 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [[self navigationController] setNavigationBarHidden:true];
     
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [[self navigationController] setNavigationBarHidden:false];
 }
 - (void)viewDidLoad
 {
