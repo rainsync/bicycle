@@ -24,6 +24,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"라이딩", @"라이딩");
+
         //self.tabBarItem.image = [UIImag]
         // Custom initialization
     }
@@ -184,7 +185,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+
     // Do any additional setup after loading the view from its nib.
 }
 

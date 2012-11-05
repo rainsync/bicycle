@@ -18,15 +18,17 @@
 - (id)init
 {
     [super init];
-    ridingViewController = [[RidingViewController alloc] initWithNibName:@"RidingViewController" bundle:nil];
-    [self addChildViewController:ridingViewController];
     
+    //ridingViewController = [[RidingViewController alloc] initWithNibName:@"RidingViewController" bundle:nil];
+    //[self addChildViewController:ridingViewController];
+    
+    RidingViewController *ridingViewController = [[RidingViewController alloc] initWithNibName:@"RidingViewController" bundle:nil];
+    UINavigationController *ridingViewNavController = [[UINavigationController alloc] initWithRootViewController:ridingViewController];
+
     
     ProfileViewController* profile = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
     UINavigationController *profileNavController = [[UINavigationController alloc] initWithRootViewController:profile];
     
-    GroupRideViewController* groupriding = [[GroupRideViewController alloc] initWithNibName:@"GroupRideViewController" bundle:nil];
-    UINavigationController *groupRidingNavController = [[UINavigationController alloc] initWithRootViewController:groupriding];
 
     StaticViewController* statics = [[StaticViewController alloc]initWithNibName:@"StaticViewController" bundle:nil];
     UINavigationController *staticsNavController = [[UINavigationController alloc] initWithRootViewController:statics];
@@ -35,7 +37,7 @@
     UINavigationController *settingNavController = [[UINavigationController alloc] initWithRootViewController:setting];    
     
     // 네이비게이션 바가 필요한 프로필 탭, 통계 탭, 설정 탭은 네비게이션 컨트롤러에 뷰 삽입하여 탭바 컨트롤러에 삽임한다.
-    self.viewControllers = @[profileNavController, groupRidingNavController, staticsNavController, settingNavController];
+    self.viewControllers = @[ridingViewNavController, profileNavController,staticsNavController, settingNavController];
     
     
     return self;

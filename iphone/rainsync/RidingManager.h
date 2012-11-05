@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-@interface LocationManager : NSObject <CLLocationManagerDelegate>
+@interface RidingManager : NSObject <CLLocationManagerDelegate>
 {
-    @private void (^location)(NSArray*);
-    @private void (^heading)(CLHeading*);
+    @private void (^location)(CLLocationManager*, NSArray*);
+    @private void (^heading)(CLLocationManager*, CLHeading*);
+    CLLocationManager *manager;
 
 }
 - (id)initWithLocation:(void(^)(NSArray*))location WithHeading:(void(^)(CLHeading*))heading;

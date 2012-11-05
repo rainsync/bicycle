@@ -6,31 +6,53 @@
 //  Copyright (c) 2012년 rainsync. All rights reserved.
 //
 
-#import "LocationManager.h"
+#import "RidingManager.h"
 
-@implementation LocationManager
+@implementation RidingManager
 
-- (id)initWithLocation:(void(^)(NSArray*))location WithHeading:(void(^)(CLHeading*))heading
+- (id)initWithLocation:(void(^)(CLLocationManager*, NSArray*))locblock WithHeading:(void(^)(CLLocationManager*, CLHeading*))headblock
 {
-    
+    manager = [[CLLocationManager alloc] init];
+    manager.delegate = self;
+    location = locblock;
+    heading = headblock;
     return self;
 }
 
 - (void)startRiding
 {
+    if([RidingManager isRiding])
+    {
+        //unexpectly exit case
+        
+        //load previous path
+        
+        //reInvoke previous path
+        NSArray* locations;
+        
+        location(manager, locations);
+        
+
+        
+    }
+    else
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsRiding"];
+    
+    [manager startUpdatingLocation];
+    [manager startUpdatingHeading];
     
     
 }
 
 - (void)stopRiding
 {
-    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsRiding"];
     
 }
 
 + (BOOL)isRiding
 {
-    
+   return [[NSUserDefaults standardUserDefaults] boolForKey:@"IsRiding"];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
