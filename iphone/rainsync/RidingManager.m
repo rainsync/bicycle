@@ -10,6 +10,7 @@
 
 @implementation RidingManager
 
+//@synthesize locations;
 
 +(RidingManager*)getInstance
 {
@@ -31,13 +32,18 @@
 {
     locmanager = [[CLLocationManager alloc] init];
     locmanager.delegate = self;
-    locationUpdate = @selector(locationUpdate:location:);
-    HeadingUpdate = @selector(headingUpdate:heading:);
+    locations = [[NSMutableArray alloc] init];
+    
+    targets = [[NSMutableArray alloc] init];
     
     return self;
 }
 
 
+- (NSMutableArray*)getlocations
+{
+    return locations;
+}
 
 - (void)addTarget:(id)obj
 {
@@ -48,7 +54,7 @@
 
 - (void)startRiding
 {
-    if([RidingManager isRiding])
+    if([self isRiding])
     {
         //unexpectly exit case
         
@@ -57,7 +63,7 @@
         //reInvoke previous path
 
         
-        location(locmanager, locations);
+        //[self locationManager:locmanager didUpdateLocations:locations];
         
 
         
@@ -80,16 +86,20 @@
     
 }
 
-+ (BOOL)isRiding
+- (BOOL)isRiding
 {
    return [[NSUserDefaults standardUserDefaults] boolForKey:@"IsRiding"];
 
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
+    [locations addObject:newLocation];
+    
     for (id obj in targets) {
-        [obj performSelector:locationUpdate withObject:@[manager, locations]];
+        if([obj respondsToSelector:@selector(locationManager:didUpdateToLocation:fromLocation:)])
+        [obj locationManager:manager didUpdateToLocation:newLocation fromLocation:oldLocation];
     }
     
 }
@@ -113,9 +123,11 @@
             break;
     }
 
+    /*
     for (id obj in targets){
-        [obj performSelector:HeadingUpdate withObject:@[manager,error]];
+        [obj locationManager:manager did];
     }
+    */
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading

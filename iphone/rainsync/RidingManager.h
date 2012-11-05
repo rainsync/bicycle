@@ -10,21 +10,25 @@
 #import <CoreLocation/CoreLocation.h>
 @interface RidingManager : NSObject <CLLocationManagerDelegate>
 {
-//    @private void (^location)(CLLocationManager*, NSArray*);
-//    @private void (^heading)(CLLocationManager*, CLHeading*);
+
     CLLocationManager *locmanager;
     
     //Array of CLLocation
-    NSMutableArray* locations;
+    
     NSMutableArray* targets;
-    SEL locationUpdate;
-    SEL HeadingUpdate;
+    NSMutableArray* locations;
+
 
 }
+
+//@property (nonatomic,retain) NSMutableArray* locations;
 
 - (id)init;
 - (void)startRiding;
 - (void)stopRiding;
 - (BOOL)isRiding;
+- (void)addTarget:(id)obj;
 + (RidingManager *)getInstance;
+- (NSMutableArray*)getlocations;
+
 @end
