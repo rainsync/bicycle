@@ -20,6 +20,7 @@
 		5501C13F1636C5A90073ACB1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C13E1636C5A90073ACB1 /* FacebookSDK.framework */; };
 		5501C14D1636D26F0073ACB1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C14C1636D26F0073ACB1 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5501C14F1636D4210073ACB1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C14E1636D4210073ACB1 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5517E90C164777AF00E2CDD3 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E90B164777AF00E2CDD3 /* LocationManager.m */; };
 		552BD57616365ECB00D89652 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552BD57416365ECB00D89652 /* ProfileViewController.m */; };
 		552BD57716365ECB00D89652 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 552BD57516365ECB00D89652 /* ProfileViewController.xib */; };
 		552BD57B1636609500D89652 /* NetUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 552BD57A1636609500D89652 /* NetUtility.m */; };
@@ -109,6 +110,8 @@
 		5508B8FE163A55FE0030ED0A /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		5508B8FF163A55FE0030ED0A /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		5508B900163A55FE0030ED0A /* FirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstViewController.xib; sourceTree = "<group>"; };
+		5517E90A164777AF00E2CDD3 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		5517E90B164777AF00E2CDD3 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		552BD57316365ECB00D89652 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		552BD57416365ECB00D89652 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		552BD57516365ECB00D89652 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -344,6 +347,8 @@
 				558A5A301642389C00BC22ED /* Queue.h */,
 				558A5A311642389C00BC22ED /* Queue.m */,
 				5570A90F163550A5008E2F50 /* Supporting Files */,
+				5517E90A164777AF00E2CDD3 /* LocationManager.h */,
+				5517E90B164777AF00E2CDD3 /* LocationManager.m */,
 			);
 			path = rainsync;
 			sourceTree = "<group>";
@@ -564,6 +569,7 @@
 				5545FD961644DA7F00D9E4ED /* AFURLConnectionOperation.m in Sources */,
 				5545FD981644DA7F00D9E4ED /* AFXMLRequestOperation.m in Sources */,
 				5545FD9A1644DA7F00D9E4ED /* UIImageView+AFNetworking.m in Sources */,
+				5517E90C164777AF00E2CDD3 /* LocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
