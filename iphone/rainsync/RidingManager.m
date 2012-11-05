@@ -10,6 +10,23 @@
 
 @implementation RidingManager
 
+
++(RidingManager*)getInstance
+{
+    static RidingManager* _instance = nil;
+    if(_instance == nil)
+    {
+        @synchronized(self)
+        {
+            if(_instance == nil)
+            {
+                _instance = [[RidingManager alloc] init];
+            }
+        }
+    }
+    return _instance;
+}
+
 - (id)init
 {
     locmanager = [[CLLocationManager alloc] init];

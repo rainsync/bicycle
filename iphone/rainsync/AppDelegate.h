@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
-#import "FirstViewController.h"
+#import "RidingManager.h"
 @class ViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> 
+{
 
+    
+}
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) UIViewController *viewController;

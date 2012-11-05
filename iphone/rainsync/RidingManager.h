@@ -26,5 +26,5 @@
 - (void)startRiding;
 - (void)stopRiding;
 - (BOOL)isRiding;
-
++ (RidingManager *)getInstance;
 @end

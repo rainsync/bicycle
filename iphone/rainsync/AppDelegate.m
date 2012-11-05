@@ -36,9 +36,13 @@
         [[NSUserDefaults standardUserDefaults] setValue:RidingType forKey:@"RidingType"];
     }
     
-    BOOL IsRiding = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsRiding"];
-
     
+    if([[RidingManager getInstance] isRiding]){
+        NSLog(@"Riding..");
+        
+    }
+
+
     [[NSUserDefaults standardUserDefaults]synchronize];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"IsStart"];
     
