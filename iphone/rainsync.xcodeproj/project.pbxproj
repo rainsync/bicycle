@@ -20,6 +20,12 @@
 		5501C13F1636C5A90073ACB1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C13E1636C5A90073ACB1 /* FacebookSDK.framework */; };
 		5501C14D1636D26F0073ACB1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C14C1636D26F0073ACB1 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5501C14F1636D4210073ACB1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C14E1636D4210073ACB1 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5513073116492C47005653B1 /* Button Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 5513072E16492C47005653B1 /* Button Pause.png */; };
+		5513073216492C47005653B1 /* Button Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 5513072E16492C47005653B1 /* Button Pause.png */; };
+		5513073316492C47005653B1 /* Button Play.png in Resources */ = {isa = PBXBuildFile; fileRef = 5513072F16492C47005653B1 /* Button Play.png */; };
+		5513073416492C47005653B1 /* Button Play.png in Resources */ = {isa = PBXBuildFile; fileRef = 5513072F16492C47005653B1 /* Button Play.png */; };
+		5513073516492C47005653B1 /* Button Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 5513073016492C47005653B1 /* Button Stop.png */; };
+		5513073616492C47005653B1 /* Button Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 5513073016492C47005653B1 /* Button Stop.png */; };
 		5517E91C1647973200E2CDD3 /* RidingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E91B1647973200E2CDD3 /* RidingManager.m */; };
 		5517E91D1647973200E2CDD3 /* RidingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E91B1647973200E2CDD3 /* RidingManager.m */; };
 		5517E9231647985400E2CDD3 /* RidingDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E9221647985400E2CDD3 /* RidingDB.m */; };
@@ -116,6 +122,9 @@
 		5501C13E1636C5A90073ACB1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		5501C14C1636D26F0073ACB1 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		5501C14E1636D4210073ACB1 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		5513072E16492C47005653B1 /* Button Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button Pause.png"; sourceTree = "<group>"; };
+		5513072F16492C47005653B1 /* Button Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button Play.png"; sourceTree = "<group>"; };
+		5513073016492C47005653B1 /* Button Stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button Stop.png"; sourceTree = "<group>"; };
 		5517E91A1647973100E2CDD3 /* RidingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RidingManager.h; sourceTree = "<group>"; };
 		5517E91B1647973200E2CDD3 /* RidingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RidingManager.m; sourceTree = "<group>"; };
 		5517E9211647985400E2CDD3 /* RidingDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RidingDB.h; path = ../RidingDB.h; sourceTree = "<group>"; };
@@ -230,6 +239,9 @@
 		0457895A16426692008E56CA /* icon */ = {
 			isa = PBXGroup;
 			children = (
+				5513072E16492C47005653B1 /* Button Pause.png */,
+				5513072F16492C47005653B1 /* Button Play.png */,
+				5513073016492C47005653B1 /* Button Stop.png */,
 				045789681642703E008E56CA /* default_profile_img.jpeg */,
 				0457896216426860008E56CA /* Facebook_icon.png */,
 			);
@@ -542,6 +554,9 @@
 				0457896116426744008E56CA /* Default@2x.png in Resources */,
 				0457896316426860008E56CA /* Facebook_icon.png in Resources */,
 				045789691642703E008E56CA /* default_profile_img.jpeg in Resources */,
+				5513073116492C47005653B1 /* Button Pause.png in Resources */,
+				5513073316492C47005653B1 /* Button Play.png in Resources */,
+				5513073516492C47005653B1 /* Button Stop.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +567,9 @@
 				5570A937163550A5008E2F50 /* InfoPlist.strings in Resources */,
 				55911007163823E100B007CA /* StaticViewController.xib in Resources */,
 				5591100C1638241500B007CA /* SettingViewController.xib in Resources */,
+				5513073216492C47005653B1 /* Button Pause.png in Resources */,
+				5513073416492C47005653B1 /* Button Play.png in Resources */,
+				5513073616492C47005653B1 /* Button Stop.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
