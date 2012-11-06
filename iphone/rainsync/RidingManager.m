@@ -75,7 +75,7 @@
             totalDistance = [[NSUserDefaults standardUserDefaults] doubleForKey:@"distance"];
             time = oldt-[[NSUserDefaults standardUserDefaults] doubleForKey:@"time"];
             if(totalDistance==0 || time ==0)
-                @throw nil;
+                @throw [NSException exceptionWithName:@"Setting" reason:@"old data is not corret" userInfo:nil];
             
         }
         @catch (NSException *exception) {
