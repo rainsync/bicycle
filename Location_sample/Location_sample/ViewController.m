@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "StaticsViewController.h"
 
 @interface ViewController ()
 
@@ -150,6 +151,11 @@
     [self saveRidingData];
 }
 
+- (IBAction)loadView:(id)sender {
+    StaticsViewController *staticsViewController = [[StaticsViewController alloc] initWithNibName:@"StaticsViewController" bundle:nil];
+    [self.view addSubview:staticsViewController.view];
+}
+
 - (void)checkTime:(NSTimer *)timer {
     if (isPaused) {
         // 일시정지 중에는 시간이 흐르지 않음
@@ -228,6 +234,7 @@
 }
 
 - (void)viewDidUnload {
+    [self setViewRec:nil];
     [self setHighestSpeed:nil];
     [self setDbStatusLabel:nil];
     [self setSaveRidingBtn:nil];
