@@ -11,10 +11,10 @@
 
 @interface StaticsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
-    NSArray *recordings;
+    NSMutableArray *recordings;
     
     sqlite3 *ridingDB;  // sqlite 라이딩 데이터베이스 선언
     NSString *databasePath; // db파일 경로
 }
-@property (strong, nonatomic) NSArray *recording;
+@property (strong, nonatomic) NSMutableArray *recording;
 @end
