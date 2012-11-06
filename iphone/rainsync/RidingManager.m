@@ -10,7 +10,8 @@
 
 @implementation RidingManager
 
-//@synthesize locations;
+@synthesize totalDistance,time;
+
 
 +(RidingManager*)getInstance
 {
@@ -60,19 +61,44 @@
         
         //load previous path
         
+        
+        
+        
         //reInvoke previous path
-
+        
         
         //[self locationManager:locmanager didUpdateLocations:locations];
         
+    
+        @try {
+            oldt= [[NSDate date] timeIntervalSince1970];
+            totalDistance = [[NSUserDefaults standardUserDefaults] doubleForKey:@"distance"];
+            time = oldt-[[NSUserDefaults standardUserDefaults] doubleForKey:@"time"];
+            if(totalDistance==0 || time ==0)
+                @throw nil;
+            
+        }
+        @catch (NSException *exception) {
+            totalDistance=0;
+            time =0;
+        }
 
         
-    }
-    else{
+    }else{
+
+
+        
+
+        totalDistance=0;
+        time =0;
+        oldt=[[NSDate date] timeIntervalSince1970];
         locations = [[NSMutableArray alloc] init];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsRiding"];
+        [[NSUserDefaults standardUserDefaults] setDouble:oldt forKey:@"time"];
     }
-    
+        
+        
+
     
     [locmanager startUpdatingLocation];
     [locmanager startUpdatingHeading];
@@ -83,6 +109,8 @@
 - (void)stopRiding
 {
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsRiding"];
+    totalDistance =0;
+    
     
 }
 
@@ -92,14 +120,31 @@
 
 }
 
+//km/h
+- (double)avgSpeed
+{
+    //total distance = m
+    //time = h
+    return (totalDistance/1000.0)/(time/60.0/60.0);
+    
+    
+}
+
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     [locations addObject:newLocation];
     
+    time+=[[NSDate date] timeIntervalSince1970]-oldt;
+    oldt=[[NSDate date] timeIntervalSince1970];
+    
+    
+    if(oldLocation)
+        totalDistance += [oldLocation distanceFromLocation:newLocation];
+
     for (id obj in targets) {
         if([obj respondsToSelector:@selector(locationManager:didUpdateToLocation:fromLocation:)])
-        [obj locationManager:manager didUpdateToLocation:newLocation fromLocation:oldLocation];
+        [obj locationManager:self didUpdateToLocation:newLocation fromLocation:oldLocation];
     }
     
 }

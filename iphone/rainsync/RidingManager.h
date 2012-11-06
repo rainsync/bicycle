@@ -14,6 +14,7 @@
     CLLocationManager *locmanager;
     
     //Array of CLLocation
+    double oldt;
     
     NSMutableArray* targets;
     NSMutableArray* locations;
@@ -22,6 +23,8 @@
 }
 
 //@property (nonatomic,retain) NSMutableArray* locations;
+@property (nonatomic, readonly) double totalDistance;
+@property (nonatomic, readonly) double time;
 
 - (id)init;
 - (void)startRiding;
@@ -30,5 +33,6 @@
 - (void)addTarget:(id)obj;
 + (RidingManager *)getInstance;
 - (NSMutableArray*)getlocations;
+- (double)avgSpeed;
 
 @end

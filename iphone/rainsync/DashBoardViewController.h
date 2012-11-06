@@ -16,7 +16,7 @@
 - (void)headingUpdate:(CLLocationManager*)manager WithLocations:(CLHeading*)heading;
 
 @property (nonatomic, retain) IBOutlet UILabel *speedLabel;
-@property (nonatomic, retain) IBOutlet UILabel *latitudeLabel;
-@property (nonatomic, retain) IBOutlet UILabel *longitudeLabel;
-@property (nonatomic, retain) IBOutlet UILabel *altitudeLabel;
+@property (nonatomic, retain) IBOutlet UILabel *avgLabel;
+@property (nonatomic, retain) IBOutlet UILabel *timeLabel;
+@property (retain, nonatomic) IBOutlet UILabel *calorieLabel;
 @end

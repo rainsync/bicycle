@@ -39,7 +39,7 @@
 					<object class="IBUILabel" id="846470225">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{27, 20}, {280, 21}}</string>
+						<string key="NSFrame">{{20, 20}, {280, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="786660222"/>
@@ -48,7 +48,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Speed</string>
+						<string key="IBUIText">현재속도</string>
 						<object class="NSColor" key="IBUITextColor" id="449236416">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -70,7 +70,7 @@
 					<object class="IBUILabel" id="786660222">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{27, 68}, {280, 21}}</string>
+						<string key="NSFrame">{{20, 67}, {280, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="895301953"/>
@@ -79,7 +79,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Lat</string>
+						<string key="IBUIText">평균속도</string>
 						<reference key="IBUITextColor" ref="449236416"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -90,35 +90,16 @@
 					<object class="IBUILabel" id="895301953">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{27, 120}, {280, 21}}</string>
+						<string key="NSFrame">{{20, 120}, {280, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="983129685"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Long</string>
-						<reference key="IBUITextColor" ref="449236416"/>
-						<nil key="IBUIHighlightedColor"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<reference key="IBUIFontDescription" ref="907176540"/>
-						<reference key="IBUIFont" ref="865488617"/>
-					</object>
-					<object class="IBUILabel" id="983129685">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{27, 173}, {280, 21}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Altitude</string>
+						<string key="IBUIText">시간</string>
 						<reference key="IBUITextColor" ref="449236416"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -129,7 +110,7 @@
 					<object class="IBUISwitch" id="476296793">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{114, 215}, {94, 27}}</string>
+						<string key="NSFrame">{{92, 288}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -138,6 +119,27 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<bool key="IBUIOn">YES</bool>
+					</object>
+					<object class="IBUILabel" id="746848880">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{20, 164}, {200, 21}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="476296793"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">칼로리</string>
+						<reference key="IBUITextColor" ref="449236416"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">0</int>
+						<reference key="IBUIFontDescription" ref="907176540"/>
+						<reference key="IBUIFont" ref="865488617"/>
+						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 413}}</string>
@@ -176,27 +178,27 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">latitudeLabel</string>
+						<string key="label">calorieLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="746848880"/>
+					</object>
+					<int key="connectionID">41</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">avgLabel</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="786660222"/>
 					</object>
-					<int key="connectionID">33</int>
+					<int key="connectionID">42</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">longitudeLabel</string>
+						<string key="label">timeLabel</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="895301953"/>
 					</object>
-					<int key="connectionID">34</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">altitudeLabel</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="983129685"/>
-					</object>
-					<int key="connectionID">35</int>
+					<int key="connectionID">43</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -211,11 +213,11 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="846470225"/>
-							<reference ref="786660222"/>
-							<reference ref="895301953"/>
-							<reference ref="983129685"/>
 							<reference ref="476296793"/>
+							<reference ref="746848880"/>
+							<reference ref="895301953"/>
+							<reference ref="786660222"/>
+							<reference ref="846470225"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -247,13 +249,13 @@
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">10</int>
-						<reference key="object" ref="983129685"/>
+						<int key="objectID">39</int>
+						<reference key="object" ref="476296793"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">39</int>
-						<reference key="object" ref="476296793"/>
+						<int key="objectID">40</int>
+						<reference key="object" ref="746848880"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -264,8 +266,8 @@
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="39.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="40.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -274,7 +276,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">39</int>
+			<int key="maxID">43</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -282,26 +284,26 @@
 					<string key="className">DashBoardViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="altitudeLabel">UILabel</string>
-						<string key="latitudeLabel">UILabel</string>
-						<string key="longitudeLabel">UILabel</string>
+						<string key="avgLabel">UILabel</string>
+						<string key="calorieLabel">UILabel</string>
 						<string key="speedLabel">UILabel</string>
+						<string key="timeLabel">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="altitudeLabel">
-							<string key="name">altitudeLabel</string>
+						<object class="IBToOneOutletInfo" key="avgLabel">
+							<string key="name">avgLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="latitudeLabel">
-							<string key="name">latitudeLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="longitudeLabel">
-							<string key="name">longitudeLabel</string>
+						<object class="IBToOneOutletInfo" key="calorieLabel">
+							<string key="name">calorieLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="speedLabel">
 							<string key="name">speedLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="timeLabel">
+							<string key="name">timeLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 					</dictionary>
