@@ -17,6 +17,10 @@
 		04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */; };
 		04EC923C1641183100E99EB5 /* ProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC923A1641183100E99EB5 /* ProfileEditViewController.m */; };
 		04EC923D1641183100E99EB5 /* ProfileEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC923B1641183100E99EB5 /* ProfileEditViewController.xib */; };
+		04F7CD77164938E100D2866D /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7CD75164938E000D2866D /* DetailViewController.m */; };
+		04F7CD78164938E100D2866D /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7CD75164938E000D2866D /* DetailViewController.m */; };
+		04F7CD79164938E100D2866D /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F7CD76164938E100D2866D /* DetailViewController.xib */; };
+		04F7CD7A164938E100D2866D /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F7CD76164938E100D2866D /* DetailViewController.xib */; };
 		5501C13F1636C5A90073ACB1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C13E1636C5A90073ACB1 /* FacebookSDK.framework */; };
 		5501C14D1636D26F0073ACB1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C14C1636D26F0073ACB1 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5501C14F1636D4210073ACB1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C14E1636D4210073ACB1 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -119,6 +123,9 @@
 		04EC92391641183100E99EB5 /* ProfileEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileEditViewController.h; sourceTree = "<group>"; };
 		04EC923A1641183100E99EB5 /* ProfileEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileEditViewController.m; sourceTree = "<group>"; };
 		04EC923B1641183100E99EB5 /* ProfileEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileEditViewController.xib; sourceTree = "<group>"; };
+		04F7CD74164938E000D2866D /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		04F7CD75164938E000D2866D /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		04F7CD76164938E100D2866D /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		5501C13E1636C5A90073ACB1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		5501C14C1636D26F0073ACB1 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		5501C14E1636D4210073ACB1 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -277,6 +284,9 @@
 				55911003163823E000B007CA /* StaticViewController.h */,
 				55911004163823E000B007CA /* StaticViewController.m */,
 				55911005163823E100B007CA /* StaticViewController.xib */,
+				04F7CD74164938E000D2866D /* DetailViewController.h */,
+				04F7CD75164938E000D2866D /* DetailViewController.m */,
+				04F7CD76164938E100D2866D /* DetailViewController.xib */,
 			);
 			name = "Statics Menu";
 			sourceTree = "<group>";
@@ -557,6 +567,7 @@
 				5513073116492C47005653B1 /* Button Pause.png in Resources */,
 				5513073316492C47005653B1 /* Button Play.png in Resources */,
 				5513073516492C47005653B1 /* Button Stop.png in Resources */,
+				04F7CD79164938E100D2866D /* DetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +581,7 @@
 				5513073216492C47005653B1 /* Button Pause.png in Resources */,
 				5513073416492C47005653B1 /* Button Play.png in Resources */,
 				5513073616492C47005653B1 /* Button Stop.png in Resources */,
+				04F7CD7A164938E100D2866D /* DetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,6 +638,7 @@
 				5517E9231647985400E2CDD3 /* RidingDB.m in Sources */,
 				5517E93A1647C28600E2CDD3 /* CSRouteView.m in Sources */,
 				5517E93E1647C29500E2CDD3 /* CSRouteAnnotation.m in Sources */,
+				04F7CD77164938E100D2866D /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,6 +663,7 @@
 				5517E9241647985400E2CDD3 /* RidingDB.m in Sources */,
 				5517E93B1647C28600E2CDD3 /* CSRouteView.m in Sources */,
 				5517E93F1647C29500E2CDD3 /* CSRouteAnnotation.m in Sources */,
+				04F7CD78164938E100D2866D /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
