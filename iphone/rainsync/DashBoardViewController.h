@@ -12,6 +12,10 @@
 
 
 @interface DashBoardViewController : UIViewController <CoreLocationControllerDelegate>
+{
+    bool paused;
+    
+}
 - (void)locationUpdate:(CLLocationManager*)manager WithLocations:(NSArray*)locations;
 - (void)headingUpdate:(CLLocationManager*)manager WithLocations:(CLHeading*)heading;
 
@@ -19,4 +23,8 @@
 @property (nonatomic, retain) IBOutlet UILabel *avgLabel;
 @property (nonatomic, retain) IBOutlet UILabel *timeLabel;
 @property (retain, nonatomic) IBOutlet UILabel *calorieLabel;
+@property (retain, nonatomic) IBOutlet UIButton *stopButton;
+@property (retain, nonatomic) IBOutlet UIButton *pauseButton;
+@property (retain, nonatomic) IBOutlet UIButton *startButton;
+
 @end

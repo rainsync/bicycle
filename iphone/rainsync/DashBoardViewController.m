@@ -21,7 +21,12 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
 
-
+        RidingManager *ridingManager = [RidingManager getInstance];
+        [ridingManager addTarget:self];
+        if([ridingManager isRiding])
+            [ridingManager startRiding];
+        paused =false;
+        
         // Custom initialization
     }
     return self;
@@ -100,19 +105,60 @@
     
 }
 
+- (IBAction)starRiding:(id)sender {
+    RidingManager *ridingManager = [RidingManager getInstance];
+    [ridingManager startRiding];
+    [self viewDidAppear:false];
+}
 
+- (IBAction)stopRiding:(id)sender {
+    RidingManager *ridingManager = [RidingManager getInstance];
+    [ridingManager stopRiding];
+    [self viewDidAppear:false];
+    
+}
+
+- (IBAction)pauseRiding:(id)sender {
+    RidingManager *ridingManager = [RidingManager getInstance];
+    
+    if(paused){
+    paused=false;
+    [self.pauseButton setImage:[UIImage imageNamed:@"Button Pause"] forState:UIControlStateNormal];
+    [ridingManager startRiding];
+        
+    }else{
+    
+    [ridingManager pauseRiding];
+    [self viewDidAppear:false];
+    paused =true;
+    [self.pauseButton setImage:[UIImage imageNamed:@"Button Play"] forState:UIControlStateNormal];
+        
+    }
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    RidingManager *ridingManager = [RidingManager getInstance];
-    [ridingManager addTarget:self];
-    [ridingManager startRiding];
+
     // Do any additional setup after loading the view from its nib.
     
 
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    RidingManager *ridingManager = [RidingManager getInstance];
+    if([ridingManager isRiding]){
+        [self.stopButton setHidden:false];
+        [self.startButton setHidden:true];
+        [self.pauseButton setHidden:false];
+    }else{
+        [self.stopButton setHidden:true];
+        [self.startButton setHidden:false];
+        [self.pauseButton setHidden:true];
+    }
+    
+}
 
 
 
@@ -122,6 +168,11 @@
     [avgLabel release];
     [timeLabel release];
     [calorieLabel release];
+    [_stopButton release];
+    [_pauseButton release];
+    [_startButton release];
+    [_stopButton release];
+    [_pauseButton release];
     [super dealloc];
 }
  
@@ -135,6 +186,12 @@
 
 - (void)viewDidUnload {
     [self setCalorieLabel:nil];
+    [self setStopButton:nil];
+    [self setPauseButton:nil];
+    [self setStartButton:nil];
+    [self setStopButton:nil];
+    [self setPauseButton:nil];
+    [self setPlayButton:nil];
     [super viewDidUnload];
 }
 @end
