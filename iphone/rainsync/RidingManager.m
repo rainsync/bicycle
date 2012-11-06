@@ -73,7 +73,7 @@
         @try {
             oldt= [[NSDate date] timeIntervalSince1970];
             totalDistance = [[NSUserDefaults standardUserDefaults] doubleForKey:@"distance"];
-            time = oldt-[[NSUserDefaults standardUserDefaults] doubleForKey:@"time"];
+            time = [[NSUserDefaults standardUserDefaults] doubleForKey:@"time"];
             if(totalDistance==0 || time ==0)
                 @throw [NSException exceptionWithName:@"Setting" reason:@"old data is not corret" userInfo:nil];
             
@@ -91,15 +91,14 @@
 
         totalDistance=0;
         time =0;
-        oldt=[[NSDate date] timeIntervalSince1970];
+        
         locations = [[NSMutableArray alloc] init];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsRiding"];
-        [[NSUserDefaults standardUserDefaults] setDouble:oldt forKey:@"time"];
+        [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
     }
         
         
-
-    
+    oldt=[[NSDate date] timeIntervalSince1970];
     [locmanager startUpdatingLocation];
     [locmanager startUpdatingHeading];
     
@@ -109,8 +108,25 @@
 - (void)stopRiding
 {
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsRiding"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    [locmanager stopUpdatingLocation];
+    [locmanager stopUpdatingHeading];
+    [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
+    [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"distance"];
     totalDistance =0;
+    time=0;
     
+    
+    
+}
+
+- (void)pauseRiding
+{
+    [[NSUserDefaults standardUserDefaults] setDouble:time forKey:@"time"];
+    [[NSUserDefaults standardUserDefaults] setDouble:totalDistance forKey:@"distance"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [locmanager stopUpdatingLocation];
+    [locmanager stopUpdatingHeading];
     
 }
 

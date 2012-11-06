@@ -19,7 +19,6 @@
     NSMutableArray* targets;
     NSMutableArray* locations;
 
-
 }
 
 //@property (nonatomic,retain) NSMutableArray* locations;
@@ -29,6 +28,7 @@
 - (id)init;
 - (void)startRiding;
 - (void)stopRiding;
+- (void)pauseRiding;
 - (BOOL)isRiding;
 - (void)addTarget:(id)obj;
 + (RidingManager *)getInstance;
