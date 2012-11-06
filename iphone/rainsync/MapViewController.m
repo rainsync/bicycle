@@ -21,11 +21,7 @@
     if (self) {
         _routeViews = [[NSMutableDictionary alloc] init];
         
-        //[self.mapView addAnnotation:];
-        t=false;
         
-
-         
 
         
         
@@ -37,15 +33,51 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if(!t){
+    
+    
     RidingManager *ridingManager =[RidingManager getInstance];
+    
+    if([ridingManager isRiding]){
     CSRouteAnnotation* routeAnnotation = [[[CSRouteAnnotation alloc] initWithPoints:[ridingManager getlocations]] autorelease];
     [self.mapView addAnnotation:routeAnnotation];
-        t=true;
+    }else{
+        //서울 시청으로 좌표 설정
+        [self setMapCenter:CLLocationCoordinate2DMake(37.56647, 126.977963)];
     }
+    
+    [ridingManager addTarget:self];
+    
     
 
         // Do any additional setup after loading the view from its nib.
+}
+
+
+- (void)locationManager:(RidingManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    
+    CLLocation *location = newLocation;
+    [self setMapCenter:location.coordinate];
+    
+    
+
+    
+}
+
+
+-(void)setMapCenter:(CLLocationCoordinate2D)location
+{
+    NSLog(@"Current Location : %f, %f",location.latitude,location.longitude);
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    span.latitudeDelta=0.001;
+    span.longitudeDelta=0.001;
+    region.span=span;
+    //location.latitude=(float *)(self.appDelegate.currentLocationLatitude);
+    //location.latitude=self.appDelegate.currentLocationLongitude;
+    region.center=location;
+    [self.mapView setRegion:region animated:TRUE];
+    [self.mapView regionThatFits:region];
 }
 
 

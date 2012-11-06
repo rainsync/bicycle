@@ -16,7 +16,6 @@
 {
     NSMutableDictionary* _routeViews;
     RidingManager *ridingManager;
-    bool t;
 
     
 }
