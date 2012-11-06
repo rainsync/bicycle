@@ -28,6 +28,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    _array = [[NSArray alloc] initWithObjects:@"Sleepy", @"Sneezy",
+					  @"Bashful", @"Happy", @"Doc", @"Grumpy", @"Dopey", @"Thorin",
+					  @"Dorin", @"Nori", @"Ori", @"Balin", @"Dwalin", @"Fill", @"Kili",
+					  @"Oin", @"Gloin", @"Bifur", @"Bofur", @"Bombur", nil];
+    
     // db 생성및확인
     NSString *docsDir;
     NSArray *dirPaths;
@@ -82,17 +87,17 @@
 
 # pragma mark Table View DataSource & Delegate
 
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    NSLog(@"%d", [_recording count]);
     return [_recording count];
+//    return [_array count];
     
 }
 
 
 
-- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
     
@@ -104,11 +109,30 @@
     }
     
     
-    
-    cell.textLabel.text = [_recording objectAtIndex:[indexPath row]];
+    NSUInteger row = [indexPath row];
+//    NSString *rowData = [_array objectAtIndex:row];
+    NSDictionary *rowData = [_recording objectAtIndex:row];
+
+    cell.textLabel.text = [rowData objectForKey:@"id"];
+//    cell.textLabel.text = rowData;
     
     return cell;
 }
 
+#pragma mark -
+#pragma mark Table View Delegate Methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSUInteger row = [indexPath row];
+	NSLog(@"didSelectRowAtIndexPath : %d", row);
+	//NSUInteger row = [indexPath row];
+	NSDictionary *rowData = [_recording objectAtIndex:row];
+	NSString *message = [[NSString alloc] initWithFormat:@"You selected %@", [rowData objectForKey:@"id"]];
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Row Selected!"
+                                                    message:message delegate:nil
+                                          cancelButtonTitle:@"Yes I Did" otherButtonTitles:nil];
+	[alert show];
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 @end

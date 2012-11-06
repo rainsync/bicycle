@@ -7,20 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		041A53FB16483A10007A4D57 /* StaticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041A53F916483A10007A4D57 /* StaticsViewController.m */; };
+		041A53FB16483A10007A4D57 /* StaticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041A53F916483A10007A4D57 /* StaticsViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		041A53FC16483A10007A4D57 /* StaticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041A53FA16483A10007A4D57 /* StaticsViewController.xib */; };
-		041A540116483A39007A4D57 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041A53FF16483A39007A4D57 /* DetailViewController.m */; };
+		041A540116483A39007A4D57 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041A53FF16483A39007A4D57 /* DetailViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		041A540216483A39007A4D57 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041A540016483A39007A4D57 /* DetailViewController.xib */; };
 		049900B81636FE1F0056CF9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049900B71636FE1F0056CF9C /* UIKit.framework */; };
 		049900BA1636FE1F0056CF9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049900B91636FE1F0056CF9C /* Foundation.framework */; };
 		049900BC1636FE1F0056CF9C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049900BB1636FE1F0056CF9C /* CoreGraphics.framework */; };
 		049900C21636FE1F0056CF9C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 049900C01636FE1F0056CF9C /* InfoPlist.strings */; };
-		049900C41636FE1F0056CF9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 049900C31636FE1F0056CF9C /* main.m */; };
-		049900C81636FE1F0056CF9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 049900C71636FE1F0056CF9C /* AppDelegate.m */; };
+		049900C41636FE1F0056CF9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 049900C31636FE1F0056CF9C /* main.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		049900C81636FE1F0056CF9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 049900C71636FE1F0056CF9C /* AppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		049900CA1636FE1F0056CF9C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 049900C91636FE1F0056CF9C /* Default.png */; };
 		049900CC1636FE1F0056CF9C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049900CB1636FE1F0056CF9C /* Default@2x.png */; };
 		049900CE1636FE1F0056CF9C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049900CD1636FE1F0056CF9C /* Default-568h@2x.png */; };
-		049900D11636FE1F0056CF9C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049900D01636FE1F0056CF9C /* ViewController.m */; };
+		049900D11636FE1F0056CF9C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049900D01636FE1F0056CF9C /* ViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		049900D41636FE1F0056CF9C /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049900D21636FE1F0056CF9C /* ViewController.xib */; };
 		04990111163704B20056CF9C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04990110163704B20056CF9C /* CoreLocation.framework */; };
 		04CDB8C416440C010011FEA2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CDB8C316440C010011FEA2 /* libsqlite3.dylib */; };
