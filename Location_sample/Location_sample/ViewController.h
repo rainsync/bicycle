@@ -58,6 +58,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *dbStatusLabel;
 @property (strong, nonatomic) IBOutlet UIButton *saveRidingBtn;
+@property (strong, nonatomic) IBOutlet UIButton *viewRec;
 
 - (IBAction)resetDistance;
 - (IBAction)startRecording:(id)sender;  // 기록 측정 시작 이벤트
@@ -66,6 +67,7 @@
 - (IBAction)endRecording:(id)sender;    // 기록 측정 완료 이벤트
 - (IBAction)sliderChanged:(id)sender;   // 몸무게 설정 슬라이더
 - (IBAction)saveRecord:(id)sender;      // 측정된 기록 데이터베이스에 저장 이벤트
+- (IBAction)loadView:(id)sender;
 
 - (void)checkTime:(NSTimer *)timer;     // 기록 측정 시간 카운터 동작 메서드
 - (void)saveRidingData; // 기록 저장 메서드 선언

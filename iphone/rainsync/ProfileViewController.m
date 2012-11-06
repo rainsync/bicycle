@@ -37,9 +37,6 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
-    
-    // 네비게이션 바 색깔 검정 스타일로 변경
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }
 
 - (void)editProfile {
