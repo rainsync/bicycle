@@ -153,7 +153,8 @@
 
 - (IBAction)loadView:(id)sender {
     StaticsViewController *staticsViewController = [[StaticsViewController alloc] initWithNibName:@"StaticsViewController" bundle:nil];
-    [self.view addSubview:staticsViewController.view];
+    UINavigationController *staticsNavViewController = [[UINavigationController alloc] initWithRootViewController:staticsViewController];
+    [self.view addSubview:staticsNavViewController.view];
 }
 
 - (void)checkTime:(NSTimer *)timer {
