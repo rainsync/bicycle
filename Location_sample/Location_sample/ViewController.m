@@ -183,16 +183,16 @@
     else if (avgSpd <= 24) {
         kcalConstant = 0.124f;
     }
-    else if (avgSpeed <= 26) {
+    else if (avgSpd <= 26) {
         kcalConstant = 0.136f;
     }
-    else if (avgSpeed <= 27) {
+    else if (avgSpd <= 27) {
         kcalConstant = 0.149f;
     }
-    else if (avgSpeed <= 29) {
+    else if (avgSpd <= 29) {
         kcalConstant = 0.163f;
     }
-    else if (avgSpeed <= 31) {
+    else if (avgSpd <= 31) {
         kcalConstant = 0.179f;
     }
     else if (avgSpeed <= 32) {
