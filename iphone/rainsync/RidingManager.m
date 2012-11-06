@@ -193,7 +193,10 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
 {
-    
+    for (id obj in targets) {
+        if([obj respondsToSelector:@selector(locationManager:didUpdateHeading:)])
+            [obj locationManager:self didUpdateToLocation:self didUpdateHeading:newHeading];
+    }
 }
 
 - (void)locationManagerDidPauseLocationUpdates:(CLLocationManager *)manager
