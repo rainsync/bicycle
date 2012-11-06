@@ -30,15 +30,30 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    // 네비게이션 바 색깔 검정 스타일로 변경
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark -
+#pragma mark Table View Data Source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+}
+
+#pragma mark -
+#pragma mark Table View Delegate Methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
 }
 
 @end
