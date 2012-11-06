@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StaticViewController : UIViewController
+@interface StaticViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+{
+    NSMutableArray *recordings;
 
+}
+@property (nonatomic, retain) NSMutableArray *recordings;
 @end
