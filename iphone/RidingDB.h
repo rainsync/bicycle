@@ -13,4 +13,5 @@
     sqlite3 *ridingDB;
     NSString *databasePath; // db파일 경로
 }
+- (NSMutableArray *)loadDB;
 @end
