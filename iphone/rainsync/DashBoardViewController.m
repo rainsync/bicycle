@@ -40,13 +40,18 @@
     
     speedLabel.text = [NSString stringWithFormat:@"%f", location.speed];
     avgLabel.text = [NSString stringWithFormat:@"%f", [manager avgSpeed]];
-    timeLabel.text = [NSString stringWithFormat:@"%lf", [manager time]];
+
     double weight = 50;
     
     calorieLabel.text = [NSString stringWithFormat:@"%lf", weight * [self calculateCalorie:[manager avgSpeed] ] * ([manager time]/60.0)];
     
 }
 
+- (void)updateTime:(double)time
+{
+    timeLabel.text = [NSString stringWithFormat:@"%lf", time];
+
+}
 
 
 - (float)calculateCalorie:(float)avgSpd {

@@ -15,7 +15,7 @@
     
     //Array of CLLocation
     double oldt;
-    
+    NSTimer *timer;
     NSMutableArray* targets;
     NSMutableArray* locations;
 
