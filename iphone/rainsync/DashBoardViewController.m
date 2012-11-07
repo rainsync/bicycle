@@ -38,12 +38,12 @@
     CLLocation *location = newLocation;
     
     
-    speedLabel.text = [NSString stringWithFormat:@"현재속도: %f", location.speed];
-    avgLabel.text = [NSString stringWithFormat:@"평균속도: %f", [manager avgSpeed]];
-    timeLabel.text = [NSString stringWithFormat:@"시간: %lf", [manager time]];
+    speedLabel.text = [NSString stringWithFormat:@"%f", location.speed];
+    avgLabel.text = [NSString stringWithFormat:@"%f", [manager avgSpeed]];
+    timeLabel.text = [NSString stringWithFormat:@"%lf", [manager time]];
     double weight = 50;
     
-    calorieLabel.text = [NSString stringWithFormat:@"칼로리: %lf", weight * [self calculateCalorie:[manager avgSpeed] ] * ([manager time]/60.0)];
+    calorieLabel.text = [NSString stringWithFormat:@"%lf", weight * [self calculateCalorie:[manager avgSpeed] ] * ([manager time]/60.0)];
     
 }
 
