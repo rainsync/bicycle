@@ -26,16 +26,14 @@
 		5513073416492C47005653B1 /* Button Play.png in Resources */ = {isa = PBXBuildFile; fileRef = 5513072F16492C47005653B1 /* Button Play.png */; };
 		5513073516492C47005653B1 /* Button Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 5513073016492C47005653B1 /* Button Stop.png */; };
 		5513073616492C47005653B1 /* Button Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 5513073016492C47005653B1 /* Button Stop.png */; };
+		5513073C164956B0005653B1 /* fells_loop.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 5513073B164956AF005653B1 /* fells_loop.gpx */; };
+		5513073D164956B0005653B1 /* fells_loop.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 5513073B164956AF005653B1 /* fells_loop.gpx */; };
 		5517E91C1647973200E2CDD3 /* RidingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E91B1647973200E2CDD3 /* RidingManager.m */; };
 		5517E91D1647973200E2CDD3 /* RidingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E91B1647973200E2CDD3 /* RidingManager.m */; };
 		5517E9231647985400E2CDD3 /* RidingDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E9221647985400E2CDD3 /* RidingDB.m */; };
 		5517E9241647985400E2CDD3 /* RidingDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E9221647985400E2CDD3 /* RidingDB.m */; };
 		5517E9261647987A00E2CDD3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5517E9251647987A00E2CDD3 /* libsqlite3.dylib */; };
 		5517E9271647988600E2CDD3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5517E9251647987A00E2CDD3 /* libsqlite3.dylib */; };
-		5517E93A1647C28600E2CDD3 /* CSRouteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E9391647C28600E2CDD3 /* CSRouteView.m */; };
-		5517E93B1647C28600E2CDD3 /* CSRouteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E9391647C28600E2CDD3 /* CSRouteView.m */; };
-		5517E93E1647C29500E2CDD3 /* CSRouteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E93D1647C29500E2CDD3 /* CSRouteAnnotation.m */; };
-		5517E93F1647C29500E2CDD3 /* CSRouteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5517E93D1647C29500E2CDD3 /* CSRouteAnnotation.m */; };
 		552BD57616365ECB00D89652 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552BD57416365ECB00D89652 /* ProfileViewController.m */; };
 		552BD57716365ECB00D89652 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 552BD57516365ECB00D89652 /* ProfileViewController.xib */; };
 		552BD57B1636609500D89652 /* NetUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 552BD57A1636609500D89652 /* NetUtility.m */; };
@@ -125,15 +123,12 @@
 		5513072E16492C47005653B1 /* Button Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button Pause.png"; sourceTree = "<group>"; };
 		5513072F16492C47005653B1 /* Button Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button Play.png"; sourceTree = "<group>"; };
 		5513073016492C47005653B1 /* Button Stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button Stop.png"; sourceTree = "<group>"; };
+		5513073B164956AF005653B1 /* fells_loop.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fells_loop.gpx; sourceTree = "<group>"; };
 		5517E91A1647973100E2CDD3 /* RidingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RidingManager.h; sourceTree = "<group>"; };
 		5517E91B1647973200E2CDD3 /* RidingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RidingManager.m; sourceTree = "<group>"; };
 		5517E9211647985400E2CDD3 /* RidingDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RidingDB.h; path = ../RidingDB.h; sourceTree = "<group>"; };
 		5517E9221647985400E2CDD3 /* RidingDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RidingDB.m; path = ../RidingDB.m; sourceTree = "<group>"; };
 		5517E9251647987A00E2CDD3 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		5517E9381647C28600E2CDD3 /* CSRouteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRouteView.h; sourceTree = "<group>"; };
-		5517E9391647C28600E2CDD3 /* CSRouteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRouteView.m; sourceTree = "<group>"; };
-		5517E93C1647C29500E2CDD3 /* CSRouteAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRouteAnnotation.h; sourceTree = "<group>"; };
-		5517E93D1647C29500E2CDD3 /* CSRouteAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRouteAnnotation.m; sourceTree = "<group>"; };
 		552BD57316365ECB00D89652 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		552BD57416365ECB00D89652 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		552BD57516365ECB00D89652 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -309,10 +304,6 @@
 		5517E9371647C27100E2CDD3 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
-				5517E93C1647C29500E2CDD3 /* CSRouteAnnotation.h */,
-				5517E93D1647C29500E2CDD3 /* CSRouteAnnotation.m */,
-				5517E9381647C28600E2CDD3 /* CSRouteView.h */,
-				5517E9391647C28600E2CDD3 /* CSRouteView.m */,
 				5570A94816355489008E2F50 /* MapViewController.h */,
 				5570A94916355489008E2F50 /* MapViewController.m */,
 				5570A94A16355489008E2F50 /* MapViewController.xib */,
@@ -350,6 +341,7 @@
 		5570A8F9163550A5008E2F50 = {
 			isa = PBXGroup;
 			children = (
+				5513073B164956AF005653B1 /* fells_loop.gpx */,
 				5517E9251647987A00E2CDD3 /* libsqlite3.dylib */,
 				5570A90E163550A5008E2F50 /* rainsync */,
 				5570A932163550A5008E2F50 /* rainsyncTests */,
@@ -557,6 +549,7 @@
 				5513073116492C47005653B1 /* Button Pause.png in Resources */,
 				5513073316492C47005653B1 /* Button Play.png in Resources */,
 				5513073516492C47005653B1 /* Button Stop.png in Resources */,
+				5513073C164956B0005653B1 /* fells_loop.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +563,7 @@
 				5513073216492C47005653B1 /* Button Pause.png in Resources */,
 				5513073416492C47005653B1 /* Button Play.png in Resources */,
 				5513073616492C47005653B1 /* Button Stop.png in Resources */,
+				5513073D164956B0005653B1 /* fells_loop.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,8 +618,6 @@
 				5545FD9A1644DA7F00D9E4ED /* UIImageView+AFNetworking.m in Sources */,
 				5517E91C1647973200E2CDD3 /* RidingManager.m in Sources */,
 				5517E9231647985400E2CDD3 /* RidingDB.m in Sources */,
-				5517E93A1647C28600E2CDD3 /* CSRouteView.m in Sources */,
-				5517E93E1647C29500E2CDD3 /* CSRouteAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,8 +640,6 @@
 				5545FD9B1644DA7F00D9E4ED /* UIImageView+AFNetworking.m in Sources */,
 				5517E91D1647973200E2CDD3 /* RidingManager.m in Sources */,
 				5517E9241647985400E2CDD3 /* RidingDB.m in Sources */,
-				5517E93B1647C28600E2CDD3 /* CSRouteView.m in Sources */,
-				5517E93F1647C29500E2CDD3 /* CSRouteAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
