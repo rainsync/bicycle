@@ -77,6 +77,12 @@
 
     DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     [self.navigationController pushViewController:detailViewController animated:YES];
+    detailViewController.recordingTime.text = [rowData objectForKey:@"time"];
+    detailViewController.distance.text = [rowData objectForKey:@"distance"];
+    detailViewController.averageSpeed.text = [rowData objectForKey:@"speed"];
+    detailViewController.altitude.text = [rowData objectForKey:@"altitude"];
+    detailViewController.calorie.text = [rowData objectForKey:@"calorie"];
+    [detailViewController release];
 }
 
 @end
