@@ -8,6 +8,7 @@
 
 #import "StaticViewController.h"
 #import "DetailViewController.h"
+#import "RidingDB.h"
 
 @interface StaticViewController ()
 
@@ -31,10 +32,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _array = [[NSArray alloc] initWithObjects:@"Sleepy", @"Sneezy",
-              @"Bashful", @"Happy", @"Doc", @"Grumpy", @"Dopey", @"Thorin",
-              @"Dorin", @"Nori", @"Ori", @"Balin", @"Dwalin", @"Fill", @"Kili",
-              @"Oin", @"Gloin", @"Bifur", @"Bofur", @"Bombur", nil];
+    RidingDB *ridingDB = [[RidingDB alloc] init];
+    _recordings = [ridingDB loadDB]; // Database loaded
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,7 +46,8 @@
 #pragma mark Table View Data Source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_array count];
+    return [_recordings count];
+    NSLog(@"%d", [_recordings count]);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -61,8 +61,8 @@
     }
     
     NSUInteger row = [indexPath row];
-    NSString *rowData = [_array objectAtIndex:row];
-    cell.textLabel.text = rowData;
+    NSDictionary *rowData = [_recordings objectAtIndex:row];
+    cell.textLabel.text = [rowData objectForKey:@"id"];
     
     return cell;
 }
@@ -73,7 +73,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSUInteger row = [indexPath row];
 	NSLog(@"didSelectRowAtIndexPath : %d", row);
-	NSDictionary *rowData = [_array objectAtIndex:row];
+	NSDictionary *rowData = [_recordings objectAtIndex:row];
 
     DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     [self.navigationController pushViewController:detailViewController animated:YES];
