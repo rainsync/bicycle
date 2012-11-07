@@ -102,8 +102,25 @@
     [locmanager startUpdatingLocation];
     [locmanager startUpdatingHeading];
     
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(checkTime:) userInfo:nil repeats:YES];
+
+    
     
 }
+
+
+- (void)checkTime:(NSTimer *)timer {
+    
+    time+=[[NSDate date] timeIntervalSince1970]-oldt;
+    oldt=[[NSDate date] timeIntervalSince1970];
+    
+    
+    for (id obj in targets) {
+        if([obj respondsToSelector:@selector(updateTime:)])
+            [obj updateTime:time];
+    }
+}
+
 
 - (void)stopRiding
 {
@@ -115,6 +132,8 @@
     [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"distance"];
     totalDistance =0;
     time=0;
+    [timer invalidate];
+    
     
     
     
@@ -127,7 +146,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     [locmanager stopUpdatingLocation];
     [locmanager stopUpdatingHeading];
-    
+    [timer invalidate];
 }
 
 - (BOOL)isRiding
@@ -150,10 +169,7 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     [locations addObject:newLocation];
-    
-    time+=[[NSDate date] timeIntervalSince1970]-oldt;
-    oldt=[[NSDate date] timeIntervalSince1970];
-    
+
     
     if(oldLocation)
         totalDistance += [oldLocation distanceFromLocation:newLocation];
