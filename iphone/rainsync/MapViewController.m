@@ -72,7 +72,7 @@
     [route_views addObject:[NSNull null]];
     
     int i=[users count]-1;
-    MKMapPoint *arr= malloc(sizeof(CLLocationCoordinate2D)* 128);
+    MKMapPoint *arr= malloc(sizeof(CLLocationCoordinate2D)* 1024);
     points[i]=arr;
     point_count[i]=0;
     return i;
@@ -81,8 +81,12 @@
 - (void) addPoint:(int)pos withLocation:(CLLocation *)newLocation
 {
     MKMapPoint *point = points[pos];
-    if(point_count[pos]>=128)
-        point_count[pos]=0;
+    if(point_count[pos]>=1024)
+    {
+        memcpy(point,point+sizeof(MKMapPoint*)*512, sizeof(MKMapPoint*)*512);
+        point_count[pos]=512;
+    
+    }
     
     point[point_count[pos]++]=MKMapPointForCoordinate(newLocation.coordinate);
     
