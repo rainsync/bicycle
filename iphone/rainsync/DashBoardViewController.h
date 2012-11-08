@@ -23,8 +23,10 @@
 @property (nonatomic, retain) IBOutlet UILabel *avgLabel;
 @property (nonatomic, retain) IBOutlet UILabel *timeLabel;
 @property (retain, nonatomic) IBOutlet UILabel *calorieLabel;
+@property (retain, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (retain, nonatomic) IBOutlet UIButton *stopButton;
 @property (retain, nonatomic) IBOutlet UIButton *pauseButton;
 @property (retain, nonatomic) IBOutlet UIButton *startButton;
+
 
 @end

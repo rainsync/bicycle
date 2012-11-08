@@ -75,7 +75,7 @@
             oldt= [[NSDate date] timeIntervalSince1970];
             totalDistance = [[NSUserDefaults standardUserDefaults] doubleForKey:@"distance"];
             time = [[NSUserDefaults standardUserDefaults] doubleForKey:@"time"];
-            if(totalDistance==0 || time ==0)
+            if(totalDistance==0 && time ==0)
                 @throw [NSException exceptionWithName:@"Setting" reason:@"old data is not correct" userInfo:nil];
             
         }
@@ -137,8 +137,10 @@
     [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"distance"];
     totalDistance =0;
     time=0;
+    if(timer){
     [timer invalidate];
-    
+    timer = nil;
+    }
     [ridingDB release];
 }
 
@@ -149,7 +151,11 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     [locmanager stopUpdatingLocation];
     [locmanager stopUpdatingHeading];
+    if(timer){
     [timer invalidate];
+    timer = nil;
+    }
+    
 }
 
 - (BOOL)isRiding
