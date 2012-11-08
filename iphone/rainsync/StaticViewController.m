@@ -31,9 +31,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
     RidingDB *ridingDB = [[RidingDB alloc] init];
     _recordings = [ridingDB loadDB]; // Database loaded
+    [ridingDB release];
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
