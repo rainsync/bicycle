@@ -123,6 +123,8 @@
 }
 
 - (IBAction)stopRiding:(id)sender {
+    paused = false;
+    
     RidingManager *ridingManager = [RidingManager getInstance];
     [ridingManager stopRiding];
     [self viewDidAppear:false];
