@@ -39,7 +39,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTrackUser:self];
+    isHeading = FALSE;
+    [self setHeading:self];
+//    [self setTrackUser:self];
     
     
     RidingManager *ridingManager =[RidingManager getInstance];
@@ -168,6 +170,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)setHeading:(id)sender {
+    if(isHeading) {
+        [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:false];
+        isHeading = FALSE;
+    }
+    else {
+        [self.mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading animated:true];
+        isHeading = TRUE;
+    }
+}
 
 - (IBAction)setTrackUser:(id)sender {
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading animated:true];
@@ -210,13 +222,11 @@
 - (void)viewDidUnload {
     [_mapView release];
     _mapView = nil;
-    [self setMapToolbar:nil];
     [super viewDidUnload];
 }
 
 - (void)dealloc {
     [_mapView release];
-    [_mapToolbar release];
     [super dealloc];
 }
 

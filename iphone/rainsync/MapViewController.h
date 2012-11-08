@@ -22,10 +22,11 @@
     NSArray *line_color;
     CLLocation * my_loc;
     
-    
+    BOOL isHeading;
 }
 @property (retain, nonatomic) IBOutlet MKMapView *mapView;
 - (IBAction)changeMap:(id)sender;
+- (IBAction)setHeading:(id)sender;
 - (NSInteger)getUserNum:(NSString*)username;
 - (void)addPoint:(int)pos withLocation:(CLLocation *)newLocation;
 @end
