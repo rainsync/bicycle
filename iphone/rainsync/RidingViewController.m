@@ -137,14 +137,7 @@
     CGFloat pageWidth = scrollView.frame.size.width;
     int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     pageControl.currentPage = page;
-    MapViewController *controller = [controllers objectAtIndex:1];
-    if(controller!=nil){
-        if(page==1)
-            [controller.mapView setHidden:false];
-        else
-            [controller.mapView setHidden:true];
-        
-    }
+
     
     //page;
     
@@ -173,14 +166,7 @@
     
     
     int page = pageControl.currentPage;
-    MapViewController *controller = [controllers objectAtIndex:1];
-    if(controller!=nil){
-        if(page==1)
-        [controller.mapView setHidden:false];
-        else
-        [controller.mapView setHidden:true];
-        
-    }
+
     // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
     [self loadScrollViewWithPage:page - 1];
     [self loadScrollViewWithPage:page];

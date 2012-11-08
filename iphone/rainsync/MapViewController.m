@@ -107,44 +107,9 @@
     
     int num= [self getUserNum:@"me"];
     [self addPoint:num withLocation:newLocation];
-    
-    /*
-    if(my_loc==nil){
-        my_loc=newLocation;
-        [self setMapCenter:newLocation.coordinate];
-    }else{
-        if([my_loc distanceFromLocation:newLocation]>=100.0f){
-            [self setMapCenter:newLocation.coordinate];
-            my_loc=newLocation;
-            
-        }
-    }
-    */
-    
-    
-//    CLLocation *location = newLocation;
-//    if(oldLocation)
-//        if([oldLocation distanceFromLocation:newLocation] >= 100.0f)
-//        {
-//            
-//            [self setMapCenter:location.coordinate];
-//        }
-    
-//    for(NSObject* key in [_routeViews allKeys])
-//	{
-//		CSRouteView* routeView = [_routeViews objectForKey:key];
-//		routeView.hidden = NO;
-//		[routeView regionChanged];
-//	}
-
-    
+        
 }
 
--(void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
-{
-    [self.mapView setTransform:CGAffineTransformMakeRotation(-1 * newHeading.magneticHeading * M_PI / 180)];
-    
-}
 
 
 -(void)setMapCenter:(CLLocationCoordinate2D)location
