@@ -24,6 +24,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [BugSenseCrashController sharedInstanceWithBugSenseAPIKey:@"001a166a"];  // add BugSense
     
     [FBProfilePictureView class];
     

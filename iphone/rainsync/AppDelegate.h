@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "RidingManager.h"
+#import <BugSense-iOS/BugSenseCrashController.h>
 @class ViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> 
