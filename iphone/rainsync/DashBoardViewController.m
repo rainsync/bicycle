@@ -14,7 +14,7 @@
 
 @implementation DashBoardViewController
 
-@synthesize speedLabel, avgLabel, timeLabel, calorieLabel;
+@synthesize speedLabel, avgLabel, timeLabel, calorieLabel, distanceLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,13 +37,18 @@
     
     CLLocation *location = newLocation;
     
+    if(location.speed == -1)
+    speedLabel.text = @"00.0";
+    else
+    speedLabel.text = [NSString stringWithFormat:@"%.2f", location.speed];
     
-    speedLabel.text = [NSString stringWithFormat:@"%f", location.speed];
-    avgLabel.text = [NSString stringWithFormat:@"%f", [manager avgSpeed]];
+    avgLabel.text = [NSString stringWithFormat:@"%.2f", [manager avgSpeed]];
 
     double weight = 50;
     
-    calorieLabel.text = [NSString stringWithFormat:@"%lf", weight * [self calculateCalorie:[manager avgSpeed] ] * ([manager time]/60.0)];
+    calorieLabel.text = [NSString stringWithFormat:@"%0.2lf", weight * [self calculateCalorie:[manager avgSpeed] ] * ([manager time]/60.0)];
+    distanceLabel.text = [NSString stringWithFormat:@"%0.2lf", [manager totalDistance]/1000.0f];
+    
     
 }
 
@@ -186,6 +191,7 @@
     [_startButton release];
     [_stopButton release];
     [_pauseButton release];
+    [distanceLabel release];
     [super dealloc];
 }
  
@@ -205,6 +211,7 @@
     [self setStopButton:nil];
     [self setPauseButton:nil];
     [self setPlayButton:nil];
+    [self setDistanceLabel:nil];
     [super viewDidUnload];
 }
 @end
