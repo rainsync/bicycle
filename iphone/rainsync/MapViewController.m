@@ -220,7 +220,6 @@
 
 
 - (void)viewDidUnload {
-    [_mapView release];
     _mapView = nil;
     [super viewDidUnload];
 }

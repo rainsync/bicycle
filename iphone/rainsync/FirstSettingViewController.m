@@ -79,6 +79,7 @@
     ViewController *viewController = [[ViewController alloc] init];
     [[[UIApplication sharedApplication] keyWindow]setRootViewController:viewController];
     [self.view removeFromSuperview];
+    [viewController release];
 }
 
 - (void)dealloc {

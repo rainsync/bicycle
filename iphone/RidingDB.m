@@ -110,9 +110,7 @@
                 //NSString *timeField = [[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
                 [db addObject:dic];
                 
-            }
-            NSLog(@"%@",[db[0] objectForKey:@"day"]);
-            
+            }            
         }
         else {
             NSLog(@"Match not found");
