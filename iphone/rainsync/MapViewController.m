@@ -141,15 +141,24 @@
 
 }
 
+- (IBAction)changeMap:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"취소" destructiveButtonTitle:nil otherButtonTitles:@"일반 지도", @"위성 지도", @"일반 + 위성 지도", nil];
+    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+    [actionSheet release];
+}
 
-- (IBAction)changeToMap:(id)sender {
-    self.mapView.mapType = MKMapTypeStandard;
-}
-- (IBAction)changeToSatellite:(id)sender {
-    self.mapView.mapType = MKMapTypeSatellite;
-}
-- (IBAction)changeToHybrid:(id)sender {
-    self.mapView.mapType = MKMapTypeHybrid;
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            self.mapView.mapType = MKMapTypeStandard;
+            break;
+        case 1:
+            self.mapView.mapType = MKMapTypeSatellite;
+            break;
+        case 2:
+            self.mapView.mapType = MKMapTypeHybrid;
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -201,11 +210,13 @@
 - (void)viewDidUnload {
     [_mapView release];
     _mapView = nil;
+    [self setMapToolbar:nil];
     [super viewDidUnload];
 }
 
 - (void)dealloc {
     [_mapView release];
+    [_mapToolbar release];
     [super dealloc];
 }
 

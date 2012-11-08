@@ -12,7 +12,7 @@
 #import "CrumbPath.h"
 #import "CrumbPathView.h"
 
-@interface MapViewController : UIViewController <MKMapViewDelegate>
+@interface MapViewController : UIViewController <MKMapViewDelegate, UIActionSheetDelegate>
 {
 
     RidingManager *ridingManager;
@@ -25,6 +25,7 @@
     
 }
 @property (retain, nonatomic) IBOutlet MKMapView *mapView;
+- (IBAction)changeMap:(id)sender;
 - (NSInteger)getUserNum:(NSString*)username;
 - (void)addPoint:(int)pos withLocation:(CLLocation *)newLocation;
 @end
