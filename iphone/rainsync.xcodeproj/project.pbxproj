@@ -17,6 +17,9 @@
 		0483FE1E163E5FA8005D804F /* FirstSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */; };
 		0483FE1F163E5FA8005D804F /* FirstSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */; };
 		04ADF5B7163EABE000F825B4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04ADF5B6163EABE000F825B4 /* MobileCoreServices.framework */; };
+		04C3C04C164BCBD700047992 /* BugSense-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C3C04B164BCBD600047992 /* BugSense-iOS.framework */; };
+		04C3C050164BCC1100047992 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C3C04F164BCC1100047992 /* SystemConfiguration.framework */; };
+		04C3C052164BCC1B00047992 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C3C051164BCC1B00047992 /* libz.dylib */; };
 		04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */; };
 		04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */; };
 		04EC923C1641183100E99EB5 /* ProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC923A1641183100E99EB5 /* ProfileEditViewController.m */; };
@@ -127,6 +130,9 @@
 		0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstSettingViewController.m; sourceTree = "<group>"; };
 		0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstSettingViewController.xib; sourceTree = "<group>"; };
 		04ADF5B6163EABE000F825B4 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		04C3C04B164BCBD600047992 /* BugSense-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "BugSense-iOS.framework"; sourceTree = "<group>"; };
+		04C3C04F164BCC1100047992 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		04C3C051164BCC1B00047992 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
 		04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
 		04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteUserViewController.xib; sourceTree = "<group>"; };
@@ -227,6 +233,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04C3C052164BCC1B00047992 /* libz.dylib in Frameworks */,
+				04C3C050164BCC1100047992 /* SystemConfiguration.framework in Frameworks */,
 				5517E9271647988600E2CDD3 /* libsqlite3.dylib in Frameworks */,
 				04ADF5B7163EABE000F825B4 /* MobileCoreServices.framework in Frameworks */,
 				5501C14F1636D4210073ACB1 /* AdSupport.framework in Frameworks */,
@@ -237,6 +245,7 @@
 				5570A909163550A5008E2F50 /* UIKit.framework in Frameworks */,
 				5570A90B163550A5008E2F50 /* Foundation.framework in Frameworks */,
 				5570A90D163550A5008E2F50 /* CoreGraphics.framework in Frameworks */,
+				04C3C04C164BCBD700047992 /* BugSense-iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,8 +391,8 @@
 		5570A8F9163550A5008E2F50 = {
 			isa = PBXGroup;
 			children = (
-				5513073B164956AF005653B1 /* fells_loop.gpx */,
-				5517E9251647987A00E2CDD3 /* libsqlite3.dylib */,
+				04C3C051164BCC1B00047992 /* libz.dylib */,
+				04C3C04F164BCC1100047992 /* SystemConfiguration.framework */,
 				5570A90E163550A5008E2F50 /* rainsync */,
 				5570A932163550A5008E2F50 /* rainsyncTests */,
 				5545FD751644DA4A00D9E4ED /* AFNetworking */,
@@ -404,6 +413,9 @@
 		5570A907163550A5008E2F50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04C3C04B164BCBD600047992 /* BugSense-iOS.framework */,
+				5513073B164956AF005653B1 /* fells_loop.gpx */,
+				5517E9251647987A00E2CDD3 /* libsqlite3.dylib */,
 				04ADF5B6163EABE000F825B4 /* MobileCoreServices.framework */,
 				5501C14E1636D4210073ACB1 /* AdSupport.framework */,
 				5501C14C1636D26F0073ACB1 /* Accounts.framework */,
@@ -779,9 +791,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Seung won Kim (7N6DQM42MS)";
+				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/FacebookSDK\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../..\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rainsync/rainsync-Prefix.pch";
@@ -790,7 +805,7 @@
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "C2E24698-499E-42C6-8520-0199EF7C5DEA";
-				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -800,9 +815,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Seung won Kim (7N6DQM42MS)";
+				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/FacebookSDK\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../..\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rainsync/rainsync-Prefix.pch";
@@ -811,7 +829,7 @@
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "C2E24698-499E-42C6-8520-0199EF7C5DEA";
-				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
