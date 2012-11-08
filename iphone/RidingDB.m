@@ -46,6 +46,26 @@
     return self;
 }
 
+- (void)saveRecordingTime:(NSString *)time withDistance:(NSString *)distance withAverageSpeed:(NSString *)speed withAltidude:(NSString *)altitude withCalories:(NSString *)calorie {
+    sqlite3_stmt *statement;
+    const char *dbpath = [databasePath UTF8String];
+    
+    if (sqlite3_open(dbpath, &ridingDB) == SQLITE_OK) {
+        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO RIDINGS (time, distance, speed, altitude, calorie) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", time, distance, speed, altitude, calorie];
+        const char *insert_stmt = [insertSQL UTF8String];
+        sqlite3_prepare_v2(ridingDB, insert_stmt, -1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+            NSLog(@"Record Added");
+        }
+        else {
+            NSLog(@"Failed to add Record");
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(ridingDB);
+    }
+
+}
+
 - (NSMutableArray *)loadDB {
     NSMutableArray *db = [[NSMutableArray alloc] init];
     
