@@ -63,7 +63,31 @@
                                                              FBSessionState status,
                                                              NSError *error) {
             
-            [self updateView];
+            NetUtility *net = [[NetUtility alloc] initwithBlock:^(int msg, NSDictionary * dic) {
+                if(msg==account_register)
+                {
+                    /*
+                    NSInteger state=[[dic objectForKey:@"state"] intValue];
+                    
+                    if(state==0)
+                    {
+                        
+                    //NSInteger uid=[[dic objectForKey:@"uid"] intValue];
+                    //NSString *passkey=[dic objectForKey:@"passkey"];
+                    //NSLog([NSString stringWithFormat:@"STATE %d UID %d PASSKEY %@", state, uid, passkey]);
+                    [[NSUserDefaults standardUserDefaults] setObject:FBSession.activeSession.accessToken forKey:@"token"];
+                        
+                    ViewController *viewController = [[ViewController alloc] init];
+                    [[[UIApplication sharedApplication] keyWindow]setRootViewController:viewController];
+                        
+                        
+                    }
+                    */
+                }
+            }];
+            NSLog(@"WW");
+            [net account_registerwithAcessToken:FBSession.activeSession.accessToken withNick:@"" withPhoto:@""];
+            //[net end];
             
         }];
         
@@ -78,7 +102,7 @@
 
     ViewController *viewController = [[ViewController alloc] init];
     [[[UIApplication sharedApplication] keyWindow]setRootViewController:viewController];
-    [self.view removeFromSuperview];
+    //[self.view removeFromSuperview];
 }
 
 - (void)dealloc {

@@ -45,10 +45,10 @@
 
 
     [[NSUserDefaults standardUserDefaults]synchronize];
-    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"IsStart"];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"token"];
     
-    NSString *IsStart = [[NSUserDefaults standardUserDefaults] stringForKey:@"IsStart"];
-    if(!IsStart){
+    NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:@"token"];
+    if(!token){
         FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:@"FirstSettingViewController" bundle:nil];
 //        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:firstSettingViewController];
 //        [navController.navigationBar setBarStyle:UIBarStyleBlack];
