@@ -49,7 +49,13 @@
 
 - (void)updateTime:(double)time
 {
-    timeLabel.text = [NSString stringWithFormat:@"%lf", time];
+    int i_time = (int)time;
+    int sec = i_time%60;
+    int min = i_time/60%60;
+    int hour = i_time/60/24%24;
+    
+    
+    timeLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, min, sec];
 
 }
 
