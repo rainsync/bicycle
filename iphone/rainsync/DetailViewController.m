@@ -35,4 +35,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    [_recordingDay release];
+    [super dealloc];
+}
+- (void)viewDidUnload {
+    [self setRecordingDay:nil];
+    [super viewDidUnload];
+}
 @end
