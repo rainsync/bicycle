@@ -7,6 +7,7 @@
 //
 
 #import "RidingManager.h"
+#import "RidingDB.h"
 
 @implementation RidingManager
 
@@ -75,7 +76,7 @@
             totalDistance = [[NSUserDefaults standardUserDefaults] doubleForKey:@"distance"];
             time = [[NSUserDefaults standardUserDefaults] doubleForKey:@"time"];
             if(totalDistance==0 || time ==0)
-                @throw [NSException exceptionWithName:@"Setting" reason:@"old data is not corret" userInfo:nil];
+                @throw [NSException exceptionWithName:@"Setting" reason:@"old data is not correct" userInfo:nil];
             
         }
         @catch (NSException *exception) {
@@ -124,6 +125,10 @@
 
 - (void)stopRiding
 {
+    RidingDB *ridingDB = [[RidingDB alloc] init];
+    [ridingDB saveRecordingTime:[NSString stringWithFormat:@"%f", time] withDistance:[NSString stringWithFormat:@"%f", totalDistance] withAverageSpeed:[NSString stringWithFormat:@"%f", [self avgSpeed]] withAltidude:@"0" withCalories:@"20"];
+    // save database
+    
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsRiding"];
     [[NSUserDefaults standardUserDefaults]synchronize];
     [locmanager stopUpdatingLocation];
@@ -134,9 +139,7 @@
     time=0;
     [timer invalidate];
     
-    
-    
-    
+    [ridingDB release];
 }
 
 - (void)pauseRiding
