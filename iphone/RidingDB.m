@@ -29,7 +29,7 @@
         const char *dbpath = [databasePath UTF8String];
         if (sqlite3_open(dbpath, &ridingDB) == SQLITE_OK) {
             char *errMsg;
-            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS RIDINGS (ID INTEGER PRIMARY KEY AUTOINCREMENT, TIME TEXT, DISTANCE TEXT, SPEED TEXT, ALTITUDE TEXT, CALORIE TEXT)";
+            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS RIDINGS (ID INTEGER PRIMARY KEY AUTOINCREMENT, DAY TEXT, TIME TEXT, DISTANCE TEXT, SPEED TEXT, ALTITUDE TEXT, CALORIE TEXT)";
             if (sqlite3_exec(ridingDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
                 NSLog(@"Failed to create table");
             }
@@ -47,11 +47,23 @@
 }
 
 - (void)saveRecordingTime:(NSString *)time withDistance:(NSString *)distance withAverageSpeed:(NSString *)speed withAltidude:(NSString *)altitude withCalories:(NSString *)calorie {
+    
+    NSDate *date = [NSDate date];
+    NSDateFormatter *form = [[NSDateFormatter alloc] init];
+    
+    [form setDateStyle:NSDateFormatterFullStyle];
+    [form setTimeStyle:NSDateFormatterShortStyle];
+    
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ko_KR"];
+    [form setLocale:locale];
+    NSLog(@"%@", [form stringFromDate:date]);
+    // set Date data
+    
     sqlite3_stmt *statement;
     const char *dbpath = [databasePath UTF8String];
     
     if (sqlite3_open(dbpath, &ridingDB) == SQLITE_OK) {
-        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO RIDINGS (time, distance, speed, altitude, calorie) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", time, distance, speed, altitude, calorie];
+        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO RIDINGS (day, time, distance, speed, altitude, calorie) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", [form stringFromDate:date], time, distance, speed, altitude, calorie];
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(ridingDB, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
@@ -89,17 +101,17 @@
         if (sqlite3_prepare_v2(ridingDB, query_stmt, -1, &statement, NULL) == SQLITE_OK) {
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)] forKey:@"id"];
-                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)] forKey:@"time"];
-                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)] forKey:@"distance"];
-                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)] forKey:@"speed"];
-                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)] forKey:@"altitude"];
-                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)] forKey:@"calorie"];
+                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)] forKey:@"day"];
+                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)] forKey:@"time"];
+                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)] forKey:@"distance"];
+                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)] forKey:@"speed"];
+                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)] forKey:@"altitude"];
+                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)] forKey:@"calorie"];
                 //NSString *timeField = [[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
                 [db addObject:dic];
                 
             }
-            NSLog(@"%@",[db[0] objectForKey:@"id"]);
+            NSLog(@"%@",[db[0] objectForKey:@"day"]);
             
         }
         else {
