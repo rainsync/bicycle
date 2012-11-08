@@ -19,6 +19,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        max_line = 1024;
+        
         line_index=0;
         line_color = [[NSArray alloc] initWithArray:@[[UIColor redColor],[UIColor greenColor], [UIColor blueColor], [UIColor blackColor], [UIColor whiteColor]]];
         points = malloc(sizeof(MKMapPoint*)*8);
@@ -73,7 +75,7 @@
     [route_views addObject:[NSNull null]];
     
     int i=[users count]-1;
-    MKMapPoint *arr= malloc(sizeof(CLLocationCoordinate2D)* 1024);
+    MKMapPoint *arr= malloc(sizeof(CLLocationCoordinate2D)* max_line);
     points[i]=arr;
     point_count[i]=0;
     return i;
@@ -82,10 +84,11 @@
 - (void) addPoint:(int)pos withLocation:(CLLocation *)newLocation
 {
     MKMapPoint *point = points[pos];
-    if(point_count[pos]>=1024)
+    if(point_count[pos]>=max_line)
     {
-        memcpy(point,point+sizeof(MKMapPoint*)*512, sizeof(MKMapPoint*)*512);
-        point_count[pos]=512;
+        NSLog(@"%d", sizeof(MKMapPoint));
+        memcpy(point,point+max_line/2, sizeof(MKMapPoint)*max_line/2);
+        point_count[pos]=max_line/2;
     
     }
     
@@ -107,44 +110,9 @@
     
     int num= [self getUserNum:@"me"];
     [self addPoint:num withLocation:newLocation];
-    
-    /*
-    if(my_loc==nil){
-        my_loc=newLocation;
-        [self setMapCenter:newLocation.coordinate];
-    }else{
-        if([my_loc distanceFromLocation:newLocation]>=100.0f){
-            [self setMapCenter:newLocation.coordinate];
-            my_loc=newLocation;
-            
-        }
-    }
-    */
-    
-    
-//    CLLocation *location = newLocation;
-//    if(oldLocation)
-//        if([oldLocation distanceFromLocation:newLocation] >= 100.0f)
-//        {
-//            
-//            [self setMapCenter:location.coordinate];
-//        }
-    
-//    for(NSObject* key in [_routeViews allKeys])
-//	{
-//		CSRouteView* routeView = [_routeViews objectForKey:key];
-//		routeView.hidden = NO;
-//		[routeView regionChanged];
-//	}
-
-    
+        
 }
 
--(void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
-{
-    [self.mapView setTransform:CGAffineTransformMakeRotation(-1 * newHeading.magneticHeading * M_PI / 180)];
-    
-}
 
 
 -(void)setMapCenter:(CLLocationCoordinate2D)location

@@ -10,10 +10,10 @@
 #import <MapKit/MKMapView.h>
 #import "RidingManager.h"
 
-
 @interface MapViewController : UIViewController <MKMapViewDelegate>
 {
 
+    int max_line;
     RidingManager *ridingManager;
     NSMutableArray *users;
     int *point_count;

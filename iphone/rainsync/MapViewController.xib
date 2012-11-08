@@ -39,7 +39,7 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBMKMapView" id="208893317">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">-2147483374</int>
+						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{0, 44}, {320, 369}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="431918494"/>
@@ -49,7 +49,6 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBMKZoomEnabled">NO</bool>
 						<bool key="IBMKScrollEnabled">NO</bool>
-						<bool key="IBMKShowsUserLocation">YES</bool>
 					</object>
 					<object class="IBUIToolbar" id="431918494">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -80,18 +79,18 @@
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="431918494"/>
 							</object>
-							<object class="IBUIBarButtonItem" id="856218594">
+							<object class="IBUIBarButtonItem" id="388396925">
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIToolbar" ref="431918494"/>
 								<int key="IBUISystemItemIdentifier">5</int>
 							</object>
-							<object class="IBUIBarButtonItem" id="692507729">
+							<object class="IBUIBarButtonItem" id="161300693">
 								<string key="IBUITitle">북쪽</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="431918494"/>
 							</object>
-							<object class="IBUIBarButtonItem" id="774263579">
+							<object class="IBUIBarButtonItem" id="812582482">
 								<string key="IBUITitle">내방향</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIStyle">1</int>
@@ -167,19 +166,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">setTrackUser:</string>
-						<reference key="source" ref="692507729"/>
+						<string key="label">setNoTrack:</string>
+						<reference key="source" ref="161300693"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
-					<int key="connectionID">42</int>
+					<int key="connectionID">44</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">setNoTrack:</string>
-						<reference key="source" ref="774263579"/>
+						<string key="label">setTrackUser:</string>
+						<reference key="source" ref="812582482"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
-					<int key="connectionID">43</int>
+					<int key="connectionID">45</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -217,9 +216,9 @@
 							<reference ref="491749238"/>
 							<reference ref="737670863"/>
 							<reference ref="327898018"/>
-							<reference ref="856218594"/>
-							<reference ref="692507729"/>
-							<reference ref="774263579"/>
+							<reference ref="388396925"/>
+							<reference ref="161300693"/>
+							<reference ref="812582482"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -240,17 +239,17 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">39</int>
-						<reference key="object" ref="856218594"/>
+						<reference key="object" ref="388396925"/>
 						<reference key="parent" ref="431918494"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">40</int>
-						<reference key="object" ref="692507729"/>
+						<reference key="object" ref="161300693"/>
 						<reference key="parent" ref="431918494"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">41</int>
-						<reference key="object" ref="774263579"/>
+						<reference key="object" ref="812582482"/>
 						<reference key="parent" ref="431918494"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -279,7 +278,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">43</int>
+			<int key="maxID">45</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
