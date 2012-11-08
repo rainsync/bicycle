@@ -23,6 +23,7 @@
 		04C3C078164BD8EF00047992 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3C076164BD8EF00047992 /* Default@2x.png */; };
 		04C3C07A164BDC9300047992 /* geustLoginBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3C079164BDC9300047992 /* geustLoginBtn.png */; };
 		04C3C07E164BDF8600047992 /* facebookBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3C07D164BDF8600047992 /* facebookBtn.png */; };
+		04D00614164C21EA00064370 /* compass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D00613164C21EA00064370 /* compass@2x.png */; };
 		04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */; };
 		04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */; };
 		04EC923C1641183100E99EB5 /* ProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC923A1641183100E99EB5 /* ProfileEditViewController.m */; };
@@ -138,6 +139,7 @@
 		04C3C076164BD8EF00047992 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		04C3C079164BDC9300047992 /* geustLoginBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = geustLoginBtn.png; sourceTree = "<group>"; };
 		04C3C07D164BDF8600047992 /* facebookBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebookBtn.png; sourceTree = "<group>"; };
+		04D00613164C21EA00064370 /* compass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compass@2x.png"; sourceTree = "<group>"; };
 		04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
 		04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
 		04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteUserViewController.xib; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 		0457895A16426692008E56CA /* icon */ = {
 			isa = PBXGroup;
 			children = (
+				04D00613164C21EA00064370 /* compass@2x.png */,
 				04C3C079164BDC9300047992 /* geustLoginBtn.png */,
 				5513072E16492C47005653B1 /* Button Pause.png */,
 				5513072F16492C47005653B1 /* Button Play.png */,
@@ -617,6 +620,7 @@
 				04C3C078164BD8EF00047992 /* Default@2x.png in Resources */,
 				04C3C07A164BDC9300047992 /* geustLoginBtn.png in Resources */,
 				04C3C07E164BDF8600047992 /* facebookBtn.png in Resources */,
+				04D00614164C21EA00064370 /* compass@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

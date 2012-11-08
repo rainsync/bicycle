@@ -63,7 +63,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIBarStyle">1</int>
 						<array class="NSMutableArray" key="IBUIItems">
-							<object class="IBUIBarButtonItem" id="888589540">
+							<object class="IBUIBarButtonItem" id="252087850">
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="431918494"/>
@@ -140,7 +140,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">changeMap:</string>
-						<reference key="source" ref="888589540"/>
+						<reference key="source" ref="252087850"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">47</int>
@@ -180,7 +180,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="388396925"/>
 							<reference ref="812582482"/>
-							<reference ref="888589540"/>
+							<reference ref="252087850"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -201,7 +201,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">46</int>
-						<reference key="object" ref="888589540"/>
+						<reference key="object" ref="252087850"/>
 						<reference key="parent" ref="431918494"/>
 					</object>
 				</array>
@@ -232,6 +232,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="changeMap:">id</string>
 						<string key="setHeading:">id</string>
+						<string key="setNoTrack:">id</string>
 						<string key="setTrackUser:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -241,6 +242,10 @@
 						</object>
 						<object class="IBActionInfo" key="setHeading:">
 							<string key="name">setHeading:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="setNoTrack:">
+							<string key="name">setNoTrack:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="setTrackUser:">
