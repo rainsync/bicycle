@@ -19,13 +19,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        max_line = 1024;
-        
-        line_index=0;
+
         line_color = [[NSArray alloc] initWithArray:@[[UIColor redColor],[UIColor greenColor], [UIColor blueColor], [UIColor blackColor], [UIColor whiteColor]]];
-        points = malloc(sizeof(MKMapPoint*)*8);
-        point_count = malloc(sizeof(int)*8);
-        
         users = [[NSMutableArray alloc] init];
         route_lines = [[NSMutableArray alloc]init];
         route_views = [[NSMutableArray alloc]init];
@@ -75,32 +70,42 @@
     [route_views addObject:[NSNull null]];
     
     int i=[users count]-1;
-    MKMapPoint *arr= malloc(sizeof(CLLocationCoordinate2D)* max_line);
-    points[i]=arr;
-    point_count[i]=0;
     return i;
     
 }
 - (void) addPoint:(int)pos withLocation:(CLLocation *)newLocation
 {
-    MKMapPoint *point = points[pos];
-    if(point_count[pos]>=max_line)
+
+
+    CrumbPath *prev_line = [route_lines objectAtIndex:pos];
+    if(prev_line == [NSNull null])
     {
-        NSLog(@"%d", sizeof(MKMapPoint));
-        memcpy(point,point+max_line/2, sizeof(MKMapPoint)*max_line/2);
-        point_count[pos]=max_line/2;
+        prev_line = [[CrumbPath alloc] initWithCenterCoordinate:newLocation.coordinate];
+        [self.mapView addOverlay:prev_line];
+    }else{
     
+        MKMapRect updateRect = [prev_line addCoordinate:newLocation.coordinate];
+        
+        if (!MKMapRectIsNull(updateRect) && route_views[pos]!=[NSNull null])
+        {
+            // There is a non null update rect.
+            // Compute the currently visible map zoom scale
+            MKZoomScale currentZoomScale = (CGFloat)(_mapView.bounds.size.width / _mapView.visibleMapRect.size.width);
+            // Find out the line width at this zoom scale and outset the updateRect by that amount
+            CGFloat lineWidth = MKRoadWidthAtZoomScale(currentZoomScale);
+            updateRect = MKMapRectInset(updateRect, -lineWidth, -lineWidth);
+            // Ask the overlay view to update just the changed area.
+            [route_views[pos] setNeedsDisplayInMapRect:updateRect];
+        }
+        
     }
+    //if(prev_line != [NSNull null])
+    //    [self.mapView removeOverlay:prev_line];
     
-    point[point_count[pos]++]=MKMapPointForCoordinate(newLocation.coordinate);
     
-    MKPolyline *prev_line = [route_lines objectAtIndex:pos];
-    if(prev_line != [NSNull null])
-        [self.mapView removeOverlay:prev_line];
     
-    MKPolyline *line = [MKPolyline polylineWithPoints:point count:point_count[pos]];
-    [route_lines replaceObjectAtIndex:pos withObject:line];
-    [self.mapView addOverlay:line];
+    [route_lines replaceObjectAtIndex:pos withObject:prev_line];
+    
     
 }
 
@@ -173,10 +178,13 @@
             
                 if(view == [NSNull null])
                 {
-                    view = [[[MKPolylineView alloc] initWithPolyline:route_lines[i]] autorelease];
-                    view.fillColor = [UIColor redColor];
-                    view.strokeColor = [UIColor redColor];
-                    view.lineWidth = 3;
+                    view = [[[CrumbPathView alloc] initWithOverlay:route_lines[i]] autorelease];
+                    [view setColor:line_color[i]];
+                    
+                    [route_views replaceObjectAtIndex:i withObject:view];
+                    //view.fillColor = [UIColor redColor];
+                    //view.strokeColor = [UIColor redColor];
+                    //view.lineWidth = 3;
                 }
             overlayView = view;
             break;

@@ -45,6 +45,10 @@
 		552BD57616365ECB00D89652 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552BD57416365ECB00D89652 /* ProfileViewController.m */; };
 		552BD57716365ECB00D89652 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 552BD57516365ECB00D89652 /* ProfileViewController.xib */; };
 		552BD57B1636609500D89652 /* NetUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 552BD57A1636609500D89652 /* NetUtility.m */; };
+		55337D17164BD089001019C2 /* CrumbPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337D14164BD089001019C2 /* CrumbPath.m */; };
+		55337D18164BD089001019C2 /* CrumbPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337D14164BD089001019C2 /* CrumbPath.m */; };
+		55337D19164BD089001019C2 /* CrumbPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337D16164BD089001019C2 /* CrumbPathView.m */; };
+		55337D1A164BD089001019C2 /* CrumbPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337D16164BD089001019C2 /* CrumbPathView.m */; };
 		5545FD8A1644DA7F00D9E4ED /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5545FD781644DA7F00D9E4ED /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		5545FD8B1644DA7F00D9E4ED /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5545FD781644DA7F00D9E4ED /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		5545FD8C1644DA7F00D9E4ED /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5545FD7A1644DA7F00D9E4ED /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -149,6 +153,10 @@
 		552BD57516365ECB00D89652 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		552BD5791636609400D89652 /* NetUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetUtility.h; sourceTree = "<group>"; };
 		552BD57A1636609500D89652 /* NetUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetUtility.m; sourceTree = "<group>"; };
+		55337D13164BD089001019C2 /* CrumbPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrumbPath.h; sourceTree = "<group>"; };
+		55337D14164BD089001019C2 /* CrumbPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrumbPath.m; sourceTree = "<group>"; };
+		55337D15164BD089001019C2 /* CrumbPathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrumbPathView.h; sourceTree = "<group>"; };
+		55337D16164BD089001019C2 /* CrumbPathView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrumbPathView.m; sourceTree = "<group>"; };
 		5545FD771644DA7F00D9E4ED /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPClient.h; path = AFNetworking/AFNetworking/AFHTTPClient.h; sourceTree = SOURCE_ROOT; };
 		5545FD781644DA7F00D9E4ED /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPClient.m; path = AFNetworking/AFNetworking/AFHTTPClient.m; sourceTree = SOURCE_ROOT; };
 		5545FD791644DA7F00D9E4ED /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = AFNetworking/AFNetworking/AFHTTPRequestOperation.h; sourceTree = SOURCE_ROOT; };
@@ -333,6 +341,10 @@
 		5517E9371647C27100E2CDD3 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
+				55337D13164BD089001019C2 /* CrumbPath.h */,
+				55337D14164BD089001019C2 /* CrumbPath.m */,
+				55337D15164BD089001019C2 /* CrumbPathView.h */,
+				55337D16164BD089001019C2 /* CrumbPathView.m */,
 				5570A94816355489008E2F50 /* MapViewController.h */,
 				5570A94916355489008E2F50 /* MapViewController.m */,
 				5570A94A16355489008E2F50 /* MapViewController.xib */,
@@ -655,6 +667,8 @@
 				5517E91C1647973200E2CDD3 /* RidingManager.m in Sources */,
 				5517E9231647985400E2CDD3 /* RidingDB.m in Sources */,
 				04F7CD77164938E100D2866D /* DetailViewController.m in Sources */,
+				55337D17164BD089001019C2 /* CrumbPath.m in Sources */,
+				55337D19164BD089001019C2 /* CrumbPathView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,6 +692,8 @@
 				5517E91D1647973200E2CDD3 /* RidingManager.m in Sources */,
 				5517E9241647985400E2CDD3 /* RidingDB.m in Sources */,
 				04F7CD78164938E100D2866D /* DetailViewController.m in Sources */,
+				55337D18164BD089001019C2 /* CrumbPath.m in Sources */,
+				55337D1A164BD089001019C2 /* CrumbPathView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
