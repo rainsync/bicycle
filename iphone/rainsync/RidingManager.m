@@ -220,7 +220,7 @@
 {
     for (id obj in targets) {
         if([obj respondsToSelector:@selector(locationManager:didUpdateHeading:)])
-            [obj locationManager:self didUpdateToLocation:self didUpdateHeading:newHeading];
+            [obj locationManager:self didUpdateHeading:newHeading];
     }
 }
 
