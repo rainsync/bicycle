@@ -29,7 +29,7 @@
         route_views = [[NSMutableArray alloc]init];
         
         my_loc =nil;
-        
+    
         
         [self getUserNum:@"me"];
 
@@ -42,6 +42,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setTrackUser:self];
     
     
     RidingManager *ridingManager =[RidingManager getInstance];
@@ -107,7 +108,7 @@
     int num= [self getUserNum:@"me"];
     [self addPoint:num withLocation:newLocation];
     
-
+    /*
     if(my_loc==nil){
         my_loc=newLocation;
         [self setMapCenter:newLocation.coordinate];
@@ -118,6 +119,7 @@
             
         }
     }
+    */
     
     
 //    CLLocation *location = newLocation;
@@ -185,7 +187,13 @@
 }
 
 
+- (IBAction)setTrackUser:(id)sender {
+    [self.mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading animated:true];
+}
 
+- (IBAction)setNoTrack:(id)sender {
+    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:false];
+}
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
 {
@@ -210,6 +218,7 @@
         return overlayView;
 
 }
+
 
 
 
