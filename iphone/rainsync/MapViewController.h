@@ -9,19 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MKMapView.h>
 #import "RidingManager.h"
+#import "CrumbPath.h"
+#import "CrumbPathView.h"
 
 @interface MapViewController : UIViewController <MKMapViewDelegate>
 {
 
-    int max_line;
     RidingManager *ridingManager;
     NSMutableArray *users;
-    int *point_count;
-    MKMapPoint **points;
     NSMutableArray *route_lines;
     NSMutableArray *route_views;
     NSArray *line_color;
-    int line_index;
     CLLocation * my_loc;
     
     
