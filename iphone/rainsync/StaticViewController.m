@@ -22,6 +22,8 @@
     if (self) {
         self.title = @"기록";
         
+        self.navigationItem.leftBarButtonItem = self.editButtonItem;
+        
         // Custom initialization
     }
     return self;
@@ -70,8 +72,32 @@
     NSUInteger row = [indexPath row];
     NSDictionary *rowData = [_recordings objectAtIndex:row];
     cell.textLabel.text = [rowData objectForKey:@"day"];
+    cell.imageView.image = [UIImage imageNamed:@"singleRiding.png"];    // single, team riding 구분해서 아이콘 달아주기 ; db에 식별자 칼럼 추가?
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the managed object for the given index path
+        // Ensure that if the user is editing a name field then the change is committed before deleting a row -- this ensures that changes are made to the correct event object.
+		[tableView endEditing:YES];
+		
+        // Delete the managed object at the given index path.
+		
+		// Update the array and table view.
+        [_recordings removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+	}
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    [_tableView setEditing:YES animated:YES];
+    NSLog(@"editButtonItem Click");
 }
 
 #pragma mark -
