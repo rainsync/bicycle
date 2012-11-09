@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-@interface RidingManager : NSObject <CLLocationManagerDelegate>
+@interface RidingManager : NSObject <CLLocationManagerDelegate, UIAlertViewDelegate>
 {
 
     CLLocationManager *locmanager;
