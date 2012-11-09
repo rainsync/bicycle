@@ -39,7 +39,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTrackUser:self];
+    isHeading = FALSE;
+    [self setHeading:self];
+//    [self setTrackUser:self];
     
     
     RidingManager *ridingManager =[RidingManager getInstance];
@@ -141,15 +143,24 @@
 
 }
 
+- (IBAction)changeMap:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"취소" destructiveButtonTitle:nil otherButtonTitles:@"일반 지도", @"위성 지도", @"일반 + 위성 지도", nil];
+    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+    [actionSheet release];
+}
 
-- (IBAction)changeToMap:(id)sender {
-    self.mapView.mapType = MKMapTypeStandard;
-}
-- (IBAction)changeToSatellite:(id)sender {
-    self.mapView.mapType = MKMapTypeSatellite;
-}
-- (IBAction)changeToHybrid:(id)sender {
-    self.mapView.mapType = MKMapTypeHybrid;
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            self.mapView.mapType = MKMapTypeStandard;
+            break;
+        case 1:
+            self.mapView.mapType = MKMapTypeSatellite;
+            break;
+        case 2:
+            self.mapView.mapType = MKMapTypeHybrid;
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -159,6 +170,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)setHeading:(id)sender {
+    if(isHeading) {
+        [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:false];
+        isHeading = FALSE;
+    }
+    else {
+        [self.mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading animated:true];
+        isHeading = TRUE;
+    }
+}
 
 - (IBAction)setTrackUser:(id)sender {
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading animated:true];
@@ -199,7 +220,6 @@
 
 
 - (void)viewDidUnload {
-    [_mapView release];
     _mapView = nil;
     [super viewDidUnload];
 }

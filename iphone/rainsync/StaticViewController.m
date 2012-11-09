@@ -69,7 +69,7 @@
     
     NSUInteger row = [indexPath row];
     NSDictionary *rowData = [_recordings objectAtIndex:row];
-    cell.textLabel.text = [rowData objectForKey:@"id"];
+    cell.textLabel.text = [rowData objectForKey:@"day"];
     
     return cell;
 }
@@ -84,6 +84,7 @@
 
     DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     [self.navigationController pushViewController:detailViewController animated:YES];
+    detailViewController.recordingDay.text = [rowData objectForKey:@"day"];
     detailViewController.recordingTime.text = [rowData objectForKey:@"time"];
     detailViewController.distance.text = [rowData objectForKey:@"distance"];
     detailViewController.averageSpeed.text = [rowData objectForKey:@"speed"];

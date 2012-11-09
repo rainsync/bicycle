@@ -25,7 +25,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [BugSenseCrashController sharedInstanceWithBugSenseAPIKey:@"001a166a"];  // add BugSense
-    
+
+    [UIApplication sharedApplication].idleTimerDisabled = YES;  // application can't lock screen automatically
+
     [FBProfilePictureView class];
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];

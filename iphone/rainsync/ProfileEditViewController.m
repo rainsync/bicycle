@@ -111,34 +111,35 @@
 // 액션 시트 이벤트 핸들러
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    // 사진 촬영
-    if (buttonIndex == 0) {
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-            imagePicker.delegate = self;
-            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
-            imagePicker.allowsEditing = NO;
-            [self presentModalViewController:imagePicker animated:YES];
-            newMedia = YES;
-        }
-    }
-    // 앨범에서 선택하기
-    else if (buttonIndex == 1) {
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-            picker.delegate = self;
-            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            picker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
-            picker.allowsEditing = NO;
-            [self presentModalViewController:picker animated:YES];
-            newMedia = NO;
-        }
-    }
-    // 삭제하기
-    else {
-        [_profileImageBtn setImage:nil forState:UIControlStateNormal];
-        [_profileImageBtn setImage:nil forState:UIControlStateHighlighted];
+    switch (buttonIndex) {
+        case 0: // 사진 촬영
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+                imagePicker.delegate = self;
+                imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
+                imagePicker.allowsEditing = NO;
+                [self presentModalViewController:imagePicker animated:YES];
+                [imagePicker release];
+                newMedia = YES;
+            }
+            break;
+        case 1: // 앨범에서 선택하기
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.delegate = self;
+                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                picker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
+                picker.allowsEditing = NO;
+                [self presentModalViewController:picker animated:YES];
+                [picker release];
+                newMedia = NO;
+            }
+            break;
+        case 2: // 삭제하기
+            [_profileImageBtn setImage:nil forState:UIControlStateNormal];
+            [_profileImageBtn setImage:nil forState:UIControlStateHighlighted];
+            break;
     }
 }
 

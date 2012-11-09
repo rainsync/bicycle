@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DetailViewController : UIViewController
+@property (retain, nonatomic) IBOutlet UILabel *recordingDay;
 @property (strong, nonatomic) IBOutlet UILabel *recordingTime;
 @property (strong, nonatomic) IBOutlet UILabel *distance;
 @property (strong, nonatomic) IBOutlet UILabel *altitude;

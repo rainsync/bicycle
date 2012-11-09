@@ -42,6 +42,7 @@
 - (void)editProfile {
     ProfileEditViewController *profileEditViewController = [[ProfileEditViewController alloc] initWithNibName:@"ProfileEditViewController" bundle:nil];
     [self.navigationController pushViewController:profileEditViewController animated:NO];
+    [profileEditViewController release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,10 +53,12 @@
 
 - (void)dealloc {
     [_Name release];
+    [_profileImageView release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setName:nil];
+    [self setProfileImageView:nil];
     [super viewDidUnload];
 }
 @end

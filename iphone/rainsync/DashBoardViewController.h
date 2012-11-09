@@ -16,9 +16,6 @@
     bool paused;
     
 }
-- (void)locationUpdate:(CLLocationManager*)manager WithLocations:(NSArray*)locations;
-- (void)headingUpdate:(CLLocationManager*)manager WithLocations:(CLHeading*)heading;
-
 @property (nonatomic, retain) IBOutlet UILabel *speedLabel;
 @property (nonatomic, retain) IBOutlet UILabel *avgLabel;
 @property (nonatomic, retain) IBOutlet UILabel *timeLabel;

@@ -35,4 +35,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    [_recordingDay release];
+    [_recordingTime release];
+    [_distance release];
+    [_altitude release];
+    [_averageSpeed release];
+    [_calorie release];
+    [super dealloc];
+}
+- (void)viewDidUnload {
+    [self setRecordingDay:nil];
+    [self setRecordingTime:nil];
+    [self setDistance:nil];
+    [self setAverageSpeed:nil];
+    [self setAltitude:nil];
+    [self setCalorie:nil];
+    [super viewDidUnload];
+}
 @end
