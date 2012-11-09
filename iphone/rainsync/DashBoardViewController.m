@@ -134,6 +134,12 @@
     [ridingManager stopRiding];
     [self viewDidAppear:false];
     
+    timeLabel.text = @"00:00:00";
+    speedLabel.text = @"00.0";
+    distanceLabel.text = @"0.00";
+    avgLabel.text = @"00.0";
+    speedLabel.text = @"00.0";
+    calorieLabel.text = @"0.00";
 }
 
 - (IBAction)pauseRiding:(id)sender {
