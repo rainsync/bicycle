@@ -122,26 +122,7 @@
 
 
 
--(void)setMapCenter:(CLLocationCoordinate2D)location
-{
-    //[self.mapView setCenterCoordinate:location zoomLevel:13 animated:YES];
- 
-    
-    NSLog(@"Current Location : %f, %f",location.latitude,location.longitude);
-    MKCoordinateRegion region;
-    MKCoordinateSpan span;
-    span.latitudeDelta=0.001;
-    span.longitudeDelta=0.001;
-    region.span=span;
-    //location.latitude=(float *)(self.appDelegate.currentLocationLatitude);
-    //location.latitude=self.appDelegate.currentLocationLongitude;
-    region.center=location;
-    [self.mapView setRegion:region animated:TRUE];
-    [self.mapView regionThatFits:region];
-    
-    
 
-}
 
 - (IBAction)changeMap:(id)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"취소" destructiveButtonTitle:nil otherButtonTitles:@"일반 지도", @"위성 지도", @"일반 + 위성 지도", nil];
