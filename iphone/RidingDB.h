@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "sqlite3.h"
+#import <CoreLocation/CoreLocation.h>
+
 
 @interface RidingDB : NSObject{
     sqlite3 *ridingDB;
     NSString *databasePath; // db파일 경로
 }
-- (void)saveRecordingTime:(NSString *)time withDistance:(NSString *)distance withAverageSpeed:(NSString *)speed withAltidude:(NSString *)altitude withCalories:(NSString *)calorie;
+- (void)saveRecordingTime:(NSString *)time withDistance:(NSString *)distance withAverageSpeed:(NSString *)speed withlocation:(CLLocation *)location withCalories:(NSString *)calorie;
 - (NSMutableArray *)loadDB;
 @end
