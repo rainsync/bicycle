@@ -125,9 +125,9 @@
 
 - (void)stopRiding
 {
-    RidingDB *ridingDB = [[RidingDB alloc] init];
-    [ridingDB saveRecordingTime:[NSString stringWithFormat:@"%f", time] withDistance:[NSString stringWithFormat:@"%f", totalDistance] withAverageSpeed:[NSString stringWithFormat:@"%f", [self avgSpeed]] withAltidude:@"0" withCalories:@"20"];
-    // save database
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"기록 측정 종료" message:@"저장하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"네넹", nil];
+    [alertView show];
+    [alertView release];
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsRiding"];
     [[NSUserDefaults standardUserDefaults]synchronize];
@@ -135,13 +135,38 @@
     [locmanager stopUpdatingHeading];
     [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
     [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"distance"];
+    
     totalDistance =0;
     time=0;
+    
     if(timer){
-    [timer invalidate];
-    timer = nil;
+        [timer invalidate];
+        timer = nil;
     }
-    [ridingDB release];
+}
+
+# pragma mark -
+# pragma mark AlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+        {
+            
+            NSLog(@"저장 취소");
+            break;
+        }
+        case 1:
+        {
+            RidingDB *ridingDB = [[RidingDB alloc] init];
+            [ridingDB saveRecordingTime:[NSString stringWithFormat:@"%f", time] withDistance:[NSString stringWithFormat:@"%f", totalDistance] withAverageSpeed:[NSString stringWithFormat:@"%f", [self avgSpeed]] withAltidude:@"0" withCalories:@"20"];
+            // save database
+            
+            NSLog(@"저장 완료");
+            [ridingDB release];
+            break;
+        }
+    }
 }
 
 - (void)pauseRiding
