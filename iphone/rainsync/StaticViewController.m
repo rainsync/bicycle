@@ -96,10 +96,27 @@
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     [super setEditing:editing animated:animated];
-    [_tableView setEditing:YES animated:YES];
-    NSLog(@"editButtonItem Click");
+
+    if(editing)
+    {
+        [_tableView setEditing:YES animated:YES];
+        NSLog(@"editMode on");
+    }
+    else
+    {
+        [_tableView setEditing:NO animated:YES];
+        NSLog(@"Done leave editmode");
+    }}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
 #pragma mark -
 #pragma mark Table View Delegate Methods
 
