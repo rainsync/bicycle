@@ -31,16 +31,24 @@
     if ([filemgr fileExistsAtPath: databasePath] == NO) {
         const char *dbpath = [databasePath UTF8String];
         if (sqlite3_open(dbpath, &ridingDB) == SQLITE_OK) {
-            char *errMsg;
-            char *sql_stmt = "CREATE TABLE IF NOT EXISTS RIDINGS (ID INTEGER PRIMARY KEY AUTOINCREMENT, DAY TEXT, TIME TEXT, DISTANCE TEXT, SPEED TEXT, CALORIE TEXT)";
-            if (sqlite3_exec(ridingDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
+            
+            sqlite3_stmt *statement;
+            
+            statement = [self getSQLStatement:ridingDB WithQuery:@"CREATE TABLE IF NOT EXISTS RIDINGS (ID INTEGER PRIMARY KEY AUTOINCREMENT, DAY TEXT, TIME TEXT, DISTANCE TEXT, SPEED TEXT, CALORIE TEXT)"];
+
+            if (sqlite3_step(statement) != SQLITE_OK) {
                 NSLog(@"Failed to create table");
             }
             
-            sql_stmt = "CREATE TABLE IF NOT EXISTS LOCATION (ID INTEGER PRIMARY KEY, LATITUDE REAL, LONGITUDE REAL, ALTITUDE REAL, TIME_STAMP INTEGER, FOREIGN KEY(ID) REFERENCES RIDINGS (ID))";
-            if (sqlite3_exec(ridingDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
+            sqlite3_finalize(statement);
+            
+            statement = [self getSQLStatement:ridingDB WithQuery:@"CREATE TABLE IF NOT EXISTS LOCATION (ID INTEGER PRIMARY KEY, LATITUDE REAL, LONGITUDE REAL, ALTITUDE REAL, TIME_STAMP REAL, FOREIGN KEY(ID) REFERENCES RIDINGS (ID))"];
+            
+            if (sqlite3_step(statement)  != SQLITE_OK) {
                 NSLog(@"Failed to create table");
             }
+            
+            sqlite3_finalize(statement);
             
             sqlite3_close(ridingDB);
         }
@@ -56,18 +64,19 @@
 }
 
 
-- (sqlite3_stmt*)QuerySQL:(sqlite3*)db WithQuery:(NSString*)query WithResult:(int*)result
-{
+- (sqlite3_stmt*)getSQLStatement:(sqlite3*)db WithQuery:(NSString*)query{
     sqlite3_stmt *statement;
-    //NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO RIDINGS (day, time, distance, speed, altitude, calorie) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", [form stringFromDate:date], time, distance, speed, calorie];
     const char *str = [query UTF8String];
-    *result = sqlite3_prepare_v2(ridingDB, str, -1, &statement, NULL);
-    
+    int result = sqlite3_prepare_v2(ridingDB, str, -1, &statement, NULL);
+    if(result!=0){
+        NSLog(@"ERROR %d with query %@", result, query);
+        return nil;
+    }
     return statement;
 
 }
 
-- (void)saveRecordingTime:(NSString *)time withDistance:(NSString *)distance withAverageSpeed:(NSString *)speed withlocation:(CLLocation *)location withCalories:(NSString *)calorie {
+- (void)saveRecordingTime:(NSString *)time withDistance:(NSString *)distance withAverageSpeed:(NSString *)speed withlocation:(NSMutableArray *)locations withCalories:(NSString *)calorie {
     
     NSDate *date = [NSDate date];
     NSDateFormatter *form = [[NSDateFormatter alloc] init];
@@ -86,7 +95,7 @@
     
     if (sqlite3_open(dbpath, &ridingDB) == SQLITE_OK) {
         
-        statement = [self QuerySQL:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO RIDINGS (day, time, distance, speed, altitude, calorie) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", [form stringFromDate:date], time, distance, speed, calorie] WithResult:&result];
+        statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO RIDINGS (day, time, distance, speed, altitude, calorie) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", [form stringFromDate:date], time, distance, speed, calorie]];
         
         if (sqlite3_step(statement) == SQLITE_DONE) {
             NSLog(@"Record Added");
@@ -96,9 +105,14 @@
         }
         
 
-        int64_t row_id = sqlite3_last_insert_rowid(ridingDB);
-        
-        
+        int row_id = sqlite3_last_insert_rowid(ridingDB);
+        //(ID INTEGER PRIMARY KEY, LATITUDE REAL, LONGITUDE REAL, ALTITUDE REAL, TIME_STAMP INTEGER, FOREIGN KEY(ID) REFERENCES RIDINGS (ID))
+        for (CLLocation * location in locations) {
+            statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO LOCATION (ID, LATITUDE, LONGITUDE, ALTITUDE, TIME_STAMP) VALUES (\"%d\", \"%f\", \"%f\", \"%f\", \"%f\")", row_id, location.coordinate.latitude, location.coordinate.longitude, location.altitude, [location.timestamp timeIntervalSince1970]]];
+            
+            sqlite3_step(statement);
+        }
+
         
         sqlite3_finalize(statement);
         sqlite3_close(ridingDB);
@@ -121,12 +135,12 @@
     
     const char *dbpath = [databasePath UTF8String];
     sqlite3_stmt *statement;
-    int result=0;
+
     if (sqlite3_open(dbpath, &ridingDB) == SQLITE_OK) {
         
-        statement = [self QuerySQL:ridingDB WithQuery:[NSString stringWithFormat:@"SELECT * FROM ridings ORDER BY id DESC"] WithResult:&result];
+        statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"SELECT * FROM ridings ORDER BY id DESC"]];
 
-        if (result == SQLITE_OK) {
+        if (statement) {
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
                 [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)] forKey:@"day"];
