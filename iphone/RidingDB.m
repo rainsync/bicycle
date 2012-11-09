@@ -27,6 +27,7 @@
     databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"ridings.db"]];
     
     NSFileManager *filemgr = [NSFileManager defaultManager];
+    //[filemgr removeItemAtPath:databasePath error:nil];
     
     if ([filemgr fileExistsAtPath: databasePath] == NO) {
         const char *dbpath = [databasePath UTF8String];
@@ -36,15 +37,17 @@
             
             statement = [self getSQLStatement:ridingDB WithQuery:@"CREATE TABLE IF NOT EXISTS RIDINGS (ID INTEGER PRIMARY KEY AUTOINCREMENT, DAY TEXT, TIME TEXT, DISTANCE TEXT, SPEED TEXT, CALORIE TEXT)"];
 
-            if (sqlite3_step(statement) != SQLITE_OK) {
+
+            //sqlite3_exec 와는 다르게 sqlite3_step은 성공시 sqlite_done을 반환 함으로써 성공을 알린다.
+            if (sqlite3_step(statement) != SQLITE_DONE) {
                 NSLog(@"Failed to create table");
             }
             
             sqlite3_finalize(statement);
             
-            statement = [self getSQLStatement:ridingDB WithQuery:@"CREATE TABLE IF NOT EXISTS LOCATION (ID INTEGER PRIMARY KEY, LATITUDE REAL, LONGITUDE REAL, ALTITUDE REAL, TIME_STAMP REAL, FOREIGN KEY(ID) REFERENCES RIDINGS (ID))"];
+            statement = [self getSQLStatement:ridingDB WithQuery:@"CREATE TABLE IF NOT EXISTS LOCATION (ID INTEGER, LATITUDE REAL, LONGITUDE REAL, ALTITUDE REAL, TIME_STAMP REAL, FOREIGN KEY(ID) REFERENCES RIDINGS (ID))"];
             
-            if (sqlite3_step(statement)  != SQLITE_OK) {
+            if (sqlite3_step(statement)  != SQLITE_DONE) {
                 NSLog(@"Failed to create table");
             }
             
@@ -95,7 +98,7 @@
     
     if (sqlite3_open(dbpath, &ridingDB) == SQLITE_OK) {
         
-        statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO RIDINGS (day, time, distance, speed, altitude, calorie) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", [form stringFromDate:date], time, distance, speed, calorie]];
+        statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO RIDINGS (day, time, distance, speed, calorie) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", [form stringFromDate:date], time, distance, speed, calorie]];
         
         if (sqlite3_step(statement) == SQLITE_DONE) {
             NSLog(@"Record Added");
@@ -108,13 +111,16 @@
         int row_id = sqlite3_last_insert_rowid(ridingDB);
         //(ID INTEGER PRIMARY KEY, LATITUDE REAL, LONGITUDE REAL, ALTITUDE REAL, TIME_STAMP INTEGER, FOREIGN KEY(ID) REFERENCES RIDINGS (ID))
         for (CLLocation * location in locations) {
-            statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO LOCATION (ID, LATITUDE, LONGITUDE, ALTITUDE, TIME_STAMP) VALUES (\"%d\", \"%f\", \"%f\", \"%f\", \"%f\")", row_id, location.coordinate.latitude, location.coordinate.longitude, location.altitude, [location.timestamp timeIntervalSince1970]]];
+            sqlite3_stmt *statement2 = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO LOCATION (ID, LATITUDE, LONGITUDE, ALTITUDE, TIME_STAMP) VALUES (\"%d\", \"%f\", \"%f\", \"%f\", \"%f\")", row_id, location.coordinate.latitude, location.coordinate.longitude, location.altitude, [location.timestamp timeIntervalSince1970]]];
             
-            sqlite3_step(statement);
+            
+            int code= sqlite3_step(statement2);
+            NSLog(@"code %d %f %f", code, location.coordinate.latitude, location.coordinate.longitude);
+            //sqlite3_finalize(statement);
         }
 
         
-        sqlite3_finalize(statement);
+        //sqlite3_finalize(statement);
         sqlite3_close(ridingDB);
     }
 
@@ -143,12 +149,27 @@
         if (statement) {
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+                int riding_id = sqlite3_column_int(statement, 0);
                 [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)] forKey:@"day"];
                 [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)] forKey:@"time"];
                 [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)] forKey:@"distance"];
                 [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)] forKey:@"speed"];
-                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)] forKey:@"altitude"];
-                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)] forKey:@"calorie"];
+                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)] forKey:@"calorie"];
+                
+                
+                //(ID INTEGER PRIMARY KEY, LATITUDE REAL, LONGITUDE REAL, ALTITUDE REAL, TIME_STAMP REAL
+                  
+                sqlite3_stmt *statement2 =[self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"SELECT * FROM location WHERE ID=%d ORDER BY TIME_STAMP ASC", riding_id]];
+                NSMutableArray * locations = [[NSMutableArray alloc] init];
+                while(sqlite3_step(statement2)== SQLITE_ROW){
+                    double lat = sqlite3_column_double(statement2, 1);
+                    double lng = sqlite3_column_double(statement2, 2);
+                    double alti = sqlite3_column_double(statement2, 3);
+                    [locations addObject:[[CLLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(lat, lng) altitude:alti horizontalAccuracy:0 verticalAccuracy:0 course:0 speed:0 timestamp:[NSDate date]]];
+                     
+                }
+                [dic setObject:locations forKey:@"locations"];
+                
                 //NSString *timeField = [[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
                 [db addObject:dic];
                 

@@ -15,6 +15,6 @@
     sqlite3 *ridingDB;
     NSString *databasePath; // db파일 경로
 }
-- (void)saveRecordingTime:(NSString *)time withDistance:(NSString *)distance withAverageSpeed:(NSString *)speed withlocation:(CLLocation *)location withCalories:(NSString *)calorie;
+- (void)saveRecordingTime:(NSString *)time withDistance:(NSString *)distance withAverageSpeed:(NSString *)speed withlocation:(NSMutableArray *)locations withCalories:(NSString *)calorie;
 - (NSMutableArray *)loadDB;
 @end
