@@ -27,6 +27,8 @@
         
         my_loc =nil;
     
+        RidingManager *ridingManager =[RidingManager getInstance];
+         [ridingManager addTarget:self];
         
         [self getUserNum:@"me"];
 
@@ -50,7 +52,7 @@
     
     }
     
-    [ridingManager addTarget:self];
+   
     
     
 
@@ -120,7 +122,17 @@
         
 }
 
-
+- (void) RidingStopped
+{
+    int num=[self getUserNum:@"me"];
+    
+    [users removeObjectAtIndex:num];
+    [route_views removeObjectAtIndex:num];
+    [route_lines removeObjectAtIndex:num];
+    [_mapView removeOverlays:_mapView.overlays];
+    
+    
+}
 
 
 
