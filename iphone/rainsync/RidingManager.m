@@ -144,6 +144,12 @@
         [timer invalidate];
         timer = nil;
     }
+
+    for (id obj in targets) {
+        if([obj respondsToSelector:@selector(RidingStopped)])
+            [obj RidingStopped];
+    }
+    
 }
 
 # pragma mark -
