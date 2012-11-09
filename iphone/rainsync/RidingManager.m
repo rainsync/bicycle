@@ -100,6 +100,7 @@
         
         
     oldt=[[NSDate date] timeIntervalSince1970];
+    //[locmanager set]
     [locmanager startUpdatingLocation];
     [locmanager startUpdatingHeading];
     
@@ -126,7 +127,7 @@
 - (void)stopRiding
 {
     RidingDB *ridingDB = [[RidingDB alloc] init];
-    [ridingDB saveRecordingTime:[NSString stringWithFormat:@"%f", time] withDistance:[NSString stringWithFormat:@"%f", totalDistance] withAverageSpeed:[NSString stringWithFormat:@"%f", [self avgSpeed]] withAltidude:@"0" withCalories:@"20"];
+    [ridingDB saveRecordingTime:[NSString stringWithFormat:@"%f", time] withDistance:[NSString stringWithFormat:@"%f", totalDistance] withAverageSpeed:[NSString stringWithFormat:@"%f", [self avgSpeed]] withlocation:locations withCalories:@"20"];
     // save database
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsRiding"];
