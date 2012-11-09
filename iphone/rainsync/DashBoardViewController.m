@@ -40,7 +40,7 @@
     if(location.speed == -1)
     speedLabel.text = @"00.0";
     else
-    speedLabel.text = [NSString stringWithFormat:@"%.2f", location.speed];
+    speedLabel.text = [NSString stringWithFormat:@"%.2f", location.speed * 3.6];
     
     avgLabel.text = [NSString stringWithFormat:@"%.2f", [manager avgSpeed]];
 
