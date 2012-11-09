@@ -28,9 +28,9 @@
     
     NSFileManager *filemgr = [NSFileManager defaultManager];
     //[filemgr removeItemAtPath:databasePath error:nil];
-    
+    const char *dbpath = [databasePath UTF8String];
     if ([filemgr fileExistsAtPath: databasePath] == NO) {
-        const char *dbpath = [databasePath UTF8String];
+        
         if (sqlite3_open(dbpath, &ridingDB) == SQLITE_OK) {
             
             sqlite3_stmt *statement;
@@ -53,14 +53,17 @@
             
             sqlite3_finalize(statement);
             
-            sqlite3_close(ridingDB);
+            //sqlite3_close(ridingDB);
         }
         else {
              NSLog(@"Failed to open/create database");
+            
         }
     }
     else {
          NSLog(@"already exist db");
+         sqlite3_open(dbpath, &ridingDB);
+        
     }
     
     return self;
@@ -95,9 +98,7 @@
     sqlite3_stmt *statement;
     int result=0;
     const char *dbpath = [databasePath UTF8String];
-    
-    if (sqlite3_open(dbpath, &ridingDB) == SQLITE_OK) {
-        
+ 
         statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO RIDINGS (day, time, distance, speed, calorie) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", [form stringFromDate:date], time, distance, speed, calorie]];
         
         if (sqlite3_step(statement) == SQLITE_DONE) {
@@ -120,11 +121,12 @@
         }
 
         
-        //sqlite3_finalize(statement);
-        sqlite3_close(ridingDB);
-    }
+        sqlite3_finalize(statement);
+
 
 }
+
+
 
 - (NSMutableArray *)loadDB {
     NSMutableArray *db = [[NSMutableArray alloc] init];
@@ -142,8 +144,7 @@
     const char *dbpath = [databasePath UTF8String];
     sqlite3_stmt *statement;
 
-    if (sqlite3_open(dbpath, &ridingDB) == SQLITE_OK) {
-        
+
         statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"SELECT * FROM ridings ORDER BY id DESC"]];
 
         if (statement) {
@@ -179,8 +180,7 @@
             NSLog(@"Match not found");
         }
         sqlite3_finalize(statement);
-    }
-    sqlite3_close(ridingDB);
+
     
     return db;
 }
