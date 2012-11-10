@@ -8,7 +8,7 @@
 
 #import "StaticViewController.h"
 #import "DetailViewController.h"
-#import "RidingDB.h"
+
 
 @interface StaticViewController ()
 
@@ -22,6 +22,9 @@
     if (self) {
         self.title = @"기록";
         
+        ridingdb = [[RidingDB alloc] init];
+
+
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
         
         // Custom initialization
@@ -29,19 +32,25 @@
     return self;
 }
 
+-(void) dealloc
+{
+    [super dealloc];
+    [ridingdb release];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-    RidingDB *ridingDB = [[RidingDB alloc] init];
-    _recordings = [ridingDB loadDB]; // Database loaded
-    [ridingDB release];
     
+
+    _recordings = [ridingdb loadDB]; // Database loaded
     [self.tableView reloadData];
 }
 
@@ -74,6 +83,7 @@
     cell.textLabel.text = [rowData objectForKey:@"day"];
     cell.imageView.image = [UIImage imageNamed:@"singleRiding.png"];    // single, team riding 구분해서 아이콘 달아주기 ; db에 식별자 칼럼 추가?
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.tag = row;
     
     return cell;
 }
@@ -88,6 +98,7 @@
         // Delete the managed object at the given index path.
 		
 		// Update the array and table view.
+        [ridingdb deleteRecord: [[[_recordings objectAtIndex:indexPath.row] objectForKey:@"id"] intValue]];
         [_recordings removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         

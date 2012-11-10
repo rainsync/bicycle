@@ -17,4 +17,6 @@
 }
 - (void)saveRecordingTime:(NSString *)time withDistance:(NSString *)distance withAverageSpeed:(NSString *)speed withlocation:(NSMutableArray *)locations withCalories:(NSString *)calorie;
 - (NSMutableArray *)loadDB;
+- (void)deleteRecord:(int)index;
+
 @end

@@ -166,7 +166,7 @@
         case 1:
         {
             RidingDB *ridingDB = [[RidingDB alloc] init];
-            [ridingDB saveRecordingTime:[NSString stringWithFormat:@"%f", time] withDistance:[NSString stringWithFormat:@"%f", totalDistance] withAverageSpeed:[NSString stringWithFormat:@"%f", [self avgSpeed]] withAltidude:@"0" withCalories:@"20"];
+            [ridingDB saveRecordingTime:[NSString stringWithFormat:@"%f", time] withDistance:[NSString stringWithFormat:@"%f", totalDistance] withAverageSpeed:[NSString stringWithFormat:@"%f", [self avgSpeed]] withlocation:locations withCalories:@"20"];
             // save database
             
             NSLog(@"저장 완료");

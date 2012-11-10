@@ -127,6 +127,31 @@
 }
 
 
+- (void)deleteRecord:(int)index
+{
+    int g= sqlite3_get_autocommit(ridingDB);
+    
+    sqlite3_stmt *statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"DELETE FROM LOCATION WHERE ID=%d", index]];
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+            NSLog(@"Record deleted");
+        }
+        else {
+            NSLog(@"Failed to delete");
+        }
+    
+    sqlite3_finalize(statement);
+    
+    statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"DELETE FROM RIDINGS WHERE ID=%d", index]];
+    if (sqlite3_step(statement) == SQLITE_DONE) {
+        NSLog(@"Record deleted");
+    }
+    else {
+        NSLog(@"Failed to delete");
+    }
+    sqlite3_finalize(statement);
+    
+}
+
 
 - (NSMutableArray *)loadDB {
     NSMutableArray *db = [[NSMutableArray alloc] init];
@@ -151,6 +176,7 @@
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
                 int riding_id = sqlite3_column_int(statement, 0);
+                [dic setObject:[[NSNumber alloc]initWithInt:riding_id] forKey:@"id"];
                 [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)] forKey:@"day"];
                 [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)] forKey:@"time"];
                 [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)] forKey:@"distance"];
