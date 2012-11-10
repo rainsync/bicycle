@@ -48,13 +48,6 @@
 }
 - (void)loadView:(NSMutableDictionary *)rowData
 {
-    self.recordingDay.text = [rowData objectForKey:@"day"];
-    self.recordingTime.text = [rowData objectForKey:@"time"];
-    self.distance.text = [rowData objectForKey:@"distance"];
-    self.averageSpeed.text = [rowData objectForKey:@"speed"];
-    self.altitude.text = [rowData objectForKey:@"altitude"];
-    self.calorie.text = [rowData objectForKey:@"calorie"];
-    
     _day = [rowData objectForKey:@"day"];
     _rectime = [rowData objectForKey:@"time"];
     _dist = [rowData objectForKey:@"distance"];
@@ -84,11 +77,11 @@
             
     }
     
-    line = [MKPolyline polylineWithCoordinates:coords count:[locations count]];
-//    [self.mapView addOverlay:line];
+    routeLine = [MKPolyline polylineWithCoordinates:coords count:[locations count]];
+    [self.mapView addOverlay:routeLine];
 //    //point.latitude /= [locations count];
 //    //point.longitude /= [locations count];
-//    [self setMapCenter:mid];
+    [self setMapCenter:mid];
     
     //MKMapRectMake(southWestPoint.x, southWestPoint.y, northEastPoint.x - southWestPoint.x, northEastPoint.y - southWestPoint.y);
     
@@ -111,23 +104,11 @@
 }
 
 - (void)dealloc {
-    [_recordingDay release];
-    [_recordingTime release];
-    [_distance release];
-    [_altitude release];
-    [_averageSpeed release];
-    [_calorie release];
     [_mapView release];
     [_detailTableView release];
     [super dealloc];
 }
 - (void)viewDidUnload {
-    [self setRecordingDay:nil];
-    [self setRecordingTime:nil];
-    [self setDistance:nil];
-    [self setAverageSpeed:nil];
-    [self setAltitude:nil];
-    [self setCalorie:nil];
     [self setMapView:nil];
     [self setDetailTableView:nil];
     [super viewDidUnload];
@@ -137,10 +118,10 @@
 {
 	MKOverlayView* overlayView = nil;
 	
-    if(overlay == line){
+    if(overlay == routeLine){
         if(view == [NSNull null])
         {
-            view = [[MKPolylineView alloc] initWithPolyline:line];
+            view = [[MKPolylineView alloc] initWithPolyline:routeLine];
             view.fillColor = [UIColor redColor];
             view.strokeColor = [UIColor redColor];
             view.lineWidth = 3;
@@ -178,9 +159,6 @@
     titles = [NSArray arrayWithObjects:
               @"",                                      //map
               @"기록",               //location
-              @"region - (CLRegion)",                   //region
-              @"addressDictionary - (NSDictionary)",    //dict
-              @"",                                      //map url
               nil];
     
     return [titles objectAtIndex:section];
@@ -204,8 +182,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSInteger mapSection = _preferCoord ? 0 : 3;
-    if (indexPath.section == 3) {
+    if (indexPath.section == 0) {
         return 240.0f;
     }
     return [_detailTableView rowHeight];
@@ -242,12 +219,12 @@
 - (UITableViewCell *)cellForLocationIndex:(NSInteger)index
 {
     NSArray const *keys = [NSArray arrayWithObjects:
-                           @"recording.day",
-                           @"recording.time",
-                           @"distance",
-                           @"speed.average",
-                           @"altitude",
-                           @"calories",
+                           @"날짜",
+                           @"주행 시간",
+                           @"주행 거리",
+                           @"평균 속도",
+                           @"고도",
+                           @"칼로리",
                            nil];
     
     if (index >= [keys count])
@@ -264,27 +241,27 @@
 //    {
 //        ivar = @"location is nil.";
 //    }
-    if ([key isEqualToString:@"recording.day"])
+    if ([key isEqualToString:@"날짜"])
     {
         ivar = _day;
     }
-    else if ([key isEqualToString:@"recording.time"])
+    else if ([key isEqualToString:@"주행 시간"])
     {
         ivar = _rectime;
     }
-    else if ([key isEqualToString:@"distance"])
+    else if ([key isEqualToString:@"주행 거리"])
     {
         ivar = _dist;
     }
-    else if ([key isEqualToString:@"speed.average"])
+    else if ([key isEqualToString:@"평균 속도"])
     {
         ivar = _avgs;
     }
-    else if ([key isEqualToString:@"altitude"])
+    else if ([key isEqualToString:@"고도"])
     {
         ivar = _altit;
     }
-    else if ([key isEqualToString:@"calories"])
+    else if ([key isEqualToString:@"칼로리"])
     {
         ivar = _calo;
     }
@@ -314,16 +291,14 @@
     }
     
     CGRect frame = CGRectMake(0, 0, cellWidth, 240);
-    MKMapView *map = [[MKMapView alloc] initWithFrame:frame];
+    _mapView = [[MKMapView alloc] initWithFrame:frame];
 //    MKCoordinateRegion region =  MKCoordinateRegionMakeWithDistance(self.placemark.location.coordinate, 200, 200);
 //    [map setRegion:region];
-    
-//    [map addOverlay:line];
-    
-    map.layer.masksToBounds = YES;
-    map.layer.cornerRadius = 10.0;
-    map.mapType = MKMapTypeStandard;
-    [map setScrollEnabled:NO];
+        
+    _mapView.layer.masksToBounds = YES;
+    _mapView.layer.cornerRadius = 10.0;
+    _mapView.mapType = MKMapTypeStandard;
+    [_mapView setScrollEnabled:NO];
     
     // add a pin using self as the object implementing the MKAnnotation protocol
 //    [map addAnnotation:self];
@@ -331,7 +306,7 @@
     NSString * cellID = @"Cell";
     UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID] autorelease];
     
-//    [cell.contentView addSubview:map];
+    [cell.contentView addSubview:_mapView];
 //    [map release];
     
     _mapCell = [cell retain];
