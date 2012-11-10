@@ -15,5 +15,8 @@
 
 @property (retain, nonatomic) IBOutlet UILabel *Name;
 @property (retain, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (retain, nonatomic) IBOutlet UIView *disableView;
+@property (retain, nonatomic) IBOutlet UIButton *loginButton;
+- (IBAction)login:(id)sender;
 - (void)editProfile;     // 프로필 수정 함수
 @end
