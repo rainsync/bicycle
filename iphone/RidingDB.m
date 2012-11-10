@@ -129,8 +129,7 @@
 
 - (void)deleteRecord:(int)index
 {
-    int g= sqlite3_get_autocommit(ridingDB);
-    
+
     sqlite3_stmt *statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"DELETE FROM LOCATION WHERE ID=%d", index]];
         if (sqlite3_step(statement) == SQLITE_DONE) {
             NSLog(@"Record deleted");

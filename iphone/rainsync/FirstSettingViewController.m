@@ -63,18 +63,18 @@
                                                              FBSessionState status,
                                                              NSError *error) {
             
-            NetUtility *net = [[NetUtility alloc] initwithBlock:^(int msg, NSDictionary * dic) {
+            NetUtility *net = [[[NetUtility alloc] initwithBlock:^(int msg, NSDictionary * dic) {
                 if(msg==account_register)
                 {
-                    /*
+                    
                     NSInteger state=[[dic objectForKey:@"state"] intValue];
                     
                     if(state==0)
                     {
                         
-                    //NSInteger uid=[[dic objectForKey:@"uid"] intValue];
-                    //NSString *passkey=[dic objectForKey:@"passkey"];
-                    //NSLog([NSString stringWithFormat:@"STATE %d UID %d PASSKEY %@", state, uid, passkey]);
+                    NSInteger uid=[[dic objectForKey:@"uid"] intValue];
+                    NSString *passkey=[dic objectForKey:@"passkey"];
+                    NSLog([NSString stringWithFormat:@"STATE %d UID %d PASSKEY %@", state, uid, passkey]);
                     [[NSUserDefaults standardUserDefaults] setObject:FBSession.activeSession.accessToken forKey:@"token"];
                         
                     ViewController *viewController = [[ViewController alloc] init];
@@ -82,12 +82,15 @@
                         
                         
                     }
-                    */
+                    
                 }
-            }];
+            }] retain];
             NSLog(@"WW");
             [net account_registerwithAcessToken:FBSession.activeSession.accessToken withNick:@"" withPhoto:@""];
-            //[net end];
+            [net end];
+            [net retain];
+            [self retain];
+            
             
         }];
         
@@ -98,6 +101,8 @@
     }
     
 }
+
+
 - (IBAction)generalLogin:(id)sender {
 
     ViewController *viewController = [[ViewController alloc] init];
