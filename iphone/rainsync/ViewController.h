@@ -14,7 +14,7 @@
 #import "SettingViewController.h"
 
 
-@interface ViewController : UITabBarController <UIAppearance>
+@interface ViewController : UITabBarController //<UIAppearance>
 
 
 - (void) changeToRiding;
