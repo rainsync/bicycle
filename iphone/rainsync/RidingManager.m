@@ -129,32 +129,12 @@
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"기록 측정 종료" message:@"저장하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"네넹", nil];
     [alertView show];
     [alertView release];
-    
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsRiding"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
-    [locmanager stopUpdatingLocation];
-    [locmanager stopUpdatingHeading];
-    [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
-    [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"distance"];
-    
-    totalDistance =0;
-    time=0;
-    
-    if(timer){
-        [timer invalidate];
-        timer = nil;
-    }
-
-    for (id obj in targets) {
-        if([obj respondsToSelector:@selector(RidingStopped)])
-            [obj RidingStopped];
-    }
-    
 }
 
 # pragma mark -
 # pragma mark AlertView Delegate
 
+// stopRiding이 모두 실행 된 다음에 이 메서드가 실행 된다.
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 0:
@@ -173,6 +153,27 @@
             [ridingDB release];
             break;
         }
+    }
+    
+    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsRiding"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    [locmanager stopUpdatingLocation];
+    [locmanager stopUpdatingHeading];
+    [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
+    [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"distance"];
+    
+    totalDistance =0;
+    time=0;
+    
+    if(timer){
+        [timer invalidate];
+        timer = nil;
+    }
+    
+    for (id obj in targets) {
+        if([obj respondsToSelector:@selector(RidingStopped)])
+            [obj RidingStopped];
     }
 }
 
