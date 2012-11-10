@@ -28,6 +28,7 @@
         paused =false;
         
         // Custom initialization
+        
     }
     return self;
 }
@@ -124,7 +125,14 @@
 - (IBAction)starRiding:(id)sender {
     RidingManager *ridingManager = [RidingManager getInstance];
     [ridingManager startRiding];
-    [self viewDidAppear:false];
+//    [self viewDidAppear:false];
+    
+    [self.stopButton setHidden:YES];
+    [self.stopSwitch setHidden:YES];
+    [self.stopLabel setHidden:YES];
+    [self.startButton setHidden:YES];
+    [self.pauseButton setHidden:NO];
+    [self.statusLabel setText:@"정지"];
 }
 
 - (IBAction)stopRiding:(id)sender {
@@ -132,7 +140,7 @@
     
     RidingManager *ridingManager = [RidingManager getInstance];
     [ridingManager stopRiding];
-    [self viewDidAppear:false];
+//    [self viewDidAppear:false];
     
     timeLabel.text = @"00:00:00";
     speedLabel.text = @"00.0";
@@ -140,23 +148,37 @@
     avgLabel.text = @"00.0";
     speedLabel.text = @"00.0";
     calorieLabel.text = @"0.00";
+    
+    [self.stopButton setHidden:YES];
+    [self.stopSwitch setHidden:YES];
+    [self.stopLabel setHidden:YES];
+    [self.startButton setHidden:NO];
+    [self.pauseButton setHidden:YES];
+    [self.statusLabel setText:@"시작"];
 }
 
 - (IBAction)pauseRiding:(id)sender {
     RidingManager *ridingManager = [RidingManager getInstance];
     
-    if(paused){
-    paused=false;
-    [self.pauseButton setImage:[UIImage imageNamed:@"Button Pause"] forState:UIControlStateNormal];
-    [ridingManager startRiding];
-        
-    }else{
-    
-    [ridingManager pauseRiding];
-    [self viewDidAppear:false];
-    paused =true;
-    [self.pauseButton setImage:[UIImage imageNamed:@"Button Play"] forState:UIControlStateNormal];
-        
+    if(paused) {
+        paused = false;
+        [ridingManager startRiding];
+        [self.stopButton setHidden:YES];
+        [self.stopSwitch setHidden:YES];
+        [self.stopLabel setHidden:YES];
+        [self.startButton setHidden:YES];
+        [self.pauseButton setHidden:NO];
+        [self.statusLabel setText:@"정지"];
+    }
+    else {
+        paused =true;
+        [ridingManager pauseRiding];
+        [self.stopButton setHidden:NO];
+        [self.stopSwitch setHidden:NO];
+        [self.stopLabel setHidden:NO];
+        [self.startButton setHidden:NO];
+        [self.pauseButton setHidden:YES];
+        [self.statusLabel setText:@"주행"];
     }
 }
 
@@ -165,27 +187,27 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view from its nib.
-    
-
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
     RidingManager *ridingManager = [RidingManager getInstance];
     if([ridingManager isRiding]){
-        [self.stopButton setHidden:false];
-        [self.startButton setHidden:true];
-        [self.pauseButton setHidden:false];
+        [self.stopButton setHidden:YES];
+        [self.stopSwitch setHidden:YES];
+        [self.stopLabel setHidden:YES];
+        [self.startButton setHidden:YES];
+        [self.pauseButton setHidden:NO];
+        [self.statusLabel setText:@"정지"];
     }else{
-        [self.stopButton setHidden:true];
-        [self.startButton setHidden:false];
-        [self.pauseButton setHidden:true];
+        [self.stopButton setHidden:NO];
+        [self.stopSwitch setHidden:NO];
+        [self.stopLabel setHidden:NO];
+        [self.startButton setHidden:NO];
+        [self.pauseButton setHidden:YES];
+        [self.statusLabel setText:@"주행"];
     }
-    
 }
-
-
-
 
 - (void)dealloc {
     [speedLabel release];
@@ -195,9 +217,10 @@
     [_stopButton release];
     [_pauseButton release];
     [_startButton release];
-    [_stopButton release];
-    [_pauseButton release];
     [distanceLabel release];
+    [_stopSwitch release];
+    [_stopLabel release];
+    [_statusLabel release];
     [super dealloc];
 }
  
@@ -215,9 +238,10 @@
     [self setPauseButton:nil];
     [self setStartButton:nil];
     [self setStopButton:nil];
-    [self setPauseButton:nil];
-    [self setPlayButton:nil];
     [self setDistanceLabel:nil];
+    [self setStopSwitch:nil];
+    [self setStopLabel:nil];
+    [self setStatusLabel:nil];
     [super viewDidUnload];
 }
 @end
