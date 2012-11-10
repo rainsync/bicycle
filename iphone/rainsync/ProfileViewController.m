@@ -24,10 +24,6 @@
         self.title = NSLocalizedString(@"프로필", @"프로필");
         
         // Custom initialization
-        
-        UIBarButtonItem *edit = [[UIBarButtonItem alloc] initWithTitle:@"수정" style: UIBarButtonItemStyleBordered target:self action:@selector(editProfile)];
-        self.navigationItem.rightBarButtonItem = edit;
-        [edit release];
     }
     return self;
 }
@@ -37,6 +33,12 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
+}
+
+- (IBAction)login:(id)sender {
+    [_disableView setHidden:YES];
+
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)editProfile {
@@ -54,11 +56,15 @@
 - (void)dealloc {
     [_Name release];
     [_profileImageView release];
+    [_disableView release];
+    [_loginButton release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setName:nil];
     [self setProfileImageView:nil];
+    [self setDisableView:nil];
+    [self setLoginButton:nil];
     [super viewDidUnload];
 }
 @end
