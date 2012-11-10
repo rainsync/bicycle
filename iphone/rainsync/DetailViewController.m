@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface DetailViewController ()
 
@@ -54,6 +55,13 @@
     self.altitude.text = [rowData objectForKey:@"altitude"];
     self.calorie.text = [rowData objectForKey:@"calorie"];
     
+    _day = [rowData objectForKey:@"day"];
+    _rectime = [rowData objectForKey:@"time"];
+    _dist = [rowData objectForKey:@"distance"];
+    _avgs = [rowData objectForKey:@"speed"];
+    _altit = [rowData objectForKey:@"altitude"];
+    _calo = [rowData objectForKey:@"calorie"];
+    
     NSMutableArray * locations = [rowData objectForKey:@"locations"];
     CLLocationCoordinate2D * coords = malloc([locations count]*sizeof(MKMapPoint));
     
@@ -77,10 +85,10 @@
     }
     
     line = [MKPolyline polylineWithCoordinates:coords count:[locations count]];
-    [self.mapView addOverlay:line];
-    //point.latitude /= [locations count];
-    //point.longitude /= [locations count];
-    [self setMapCenter:mid];
+//    [self.mapView addOverlay:line];
+//    //point.latitude /= [locations count];
+//    //point.longitude /= [locations count];
+//    [self setMapCenter:mid];
     
     //MKMapRectMake(southWestPoint.x, southWestPoint.y, northEastPoint.x - southWestPoint.x, northEastPoint.y - southWestPoint.y);
     
@@ -110,6 +118,7 @@
     [_averageSpeed release];
     [_calorie release];
     [_mapView release];
+    [_detailTableView release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -120,6 +129,7 @@
     [self setAltitude:nil];
     [self setCalorie:nil];
     [self setMapView:nil];
+    [self setDetailTableView:nil];
     [super viewDidUnload];
 }
 
@@ -140,6 +150,192 @@
 
     return overlayView;
     
+}
+
+#pragma mark -
+#pragma mark Tableview Data Source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSArray *counts;
+    counts = [NSArray arrayWithObjects:
+              [NSNumber numberWithInt:1],  //map
+              [NSNumber numberWithInt:6],  //location
+              nil];
+    
+    return [[counts objectAtIndex:section] integerValue];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSArray *titles;
+    titles = [NSArray arrayWithObjects:
+              @"",                                      //map
+              @"기록",               //location
+              @"region - (CLRegion)",                   //region
+              @"addressDictionary - (NSDictionary)",    //dict
+              @"",                                      //map url
+              nil];
+    
+    return [titles objectAtIndex:section];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger section = indexPath.section;
+    
+    switch (section)
+    {
+        case 0: return [self cellForMapView];
+        case 1: return [self cellForLocationIndex:indexPath.row];
+    }
+    
+    return nil;
+}
+
+#pragma mark -
+#pragma mark Tableview Delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    NSInteger mapSection = _preferCoord ? 0 : 3;
+    if (indexPath.section == 3) {
+        return 240.0f;
+    }
+    return [_detailTableView rowHeight];
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // if its the map url cell, open the location in Google maps
+    //
+//    if (indexPath.section == 4) // map url is always last section
+//    {
+//        NSString *ll = [NSString stringWithFormat:@"%f,%f",
+//                        self.placemark.location.coordinate.latitude,
+//                        self.placemark.location.coordinate.longitude];
+//        ll = [ll stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        NSString *url = [NSString stringWithFormat: @"http://maps.google.com/maps?ll=%@",ll];
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+//        
+//        [_detailTableView deselectRowAtIndexPath:indexPath animated:NO];
+//    }
+}
+
+#pragma mark - cell generators
+
+- (UITableViewCell *)blankCell
+{
+    NSString *cellID = @"Cell";
+    UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID] autorelease];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+- (UITableViewCell *)cellForLocationIndex:(NSInteger)index
+{
+    NSArray const *keys = [NSArray arrayWithObjects:
+                           @"recording.day",
+                           @"recording.time",
+                           @"distance",
+                           @"speed.average",
+                           @"altitude",
+                           @"calories",
+                           nil];
+    
+    if (index >= [keys count])
+        index = [keys count] - 1;
+    
+    UITableViewCell *cell = [self blankCell];
+    
+    // setup
+    NSString *key = [keys objectAtIndex:index];
+    NSString *ivar = @"";
+    
+    // look up the values, special case lat and long and timestamp but first, special case placemark being nil.
+//    if (self.placemark.location == nil)
+//    {
+//        ivar = @"location is nil.";
+//    }
+    if ([key isEqualToString:@"recording.day"])
+    {
+        ivar = _day;
+    }
+    else if ([key isEqualToString:@"recording.time"])
+    {
+        ivar = _rectime;
+    }
+    else if ([key isEqualToString:@"distance"])
+    {
+        ivar = _dist;
+    }
+    else if ([key isEqualToString:@"speed.average"])
+    {
+        ivar = _avgs;
+    }
+    else if ([key isEqualToString:@"altitude"])
+    {
+        ivar = _altit;
+    }
+    else if ([key isEqualToString:@"calories"])
+    {
+        ivar = _calo;
+    }
+//    else
+//    {
+//        double var = [self doubleForObject:self.placemark.location andSelector:NSSelectorFromString(key)];
+//        ivar = [self displayStringForDouble:var];
+//    }
+    
+    // set cell attributes
+    cell.textLabel.text = key;
+    cell.detailTextLabel.text = ivar;
+    
+    return cell;
+}
+
+- (UITableViewCell *)cellForMapView
+{
+    if (_mapCell)
+        return _mapCell;
+    
+    // if not cached, setup the map view...
+    CGFloat cellWidth = self.view.bounds.size.width - 20;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        cellWidth = self.view.bounds.size.width - 90;
+    }
+    
+    CGRect frame = CGRectMake(0, 0, cellWidth, 240);
+    MKMapView *map = [[MKMapView alloc] initWithFrame:frame];
+//    MKCoordinateRegion region =  MKCoordinateRegionMakeWithDistance(self.placemark.location.coordinate, 200, 200);
+//    [map setRegion:region];
+    
+//    [map addOverlay:line];
+    
+    map.layer.masksToBounds = YES;
+    map.layer.cornerRadius = 10.0;
+    map.mapType = MKMapTypeStandard;
+    [map setScrollEnabled:NO];
+    
+    // add a pin using self as the object implementing the MKAnnotation protocol
+//    [map addAnnotation:self];
+    
+    NSString * cellID = @"Cell";
+    UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID] autorelease];
+    
+//    [cell.contentView addSubview:map];
+//    [map release];
+    
+    _mapCell = [cell retain];
+    return cell;
 }
 
 @end
