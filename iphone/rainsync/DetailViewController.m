@@ -20,7 +20,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         view = [NSNull null];
-        // Custom initialization
+        // Custom initialization      
+        self.navigationItem.rightBarButtonItem = self.editButtonItem;
     }
     return self;
 }
@@ -95,6 +96,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _detailTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
 }
 
 - (void)didReceiveMemoryWarning

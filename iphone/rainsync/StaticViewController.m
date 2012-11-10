@@ -138,6 +138,8 @@
 
     DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     [self.navigationController pushViewController:detailViewController animated:YES];
+    UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
+    detailViewController.title = cell.textLabel.text;
     
     [detailViewController loadView:rowData];
     
