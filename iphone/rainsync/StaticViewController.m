@@ -8,7 +8,10 @@
 
 #import "StaticViewController.h"
 #import "DetailViewController.h"
+#import "PrettyKit.h"
 
+#define start_color [UIColor colorWithHex:0x646464]
+#define end_color [UIColor colorWithHex:0x292929]
 
 @interface StaticViewController ()
 
@@ -43,6 +46,11 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view from its nib.
+    self.tableView.rowHeight = 60;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+        
+    [self.tableView dropShadows];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -63,25 +71,54 @@
 #pragma mark -
 #pragma mark Table View Data Source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [_recordings count];
     NSLog(@"%d", [_recordings count]);
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return tableView.rowHeight + [PrettyCustomViewTableViewCell tableView:tableView neededHeightForIndexPath:indexPath];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PrettyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[PrettyTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell.tableViewBackgroundColor = tableView.backgroundColor;
+        cell.gradientStartColor = start_color;
+        cell.gradientEndColor = end_color;
     }
     
     NSUInteger row = [indexPath row];
     NSDictionary *rowData = [_recordings objectAtIndex:row];
     cell.textLabel.text = [rowData objectForKey:@"day"];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.imageView.image = [UIImage imageNamed:@"singleRiding.png"];    // single, team riding 구분해서 아이콘 달아주기 ; db에 식별자 칼럼 추가?
+    
+    int i_time = [[rowData objectForKey:@"time"] intValue];
+    int sec = i_time%60;
+    int min = i_time/60%60;
+    int hour = i_time/60/60%24;
+    NSString *recordTime = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, min, sec];
+    // 시간 00:00:00 단위로 변환
+    
+    double distance = [[rowData objectForKey:@"distance"] doubleValue];
+    NSString *recordDistance = [NSString stringWithFormat:@"%.1f km", distance];
+    // 거리 00.0 단위로 변환
+    
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n%@", recordTime, recordDistance];
+    cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+    cell.detailTextLabel.numberOfLines = 2;
+    cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.tag = row;
     
