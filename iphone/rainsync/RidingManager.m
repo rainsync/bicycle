@@ -38,7 +38,7 @@
     locations = [[NSMutableArray alloc] init];
     
     targets = [[NSMutableArray alloc] init];
-    
+    ridingDB = [[RidingDB alloc] init];
     return self;
 }
 
@@ -148,6 +148,11 @@
     
     [self saveStatus];
     
+    [ridingDB saveLocation:locations];
+    [locations removeAllObjects];
+    
+    
+    
     for (id obj in targets) {
         if([obj respondsToSelector:@selector(updateTime:)])
             [obj updateTime:_time];
@@ -198,12 +203,12 @@
         }
         case 1:
         {
-            RidingDB *ridingDB = [[RidingDB alloc] init];
-            [ridingDB saveRecordingTime:[NSString stringWithFormat:@"%f", time] withDistance:[NSString stringWithFormat:@"%f", _totalDistance] withAverageSpeed:[NSString stringWithFormat:@"%f", [self avgSpeed]] withlocation:locations withCalories:@"20"];
+            [ridingDB saveRecording:self];
+            //[ridingDB saveRecordingTime:[NSString stringWithFormat:@"%f", time] withDistance:[NSString stringWithFormat:@"%f", _totalDistance] withAverageSpeed:[NSString stringWithFormat:@"%f", [self avgSpeed]] withlocation:locations withCalories:@"20"];
             // save database
             
             NSLog(@"저장 완료");
-            [ridingDB release];
+
             break;
         }
     }
