@@ -67,6 +67,7 @@
     int hour = i_time/60/60%24;
     
     
+    
     return [NSString stringWithFormat:@"%02d:%02d:%02d", hour, min, sec];
     
 }
@@ -75,14 +76,14 @@
 {
     
     NSDate *date=[[NSDate alloc] initWithTimeIntervalSince1970:time];
+
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"ko_KR"] autorelease]];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ko_KR"];
-    NSCalendar *cal = [[NSCalendar alloc] init];
-    [cal setLocale:locale];
-    NSString *ret= [cal stringFromDate:date];
-    [cal release];
-    [date release];
-    return ret;
+    
+    return [dateFormatter stringFromDate:date];
 }
 
 +(double)metreTokilometre:(double)metre
