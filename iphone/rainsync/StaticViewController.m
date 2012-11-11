@@ -46,7 +46,7 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view from its nib.
-    self.tableView.rowHeight = 60;
+    self.tableView.rowHeight = 80;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
         
@@ -116,6 +116,7 @@
     // 거리 00.0 단위로 변환
     
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n%@", recordTime, recordDistance];
+    cell.detailTextLabel.textColor = [UIColor colorWithWhite:1.0 alpha:0.6f];
     cell.detailTextLabel.backgroundColor = [UIColor clearColor];
     cell.detailTextLabel.numberOfLines = 2;
     cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
