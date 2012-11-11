@@ -45,6 +45,7 @@
 //m/s
 -(double)avgSpeed
 {
+    
     return _totalDistance/_time;
 }
 
@@ -96,11 +97,12 @@
         _totalDistance=0;
         _time =0;
         _calorie = 0;
+        _start_date = [[NSDate date] timeIntervalSince1970];
     
         locations = [[NSMutableArray alloc] init];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsRiding"];
         [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
-        [[NSUserDefaults standardUserDefaults] setDouble:[[NSDate date] timeIntervalSince1970] forKey:@"start_date"];
+        [[NSUserDefaults standardUserDefaults] setDouble:_start_date forKey:@"start_date"];
         [[NSUserDefaults standardUserDefaults]synchronize];
         
         
@@ -169,9 +171,7 @@
     [locmanager stopUpdatingLocation];
     [locmanager stopUpdatingHeading];
     
-    
-    _totalDistance =0;
-    _time=0;
+
     
     if(timer){
         [timer invalidate];
@@ -256,7 +256,7 @@
     
     if([newLocation speed])
     {
-        if(_max_speed==0)
+        if(_max_speed==0 && [newLocation speed] != -1)
             _max_speed = [newLocation speed];
         else if(_max_speed < [newLocation speed])
             _max_speed = [newLocation speed];
