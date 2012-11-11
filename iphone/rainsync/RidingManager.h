@@ -31,7 +31,7 @@
 
 }
 
-
+@property (nonatomic, readonly) double start_date;
 @property (nonatomic, readonly) double totalDistance;
 @property (nonatomic, readonly) double time;
 @property (nonatomic, readonly) double calorie;

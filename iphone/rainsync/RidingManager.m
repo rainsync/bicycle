@@ -76,7 +76,8 @@
             _totalDistance = [[NSUserDefaults standardUserDefaults] doubleForKey:@"distance"];
             _time = [[NSUserDefaults standardUserDefaults] doubleForKey:@"time"];
             _calorie = [[NSUserDefaults standardUserDefaults] doubleForKey:@"calorie"];
-            if(_totalDistance==0 && _time ==0 && _calorie ==0)
+            _start_date = [[NSUserDefaults standardUserDefaults] doubleForKey:@"start_date"];
+            if(_totalDistance==0 && _time ==0 && _calorie ==0 && _start_date==0)
                 @throw [NSException exceptionWithName:@"Setting" reason:@"old data is not correct" userInfo:nil];
             
         }
@@ -84,6 +85,7 @@
             _totalDistance=0;
             _time =0;
             _calorie =0;
+            _start_date =[[NSDate date] timeIntervalSince1970];
         }
         
         
@@ -98,7 +100,7 @@
         locations = [[NSMutableArray alloc] init];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsRiding"];
         [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
-        
+        [[NSUserDefaults standardUserDefaults] setDouble:[[NSDate date] timeIntervalSince1970] forKey:@"start_date"];
         [[NSUserDefaults standardUserDefaults]synchronize];
         
         
