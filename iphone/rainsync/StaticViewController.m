@@ -98,20 +98,17 @@
     
     NSUInteger row = [indexPath row];
     NSDictionary *rowData = [_recordings objectAtIndex:row];
-    cell.textLabel.text = [rowData objectForKey:@"day"];
+    cell.textLabel.text = [Utility timeToDate:[[rowData objectForKey:@"start_date"] doubleValue]];
     cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.imageView.image = [UIImage imageNamed:@"singleRiding.png"];    // single, team riding 구분해서 아이콘 달아주기 ; db에 식별자 칼럼 추가?
     
-    int i_time = [[rowData objectForKey:@"time"] intValue];
-    int sec = i_time%60;
-    int min = i_time/60%60;
-    int hour = i_time/60/60%24;
-    NSString *recordTime = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, min, sec];
+
+    NSString *recordTime = [Utility getStringTime:[[rowData objectForKey:@"time"] doubleValue] ];;
     // 시간 00:00:00 단위로 변환
     
-    double distance = [[rowData objectForKey:@"distance"] doubleValue];
+    double distance = [Utility metreTokilometre:[[rowData objectForKey:@"distance"] doubleValue] ];
     NSString *recordDistance = [NSString stringWithFormat:@"%.1f km", distance];
     // 거리 00.0 단위로 변환
     

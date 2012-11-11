@@ -234,39 +234,40 @@
     // look up the values, special case lat and long and timestamp but first, special case placemark being nil.
     if ([key isEqualToString:@"시작 시간"]) {
 //        ivar = _startDate;    //측정 시작 시간 표시
+        ivar = [Utility timeToDate:[[rawdata objectForKey:@"start_date"] doubleValue]];
+        
     }
     else if ([key isEqualToString:@"종료 시간"])
     {
-        ivar = [rawdata objectForKey:@"day"];
+
+        ivar = [Utility timeToDate:[[rawdata objectForKey:@"end_date"] doubleValue]];
+       
+        
     }
     else if ([key isEqualToString:@"주행 시간"])
     {
         
-        int i_time = [rawdata objectForKey:@"time"];
-        int sec = i_time%60;
-        int min = i_time/60%60;
-        int hour = i_time/60/60%24;
-        
-        ivar = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, min, sec];
+        ivar = [Utility getStringTime:[[rawdata objectForKey:@"time"] doubleValue] ];
     }
     else if ([key isEqualToString:@"주행 거리"])
     {
-        double distance = [[rawdata objectForKey:@"distance"] doubleValue];
+        double distance = [Utility metreTokilometre:[[rawdata objectForKey:@"distance"] doubleValue] ];
         ivar = [NSString stringWithFormat:@"%.1f km", distance];
     }
     else if ([key isEqualToString:@"평균 속도"])
     {
-        double avgSpeed = [[rawdata objectForKey:@"speed"] doubleValue];
+        double avgSpeed = [Utility mpsTokph:[[rawdata objectForKey:@"speed"] doubleValue] ];
         ivar = [NSString stringWithFormat:@"%.1f km/h", avgSpeed];
     }
     else if ([key isEqualToString:@"최고 속도"])
     {
-        double maxSpeed = [[rawdata objectForKey:@"altitude"] doubleValue];
+        double maxSpeed = [Utility mpsTokph:[[rawdata objectForKey:@"max_speed"] doubleValue]];
         ivar = [NSString stringWithFormat:@"%.1f km/h", maxSpeed];
     }
     else if ([key isEqualToString:@"칼로리"])
     {
-        ivar = [rawdata objectForKey:@"calorie"];
+        double calorie = [[rawdata objectForKey:@"calorie"] doubleValue];
+        ivar = [NSString stringWithFormat:@"%.1f km/h", calorie];
     }
 //    else
 //    {

@@ -113,12 +113,12 @@
     
 }
 
-- (void)locationManager:(RidingManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+- (void)locationManager:(RidingManager *)manager
 {
     
     
     int num= [self getUserNum:@"me"];
-    [self addPoint:num withLocation:newLocation];
+    [self addPoint:num withLocation:[manager current_location]];
         
 }
 

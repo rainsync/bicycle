@@ -42,11 +42,13 @@
     return self;
 }
 
-
-- (NSMutableArray*)getlocations
+//m/s
+-(double)avgSpeed
 {
-    return locations;
+    
+    return _totalDistance/_time;
 }
+
 
 - (void)addTarget:(id)obj
 {
@@ -75,7 +77,8 @@
             _totalDistance = [[NSUserDefaults standardUserDefaults] doubleForKey:@"distance"];
             _time = [[NSUserDefaults standardUserDefaults] doubleForKey:@"time"];
             _calorie = [[NSUserDefaults standardUserDefaults] doubleForKey:@"calorie"];
-            if(_totalDistance==0 && _time ==0 && _calorie ==0)
+            _start_date = [[NSUserDefaults standardUserDefaults] doubleForKey:@"start_date"];
+            if(_totalDistance==0 && _time ==0 && _calorie ==0 && _start_date==0)
                 @throw [NSException exceptionWithName:@"Setting" reason:@"old data is not correct" userInfo:nil];
             
         }
@@ -83,6 +86,7 @@
             _totalDistance=0;
             _time =0;
             _calorie =0;
+            _start_date =[[NSDate date] timeIntervalSince1970];
         }
         
         
@@ -93,11 +97,12 @@
         _totalDistance=0;
         _time =0;
         _calorie = 0;
+        _start_date = [[NSDate date] timeIntervalSince1970];
     
         locations = [[NSMutableArray alloc] init];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsRiding"];
         [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
-        
+        [[NSUserDefaults standardUserDefaults] setDouble:_start_date forKey:@"start_date"];
         [[NSUserDefaults standardUserDefaults]synchronize];
         
         
@@ -155,7 +160,7 @@
     
     for (id obj in targets) {
         if([obj respondsToSelector:@selector(updateTime:)])
-            [obj updateTime:_time];
+            [obj updateTime:self];
     }
 }
 
@@ -166,9 +171,7 @@
     [locmanager stopUpdatingLocation];
     [locmanager stopUpdatingHeading];
     
-    
-    _totalDistance =0;
-    _time=0;
+
     
     if(timer){
         [timer invalidate];
@@ -197,7 +200,7 @@
     switch (buttonIndex) {
         case 0:
         {
-            
+            [ridingDB discardRecording];
             NSLog(@"저장 취소");
             break;
         }
@@ -238,69 +241,14 @@
 
 }
 
-//km/h
-- (double)avgSpeed
-{
-    //total distance = m
-    //time = h
-    return (_totalDistance/1000.0)/(_time/60.0/60.0);
-    
-    
-}
 
 
-- (float)calculateCalorie:(float)avgSpd {
-    float kcalConstant = 0.0f;
-    if (avgSpd <=1){
-        kcalConstant = 0;
-    }
-    else if (avgSpd <= 13) {
-        kcalConstant = 0.065f;
-    }
-    else if (avgSpd <= 16) {
-        kcalConstant = 0.0783f;
-    }
-    else if (avgSpd <= 19) {
-        kcalConstant = 0.0939f;
-    }
-    else if (avgSpd <= 22) {
-        kcalConstant = 0.113f;
-    }
-    else if (avgSpd <= 24) {
-        kcalConstant = 0.124f;
-    }
-    else if (avgSpd <= 26) {
-        kcalConstant = 0.136f;
-    }
-    else if (avgSpd <= 27) {
-        kcalConstant = 0.149f;
-    }
-    else if (avgSpd <= 29) {
-        kcalConstant = 0.163f;
-    }
-    else if (avgSpd <= 31) {
-        kcalConstant = 0.179f;
-    }
-    else if (avgSpd <= 32) {
-        kcalConstant = 0.196f;
-    }
-    else if (avgSpd <= 34) {
-        kcalConstant = 0.215f;
-    }
-    else if (avgSpd <= 37) {
-        kcalConstant = 0.259f;
-    }
-    else {  // avgSpeed 40km/h 이상
-        kcalConstant = 0.311f;
-    }
-    
-    return kcalConstant;
-}
 
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     
+    _current_location=newLocation;
     
     
     
@@ -308,7 +256,7 @@
     
     if([newLocation speed])
     {
-        if(_max_speed==0)
+        if(_max_speed==0 && [newLocation speed] != -1)
             _max_speed = [newLocation speed];
         else if(_max_speed < [newLocation speed])
             _max_speed = [newLocation speed];
@@ -317,14 +265,14 @@
     if(oldLocation){
         _totalDistance += [oldLocation distanceFromLocation:newLocation];
         if([oldLocation speed])
-        _calorie += weight * (([[newLocation timestamp] timeIntervalSince1970]-[[oldLocation timestamp] timeIntervalSince1970])/60.0) * [self calculateCalorie:[oldLocation speed]*3.6];
+        _calorie += weight * (([[newLocation timestamp] timeIntervalSince1970]-[[oldLocation timestamp] timeIntervalSince1970])/60.0) * [Utility calculateCalorie:[oldLocation speed]*3.6];
         
     }
 
     
     for (id obj in targets) {
-        if([obj respondsToSelector:@selector(locationManager:didUpdateToLocation:fromLocation:)])
-        [obj locationManager:self didUpdateToLocation:newLocation fromLocation:oldLocation];
+        if([obj respondsToSelector:@selector(locationManager:)])
+        [obj locationManager:self];
     }
     
 }

@@ -36,7 +36,7 @@
             
             sqlite3_stmt *statement;
             
-            statement = [self getSQLStatement:ridingDB WithQuery:@"CREATE TABLE IF NOT EXISTS RIDINGS (ID INTEGER PRIMARY KEY AUTOINCREMENT, DAY TEXT, TIME TEXT, DISTANCE TEXT, SPEED TEXT, CALORIE TEXT)"];
+            statement = [self getSQLStatement:ridingDB WithQuery:@"CREATE TABLE IF NOT EXISTS RIDINGS (ID INTEGER PRIMARY KEY AUTOINCREMENT, START_DATE REAL, END_DATE REAL, TIME REAL, DISTANCE REAL, SPEED REAL, MAX_SPEED REAL, CALORIE REAL)"];
 
 
             //sqlite3_exec 와는 다르게 sqlite3_step은 성공시 sqlite_done을 반환 함으로써 성공을 알린다.
@@ -54,6 +54,7 @@
             
             sqlite3_finalize(statement);
             
+
             
             
             //sqlite3_close(ridingDB);
@@ -91,22 +92,20 @@
     sqlite3_stmt *statement = [self getSQLStatement:ridingDB WithQuery:@"SELECT id FROM RIDINGS ORDER BY id DESC LIMIT 1"];
     int row_id=0;
     
-   if(sqlite3_step(statement) == SQLITE_DONE) {
-       sqlite3_finalize(statement);
+   if(sqlite3_step(statement) == SQLITE_DONE) 
        row_id=1;
-   }else{
+   else
        row_id=sqlite3_column_int(statement, 0)+1;
-   }
+   
 
-           
+    sqlite3_finalize(statement);
        
        
        
-       
-       
+
        //(ID INTEGER PRIMARY KEY, LATITUDE REAL, LONGITUDE REAL, ALTITUDE REAL, TIME_STAMP INTEGER, FOREIGN KEY(ID) REFERENCES RIDINGS (ID))
        for (CLLocation * location in locations) {
-           sqlite3_stmt *statement2 = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO LOCATION (ID, LATITUDE, LONGITUDE, ALTITUDE, TIME_STAMP) VALUES (\"%d\", \"%f\", \"%f\", \"%f\", \"%f\")", row_id, location.coordinate.latitude, location.coordinate.longitude, location.altitude, [location.timestamp timeIntervalSince1970]]];
+           sqlite3_stmt *statement2 = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO LOCATION (ID, LATITUDE, LONGITUDE, ALTITUDE, TIME_STAMP) VALUES (%d, %lf, %lf, %lf, %lf)", row_id, location.coordinate.latitude, location.coordinate.longitude, location.altitude, [location.timestamp timeIntervalSince1970]]];
            
            
            int code= sqlite3_step(statement2);
@@ -120,6 +119,29 @@
    
 }
 
+- (void)discardRecording{
+    sqlite3_stmt *statement = [self getSQLStatement:ridingDB WithQuery:@"SELECT id FROM RIDINGS ORDER BY id DESC LIMIT 1"];
+    int row_id=0;
+    
+    if(sqlite3_step(statement) == SQLITE_DONE)
+        row_id=1;
+    else
+        row_id=sqlite3_column_int(statement, 0)+1;
+    
+    
+    sqlite3_finalize(statement);
+    
+    
+    statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"DELETE FROM LOCATION WHERE ID=%d", row_id]];
+    
+    if(sqlite3_step(statement) == SQLITE_DONE)
+    {
+        
+    }
+    
+    
+}
+
 - (void)saveRecording:(RidingManager*)manager {
     
     NSDate *date = [NSDate date];
@@ -128,16 +150,13 @@
     [form setDateStyle:NSDateFormatterFullStyle];
     [form setTimeStyle:NSDateFormatterShortStyle];
     
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ko_KR"];
-    [form setLocale:locale];
-    NSLog(@"%@", [form stringFromDate:date]);
-    // set Date data
+
     
     sqlite3_stmt *statement;
-    int result=0;
-    const char *dbpath = [databasePath UTF8String];
- 
-        statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO RIDINGS (day, time, distance, speed, calorie) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", [form stringFromDate:date], [manager time], [manager totalDistance], [manager avgSpeed], [manager calorie]]];
+
+    //(ID INTEGER PRIMARY KEY AUTOINCREMENT, START_DATE REAL, END_DATE REAL, TIME REAL, DISTANCE REAL, SPEED REAL, MAX_SPEED REAL, CALORIE REAL)
+    
+        statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO RIDINGS (start_date,end_date, time, distance, speed,max_speed, calorie) VALUES (%lf, %lf, %lf, %lf, %lf,%lf, %lf)", [manager start_date], [[NSDate date] timeIntervalSince1970], [manager time], [manager totalDistance], [manager avgSpeed], [manager max_speed], [manager calorie]]];
         
         if (sqlite3_step(statement) == SQLITE_DONE) {
             NSLog(@"Record Added");
@@ -191,10 +210,13 @@
     
     databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"ridings.db"]];
     
-    const char *dbpath = [databasePath UTF8String];
+
     sqlite3_stmt *statement;
 
 
+    //(ID INTEGER PRIMARY KEY AUTOINCREMENT, START_DATE REAL, END_DATE REAL, TIME REAL, DISTANCE REAL, SPEED REAL, MAX_SPEED REAL, CALORIE REAL)
+    
+    
         statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"SELECT * FROM ridings ORDER BY id DESC"]];
 
         if (statement) {
@@ -202,11 +224,13 @@
                 NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
                 int riding_id = sqlite3_column_int(statement, 0);
                 [dic setObject:[[NSNumber alloc]initWithInt:riding_id] forKey:@"id"];
-                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)] forKey:@"day"];
-                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)] forKey:@"time"];
-                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)] forKey:@"distance"];
-                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)] forKey:@"speed"];
-                [dic setObject:[[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)] forKey:@"calorie"];
+                [dic setObject:[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 1)] forKey:@"start_date"];
+                [dic setObject:[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 2)] forKey:@"end_date"];
+                [dic setObject:[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 3)] forKey:@"time"];
+                [dic setObject:[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 4)] forKey:@"distance"];
+                [dic setObject:[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 5)] forKey:@"speed"];
+                [dic setObject:[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 6)] forKey:@"max_speed"];
+                [dic setObject:[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 7)] forKey:@"calorie"];
                 
                 
                 //(ID INTEGER PRIMARY KEY, LATITUDE REAL, LONGITUDE REAL, ALTITUDE REAL, TIME_STAMP REAL

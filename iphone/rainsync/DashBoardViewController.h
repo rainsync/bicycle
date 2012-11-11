@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CoreLocationController.h"
 #import "RidingManager.h"
+#import "Utility.h"
 
 
 @interface DashBoardViewController : UIViewController <CoreLocationControllerDelegate>
