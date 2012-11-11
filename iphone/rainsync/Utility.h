@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface Utility : NSObject
++(NSString*)timeToDate:(double)time;
 + (float)calculateCalorie:(float)avgSpd;
 +(NSString*)getStringTime:(double)time;
 +(double)metreTokilometre:(double)metre;

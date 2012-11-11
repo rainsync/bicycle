@@ -71,6 +71,20 @@
     
 }
 
++(NSString*)timeToDate:(double)time
+{
+    
+    NSDate *date=[[NSDate alloc] initWithTimeIntervalSince1970:time];
+    
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ko_KR"];
+    NSCalendar *cal = [[NSCalendar alloc] init];
+    [cal setLocale:locale];
+    NSString *ret= [cal stringFromDate:date];
+    [cal release];
+    [date release];
+    return ret;
+}
+
 +(double)metreTokilometre:(double)metre
 {
     return metre/1000.0;
