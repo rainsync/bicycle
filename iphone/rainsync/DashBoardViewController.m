@@ -31,24 +31,21 @@
 
 
 
-- (void)locationManager:(RidingManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+- (void)locationManager:(RidingManager *)manager
 {
     
-    CLLocation *location = newLocation;
-    
-    if(location.speed == -1)
-        speedLabel.text = @"00.0";
-    else
-        speedLabel.text = [NSString stringWithFormat:@"%.2f", location.speed * 3.6];
-    
-    avgLabel.text = [NSString stringWithFormat:@"%.2f", [Utility mpsTokph:[manager totalDistance]  WithTime:[manager time]]];
 
     
-    //calorieLabel.text = [NSString stringWithFormat:@"%0.2lf", weight * [self calculateCalorie:[manager avgSpeed] ] * ([manager time]/60.0)];
+    if([manager current_location].speed == -1)
+        speedLabel.text = @"00.0";
+    else
+        speedLabel.text = [NSString stringWithFormat:@"%.2lf", [Utility mpsTokph:[manager current_location].speed]];
     
-    calorieLabel.text = [NSString stringWithFormat:@"%d", [manager calorie] ];
+    avgLabel.text = [NSString stringWithFormat:@"%.2lf", [Utility mpsTokph:[manager avgSpeed]]];
+
+    calorieLabel.text = [NSString stringWithFormat:@"%.2lf", [manager calorie] ];
     
-    distanceLabel.text = [NSString stringWithFormat:@"%0.2lf", [manager totalDistance]/1000.0f];
+    distanceLabel.text = [NSString stringWithFormat:@"%.2lf", [Utility metreTokilometre:[manager totalDistance]]];
     
     
 }
@@ -152,16 +149,7 @@
         case 1:
         {
             [ridingManager loadStatus];
-            
-
-            speedLabel.text = @"00.0";
-
-            avgLabel.text = [NSString stringWithFormat:@"%.2f", [Utility mpsTokph:[ridingManager totalDistance]  WithTime:[ridingManager time]] ];
-            
-            
-            calorieLabel.text = [NSString stringWithFormat:@"%0.2lf",[ridingManager calorie]];
-            distanceLabel.text = [NSString stringWithFormat:@"%0.2lf", [ridingManager totalDistance]/1000.0f];
-            
+            [self locationManager:ridingManager];
             [self updateTime:ridingManager];
             
             
