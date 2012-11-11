@@ -8,12 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
-
+@interface SettingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+{
+    UITextField *text;
+    int weight;
+}
 @property (nonatomic, retain) IBOutlet UITableView *settingTableView;
-//@property (nonatomic, strong) UIPickerView *pickerView;
-@property (nonatomic, readonly) NSInteger weight;
-@property (nonatomic, retain) NSArray *weightArray;
-- (void)setPickerViewValue:(id)value;
-- (id)getPickerViewValue;
 @end

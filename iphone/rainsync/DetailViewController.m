@@ -109,7 +109,7 @@
     NSArray *counts;
     counts = [NSArray arrayWithObjects:
               [NSNumber numberWithInt:1],  //map
-              [NSNumber numberWithInt:6],  //location
+              [NSNumber numberWithInt:7],  //location
               nil];
     
     return [[counts objectAtIndex:section] integerValue];
@@ -135,7 +135,7 @@
     if (section == 0) {
         UILabel *headerLabel=[[UILabel alloc]initWithFrame:CGRectMake(5,0,300,44)];
         headerLabel.backgroundColor= [UIColor clearColor];
-        headerLabel.text= [NSString stringWithFormat:@"%@", _day];
+        headerLabel.text= [NSString stringWithFormat:@"%@", [Utility timeToDate:[[rawdata objectForKey:@"start_date"] doubleValue]]];
         headerLabel.font = [UIFont boldSystemFontOfSize:17];
         headerLabel.textColor = [UIColor whiteColor];
         [headerView addSubview: headerLabel];
@@ -267,7 +267,7 @@
     else if ([key isEqualToString:@"칼로리"])
     {
         double calorie = [[rawdata objectForKey:@"calorie"] doubleValue];
-        ivar = [NSString stringWithFormat:@"%.1f km/h", calorie];
+        ivar = [NSString stringWithFormat:@"%.1f kcal", calorie];
     }
 //    else
 //    {

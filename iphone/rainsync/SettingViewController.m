@@ -24,16 +24,7 @@
 
         UIImage *img = [UIImage imageNamed:@"settingIcon"];
         [self.tabBarItem setImage:img];
-        
-        _weightArray = [NSArray arrayWithObjects:@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",
-                        @"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59",
-                        @"60",@"61",@"62",@"63",@"64",@"65",@"66",@"67",@"68",@"69",
-                        @"70",@"71",@"72",@"73",@"74",@"75",@"76",@"77",@"78",@"79",
-                        @"80",@"81",@"82",@"83",@"84",@"85",@"86",@"87",@"88",@"89",
-                        @"90",@"91",@"92",@"93",@"94",@"95",@"96",@"97",@"98",@"99",
-                        @"100",@"101",@"102",@"103",@"104",@"105",@"106",@"107",@"108",@"109",
-                        @"110",@"111",@"112",@"113",@"114",@"115",@"116",@"117",@"118",@"119", nil];
-        [_weightArray retain];
+
     }
     return self;
 }
@@ -105,6 +96,15 @@
     return headerView;
 }
 
+-(void)cancelNumberPad{
+    [text resignFirstResponder];
+    text.text = @"";
+}
+
+-(void)doneWithNumberPad{
+    NSString *numberFromTheKeyboard = text.text;
+    [text resignFirstResponder];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -122,7 +122,25 @@
     switch (indexPath.section) {
         case 0:
             cell.textLabel.text = @"몸무게 설정";
-            cell.detailTextLabel.text = @"60 kg";
+            text = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 180, 20)];
+            text.placeholder = @"60 kg";
+            [text setKeyboardType:UIKeyboardTypeDecimalPad];
+            [text setTextAlignment:NSTextAlignmentRight];
+            cell.accessoryView = text;
+            
+            UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+            numberToolbar.barStyle = UIBarStyleBlackTranslucent;
+            numberToolbar.items = [NSArray arrayWithObjects:
+                                   [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
+                                   [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                                   [[UIBarButtonItem alloc]initWithTitle:@"Apply" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)],
+                                   nil];
+            [numberToolbar sizeToFit];
+            
+            text.inputAccessoryView =numberToolbar;
+
+            //=self;
+            
             break;
         case 1:
             switch (indexPath.row) {
@@ -172,7 +190,7 @@
     switch (indexPath.section) {
         case 0:
             // 피커뷰 띄워줌
-            [self showPicker];
+            
             NSLog(@"몸무게 설정");
             break;
         case 1:
@@ -190,41 +208,7 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark -
-#pragma mark Picker View delegate
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    return (NSString*)[_weightArray objectAtIndex:row+1];
-}
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return 1;
-}
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return [_weightArray count] - 1;
-}
-
-- (void) showPicker{
-    UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:@"몸무게 설정"
-                                                      delegate:self
-                                             cancelButtonTitle:@"완료"
-                                        destructiveButtonTitle:@"취소"
-                                             otherButtonTitles:nil];
-    // Add the picker
-    UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0,185,0,0)];
-    
-    pickerView.delegate = self;
-    pickerView.showsSelectionIndicator = YES;    // note this is default to NO
-    
-    [menu addSubview:pickerView];
-    [menu showInView:self.view];
-    [menu setBounds:CGRectMake(0,0,320, 700)];
-    
-    [pickerView release];
-    [menu release];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    
+- (IBAction)textFieldDoneEditing:(id)sender {
+    [sender resignFirstResponder];
 }
 @end
