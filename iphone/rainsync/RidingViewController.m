@@ -16,18 +16,14 @@
 
 @synthesize scrollView, pageControl;
 
-
-
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"라이딩", @"라이딩");
-
+        UIImage *img = [UIImage imageNamed:@"bikeIcon"];
+        [self.tabBarItem setImage:img];        
         
-        
-        //self.tabBarItem.image = [UIImag]
         // Custom initialization
     }
     return self;
