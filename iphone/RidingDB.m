@@ -54,6 +54,7 @@
             
             sqlite3_finalize(statement);
             
+
             
             
             //sqlite3_close(ridingDB);
@@ -91,14 +92,13 @@
     sqlite3_stmt *statement = [self getSQLStatement:ridingDB WithQuery:@"SELECT id FROM RIDINGS ORDER BY id DESC LIMIT 1"];
     int row_id=0;
     
-   if(sqlite3_step(statement) == SQLITE_DONE) {
-       sqlite3_finalize(statement);
+   if(sqlite3_step(statement) == SQLITE_DONE) 
        row_id=1;
-   }else{
+   else
        row_id=sqlite3_column_int(statement, 0)+1;
-   }
+   
 
-           
+    sqlite3_finalize(statement);
        
        
        
@@ -118,6 +118,29 @@
    
     
    
+}
+
+- (void)discardRecording{
+    sqlite3_stmt *statement = [self getSQLStatement:ridingDB WithQuery:@"SELECT id FROM RIDINGS ORDER BY id DESC LIMIT 1"];
+    int row_id=0;
+    
+    if(sqlite3_step(statement) == SQLITE_DONE)
+        row_id=1;
+    else
+        row_id=sqlite3_column_int(statement, 0)+1;
+    
+    
+    sqlite3_finalize(statement);
+    
+    
+    statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"DELETE FROM LOCATION WHERE ID=%d", row_id]];
+    
+    if(sqlite3_step(statement) == SQLITE_DONE)
+    {
+        
+    }
+    
+    
 }
 
 - (void)saveRecording:(RidingManager*)manager {

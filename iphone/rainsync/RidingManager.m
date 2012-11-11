@@ -197,7 +197,7 @@
     switch (buttonIndex) {
         case 0:
         {
-            
+            [ridingDB discardRecording];
             NSLog(@"저장 취소");
             break;
         }
