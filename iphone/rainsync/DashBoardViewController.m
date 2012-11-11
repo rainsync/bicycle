@@ -20,18 +20,16 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
 
-        RidingManager *ridingManager = [RidingManager getInstance];
-        [ridingManager addTarget:self];
-        if([ridingManager isRiding])
-            [ridingManager startRiding];
-        paused =false;
         
         // Custom initialization
-        
     }
     return self;
 }
+
+
+
 
 - (void)locationManager:(RidingManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
@@ -39,12 +37,12 @@
     CLLocation *location = newLocation;
     
     if(location.speed == -1)
-    speedLabel.text = @"00.0";
+        speedLabel.text = @"00.0";
     else
-    speedLabel.text = [NSString stringWithFormat:@"%.2f", location.speed * 3.6];
+        speedLabel.text = [NSString stringWithFormat:@"%.2f", location.speed * 3.6];
     
     avgLabel.text = [NSString stringWithFormat:@"%.2f", [manager avgSpeed]];
-
+    
     double weight = 50;
     
     calorieLabel.text = [NSString stringWithFormat:@"%0.2lf", weight * [self calculateCalorie:[manager avgSpeed] ] * ([manager time]/60.0)];
@@ -62,7 +60,7 @@
     
     
     timeLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, min, sec];
-
+    
 }
 
 
@@ -122,92 +120,106 @@
     
 }
 
-- (IBAction)starRiding:(id)sender {
-    RidingManager *ridingManager = [RidingManager getInstance];
-    [ridingManager startRiding];
-//    [self viewDidAppear:false];
-    
-    [self.stopButton setHidden:YES];
-    [self.stopSwitch setHidden:YES];
-    [self.stopLabel setHidden:YES];
-    [self.startButton setHidden:YES];
-    [self.pauseButton setHidden:NO];
-    [self.statusLabel setText:@"정지"];
-}
+
 
 - (IBAction)stopRiding:(id)sender {
     paused = false;
     
     RidingManager *ridingManager = [RidingManager getInstance];
     [ridingManager stopRiding];
-//    [self viewDidAppear:false];
-    
     timeLabel.text = @"00:00:00";
     speedLabel.text = @"00.0";
     distanceLabel.text = @"0.00";
     avgLabel.text = @"00.0";
     speedLabel.text = @"00.0";
     calorieLabel.text = @"0.00";
+    [self.stopButton setHidden:true];
     
-    [self.stopButton setHidden:YES];
-    [self.stopSwitch setHidden:YES];
-    [self.stopLabel setHidden:YES];
-    [self.startButton setHidden:NO];
-    [self.pauseButton setHidden:YES];
-    [self.statusLabel setText:@"시작"];
 }
 
-- (IBAction)pauseRiding:(id)sender {
+- (IBAction)statusChanged:(id)sender {
     RidingManager *ridingManager = [RidingManager getInstance];
     
-    if(paused) {
-        paused = false;
+    if(!paused){
+        paused=true;
+        [self.statusButton setImage:[UIImage imageNamed:@"pauseSingleRiding"] forState:UIControlStateNormal];
+        [ridingManager loadStatus];
         [ridingManager startRiding];
-        [self.stopButton setHidden:YES];
-        [self.stopSwitch setHidden:YES];
-        [self.stopLabel setHidden:YES];
-        [self.startButton setHidden:YES];
-        [self.pauseButton setHidden:NO];
-        [self.statusLabel setText:@"정지"];
-    }
-    else {
-        paused =true;
+        [self.stopButton setHidden:false];
+        
+    }else{
+        
         [ridingManager pauseRiding];
-        [self.stopButton setHidden:NO];
-        [self.stopSwitch setHidden:NO];
-        [self.stopLabel setHidden:NO];
-        [self.startButton setHidden:NO];
-        [self.pauseButton setHidden:YES];
-        [self.statusLabel setText:@"주행"];
+        
+        paused =false;
+        [self.statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
+        
+        [self.stopButton setHidden:true];
+        
     }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // Do any additional setup after loading the view from its nib.
+    
+    
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
     RidingManager *ridingManager = [RidingManager getInstance];
+
+    
+    [ridingManager addTarget:self];
     if([ridingManager isRiding]){
-        [self.stopButton setHidden:YES];
-        [self.stopSwitch setHidden:YES];
-        [self.stopLabel setHidden:YES];
-        [self.startButton setHidden:YES];
-        [self.pauseButton setHidden:NO];
-        [self.statusLabel setText:@"정지"];
-    }else{
-        [self.stopButton setHidden:NO];
-        [self.stopSwitch setHidden:NO];
-        [self.stopLabel setHidden:NO];
-        [self.startButton setHidden:NO];
-        [self.pauseButton setHidden:YES];
-        [self.statusLabel setText:@"주행"];
+        UIAlertView *view=[[UIAlertView alloc] initWithTitle:@"알림" message:@"이전 라이딩을 불러오시겠습니까?"  delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"네", nil];
+        [view show];
+        [view release];
+        
     }
+    
+    paused = false;
+
+    
+    
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    RidingManager *ridingManager = [RidingManager getInstance];
+    switch (buttonIndex) {
+        case 0:
+        {
+            [ridingManager discard];
+        }
+        case 1:
+        {
+            [ridingManager loadStatus];
+            
+
+            speedLabel.text = @"00.0";
+
+            avgLabel.text = [NSString stringWithFormat:@"%.2f", [ridingManager avgSpeed]];
+            
+            double weight = 50;
+            
+            calorieLabel.text = [NSString stringWithFormat:@"%0.2lf", weight * [self calculateCalorie:[ridingManager avgSpeed] ] * ([ridingManager time]/60.0)];
+            distanceLabel.text = [NSString stringWithFormat:@"%0.2lf", [ridingManager totalDistance]/1000.0f];
+            
+            [self updateTime:[ridingManager time]];
+            
+            
+            
+        }
+    }
+    
+    
+    
+}
+
 
 - (void)dealloc {
     [speedLabel release];
@@ -215,15 +227,11 @@
     [timeLabel release];
     [calorieLabel release];
     [_stopButton release];
-    [_pauseButton release];
-    [_startButton release];
+    [_statusButton release];
     [distanceLabel release];
-    [_stopSwitch release];
-    [_stopLabel release];
-    [_statusLabel release];
     [super dealloc];
 }
- 
+
 
 
 - (void)didReceiveMemoryWarning
@@ -235,13 +243,9 @@
 - (void)viewDidUnload {
     [self setCalorieLabel:nil];
     [self setStopButton:nil];
-    [self setPauseButton:nil];
-    [self setStartButton:nil];
+    [self setStatusButton:nil];
     [self setStopButton:nil];
     [self setDistanceLabel:nil];
-    [self setStopSwitch:nil];
-    [self setStopLabel:nil];
-    [self setStatusLabel:nil];
     [super viewDidUnload];
 }
 @end

@@ -34,5 +34,6 @@
 + (RidingManager *)getInstance;
 - (NSMutableArray*)getlocations;
 - (double)avgSpeed;
+- (void)discard;
 
 @end

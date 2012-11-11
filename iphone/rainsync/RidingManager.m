@@ -52,9 +52,7 @@
     [targets addObject:obj];
 }
 
-
-
-- (void)startRiding
+- (void)loadStatus
 {
     if([self isRiding])
     {
@@ -70,7 +68,7 @@
         
         //[self locationManager:locmanager didUpdateLocations:locations];
         
-    
+        
         @try {
             oldt= [[NSDate date] timeIntervalSince1970];
             totalDistance = [[NSUserDefaults standardUserDefaults] doubleForKey:@"distance"];
@@ -83,21 +81,36 @@
             totalDistance=0;
             time =0;
         }
-
+        
         
     }else{
-
-
         
-
+        
+        
         totalDistance=0;
         time =0;
         
         locations = [[NSMutableArray alloc] init];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsRiding"];
         [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
-    }
+        [[NSUserDefaults standardUserDefaults]synchronize];
         
+        
+    }
+    
+}
+
+- (void)saveStatus
+{
+    [[NSUserDefaults standardUserDefaults] setDouble:time forKey:@"time"];
+    [[NSUserDefaults standardUserDefaults] setDouble:totalDistance forKey:@"distance"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
+- (void)startRiding
+{
+
         
     oldt=[[NSDate date] timeIntervalSince1970];
     //[locmanager set]
@@ -116,6 +129,7 @@
     time+=[[NSDate date] timeIntervalSince1970]-oldt;
     oldt=[[NSDate date] timeIntervalSince1970];
     
+    [self saveStatus];
     
     for (id obj in targets) {
         if([obj respondsToSelector:@selector(updateTime:)])
@@ -129,6 +143,14 @@
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"기록 측정 종료" message:@"저장하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"네넹", nil];
     [alertView show];
     [alertView release];
+}
+
+- (void)discard
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsRiding"];
+    [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
+    [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"distance"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 # pragma mark -
@@ -156,12 +178,11 @@
     }
     
     
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsRiding"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
+    [self discard];
+    
     [locmanager stopUpdatingLocation];
     [locmanager stopUpdatingHeading];
-    [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
-    [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"distance"];
+
     
     totalDistance =0;
     time=0;
@@ -179,9 +200,8 @@
 
 - (void)pauseRiding
 {
-    [[NSUserDefaults standardUserDefaults] setDouble:time forKey:@"time"];
-    [[NSUserDefaults standardUserDefaults] setDouble:totalDistance forKey:@"distance"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self saveStatus];
+    
     [locmanager stopUpdatingLocation];
     [locmanager stopUpdatingHeading];
     if(timer){
