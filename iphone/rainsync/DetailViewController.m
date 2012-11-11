@@ -21,7 +21,7 @@
     if (self) {
         view = [NSNull null];
         // Custom initialization      
-        self.navigationItem.rightBarButtonItem = self.editButtonItem;
+//        self.navigationItem.rightBarButtonItem = self.editButtonItem;
     }
     return self;
 }
@@ -97,6 +97,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     _detailTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    _detailTableView.separatorColor = [UIColor blackColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -280,19 +281,27 @@
     }
     else if ([key isEqualToString:@"주행 시간"])
     {
-        ivar = _rectime;
+        int i_time = [_rectime intValue];
+        int sec = i_time%60;
+        int min = i_time/60%60;
+        int hour = i_time/60/60%24;
+        
+        ivar = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, min, sec];
     }
     else if ([key isEqualToString:@"주행 거리"])
     {
-        ivar = _dist;
+        double distance = [_dist doubleValue];
+        ivar = [NSString stringWithFormat:@"%.1f km", distance];
     }
     else if ([key isEqualToString:@"평균 속도"])
     {
-        ivar = _avgs;
+        double avgSpeed = [_avgs doubleValue];
+        ivar = [NSString stringWithFormat:@"%.1f km/h", avgSpeed];
     }
     else if ([key isEqualToString:@"최고 속도"])
     {
-        ivar = _altit;
+        double maxSpeed = [_altit doubleValue];
+        ivar = [NSString stringWithFormat:@"%.1f km/h", maxSpeed];
     }
     else if ([key isEqualToString:@"칼로리"])
     {
@@ -305,8 +314,14 @@
 //    }
     
     // set cell attributes
+    cell.backgroundColor = [UIColor blackColor];
     cell.textLabel.text = key;
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.detailTextLabel.text = ivar;
+    cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:17];
+    cell.detailTextLabel.textColor = [UIColor colorWithHex:0x3D89BF];
+    cell.detailTextLabel.backgroundColor = [UIColor clearColor];
     
     return cell;
 }
