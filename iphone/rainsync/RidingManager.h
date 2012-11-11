@@ -18,12 +18,20 @@
     NSTimer *timer;
     NSMutableArray* targets;
     NSMutableArray* locations;
+//    int calorie;
+    int weight;
+    
+    //inital speed
+    
+    
 
 }
 
-//@property (nonatomic,retain) NSMutableArray* locations;
+
 @property (nonatomic, readonly) double totalDistance;
 @property (nonatomic, readonly) double time;
+@property (nonatomic, readonly) int calorie;
+@property (nonatomic, readonly) double max_speed;
 
 - (id)init;
 - (void)startRiding;

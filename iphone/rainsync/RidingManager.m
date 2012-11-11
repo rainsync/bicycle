@@ -11,7 +11,7 @@
 
 @implementation RidingManager
 
-@synthesize totalDistance,time;
+
 
 
 +(RidingManager*)getInstance
@@ -32,6 +32,7 @@
 
 - (id)init
 {
+    
     locmanager = [[CLLocationManager alloc] init];
     locmanager.delegate = self;
     locations = [[NSMutableArray alloc] init];
@@ -71,15 +72,17 @@
         
         @try {
             oldt= [[NSDate date] timeIntervalSince1970];
-            totalDistance = [[NSUserDefaults standardUserDefaults] doubleForKey:@"distance"];
-            time = [[NSUserDefaults standardUserDefaults] doubleForKey:@"time"];
-            if(totalDistance==0 && time ==0)
+            _totalDistance = [[NSUserDefaults standardUserDefaults] doubleForKey:@"distance"];
+            _time = [[NSUserDefaults standardUserDefaults] doubleForKey:@"time"];
+            _calorie = [[NSUserDefaults standardUserDefaults] doubleForKey:@"calorie"];
+            if(_totalDistance==0 && _time ==0 && _calorie ==0)
                 @throw [NSException exceptionWithName:@"Setting" reason:@"old data is not correct" userInfo:nil];
             
         }
         @catch (NSException *exception) {
-            totalDistance=0;
-            time =0;
+            _totalDistance=0;
+            _time =0;
+            _calorie =0;
         }
         
         
@@ -87,25 +90,39 @@
         
         
         
-        totalDistance=0;
-        time =0;
-        
+        _totalDistance=0;
+        _time =0;
+        _calorie = 0;
+    
         locations = [[NSMutableArray alloc] init];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsRiding"];
         [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
+        
         [[NSUserDefaults standardUserDefaults]synchronize];
         
         
     }
+    weight =50;
     
 }
 
 - (void)saveStatus
 {
-    [[NSUserDefaults standardUserDefaults] setDouble:time forKey:@"time"];
-    [[NSUserDefaults standardUserDefaults] setDouble:totalDistance forKey:@"distance"];
+    [[NSUserDefaults standardUserDefaults] setDouble:_time forKey:@"time"];
+    [[NSUserDefaults standardUserDefaults] setDouble:_totalDistance forKey:@"distance"];
+    [[NSUserDefaults standardUserDefaults] setInteger:_calorie forKey:@"calorie"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+
+- (void)discardStatus
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsRiding"];
+    [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
+    [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"distance"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+
 
 
 - (void)startRiding
@@ -126,32 +143,46 @@
 
 - (void)checkTime:(NSTimer *)timer {
     
-    time+=[[NSDate date] timeIntervalSince1970]-oldt;
+    _time+=[[NSDate date] timeIntervalSince1970]-oldt;
     oldt=[[NSDate date] timeIntervalSince1970];
     
     [self saveStatus];
     
     for (id obj in targets) {
         if([obj respondsToSelector:@selector(updateTime:)])
-            [obj updateTime:time];
+            [obj updateTime:_time];
     }
 }
 
 
 - (void)stopRiding
 {
+    
+    [locmanager stopUpdatingLocation];
+    [locmanager stopUpdatingHeading];
+    
+    
+    _totalDistance =0;
+    _time=0;
+    
+    if(timer){
+        [timer invalidate];
+        timer = nil;
+    }
+    
+    for (id obj in targets) {
+        if([obj respondsToSelector:@selector(RidingStopped)])
+            [obj RidingStopped];
+    }
+    
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"기록 측정 종료" message:@"저장하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"네넹", nil];
     [alertView show];
     [alertView release];
+    
+    
 }
 
-- (void)discard
-{
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsRiding"];
-    [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
-    [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"distance"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
-}
+
 
 # pragma mark -
 # pragma mark AlertView Delegate
@@ -168,7 +199,7 @@
         case 1:
         {
             RidingDB *ridingDB = [[RidingDB alloc] init];
-            [ridingDB saveRecordingTime:[NSString stringWithFormat:@"%f", time] withDistance:[NSString stringWithFormat:@"%f", totalDistance] withAverageSpeed:[NSString stringWithFormat:@"%f", [self avgSpeed]] withlocation:locations withCalories:@"20"];
+            [ridingDB saveRecordingTime:[NSString stringWithFormat:@"%f", time] withDistance:[NSString stringWithFormat:@"%f", _totalDistance] withAverageSpeed:[NSString stringWithFormat:@"%f", [self avgSpeed]] withlocation:locations withCalories:@"20"];
             // save database
             
             NSLog(@"저장 완료");
@@ -178,24 +209,9 @@
     }
     
     
-    [self discard];
+    [self discardStatus];
     
-    [locmanager stopUpdatingLocation];
-    [locmanager stopUpdatingHeading];
 
-    
-    totalDistance =0;
-    time=0;
-    
-    if(timer){
-        [timer invalidate];
-        timer = nil;
-    }
-    
-    for (id obj in targets) {
-        if([obj respondsToSelector:@selector(RidingStopped)])
-            [obj RidingStopped];
-    }
 }
 
 - (void)pauseRiding
@@ -222,20 +238,85 @@
 {
     //total distance = m
     //time = h
-    return (totalDistance/1000.0)/(time/60.0/60.0);
+    return (_totalDistance/1000.0)/(_time/60.0/60.0);
     
     
 }
 
 
+- (float)calculateCalorie:(float)avgSpd {
+    float kcalConstant = 0.0f;
+    if (avgSpd <=1){
+        kcalConstant = 0;
+    }
+    else if (avgSpd <= 13) {
+        kcalConstant = 0.065f;
+    }
+    else if (avgSpd <= 16) {
+        kcalConstant = 0.0783f;
+    }
+    else if (avgSpd <= 19) {
+        kcalConstant = 0.0939f;
+    }
+    else if (avgSpd <= 22) {
+        kcalConstant = 0.113f;
+    }
+    else if (avgSpd <= 24) {
+        kcalConstant = 0.124f;
+    }
+    else if (avgSpd <= 26) {
+        kcalConstant = 0.136f;
+    }
+    else if (avgSpd <= 27) {
+        kcalConstant = 0.149f;
+    }
+    else if (avgSpd <= 29) {
+        kcalConstant = 0.163f;
+    }
+    else if (avgSpd <= 31) {
+        kcalConstant = 0.179f;
+    }
+    else if (avgSpd <= 32) {
+        kcalConstant = 0.196f;
+    }
+    else if (avgSpd <= 34) {
+        kcalConstant = 0.215f;
+    }
+    else if (avgSpd <= 37) {
+        kcalConstant = 0.259f;
+    }
+    else {  // avgSpeed 40km/h 이상
+        kcalConstant = 0.311f;
+    }
+    
+    return kcalConstant;
+}
+
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
+    
+    
+    
+    
     [locations addObject:newLocation];
+    
+    if([newLocation speed])
+    {
+        if(_max_speed==0)
+            _max_speed = [newLocation speed];
+        else if(_max_speed < [newLocation speed])
+            _max_speed = [newLocation speed];
+    }
+    
+    if(oldLocation){
+        _totalDistance += [oldLocation distanceFromLocation:newLocation];
+        if([oldLocation speed])
+        _calorie += weight * (([[newLocation timestamp] timeIntervalSince1970]-[[oldLocation timestamp] timeIntervalSince1970])/60.0) * [self calculateCalorie:[oldLocation speed]*3.6];
+        
+    }
 
     
-    if(oldLocation)
-        totalDistance += [oldLocation distanceFromLocation:newLocation];
-
     for (id obj in targets) {
         if([obj respondsToSelector:@selector(locationManager:didUpdateToLocation:fromLocation:)])
         [obj locationManager:self didUpdateToLocation:newLocation fromLocation:oldLocation];

@@ -42,10 +42,12 @@
         speedLabel.text = [NSString stringWithFormat:@"%.2f", location.speed * 3.6];
     
     avgLabel.text = [NSString stringWithFormat:@"%.2f", [manager avgSpeed]];
+
     
-    double weight = 50;
+    //calorieLabel.text = [NSString stringWithFormat:@"%0.2lf", weight * [self calculateCalorie:[manager avgSpeed] ] * ([manager time]/60.0)];
     
-    calorieLabel.text = [NSString stringWithFormat:@"%0.2lf", weight * [self calculateCalorie:[manager avgSpeed] ] * ([manager time]/60.0)];
+    calorieLabel.text = [NSString stringWithFormat:@"%d", [manager calorie] ];
+    
     distanceLabel.text = [NSString stringWithFormat:@"%0.2lf", [manager totalDistance]/1000.0f];
     
     
@@ -64,53 +66,7 @@
 }
 
 
-- (float)calculateCalorie:(float)avgSpd {
-    float kcalConstant = 0.0f;
-    if (avgSpd <=1){
-        kcalConstant = 0;
-    }
-    else if (avgSpd <= 13) {
-        kcalConstant = 0.065f;
-    }
-    else if (avgSpd <= 16) {
-        kcalConstant = 0.0783f;
-    }
-    else if (avgSpd <= 19) {
-        kcalConstant = 0.0939f;
-    }
-    else if (avgSpd <= 22) {
-        kcalConstant = 0.113f;
-    }
-    else if (avgSpd <= 24) {
-        kcalConstant = 0.124f;
-    }
-    else if (avgSpd <= 26) {
-        kcalConstant = 0.136f;
-    }
-    else if (avgSpd <= 27) {
-        kcalConstant = 0.149f;
-    }
-    else if (avgSpd <= 29) {
-        kcalConstant = 0.163f;
-    }
-    else if (avgSpd <= 31) {
-        kcalConstant = 0.179f;
-    }
-    else if (avgSpd <= 32) {
-        kcalConstant = 0.196f;
-    }
-    else if (avgSpd <= 34) {
-        kcalConstant = 0.215f;
-    }
-    else if (avgSpd <= 37) {
-        kcalConstant = 0.259f;
-    }
-    else {  // avgSpeed 40km/h 이상
-        kcalConstant = 0.311f;
-    }
-    
-    return kcalConstant;
-}
+
 
 
 
@@ -124,6 +80,7 @@
 
 - (IBAction)stopRiding:(id)sender {
     paused = false;
+    [self.statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
     
     RidingManager *ridingManager = [RidingManager getInstance];
     [ridingManager stopRiding];
@@ -134,6 +91,8 @@
     speedLabel.text = @"00.0";
     calorieLabel.text = @"0.00";
     [self.stopButton setHidden:true];
+    
+    
     
 }
 
@@ -193,7 +152,7 @@
     switch (buttonIndex) {
         case 0:
         {
-            [ridingManager discard];
+            [ridingManager discardStatus];
         }
         case 1:
         {
@@ -204,9 +163,8 @@
 
             avgLabel.text = [NSString stringWithFormat:@"%.2f", [ridingManager avgSpeed]];
             
-            double weight = 50;
             
-            calorieLabel.text = [NSString stringWithFormat:@"%0.2lf", weight * [self calculateCalorie:[ridingManager avgSpeed] ] * ([ridingManager time]/60.0)];
+            calorieLabel.text = [NSString stringWithFormat:@"%0.2lf",[ridingManager calorie]];
             distanceLabel.text = [NSString stringWithFormat:@"%0.2lf", [ridingManager totalDistance]/1000.0f];
             
             [self updateTime:[ridingManager time]];
