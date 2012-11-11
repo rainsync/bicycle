@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "RidingDB.h"
 @interface RidingManager : NSObject <CLLocationManagerDelegate, UIAlertViewDelegate>
 {
 
@@ -18,12 +19,21 @@
     NSTimer *timer;
     NSMutableArray* targets;
     NSMutableArray* locations;
+//    int calorie;
+    int weight;
+    RidingDB *ridingDB;
+    
+    //inital speed
+    
+    
 
 }
 
-//@property (nonatomic,retain) NSMutableArray* locations;
+
 @property (nonatomic, readonly) double totalDistance;
 @property (nonatomic, readonly) double time;
+@property (nonatomic, readonly) int calorie;
+@property (nonatomic, readonly) double max_speed;
 
 - (id)init;
 - (void)startRiding;
