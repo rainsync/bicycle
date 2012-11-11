@@ -159,11 +159,42 @@
 {
     NSArray *titles;
     titles = [NSArray arrayWithObjects:
-              @"",                                      //map
+              @"날짜",                                      //map
               @"기록",               //location
               nil];
     
     return [titles objectAtIndex:section];
+}
+
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)] autorelease];
+    [headerView setBackgroundColor:[UIColor clearColor]];
+    
+
+    if (section == 0) {
+        UILabel *headerLabel=[[UILabel alloc]initWithFrame:CGRectMake(5,0,300,44)];
+        headerLabel.backgroundColor= [UIColor clearColor];
+        headerLabel.text= [NSString stringWithFormat:@"%@", _day];
+        headerLabel.font = [UIFont boldSystemFontOfSize:17];
+        headerLabel.textColor = [UIColor whiteColor];
+        [headerView addSubview: headerLabel];
+        [headerLabel release];
+    }
+    else if (section == 1) {
+        UILabel *recordLabel=[[UILabel alloc]initWithFrame:CGRectMake(5,0,300,44)];
+        recordLabel.backgroundColor= [UIColor clearColor];
+        recordLabel.text=@"상세 기록";
+        recordLabel.font = [UIFont boldSystemFontOfSize:17];
+        recordLabel.textColor = [UIColor whiteColor];
+        [headerView addSubview: recordLabel];
+        [recordLabel release];
+    }
+    else {
+        [headerView setBackgroundColor:[UIColor clearColor]];
+    }
+
+    return headerView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -221,11 +252,12 @@
 - (UITableViewCell *)cellForLocationIndex:(NSInteger)index
 {
     NSArray const *keys = [NSArray arrayWithObjects:
-                           @"날짜",
+                           @"시작 시간",
+                           @"종료 시간",
                            @"주행 시간",
                            @"주행 거리",
                            @"평균 속도",
-                           @"고도",
+                           @"최고 속도",
                            @"칼로리",
                            nil];
     
@@ -239,11 +271,10 @@
     NSString *ivar = @"";
     
     // look up the values, special case lat and long and timestamp but first, special case placemark being nil.
-//    if (self.placemark.location == nil)
-//    {
-//        ivar = @"location is nil.";
-//    }
-    if ([key isEqualToString:@"날짜"])
+    if ([key isEqualToString:@"시작 시간"]) {
+//        ivar = _startDate;    //측정 시작 시간 표시
+    }
+    else if ([key isEqualToString:@"종료 시간"])
     {
         ivar = _day;
     }
@@ -259,7 +290,7 @@
     {
         ivar = _avgs;
     }
-    else if ([key isEqualToString:@"고도"])
+    else if ([key isEqualToString:@"최고 속도"])
     {
         ivar = _altit;
     }
