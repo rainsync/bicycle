@@ -34,6 +34,7 @@
 @property (nonatomic, readonly) double time;
 @property (nonatomic, readonly) int calorie;
 @property (nonatomic, readonly) double max_speed;
+-(NSString*) getTime;
 
 - (id)init;
 - (void)startRiding;

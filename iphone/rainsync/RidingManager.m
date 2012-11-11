@@ -140,6 +140,17 @@
     
 }
 
+-(NSString*)getTime
+{
+    int i_time = (int)time;
+    int sec = i_time%60;
+    int min = i_time/60%60;
+    int hour = i_time/60/60%24;
+    
+    
+    return [NSString stringWithFormat:@"%02d:%02d:%02d", hour, min, sec];
+    
+}
 
 - (void)checkTime:(NSTimer *)timer {
     
@@ -155,7 +166,7 @@
     
     for (id obj in targets) {
         if([obj respondsToSelector:@selector(updateTime:)])
-            [obj updateTime:_time];
+            [obj updateTime:self];
     }
 }
 
