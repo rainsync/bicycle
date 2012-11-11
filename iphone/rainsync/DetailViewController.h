@@ -13,7 +13,7 @@
 {
     MKPolyline *routeLine;
     MKPolylineView *view;
-    
+    NSMutableDictionary *rawdata;
     UITableViewCell *_mapCell;
 }
 @property (retain, nonatomic) IBOutlet UITableView *detailTableView;
@@ -27,6 +27,7 @@
 @property (strong, nonatomic) NSString *calo;
 
 // cell generators
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil WithRawData:(NSMutableDictionary *)data;
 - (UITableViewCell *)blankCell;
 - (UITableViewCell *)cellForLocationIndex:(NSInteger)index; // 8
 - (UITableViewCell *)cellForMapView;
