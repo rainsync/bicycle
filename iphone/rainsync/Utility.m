@@ -71,10 +71,14 @@
     
 }
 
-+(double)mpsTokph:(double)distance WithTime:(double)time
++(double)metreTokilometre:(double)metre
 {
-    return (distance/1000.0)/(time/60.0/60.0);
+    return metre/1000.0;
+    
 }
 
++(double)mpsTokph:(double)mps{
+    return mps*3.6;
+}
 
 @end

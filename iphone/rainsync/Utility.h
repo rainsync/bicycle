@@ -11,6 +11,7 @@
 @interface Utility : NSObject
 + (float)calculateCalorie:(float)avgSpd;
 +(NSString*)getStringTime:(double)time;
-+(double)mpsTokph:(double)distance WithTime:(double)time;
++(double)metreTokilometre:(double)metre;
++(double)mpsTokph:(double)mps;
 
 @end
