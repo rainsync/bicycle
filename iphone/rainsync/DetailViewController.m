@@ -15,14 +15,16 @@
 
 @implementation DetailViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil WithRawData:(NSMutableDictionary *)data
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         view = [NSNull null];
+        rawdata = data;
         // Custom initialization      
 //        self.navigationItem.rightBarButtonItem = self.editButtonItem;
     }
+    
     return self;
 }
 
@@ -47,50 +49,7 @@
     
     
 }
-- (void)loadView:(NSMutableDictionary *)rowData
-{
-    _day = [rowData objectForKey:@"day"];
-    _rectime = [rowData objectForKey:@"time"];
-    _dist = [rowData objectForKey:@"distance"];
-    _avgs = [rowData objectForKey:@"speed"];
-    _altit = [rowData objectForKey:@"altitude"];
-    _calo = [rowData objectForKey:@"calorie"];
-    
-    NSMutableArray * locations = [rowData objectForKey:@"locations"];
-    CLLocationCoordinate2D * coords = malloc([locations count]*sizeof(MKMapPoint));
-    
-    int i=0;
-    CLLocationCoordinate2D point;
-    CLLocationCoordinate2D mid;
-    //CLLocationCoordinate2D northEastPoint;
-    //CLLocationCoordinate2D southWestPoint;
-    
-    for (CLLocation *location in locations) {
-        point = location.coordinate;
-        if(i==0)
-            mid=point;
-        coords[i++] = point;
-        //point = MKMapPointForCoordinate(location.coordinate);
 
-        
-        //coords[i++]= point;
-
-            
-    }
-    
-    routeLine = [MKPolyline polylineWithCoordinates:coords count:[locations count]];
-    [self.mapView addOverlay:routeLine];
-//    //point.latitude /= [locations count];
-//    //point.longitude /= [locations count];
-    [self setMapCenter:mid];
-    
-    //MKMapRectMake(southWestPoint.x, southWestPoint.y, northEastPoint.x - southWestPoint.x, northEastPoint.y - southWestPoint.y);
-    
-    free(coords);
-    
-    
-    
-}
 
 - (void)viewDidLoad
 {
@@ -270,6 +229,7 @@
     // setup
     NSString *key = [keys objectAtIndex:index];
     NSString *ivar = @"";
+
     
     // look up the values, special case lat and long and timestamp but first, special case placemark being nil.
     if ([key isEqualToString:@"시작 시간"]) {
@@ -277,11 +237,12 @@
     }
     else if ([key isEqualToString:@"종료 시간"])
     {
-        ivar = _day;
+        ivar = [rawdata objectForKey:@"day"];
     }
     else if ([key isEqualToString:@"주행 시간"])
     {
-        int i_time = [_rectime intValue];
+        
+        int i_time = [rawdata objectForKey:@"time"];
         int sec = i_time%60;
         int min = i_time/60%60;
         int hour = i_time/60/60%24;
@@ -290,22 +251,22 @@
     }
     else if ([key isEqualToString:@"주행 거리"])
     {
-        double distance = [_dist doubleValue];
+        double distance = [[rawdata objectForKey:@"distance"] doubleValue];
         ivar = [NSString stringWithFormat:@"%.1f km", distance];
     }
     else if ([key isEqualToString:@"평균 속도"])
     {
-        double avgSpeed = [_avgs doubleValue];
+        double avgSpeed = [[rawdata objectForKey:@"speed"] doubleValue];
         ivar = [NSString stringWithFormat:@"%.1f km/h", avgSpeed];
     }
     else if ([key isEqualToString:@"최고 속도"])
     {
-        double maxSpeed = [_altit doubleValue];
+        double maxSpeed = [[rawdata objectForKey:@"altitude"] doubleValue];
         ivar = [NSString stringWithFormat:@"%.1f km/h", maxSpeed];
     }
     else if ([key isEqualToString:@"칼로리"])
     {
-        ivar = _calo;
+        ivar = [rawdata objectForKey:@"calorie"];
     }
 //    else
 //    {
@@ -331,6 +292,10 @@
     if (_mapCell)
         return _mapCell;
     
+    
+
+    
+    
     // if not cached, setup the map view...
     CGFloat cellWidth = self.view.bounds.size.width - 20;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -338,15 +303,53 @@
         cellWidth = self.view.bounds.size.width - 90;
     }
     
-    CGRect frame = CGRectMake(0, 0, cellWidth, 240);
-    _mapView = [[MKMapView alloc] initWithFrame:frame];
+
 //    MKCoordinateRegion region =  MKCoordinateRegionMakeWithDistance(self.placemark.location.coordinate, 200, 200);
 //    [map setRegion:region];
-        
+    CGRect frame = CGRectMake(0, 0, cellWidth, 240);
+    _mapView = [[MKMapView alloc] initWithFrame:frame];
+    _mapView.delegate =self;
+    
     _mapView.layer.masksToBounds = YES;
     _mapView.layer.cornerRadius = 10.0;
     _mapView.mapType = MKMapTypeStandard;
-    [_mapView setScrollEnabled:NO];
+    //[_mapView setScrollEnabled:NO];
+    
+    
+    
+    NSMutableArray * locations = [rawdata objectForKey:@"locations"];
+    CLLocationCoordinate2D * coords = malloc([locations count]*sizeof(MKMapPoint));
+    
+    int i=0;
+    CLLocationCoordinate2D point;
+    CLLocationCoordinate2D mid;
+    //CLLocationCoordinate2D northEastPoint;
+    //CLLocationCoordinate2D southWestPoint;
+    
+    for (CLLocation *location in locations) {
+        point = location.coordinate;
+        if(i==0)
+            mid=point;
+        coords[i++] = point;
+        //point = MKMapPointForCoordinate(location.coordinate);
+        
+        
+        //coords[i++]= point;
+        
+        
+    }
+    
+    routeLine = [MKPolyline polylineWithCoordinates:coords count:[locations count]];
+    [self.mapView addOverlay:routeLine];
+    //    //point.latitude /= [locations count];
+    //    //point.longitude /= [locations count];
+    [self setMapCenter:mid];
+    
+    //MKMapRectMake(southWestPoint.x, southWestPoint.y, northEastPoint.x - southWestPoint.x, northEastPoint.y - southWestPoint.y);
+    
+    free(coords);
+
+    
     
     // add a pin using self as the object implementing the MKAnnotation protocol
 //    [map addAnnotation:self];

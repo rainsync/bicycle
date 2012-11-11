@@ -159,12 +159,11 @@
 	NSLog(@"didSelectRowAtIndexPath : %d", row);
 	NSDictionary *rowData = [_recordings objectAtIndex:row];
 
-    DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil WithRawData:rowData];
     [self.navigationController pushViewController:detailViewController animated:YES];
     UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
     detailViewController.title = cell.textLabel.text;
     
-    [detailViewController loadView:rowData];
     
     
     [detailViewController release];
