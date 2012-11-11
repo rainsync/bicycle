@@ -42,11 +42,12 @@
     return self;
 }
 
-
-- (NSMutableArray*)getlocations
+//m/s
+-(double)avgSpeed
 {
-    return locations;
+    return _totalDistance/_time;
 }
+
 
 - (void)addTarget:(id)obj
 {
@@ -245,6 +246,7 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     
+    _current_location=newLocation;
     
     
     
@@ -267,8 +269,8 @@
 
     
     for (id obj in targets) {
-        if([obj respondsToSelector:@selector(locationManager:didUpdateToLocation:fromLocation:)])
-        [obj locationManager:self didUpdateToLocation:newLocation fromLocation:oldLocation];
+        if([obj respondsToSelector:@selector(locationManager:)])
+        [obj locationManager:self];
     }
     
 }

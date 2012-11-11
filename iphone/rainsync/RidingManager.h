@@ -36,7 +36,7 @@
 @property (nonatomic, readonly) double time;
 @property (nonatomic, readonly) double calorie;
 @property (nonatomic, readonly) double max_speed;
-
+@property (nonatomic, readonly) CLLocation *current_location;
 
 
 - (id)init;
@@ -46,7 +46,6 @@
 - (BOOL)isRiding;
 - (void)addTarget:(id)obj;
 + (RidingManager *)getInstance;
-- (NSMutableArray*)getlocations;
 - (double)avgSpeed;
 - (void)discard;
 
