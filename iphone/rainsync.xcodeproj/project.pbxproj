@@ -125,6 +125,7 @@
 		5591100E163825AE00B007CA /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 559110091638241500B007CA /* SettingViewController.m */; };
 		5591100F1638260200B007CA /* StaticViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55911005163823E100B007CA /* StaticViewController.xib */; };
 		559110101638260600B007CA /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5591100A1638241500B007CA /* SettingViewController.xib */; };
+		55CAB2A0165006FF0052AB2E /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CAB29F165006FF0052AB2E /* Utility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -274,6 +275,8 @@
 		559110081638241400B007CA /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		559110091638241500B007CA /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		5591100A1638241500B007CA /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		55CAB29E165006FF0052AB2E /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		55CAB29F165006FF0052AB2E /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -435,6 +438,8 @@
 				5517E9221647985400E2CDD3 /* RidingDB.m */,
 				558A5A301642389C00BC22ED /* Queue.h */,
 				558A5A311642389C00BC22ED /* Queue.m */,
+				55CAB29E165006FF0052AB2E /* Utility.h */,
+				55CAB29F165006FF0052AB2E /* Utility.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -793,6 +798,7 @@
 				04DC76B9164EECDF00289E27 /* PrettyShadowPlainTableview.m in Sources */,
 				04DC76BA164EECDF00289E27 /* PrettyTabBar.m in Sources */,
 				04DC76BB164EECDF00289E27 /* PrettyToolbar.m in Sources */,
+				55CAB2A0165006FF0052AB2E /* Utility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import "RidingDB.h"
+#import "Utility.h"
+
 @interface RidingManager : NSObject <CLLocationManagerDelegate, UIAlertViewDelegate>
 {
 
@@ -32,9 +34,10 @@
 
 @property (nonatomic, readonly) double totalDistance;
 @property (nonatomic, readonly) double time;
-@property (nonatomic, readonly) int calorie;
+@property (nonatomic, readonly) double calorie;
 @property (nonatomic, readonly) double max_speed;
--(NSString*) getTime;
+
+
 
 - (id)init;
 - (void)startRiding;

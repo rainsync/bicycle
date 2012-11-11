@@ -41,7 +41,7 @@
     else
         speedLabel.text = [NSString stringWithFormat:@"%.2f", location.speed * 3.6];
     
-    avgLabel.text = [NSString stringWithFormat:@"%.2f", [manager avgSpeed]];
+    avgLabel.text = [NSString stringWithFormat:@"%.2f", [Utility mpsTokph:[manager totalDistance]  WithTime:[manager time]]];
 
     
     //calorieLabel.text = [NSString stringWithFormat:@"%0.2lf", weight * [self calculateCalorie:[manager avgSpeed] ] * ([manager time]/60.0)];
@@ -56,7 +56,7 @@
 - (void)updateTime:(RidingManager*)manager
 {
 
-    timeLabel.text = [manager getTime];
+    timeLabel.text = [Utility getStringTime:[manager time]];
     
 }
 
@@ -156,13 +156,13 @@
 
             speedLabel.text = @"00.0";
 
-            avgLabel.text = [NSString stringWithFormat:@"%.2f", [ridingManager avgSpeed]];
+            avgLabel.text = [NSString stringWithFormat:@"%.2f", [Utility mpsTokph:[ridingManager totalDistance]  WithTime:[ridingManager time]] ];
             
             
             calorieLabel.text = [NSString stringWithFormat:@"%0.2lf",[ridingManager calorie]];
             distanceLabel.text = [NSString stringWithFormat:@"%0.2lf", [ridingManager totalDistance]/1000.0f];
             
-            [self updateTime:[ridingManager time]];
+            [self updateTime:ridingManager];
             
             
             

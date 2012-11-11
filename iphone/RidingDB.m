@@ -106,7 +106,7 @@
        
        //(ID INTEGER PRIMARY KEY, LATITUDE REAL, LONGITUDE REAL, ALTITUDE REAL, TIME_STAMP INTEGER, FOREIGN KEY(ID) REFERENCES RIDINGS (ID))
        for (CLLocation * location in locations) {
-           sqlite3_stmt *statement2 = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO LOCATION (ID, LATITUDE, LONGITUDE, ALTITUDE, TIME_STAMP) VALUES (\"%d\", \"%f\", \"%f\", \"%f\", \"%f\")", row_id, location.coordinate.latitude, location.coordinate.longitude, location.altitude, [location.timestamp timeIntervalSince1970]]];
+           sqlite3_stmt *statement2 = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO LOCATION (ID, LATITUDE, LONGITUDE, ALTITUDE, TIME_STAMP) VALUES (%d, %lf, %lf, %lf, %lf)", row_id, location.coordinate.latitude, location.coordinate.longitude, location.altitude, [location.timestamp timeIntervalSince1970]]];
            
            
            int code= sqlite3_step(statement2);
@@ -160,7 +160,7 @@
     int result=0;
     const char *dbpath = [databasePath UTF8String];
  
-        statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO RIDINGS (day, time, distance, speed, calorie) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", [form stringFromDate:date], [manager time], [manager totalDistance], [manager avgSpeed], [manager calorie]]];
+        statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO RIDINGS (day, time, distance, speed, calorie) VALUES (\"%@\", \"%@\", %lf, %lf, %d)", [form stringFromDate:date], [manager getTime], [manager totalDistance], [manager avgSpeed], [manager calorie]]];
         
         if (sqlite3_step(statement) == SQLITE_DONE) {
             NSLog(@"Record Added");

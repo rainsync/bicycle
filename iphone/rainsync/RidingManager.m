@@ -140,17 +140,6 @@
     
 }
 
--(NSString*)getTime
-{
-    int i_time = (int)time;
-    int sec = i_time%60;
-    int min = i_time/60%60;
-    int hour = i_time/60/60%24;
-    
-    
-    return [NSString stringWithFormat:@"%02d:%02d:%02d", hour, min, sec];
-    
-}
 
 - (void)checkTime:(NSTimer *)timer {
     
@@ -249,64 +238,8 @@
 
 }
 
-//km/h
-- (double)avgSpeed
-{
-    //total distance = m
-    //time = h
-    return (_totalDistance/1000.0)/(_time/60.0/60.0);
-    
-    
-}
 
 
-- (float)calculateCalorie:(float)avgSpd {
-    float kcalConstant = 0.0f;
-    if (avgSpd <=1){
-        kcalConstant = 0;
-    }
-    else if (avgSpd <= 13) {
-        kcalConstant = 0.065f;
-    }
-    else if (avgSpd <= 16) {
-        kcalConstant = 0.0783f;
-    }
-    else if (avgSpd <= 19) {
-        kcalConstant = 0.0939f;
-    }
-    else if (avgSpd <= 22) {
-        kcalConstant = 0.113f;
-    }
-    else if (avgSpd <= 24) {
-        kcalConstant = 0.124f;
-    }
-    else if (avgSpd <= 26) {
-        kcalConstant = 0.136f;
-    }
-    else if (avgSpd <= 27) {
-        kcalConstant = 0.149f;
-    }
-    else if (avgSpd <= 29) {
-        kcalConstant = 0.163f;
-    }
-    else if (avgSpd <= 31) {
-        kcalConstant = 0.179f;
-    }
-    else if (avgSpd <= 32) {
-        kcalConstant = 0.196f;
-    }
-    else if (avgSpd <= 34) {
-        kcalConstant = 0.215f;
-    }
-    else if (avgSpd <= 37) {
-        kcalConstant = 0.259f;
-    }
-    else {  // avgSpeed 40km/h 이상
-        kcalConstant = 0.311f;
-    }
-    
-    return kcalConstant;
-}
 
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
@@ -328,7 +261,7 @@
     if(oldLocation){
         _totalDistance += [oldLocation distanceFromLocation:newLocation];
         if([oldLocation speed])
-        _calorie += weight * (([[newLocation timestamp] timeIntervalSince1970]-[[oldLocation timestamp] timeIntervalSince1970])/60.0) * [self calculateCalorie:[oldLocation speed]*3.6];
+        _calorie += weight * (([[newLocation timestamp] timeIntervalSince1970]-[[oldLocation timestamp] timeIntervalSince1970])/60.0) * [Utility calculateCalorie:[oldLocation speed]*3.6];
         
     }
 
