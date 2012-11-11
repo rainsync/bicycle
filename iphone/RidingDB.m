@@ -150,16 +150,13 @@
     [form setDateStyle:NSDateFormatterFullStyle];
     [form setTimeStyle:NSDateFormatterShortStyle];
     
-//    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ko_KR"];
-//    [form setLocale:locale];
-//    NSLog(@"%@", [form stringFromDate:date]);
-    // set Date data
+
     
     sqlite3_stmt *statement;
 
     //(ID INTEGER PRIMARY KEY AUTOINCREMENT, START_DATE REAL, END_DATE REAL, TIME REAL, DISTANCE REAL, SPEED REAL, MAX_SPEED REAL, CALORIE REAL)
     
-        statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO RIDINGS (start_date,end_date, time, distance, speed, calorie) VALUES (%lf, %lf, %lf, %lf, %lf,%lf, %lf)", [manager start_date], [[NSDate date] timeIntervalSince1970], [manager time], [manager totalDistance], [manager avgSpeed], [manager max_speed], [manager calorie]]];
+        statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO RIDINGS (start_date,end_date, time, distance, speed,max_speed, calorie) VALUES (%lf, %lf, %lf, %lf, %lf,%lf, %lf)", [manager start_date], [[NSDate date] timeIntervalSince1970], [manager time], [manager totalDistance], [manager avgSpeed], [manager max_speed], [manager calorie]]];
         
         if (sqlite3_step(statement) == SQLITE_DONE) {
             NSLog(@"Record Added");
