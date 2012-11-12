@@ -55,7 +55,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    _detailTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    UIView* bview = [[UIView alloc] init];
+    bview.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    [_detailTableView setBackgroundView:bview];
+    [bview release];
     _detailTableView.separatorColor = [UIColor blackColor];
 }
 

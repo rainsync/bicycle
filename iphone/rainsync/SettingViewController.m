@@ -33,9 +33,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    _settingTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
-
+    UIView* bview = [[UIView alloc] init];
+    bview.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    [_settingTableView setBackgroundView:bview];
+    [bview release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,6 +64,17 @@
     }
     
     return 0;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSArray *titles;
+    titles = [NSArray arrayWithObjects:
+              @"몸무게",                                      //map
+              @"지도 설정",               //location
+              nil];
+    
+    return [titles objectAtIndex:section];
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
