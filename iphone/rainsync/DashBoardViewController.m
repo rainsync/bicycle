@@ -83,8 +83,8 @@
     avgLabel.text = @"00.0";
     speedLabel.text = @"00.0";
     calorieLabel.text = @"0.00";
-    [self.stopButton setHidden:true];
-    
+    [self.stopButton setEnabled:NO];
+    [self.stopLabel setAlpha:0.5f];
     
     
 }
@@ -94,10 +94,12 @@
     
     if(!paused){
         paused=true;
-        [self.statusButton setImage:[UIImage imageNamed:@"pauseSingleRiding"] forState:UIControlStateNormal];
         [ridingManager loadStatus];
         [ridingManager startRiding];
-        [self.stopButton setHidden:false];
+        [self.statusButton setImage:[UIImage imageNamed:@"pause_SingleRiding"] forState:UIControlStateNormal];
+        [self.statusLabel setText:@"멈추기"];
+        [self.stopButton setEnabled:NO];
+        [self.stopLabel setAlpha:0.5f];
         
     }else{
         
@@ -105,9 +107,9 @@
         
         paused =false;
         [self.statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
-        
-        [self.stopButton setHidden:true];
-        
+        [self.statusLabel setText:@"달리기"];
+        [self.stopButton setEnabled:YES];
+        [self.stopLabel setAlpha:1.0f];
     }
 }
 
@@ -117,7 +119,7 @@
     
 
     // Do any additional setup after loading the view from its nib.
-    
+
     
 }
 
@@ -133,7 +135,10 @@
         [view release];
         
     }
-    
+    else {
+        [_stopButton setEnabled:NO];    // 처음 시작이면 정지버튼 비활성
+        [_stopLabel setAlpha:0.5f];
+    }
     paused = false;
 
     
@@ -173,6 +178,8 @@
     [_stopButton release];
     [_statusButton release];
     [distanceLabel release];
+    [_statusLabel release];
+    [_stopLabel release];
     [super dealloc];
 }
 
@@ -190,6 +197,9 @@
     [self setStatusButton:nil];
     [self setStopButton:nil];
     [self setDistanceLabel:nil];
+    [self setStatusLabel:nil];
+    [self setStopLabel:nil];
     [super viewDidUnload];
 }
+
 @end
