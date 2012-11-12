@@ -110,7 +110,10 @@
         
         
     }
-    weight =50;
+    weight =[[NSUserDefaults standardUserDefaults] doubleForKey:@"weight"];
+    if(weight==0)
+        weight=50;
+    
     
 }
 
@@ -137,9 +140,43 @@
 - (void)startRiding
 {
 
-        
+    
     oldt=[[NSDate date] timeIntervalSince1970];
     //[locmanager set]
+    int accuracy=[[NSUserDefaults standardUserDefaults] integerForKey:@"gps_opt"];
+    switch (accuracy) {
+        case 1:
+            accuracy = kCLLocationAccuracyBestForNavigation;
+            break;
+        
+            
+        default:
+        case 0:
+        case 2:
+            accuracy = kCLLocationAccuracyBest;
+            break;
+        
+        case 3:
+            accuracy = kCLLocationAccuracyNearestTenMeters;
+            break;
+            
+        case 4:
+            accuracy = kCLLocationAccuracyHundredMeters;
+            break;
+            
+        case 5:
+            accuracy = kCLLocationAccuracyKilometer;
+            break;
+        
+        case 6:
+            accuracy = kCLLocationAccuracyThreeKilometers;
+            break;
+        
+    }
+    
+    
+    [locmanager setDesiredAccuracy:accuracy];
+    
     [locmanager startUpdatingLocation];
     [locmanager startUpdatingHeading];
     
