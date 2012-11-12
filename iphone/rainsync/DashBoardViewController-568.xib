@@ -155,7 +155,7 @@
 						<string key="NSFrame">{{191, 430}, {32, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="133821951"/>
+						<reference key="NSNextKeyView" ref="150385347"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -229,7 +229,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">CURRENT PACE</string>
+						<string key="IBUIText">현재 속도</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -255,7 +255,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">AVG SPEED</string>
+						<string key="IBUIText">평균 속도</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -281,7 +281,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">DISTANCE</string>
+						<string key="IBUIText">주행 거리</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -306,7 +306,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">CALORIES</string>
+						<string key="IBUIText">칼로리</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -621,12 +621,13 @@
 							<string key="NSResourceName">cyc.png</string>
 						</object>
 					</object>
-					<object class="IBUILabel" id="133821951">
+					<object class="IBUILabel" id="150385347">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{59, 479}, {21, 15}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -767,7 +768,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">stopLabel</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="133821951"/>
+						<reference key="destination" ref="150385347"/>
 					</object>
 					<int key="connectionID">113</int>
 				</object>
@@ -825,7 +826,7 @@
 							<reference ref="542242123"/>
 							<reference ref="117803799"/>
 							<reference ref="468004167"/>
-							<reference ref="133821951"/>
+							<reference ref="150385347"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -963,7 +964,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">111</int>
-						<reference key="object" ref="133821951"/>
+						<reference key="object" ref="150385347"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -1012,6 +1013,20 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">DashBoardViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="statusChanged:">id</string>
+						<string key="stopRiding:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="statusChanged:">
+							<string key="name">statusChanged:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="stopRiding:">
+							<string key="name">stopRiding:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="avgLabel">UILabel</string>
 						<string key="calorieLabel">UILabel</string>
