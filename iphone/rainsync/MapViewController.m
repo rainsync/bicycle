@@ -25,8 +25,6 @@
         route_lines = [[NSMutableArray alloc]init];
         route_views = [[NSMutableArray alloc]init];
         
-        my_loc =nil;
-    
         RidingManager *ridingManager =[RidingManager getInstance];
          [ridingManager addTarget:self];
         
@@ -86,6 +84,7 @@
     {
         prev_line = [[CrumbPath alloc] initWithCenterCoordinate:newLocation.coordinate];
         [self.mapView addOverlay:prev_line];
+        [route_lines replaceObjectAtIndex:pos withObject:prev_line];
     }else{
     
         MKMapRect updateRect = [prev_line addCoordinate:newLocation.coordinate];
@@ -108,7 +107,7 @@
     
     
     
-    [route_lines replaceObjectAtIndex:pos withObject:prev_line];
+    //[route_lines replaceObjectAtIndex:pos withObject:prev_line];
     
     
 }
@@ -119,8 +118,10 @@
     
     int num= [self getUserNum:@"me"];
     [self addPoint:num withLocation:[manager current_location]];
+    
         
 }
+
 
 - (void) RidingStopped
 {
@@ -184,6 +185,7 @@
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
 {
+
 	MKOverlayView* overlayView = nil;
 	
     for(int i=0; i<[route_lines count]; ++i){
