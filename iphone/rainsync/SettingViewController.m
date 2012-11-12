@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 #import "PrettyKit.h"
+#import "GpsOptionTableView.h"
 
 #define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"-568":@""]
 
@@ -211,6 +212,9 @@
             switch (indexPath.row) {
                 case 0:
                     NSLog(@"gps 옵션 설정");
+                    GpsOptionTableView *gpsTableView = [[GpsOptionTableView alloc] initWithNibName:@"GpsOptionTableView" bundle:nil];
+                    [self.navigationController pushViewController:gpsTableView animated:YES];
+                    [gpsTableView release];
                     break;
                 case 1:
                     NSLog(@"주행 중 경로선 옵션 설정");
