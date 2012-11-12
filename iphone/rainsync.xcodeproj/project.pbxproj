@@ -26,7 +26,7 @@
 		04C3C07E164BDF8600047992 /* facebookBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3C07D164BDF8600047992 /* facebookBtn.png */; };
 		04D00614164C21EA00064370 /* compass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D00613164C21EA00064370 /* compass@2x.png */; };
 		04DC7693164EE9C700289E27 /* startSingleRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DC7691164EE9C700289E27 /* startSingleRiding@2x.png */; };
-		04DC7694164EE9C700289E27 /* pauseSingleRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DC7692164EE9C700289E27 /* pauseSingleRiding@2x.png */; };
+		04DC7694164EE9C700289E27 /* stopSingleRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DC7692164EE9C700289E27 /* stopSingleRiding@2x.png */; };
 		04DC7698164EEA8000289E27 /* stopSwitch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DC7696164EEA8000289E27 /* stopSwitch@2x.png */; };
 		04DC7699164EEA8000289E27 /* stopButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DC7697164EEA8000289E27 /* stopButton@2x.png */; };
 		04DC76B3164EECDF00289E27 /* PrettyCustomViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC76A1164EECDF00289E27 /* PrettyCustomViewTableViewCell.m */; };
@@ -45,6 +45,8 @@
 		04E3BB2D1650DE03001D8745 /* cyc.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB2C1650DE03001D8745 /* cyc.png */; };
 		04E3BB471651025F001D8745 /* GpsOptionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E3BB451651025E001D8745 /* GpsOptionTableView.m */; };
 		04E3BB481651025F001D8745 /* GpsOptionTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB461651025E001D8745 /* GpsOptionTableView.xib */; };
+		04E3BB5316512256001D8745 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3C075164BD8EF00047992 /* Default-568h@2x.png */; };
+		04E3BB57165128FE001D8745 /* pause_SingleRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB56165128FE001D8745 /* pause_SingleRiding@2x.png */; };
 		04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */; };
 		04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */; };
 		04EC923C1641183100E99EB5 /* ProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC923A1641183100E99EB5 /* ProfileEditViewController.m */; };
@@ -168,7 +170,7 @@
 		04C3C07D164BDF8600047992 /* facebookBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebookBtn.png; sourceTree = "<group>"; };
 		04D00613164C21EA00064370 /* compass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compass@2x.png"; sourceTree = "<group>"; };
 		04DC7691164EE9C700289E27 /* startSingleRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startSingleRiding@2x.png"; sourceTree = "<group>"; };
-		04DC7692164EE9C700289E27 /* pauseSingleRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pauseSingleRiding@2x.png"; sourceTree = "<group>"; };
+		04DC7692164EE9C700289E27 /* stopSingleRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stopSingleRiding@2x.png"; sourceTree = "<group>"; };
 		04DC7696164EEA8000289E27 /* stopSwitch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stopSwitch@2x.png"; sourceTree = "<group>"; };
 		04DC7697164EEA8000289E27 /* stopButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stopButton@2x.png"; sourceTree = "<group>"; };
 		04DC76A0164EECDF00289E27 /* PrettyCustomViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrettyCustomViewTableViewCell.h; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 		04E3BB441651025E001D8745 /* GpsOptionTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GpsOptionTableView.h; sourceTree = "<group>"; };
 		04E3BB451651025E001D8745 /* GpsOptionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GpsOptionTableView.m; sourceTree = "<group>"; };
 		04E3BB461651025E001D8745 /* GpsOptionTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GpsOptionTableView.xib; sourceTree = "<group>"; };
+		04E3BB56165128FE001D8745 /* pause_SingleRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause_SingleRiding@2x.png"; sourceTree = "<group>"; };
 		04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
 		04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
 		04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteUserViewController.xib; sourceTree = "<group>"; };
@@ -355,7 +358,8 @@
 			isa = PBXGroup;
 			children = (
 				04DC7691164EE9C700289E27 /* startSingleRiding@2x.png */,
-				04DC7692164EE9C700289E27 /* pauseSingleRiding@2x.png */,
+				04E3BB56165128FE001D8745 /* pause_SingleRiding@2x.png */,
+				04DC7692164EE9C700289E27 /* stopSingleRiding@2x.png */,
 				045B565D164A5481005CEC8A /* statusbar.png */,
 				045B565E164A5481005CEC8A /* nowRiding.png */,
 				045B565F164A5481005CEC8A /* background.png */,
@@ -742,7 +746,7 @@
 				047AD61E164D1FDE00983365 /* teamRiding@2x.png in Resources */,
 				047AD61F164D1FDE00983365 /* singleRiding@2x.png in Resources */,
 				04DC7693164EE9C700289E27 /* startSingleRiding@2x.png in Resources */,
-				04DC7694164EE9C700289E27 /* pauseSingleRiding@2x.png in Resources */,
+				04DC7694164EE9C700289E27 /* stopSingleRiding@2x.png in Resources */,
 				04DC7698164EEA8000289E27 /* stopSwitch@2x.png in Resources */,
 				04DC7699164EEA8000289E27 /* stopButton@2x.png in Resources */,
 				04E3BB201650CD1B001D8745 /* icon.png in Resources */,
@@ -752,6 +756,8 @@
 				55B1D8051650FA930032D86C /* DashBoardViewController-568.xib in Resources */,
 				55B1D8071650FAB30032D86C /* FirstSettingViewController-568.xib in Resources */,
 				04E3BB481651025F001D8745 /* GpsOptionTableView.xib in Resources */,
+				04E3BB5316512256001D8745 /* Default-568h@2x.png in Resources */,
+				04E3BB57165128FE001D8745 /* pause_SingleRiding@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -943,6 +949,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/rainsync.app/rainsync";
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -1059,6 +1066,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/rainsync.app/rainsync";
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -1076,6 +1084,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/rainsync.app/rainsync";
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",

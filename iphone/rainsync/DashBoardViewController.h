@@ -23,5 +23,7 @@
 @property (retain, nonatomic) IBOutlet UILabel *calorieLabel;
 @property (retain, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (retain, nonatomic) IBOutlet UIButton *stopButton;
+@property (retain, nonatomic) IBOutlet UILabel *stopLabel;
 @property (retain, nonatomic) IBOutlet UIButton *statusButton;
+@property (retain, nonatomic) IBOutlet UILabel *statusLabel;
 @end
