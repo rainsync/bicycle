@@ -13,7 +13,7 @@
 
 @interface RidingDB : NSObject{
     sqlite3 *ridingDB;
-    NSString *databasePath; // db파일 경로
+
 }
 - (void)saveRecording:(RidingDB *)manager;
 
