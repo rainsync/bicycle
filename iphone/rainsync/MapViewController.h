@@ -15,12 +15,12 @@
 @interface MapViewController : UIViewController <MKMapViewDelegate, UIActionSheetDelegate>
 {
 
-    RidingManager *ridingManager;
+
     NSMutableArray *users;
     NSMutableArray *route_lines;
     NSMutableArray *route_views;
     NSArray *line_color;
-    CLLocation * my_loc;
+
     
     BOOL isHeading;
 }
