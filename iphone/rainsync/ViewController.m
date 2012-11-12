@@ -13,6 +13,8 @@
 
 @end
 
+#define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"~568":@""]
+
 @implementation ViewController
 
 - (id)init
@@ -33,7 +35,7 @@
     UINavigationController *profileNavController = [[UINavigationController alloc] initWithRootViewController:profile];
     [profileNavController setValue:[[[PrettyNavigationBar alloc] init] autorelease] forKeyPath:@"navigationBar"];
     
-    StaticViewController* statics = [[StaticViewController alloc]initWithNibName:@"StaticViewController" bundle:nil];
+    StaticViewController* statics = [[StaticViewController alloc]initWithNibName:getNibName(@"StaticViewController") bundle:nil];
     UINavigationController *staticsNavController = [[UINavigationController alloc] initWithRootViewController:statics];
     [staticsNavController setValue:[[[PrettyNavigationBar alloc] init] autorelease] forKeyPath:@"navigationBar"];
     

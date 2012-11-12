@@ -116,12 +116,17 @@
     
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n%@", recordTime, recordDistance];
     cell.detailTextLabel.textColor = [UIColor colorWithWhite:1.0 alpha:0.6f];
-    cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+    cell.detailTextLabel.backgroundColor = [UIColor blackColor];
     cell.detailTextLabel.numberOfLines = 2;
     cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.tag = row;
     
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, tableView.rowHeight + [PrettyCustomViewTableViewCell tableView:tableView neededHeightForIndexPath:indexPath]-4, self.view.bounds.size.width, 2)];
+    lineView.backgroundColor = [UIColor blackColor];
+    [cell.contentView addSubview:lineView];
+    [lineView release]; // 셀 구분지점에 검은색 줄 삽입
+        
     return cell;
 }
 
