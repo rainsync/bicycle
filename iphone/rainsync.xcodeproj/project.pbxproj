@@ -44,6 +44,9 @@
 		04E3BB211650CD1B001D8745 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB1F1650CD1B001D8745 /* icon@2x.png */; };
 		04E3BB251650D025001D8745 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB241650D025001D8745 /* background@2x.png */; };
 		04E3BB271650D03C001D8745 /* background-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB261650D03C001D8745 /* background-568h@2x.png */; };
+		04E3BB2D1650DE03001D8745 /* cyc.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB2C1650DE03001D8745 /* cyc.png */; };
+		04E3BB331650E6AA001D8745 /* FirstSettingViewController~568.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB321650E6A9001D8745 /* FirstSettingViewController~568.xib */; };
+		04E3BB341650E744001D8745 /* FirstSettingViewController~568.xib in Sources */ = {isa = PBXBuildFile; fileRef = 04E3BB321650E6A9001D8745 /* FirstSettingViewController~568.xib */; };
 		04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */; };
 		04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */; };
 		04EC923C1641183100E99EB5 /* ProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC923A1641183100E99EB5 /* ProfileEditViewController.m */; };
@@ -191,6 +194,8 @@
 		04E3BB1F1650CD1B001D8745 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		04E3BB241650D025001D8745 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		04E3BB261650D03C001D8745 /* background-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-568h@2x.png"; sourceTree = "<group>"; };
+		04E3BB2C1650DE03001D8745 /* cyc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cyc.png; sourceTree = "<group>"; };
+		04E3BB321650E6A9001D8745 /* FirstSettingViewController~568.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FirstSettingViewController~568.xib"; sourceTree = "<group>"; };
 		04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
 		04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
 		04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteUserViewController.xib; sourceTree = "<group>"; };
@@ -326,6 +331,7 @@
 		0457895A16426692008E56CA /* icon */ = {
 			isa = PBXGroup;
 			children = (
+				04E3BB2C1650DE03001D8745 /* cyc.png */,
 				047AD61C164D1FDE00983365 /* teamRiding@2x.png */,
 				047AD61D164D1FDE00983365 /* singleRiding@2x.png */,
 				04D00613164C21EA00064370 /* compass@2x.png */,
@@ -363,6 +369,7 @@
 				0483FE1B163E5FA8005D804F /* FirstSettingViewController.h */,
 				0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */,
 				0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */,
+				04E3BB321650E6A9001D8745 /* FirstSettingViewController~568.xib */,
 			);
 			name = FirstUserView;
 			sourceTree = "<group>";
@@ -419,9 +426,9 @@
 			children = (
 				55911003163823E000B007CA /* StaticViewController.h */,
 				55911004163823E000B007CA /* StaticViewController.m */,
-				55911005163823E100B007CA /* StaticViewController.xib */,
 				04F7CD74164938E000D2866D /* DetailViewController.h */,
 				04F7CD75164938E000D2866D /* DetailViewController.m */,
+				55911005163823E100B007CA /* StaticViewController.xib */,
 				04F7CD76164938E100D2866D /* DetailViewController.xib */,
 			);
 			name = "Statics Menu";
@@ -733,6 +740,8 @@
 				04E3BB211650CD1B001D8745 /* icon@2x.png in Resources */,
 				04E3BB251650D025001D8745 /* background@2x.png in Resources */,
 				04E3BB271650D03C001D8745 /* background-568h@2x.png in Resources */,
+				04E3BB2D1650DE03001D8745 /* cyc.png in Resources */,
+				04E3BB331650E6AA001D8745 /* FirstSettingViewController~568.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,6 +783,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E3BB341650E744001D8745 /* FirstSettingViewController~568.xib in Sources */,
 				558A5A3316423F5E00BC22ED /* Queue.h in Sources */,
 				558A5A3416423F5E00BC22ED /* Queue.m in Sources */,
 				5591100E163825AE00B007CA /* SettingViewController.m in Sources */,

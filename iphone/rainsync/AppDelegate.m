@@ -12,6 +12,9 @@
 #import "DashBoardViewController.h"
 #import "FirstSettingViewController.h"
 
+
+#define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"~568":@""]
+
 @implementation AppDelegate
 
 - (void)dealloc
@@ -51,7 +54,8 @@
     
     NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:@"token"];
     if(!token){
-        FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:@"FirstSettingViewController" bundle:nil];
+        NSLog(@"%@", getNibName(@"FirstSettingViewController"));
+        FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:getNibName(@"FirstSettingViewController") bundle:nil];
 //        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:firstSettingViewController];
 //        [navController.navigationBar setBarStyle:UIBarStyleBlack];
         

@@ -7,6 +7,7 @@
 //
 
 #import "DashBoardViewController.h"
+#import "PrettyKit.h"
 
 @interface DashBoardViewController ()
 
@@ -113,6 +114,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // 4 inch case
+    if ([UIScreen mainScreen].bounds.size.height == 568) {
+        PrettyToolbar *toolbar = [[PrettyToolbar alloc] initWithFrame:CGRectMake(0, -90, 320, 44)];
+        UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cyc"]];
+        [toolbar insertSubview:logo atIndex:0];
+        [logo setFrame:CGRectMake(toolbar.bounds.size.width/2 - 20 , 10, 40, 27)];
+        [self.view addSubview:toolbar];
+        [toolbar release];
+        [self.view setBounds:CGRectMake(0, -90, self.view.frame.size.width, self.view.frame.size.height)];
+    }
+    
     
     // Do any additional setup after loading the view from its nib.
     
