@@ -29,7 +29,7 @@
         UIImage *img = [UIImage imageNamed:@"staticIcon"];
         [self.tabBarItem setImage:img];
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
-        _recordings = [ridingdb loadDB]; // Database loaded
+        _recordings = nil;
         // Custom initialization
     }
     return self;
@@ -39,7 +39,7 @@
 {
     [super dealloc];
     [ridingdb release];
-    [_recordings release];
+
 }
 
 - (void)viewDidLoad
@@ -56,7 +56,10 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
+    if(_recordings)
+        [_recordings release];
+    
+    _recordings = [ridingdb loadDB]; // Database loaded
     [self.tableView reloadData];
 }
 

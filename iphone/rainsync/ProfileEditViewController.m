@@ -94,6 +94,7 @@
     if (error) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save failed" message:@"Failed to save image" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
+        [alert release];
     }
 }
 

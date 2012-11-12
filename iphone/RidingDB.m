@@ -19,6 +19,7 @@
     // db 생성 및 확인
     NSString *docsDir;
     NSArray *dirPaths;
+    NSString *databasePath; // db파일 경로
     
     // documents 디렉토리 확인하기
     dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -70,7 +71,16 @@
         
     }
     
+    [databasePath release];
+    
     return self;
+}
+
+-(void)dealloc
+{
+    [super dealloc];
+    sqlite3_close(ridingDB);
+    
 }
 
 
@@ -110,7 +120,7 @@
            
            int code= sqlite3_step(statement2);
            NSLog(@"code %d %f %f", code, location.coordinate.latitude, location.coordinate.longitude);
-           //sqlite3_finalize(statement);
+           sqlite3_finalize(statement2);
        }
 
        
@@ -139,7 +149,7 @@
         
     }
     
-    
+    sqlite3_finalize(statement);
 }
 
 - (void)saveRecording:(RidingManager*)manager {
@@ -217,7 +227,7 @@
                 [dic setObject:[[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 6)] autorelease] forKey:@"max_speed"];
                 [dic setObject:[[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 7)] autorelease] forKey:@"calorie"];
             
-                NSLog(@"rc %d", [[dic objectForKey:@"speed"] retainCount]);
+
                 
 
                 //(ID INTEGER PRIMARY KEY, LATITUDE REAL, LONGITUDE REAL, ALTITUDE REAL, TIME_STAMP REAL

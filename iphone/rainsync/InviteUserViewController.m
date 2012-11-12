@@ -31,6 +31,7 @@
     // Do any additional setup after loading the view from its nib.
     NSArray *array = [[NSArray alloc] initWithObjects:@"김승원", @"노연재", @"최태양", nil];
     self.listData = array;
+    [array release];
     
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
