@@ -144,12 +144,7 @@
 
 - (void)saveRecording:(RidingManager*)manager {
     
-    NSDate *date = [NSDate date];
-    NSDateFormatter *form = [[NSDateFormatter alloc] init];
-    
-    [form setDateStyle:NSDateFormatterFullStyle];
-    [form setTimeStyle:NSDateFormatterShortStyle];
-    
+
 
     
     sqlite3_stmt *statement;
@@ -200,19 +195,9 @@
 - (NSMutableArray *)loadDB {
     NSMutableArray *db = [[NSMutableArray alloc] init];
     
-    // db 생성및확인
-    NSString *docsDir;
-    NSArray *dirPaths;
-    
-    // documents 디렉토리확인하기
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = [dirPaths objectAtIndex:0];
-    
-    databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"ridings.db"]];
-    
-
     sqlite3_stmt *statement;
 
+    
 
     //(ID INTEGER PRIMARY KEY AUTOINCREMENT, START_DATE REAL, END_DATE REAL, TIME REAL, DISTANCE REAL, SPEED REAL, MAX_SPEED REAL, CALORIE REAL)
     
@@ -223,16 +208,18 @@
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
                 int riding_id = sqlite3_column_int(statement, 0);
-                [dic setObject:[[NSNumber alloc]initWithInt:riding_id] forKey:@"id"];
-                [dic setObject:[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 1)] forKey:@"start_date"];
-                [dic setObject:[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 2)] forKey:@"end_date"];
-                [dic setObject:[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 3)] forKey:@"time"];
-                [dic setObject:[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 4)] forKey:@"distance"];
-                [dic setObject:[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 5)] forKey:@"speed"];
-                [dic setObject:[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 6)] forKey:@"max_speed"];
-                [dic setObject:[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 7)] forKey:@"calorie"];
+                [dic setObject:[[[NSNumber alloc]initWithInt:riding_id] autorelease] forKey:@"id"];
+                [dic setObject:[[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 1)] autorelease] forKey:@"start_date"];
+                [dic setObject:[[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 2)] autorelease] forKey:@"end_date"];
+                [dic setObject:[[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 3)] autorelease] forKey:@"time"];
+                [dic setObject:[[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 4)] autorelease] forKey:@"distance"];
+                [dic setObject:[[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 5)] autorelease] forKey:@"speed"];
+                [dic setObject:[[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 6)] autorelease] forKey:@"max_speed"];
+                [dic setObject:[[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 7)] autorelease] forKey:@"calorie"];
+            
+                NSLog(@"rc %d", [[dic objectForKey:@"speed"] retainCount]);
                 
-                
+
                 //(ID INTEGER PRIMARY KEY, LATITUDE REAL, LONGITUDE REAL, ALTITUDE REAL, TIME_STAMP REAL
                   
                 sqlite3_stmt *statement2 =[self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"SELECT * FROM location WHERE ID=%d ORDER BY TIME_STAMP ASC", riding_id]];
@@ -241,13 +228,18 @@
                     double lat = sqlite3_column_double(statement2, 1);
                     double lng = sqlite3_column_double(statement2, 2);
                     double alti = sqlite3_column_double(statement2, 3);
-                    [locations addObject:[[CLLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(lat, lng) altitude:alti horizontalAccuracy:0 verticalAccuracy:0 course:0 speed:0 timestamp:[NSDate date]]];
+                    [locations addObject:[[[CLLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(lat, lng) altitude:alti horizontalAccuracy:0 verticalAccuracy:0 course:0 speed:0 timestamp:[NSDate date]] autorelease]];
                      
                 }
+                sqlite3_finalize(statement2);
+
                 [dic setObject:locations forKey:@"locations"];
+                [locations release];
                 
-                //NSString *timeField = [[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
+                
                 [db addObject:dic];
+                [dic release];
+                
                 
             }            
         }
@@ -256,6 +248,7 @@
         }
         sqlite3_finalize(statement);
 
+    
     
     return db;
 }

@@ -29,7 +29,7 @@
         UIImage *img = [UIImage imageNamed:@"staticIcon"];
         [self.tabBarItem setImage:img];
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
-        
+        _recordings = [ridingdb loadDB]; // Database loaded
         // Custom initialization
     }
     return self;
@@ -39,6 +39,7 @@
 {
     [super dealloc];
     [ridingdb release];
+    [_recordings release];
 }
 
 - (void)viewDidLoad
@@ -56,11 +57,9 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-    
-
-    _recordings = [ridingdb loadDB]; // Database loaded
     [self.tableView reloadData];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -172,6 +171,7 @@
 	NSDictionary *rowData = [_recordings objectAtIndex:row];
 
     DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil WithRawData:rowData];
+    
     [self.navigationController pushViewController:detailViewController animated:YES];
     UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
     detailViewController.title = cell.textLabel.text;
