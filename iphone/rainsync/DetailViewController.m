@@ -281,9 +281,9 @@
 //    }
     
     // set cell attributes
-    cell.backgroundColor = [UIColor whiteColor];
+    cell.backgroundColor = [UIColor blackColor];
     cell.textLabel.text = key;
-    cell.textLabel.textColor = [UIColor blackColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.detailTextLabel.text = ivar;
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:17];
