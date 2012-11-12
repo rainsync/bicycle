@@ -319,7 +319,7 @@
     
     
     NSMutableArray * locations = [rawdata objectForKey:@"locations"];
-    CLLocationCoordinate2D * coords = malloc([locations count]*sizeof(MKMapPoint));
+    CLLocationCoordinate2D * coords = malloc([locations count]*sizeof(CLLocationCoordinate2D));
     
     int i=0;
     CLLocationCoordinate2D point;
