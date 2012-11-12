@@ -13,6 +13,8 @@
 #define start_color [UIColor colorWithHex:0x646464]
 #define end_color [UIColor colorWithHex:0x292929]
 
+#define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"-568@2x":@""]
+
 @interface StaticViewController ()
 
 @end
@@ -49,8 +51,11 @@
     // Do any additional setup after loading the view from its nib.
     self.tableView.rowHeight = 80;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
-        
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:getNibName(@"background")]];
+    
+
+    
+    
     [self.tableView dropShadows];
 }
 

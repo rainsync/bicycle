@@ -13,7 +13,6 @@
 
 @end
 
-#define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"~568":@""]
 
 @implementation ViewController
 
@@ -31,11 +30,11 @@
 //    UINavigationController *ridingViewNavController = [[UINavigationController alloc] initWithRootViewController:ridingViewController];
 
     
-    ProfileViewController* profile = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
-    UINavigationController *profileNavController = [[UINavigationController alloc] initWithRootViewController:profile];
-    [profileNavController setValue:[[[PrettyNavigationBar alloc] init] autorelease] forKeyPath:@"navigationBar"];
+    //ProfileViewController* profile = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
+    //UINavigationController *profileNavController = [[UINavigationController alloc] initWithRootViewController:profile];
+    //[profileNavController setValue:[[[PrettyNavigationBar alloc] init] autorelease] forKeyPath:@"navigationBar"];
     
-    StaticViewController* statics = [[StaticViewController alloc]initWithNibName:getNibName(@"StaticViewController") bundle:nil];
+    StaticViewController* statics = [[StaticViewController alloc]initWithNibName:@"StaticViewController" bundle:nil];
     UINavigationController *staticsNavController = [[UINavigationController alloc] initWithRootViewController:statics];
     [staticsNavController setValue:[[[PrettyNavigationBar alloc] init] autorelease] forKeyPath:@"navigationBar"];
     
@@ -44,10 +43,11 @@
     [settingNavController setValue:[[[PrettyNavigationBar alloc] init] autorelease] forKeyPath:@"navigationBar"];
     
     // 네이비게이션 바가 필요한 프로필 탭, 통계 탭, 설정 탭은 네비게이션 컨트롤러에 뷰 삽입하여 탭바 컨트롤러에 삽임한다.
-    self.viewControllers = @[ridingViewController, profileNavController,staticsNavController, settingNavController];
+    //self.viewControllers = @[ridingViewController, profileNavController,staticsNavController, settingNavController];
+    self.viewControllers = @[ridingViewController,staticsNavController, settingNavController];
 
     [ridingViewController release];
-    [profile release];
+    //[profile release];
     [statics release];
     [setting release];
     

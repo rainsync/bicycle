@@ -21,7 +21,6 @@
 		04C3C04C164BCBD700047992 /* BugSense-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C3C04B164BCBD600047992 /* BugSense-iOS.framework */; };
 		04C3C050164BCC1100047992 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C3C04F164BCC1100047992 /* SystemConfiguration.framework */; };
 		04C3C052164BCC1B00047992 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C3C051164BCC1B00047992 /* libz.dylib */; };
-		04C3C077164BD8EF00047992 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3C075164BD8EF00047992 /* Default-568h@2x.png */; };
 		04C3C078164BD8EF00047992 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3C076164BD8EF00047992 /* Default@2x.png */; };
 		04C3C07A164BDC9300047992 /* geustLoginBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3C079164BDC9300047992 /* geustLoginBtn.png */; };
 		04C3C07E164BDF8600047992 /* facebookBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3C07D164BDF8600047992 /* facebookBtn.png */; };
@@ -43,15 +42,7 @@
 		04E3BB201650CD1B001D8745 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB1E1650CD1B001D8745 /* icon.png */; };
 		04E3BB211650CD1B001D8745 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB1F1650CD1B001D8745 /* icon@2x.png */; };
 		04E3BB251650D025001D8745 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB241650D025001D8745 /* background@2x.png */; };
-		04E3BB271650D03C001D8745 /* background-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB261650D03C001D8745 /* background-568h@2x.png */; };
 		04E3BB2D1650DE03001D8745 /* cyc.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB2C1650DE03001D8745 /* cyc.png */; };
-		04E3BB331650E6AA001D8745 /* FirstSettingViewController~568.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB321650E6A9001D8745 /* FirstSettingViewController~568.xib */; };
-		04E3BB341650E744001D8745 /* FirstSettingViewController~568.xib in Sources */ = {isa = PBXBuildFile; fileRef = 04E3BB321650E6A9001D8745 /* FirstSettingViewController~568.xib */; };
-		04E3BB361650E7FD001D8745 /* DashBoardViewController~568.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB351650E7FC001D8745 /* DashBoardViewController~568.xib */; };
-		04E3BB371650E7FD001D8745 /* DashBoardViewController~568.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB351650E7FC001D8745 /* DashBoardViewController~568.xib */; };
-		04E3BB391650F1EF001D8745 /* StaticViewController~568.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB381650F1EF001D8745 /* StaticViewController~568.xib */; };
-		04E3BB3A1650F1EF001D8745 /* StaticViewController~568.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB381650F1EF001D8745 /* StaticViewController~568.xib */; };
-		04E3BB3B1650F29A001D8745 /* StaticViewController~568.xib in Sources */ = {isa = PBXBuildFile; fileRef = 04E3BB381650F1EF001D8745 /* StaticViewController~568.xib */; };
 		04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */; };
 		04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */; };
 		04EC923C1641183100E99EB5 /* ProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC923A1641183100E99EB5 /* ProfileEditViewController.m */; };
@@ -137,6 +128,9 @@
 		5591100E163825AE00B007CA /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 559110091638241500B007CA /* SettingViewController.m */; };
 		5591100F1638260200B007CA /* StaticViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55911005163823E100B007CA /* StaticViewController.xib */; };
 		559110101638260600B007CA /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5591100A1638241500B007CA /* SettingViewController.xib */; };
+		55B1D8051650FA930032D86C /* DashBoardViewController-568.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B1D8041650FA930032D86C /* DashBoardViewController-568.xib */; };
+		55B1D8071650FAB30032D86C /* FirstSettingViewController-568.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B1D8061650FAB30032D86C /* FirstSettingViewController-568.xib */; };
+		55B1D8091650FB5C0032D86C /* background-568@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55B1D8081650FB5C0032D86C /* background-568@2x.png */; };
 		55CAB2A0165006FF0052AB2E /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CAB29F165006FF0052AB2E /* Utility.m */; };
 /* End PBXBuildFile section */
 
@@ -198,11 +192,7 @@
 		04E3BB1E1650CD1B001D8745 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		04E3BB1F1650CD1B001D8745 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		04E3BB241650D025001D8745 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
-		04E3BB261650D03C001D8745 /* background-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-568h@2x.png"; sourceTree = "<group>"; };
 		04E3BB2C1650DE03001D8745 /* cyc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cyc.png; sourceTree = "<group>"; };
-		04E3BB321650E6A9001D8745 /* FirstSettingViewController~568.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FirstSettingViewController~568.xib"; sourceTree = "<group>"; };
-		04E3BB351650E7FC001D8745 /* DashBoardViewController~568.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DashBoardViewController~568.xib"; sourceTree = "<group>"; };
-		04E3BB381650F1EF001D8745 /* StaticViewController~568.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "StaticViewController~568.xib"; sourceTree = "<group>"; };
 		04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
 		04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
 		04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteUserViewController.xib; sourceTree = "<group>"; };
@@ -295,6 +285,9 @@
 		559110081638241400B007CA /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		559110091638241500B007CA /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		5591100A1638241500B007CA /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		55B1D8041650FA930032D86C /* DashBoardViewController-568.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DashBoardViewController-568.xib"; sourceTree = "<group>"; };
+		55B1D8061650FAB30032D86C /* FirstSettingViewController-568.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FirstSettingViewController-568.xib"; sourceTree = "<group>"; };
+		55B1D8081650FB5C0032D86C /* background-568@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-568@2x.png"; sourceTree = "<group>"; };
 		55CAB29E165006FF0052AB2E /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		55CAB29F165006FF0052AB2E /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -362,7 +355,7 @@
 				045B565E164A5481005CEC8A /* nowRiding.png */,
 				045B565F164A5481005CEC8A /* background.png */,
 				04E3BB241650D025001D8745 /* background@2x.png */,
-				04E3BB261650D03C001D8745 /* background-568h@2x.png */,
+				55B1D8081650FB5C0032D86C /* background-568@2x.png */,
 				045B5660164A5481005CEC8A /* dashboard.png */,
 				04DC7696164EEA8000289E27 /* stopSwitch@2x.png */,
 				04DC7697164EEA8000289E27 /* stopButton@2x.png */,
@@ -376,7 +369,7 @@
 				0483FE1B163E5FA8005D804F /* FirstSettingViewController.h */,
 				0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */,
 				0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */,
-				04E3BB321650E6A9001D8745 /* FirstSettingViewController~568.xib */,
+				55B1D8061650FAB30032D86C /* FirstSettingViewController-568.xib */,
 			);
 			name = FirstUserView;
 			sourceTree = "<group>";
@@ -434,7 +427,6 @@
 				55911003163823E000B007CA /* StaticViewController.h */,
 				55911004163823E000B007CA /* StaticViewController.m */,
 				55911005163823E100B007CA /* StaticViewController.xib */,
-				04E3BB381650F1EF001D8745 /* StaticViewController~568.xib */,
 				04F7CD74164938E000D2866D /* DetailViewController.h */,
 				04F7CD75164938E000D2866D /* DetailViewController.m */,
 				04F7CD76164938E100D2866D /* DetailViewController.xib */,
@@ -626,7 +618,7 @@
 				5570A94316355152008E2F50 /* DashBoardViewController.h */,
 				5570A94416355152008E2F50 /* DashBoardViewController.m */,
 				5570A94516355152008E2F50 /* DashBoardViewController.xib */,
-				04E3BB351650E7FC001D8745 /* DashBoardViewController~568.xib */,
+				55B1D8041650FA930032D86C /* DashBoardViewController-568.xib */,
 				55910FFE1638207000B007CA /* GroupRideViewController.h */,
 				55910FFF1638207100B007CA /* GroupRideViewController.m */,
 				559110001638207300B007CA /* GroupRideViewController.xib */,
@@ -711,6 +703,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55B1D8091650FB5C0032D86C /* background-568@2x.png in Resources */,
 				559110101638260600B007CA /* SettingViewController.xib in Resources */,
 				5591100F1638260200B007CA /* StaticViewController.xib in Resources */,
 				5570A913163550A5008E2F50 /* InfoPlist.strings in Resources */,
@@ -734,7 +727,6 @@
 				045B5662164A5481005CEC8A /* nowRiding.png in Resources */,
 				045B5663164A5481005CEC8A /* background.png in Resources */,
 				045B5664164A5481005CEC8A /* dashboard.png in Resources */,
-				04C3C077164BD8EF00047992 /* Default-568h@2x.png in Resources */,
 				04C3C078164BD8EF00047992 /* Default@2x.png in Resources */,
 				04C3C07A164BDC9300047992 /* geustLoginBtn.png in Resources */,
 				04C3C07E164BDF8600047992 /* facebookBtn.png in Resources */,
@@ -748,11 +740,9 @@
 				04E3BB201650CD1B001D8745 /* icon.png in Resources */,
 				04E3BB211650CD1B001D8745 /* icon@2x.png in Resources */,
 				04E3BB251650D025001D8745 /* background@2x.png in Resources */,
-				04E3BB271650D03C001D8745 /* background-568h@2x.png in Resources */,
 				04E3BB2D1650DE03001D8745 /* cyc.png in Resources */,
-				04E3BB331650E6AA001D8745 /* FirstSettingViewController~568.xib in Resources */,
-				04E3BB361650E7FD001D8745 /* DashBoardViewController~568.xib in Resources */,
-				04E3BB391650F1EF001D8745 /* StaticViewController~568.xib in Resources */,
+				55B1D8051650FA930032D86C /* DashBoardViewController-568.xib in Resources */,
+				55B1D8071650FAB30032D86C /* FirstSettingViewController-568.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -768,8 +758,6 @@
 				5513073616492C47005653B1 /* Button Stop.png in Resources */,
 				5513073D164956B0005653B1 /* fells_loop.gpx in Resources */,
 				04F7CD7A164938E100D2866D /* DetailViewController.xib in Resources */,
-				04E3BB371650E7FD001D8745 /* DashBoardViewController~568.xib in Resources */,
-				04E3BB3A1650F1EF001D8745 /* StaticViewController~568.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -796,8 +784,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04E3BB3B1650F29A001D8745 /* StaticViewController~568.xib in Sources */,
-				04E3BB341650E744001D8745 /* FirstSettingViewController~568.xib in Sources */,
 				558A5A3316423F5E00BC22ED /* Queue.h in Sources */,
 				558A5A3416423F5E00BC22ED /* Queue.m in Sources */,
 				5591100E163825AE00B007CA /* SettingViewController.m in Sources */,

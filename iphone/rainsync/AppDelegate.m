@@ -13,7 +13,7 @@
 #import "FirstSettingViewController.h"
 
 
-#define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"~568":@""]
+#define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"-568":@""]
 
 @implementation AppDelegate
 
@@ -56,8 +56,7 @@
     if(!token){
         NSLog(@"%@", getNibName(@"FirstSettingViewController"));
         FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:getNibName(@"FirstSettingViewController") bundle:nil];
-//        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:firstSettingViewController];
-//        [navController.navigationBar setBarStyle:UIBarStyleBlack];
+
         
         self.viewController = firstSettingViewController;
         

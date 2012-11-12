@@ -9,6 +9,8 @@
 #import "SettingViewController.h"
 #import "PrettyKit.h"
 
+#define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"-568":@""]
+
 @interface SettingViewController ()
 
 @end
@@ -34,7 +36,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     UIView* bview = [[UIView alloc] init];
-    bview.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    bview.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:getNibName(@"background")]];
     [_settingTableView setBackgroundView:bview];
     [bview release];
 }

@@ -9,6 +9,8 @@
 #import "DetailViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"-568":@""]
+
 @interface DetailViewController ()
 
 @end
@@ -56,7 +58,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     UIView* bview = [[UIView alloc] init];
-    bview.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    bview.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:getNibName(@"background")]];
     [_detailTableView setBackgroundView:bview];
     [bview release];
     _detailTableView.separatorColor = [UIColor blackColor];
@@ -279,9 +281,9 @@
 //    }
     
     // set cell attributes
-    cell.backgroundColor = [UIColor blackColor];
+    cell.backgroundColor = [UIColor whiteColor];
     cell.textLabel.text = key;
-    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.textColor = [UIColor blackColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.detailTextLabel.text = ivar;
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:17];
