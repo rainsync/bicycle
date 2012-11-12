@@ -26,8 +26,8 @@
         self.title = @"기록";
         
         ridingdb = [[RidingDB alloc] init];
-
-
+        UIImage *img = [UIImage imageNamed:@"staticIcon"];
+        [self.tabBarItem setImage:img];
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
         
         // Custom initialization

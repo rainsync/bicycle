@@ -21,6 +21,10 @@
     if (self) {
         self.title = @"설정";
         // Custom initialization
+
+        UIImage *img = [UIImage imageNamed:@"settingIcon"];
+        [self.tabBarItem setImage:img];
+
     }
     return self;
 }
@@ -31,6 +35,7 @@
     // Do any additional setup after loading the view from its nib.
     
     _settingTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,26 +49,17 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 5;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     if (section == 0) {
-        return 3;
+        return 1;
     }
     if (section == 1) {
-        return 1;
-    }
-    if (section == 2) {
-        return 1;
-    }
-    if (section == 3) {
-        return 20;
-    }
-    if (section == 4) {
-        return 1;
+        return 2;
     }
     
     return 0;
@@ -78,7 +74,7 @@
     if (section == 0) {
         UILabel *headerLabel=[[UILabel alloc]initWithFrame:CGRectMake(5,0,300,44)];
         headerLabel.backgroundColor= [UIColor clearColor];
-        headerLabel.text= [NSString stringWithFormat:@"%@", [rawdata objectForKey:@"day"]];
+        headerLabel.text= [NSString stringWithFormat:@"GPS 설정"];
         headerLabel.font = [UIFont boldSystemFontOfSize:17];
         headerLabel.textColor = [UIColor whiteColor];
         [headerView addSubview: headerLabel];
@@ -87,7 +83,7 @@
     else if (section == 1) {
         UILabel *recordLabel=[[UILabel alloc]initWithFrame:CGRectMake(5,0,300,44)];
         recordLabel.backgroundColor= [UIColor clearColor];
-        recordLabel.text=@"상세 기록";
+        recordLabel.text=@"GPS 설정";
         recordLabel.font = [UIFont boldSystemFontOfSize:17];
         recordLabel.textColor = [UIColor whiteColor];
         [headerView addSubview: recordLabel];
@@ -100,127 +96,88 @@
     return headerView;
 }
 
+-(void)cancelNumberPad{
+    [text resignFirstResponder];
+    text.text = @"";
+}
+
+-(void)doneWithNumberPad{
+    NSString *numberFromTheKeyboard = text.text;
+    [text resignFirstResponder];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    static NSString *SegmentedCellIdentifier = @"SegmentedCell";
-    PrettySegmentedControlTableViewCell *segmentedCell;
-    static NSString *GridCellIdentifier = @"GridCell";
-    PrettyGridTableViewCell *gridCell;
-    
-    
+ 
     PrettyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[PrettyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[PrettyTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
         cell.tableViewBackgroundColor = tableView.backgroundColor;
-    }
-    
-    switch (indexPath.section) {
-        case 1:
-            switch (indexPath.row) {
-                case 0:
-                    segmentedCell = [tableView dequeueReusableCellWithIdentifier:SegmentedCellIdentifier];
-                    if (segmentedCell == nil) {
-                        segmentedCell = [[[PrettySegmentedControlTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SegmentedCellIdentifier] autorelease];
-                    }
-                    [segmentedCell prepareForTableView:tableView indexPath:indexPath];
-                    segmentedCell.titles = [NSArray arrayWithObjects:@"1", @"2", @"3", @"4", nil];
-                    segmentedCell.tableViewBackgroundColor = tableView.backgroundColor;
-                    return segmentedCell;
-                default:
-                    break;
-            }
-            
-            break;
-        case 2:
-            gridCell = [tableView dequeueReusableCellWithIdentifier:GridCellIdentifier];
-            if (gridCell == nil) {
-                gridCell = [[[PrettyGridTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:GridCellIdentifier] autorelease];
-                gridCell.tableViewBackgroundColor = tableView.backgroundColor;
-                gridCell.actionBlock = ^(NSIndexPath *indexPath, int selectedIndex) {
-                    [gridCell deselectAnimated:YES];
-                };
-            }
-            [gridCell prepareForTableView:tableView indexPath:indexPath];
-            gridCell.numberOfElements = 3;
-            [gridCell setText:@"One" atIndex:0];
-            [gridCell setDetailText:@"Detail Text" atIndex:0];
-            [gridCell setText:@"Two" atIndex:1];
-            [gridCell setDetailText:@"Detail Text" atIndex:1];
-            [gridCell setText:@"Three" atIndex:2];
-            [gridCell setDetailText:@"Detail Text" atIndex:2];
-            return gridCell;
-        case 4:
-            gridCell = [tableView dequeueReusableCellWithIdentifier:GridCellIdentifier];
-            if (gridCell == nil) {
-                gridCell = [[[PrettyGridTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:GridCellIdentifier] autorelease];
-                gridCell.tableViewBackgroundColor = tableView.backgroundColor;
-                gridCell.actionBlock = ^(NSIndexPath *indexPath, int selectedIndex) {
-                    [gridCell deselectAnimated:YES];
-                };
-            }
-            [gridCell prepareForTableView:tableView indexPath:indexPath];
-            gridCell.numberOfElements = 2;
-            [gridCell setText:@"Four" atIndex:0];
-            [gridCell setText:@"Five" atIndex:1];
-            return gridCell;
-            
-        default:
-            break;
     }
     
     // Configure the cell...
     [cell prepareForTableView:tableView indexPath:indexPath];
-    cell.textLabel.text = @"Text";
-    if (indexPath.section == 0) {
-        cell.cornerRadius = 20;
+    
+    switch (indexPath.section) {
+        case 0:
+            cell.textLabel.text = @"몸무게 설정";
+            text = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 180, 20)];
+            text.placeholder = @"60 kg";
+            [text setKeyboardType:UIKeyboardTypeDecimalPad];
+            [text setTextAlignment:NSTextAlignmentRight];
+            cell.accessoryView = text;
+            
+            UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+            numberToolbar.barStyle = UIBarStyleBlackTranslucent;
+            numberToolbar.items = [NSArray arrayWithObjects:
+                                   [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
+                                   [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                                   [[UIBarButtonItem alloc]initWithTitle:@"Apply" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)],
+                                   nil];
+            [numberToolbar sizeToFit];
+            
+            text.inputAccessoryView =numberToolbar;
+
+            //=self;
+            
+            break;
+        case 1:
+            switch (indexPath.row) {
+                case 0:
+                    cell.textLabel.text = @"GPS 설정";
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    break;
+                case 1:
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    [cell.textLabel setText:@"주행 중 이동경로 표시"];
+                    UIView		*viewCell = [[UIView alloc] initWithFrame:CGRectMake(70, 0, 160, 40)];
+                    UISwitch	*drawRouteSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(70, 6, 94, 27)];
+                    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"drawRoute"] ) [drawRouteSwitch setOn:YES animated:NO];
+                    else [drawRouteSwitch setOn:NO animated:NO];
+                    
+                    [viewCell addSubview:drawRouteSwitch];
+                    [drawRouteSwitch addTarget:self action:@selector(saveRouteOption:) forControlEvents:UIControlEventValueChanged];
+                    cell.accessoryView = viewCell;
+                    [drawRouteSwitch release];
+                    [viewCell		release];
+                    break;
+            }
+            break;
     }
-    else {
-        cell.cornerRadius = 10;
-    }
+
+    cell.cornerRadius = 10;
     
     return cell;
 }
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
+- (IBAction)saveRouteOption:(id)sender {
+    NSLog(@"이동 경로 옵션");
+    UISwitch *routeSwitch = (UISwitch *)sender;
+	BOOL setting = routeSwitch.isOn;
+    [[NSUserDefaults standardUserDefaults] setBool:setting forKey:@"drawRoute"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 #pragma mark - Table view delegate
 
@@ -230,16 +187,28 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.section) {
+        case 0:
+            // 피커뷰 띄워줌
+            
+            NSLog(@"몸무게 설정");
+            break;
+        case 1:
+            switch (indexPath.row) {
+                case 0:
+                    NSLog(@"gps 옵션 설정");
+                    break;
+                case 1:
+                    NSLog(@"주행 중 경로선 옵션 설정");
+                    break;
+            }
+        default:
+            break;
+    }
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-
+- (IBAction)textFieldDoneEditing:(id)sender {
+    [sender resignFirstResponder];
+}
 @end
