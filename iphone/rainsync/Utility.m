@@ -77,13 +77,17 @@
     
     NSDate *date=[[NSDate alloc] initWithTimeIntervalSince1970:time];
 
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"ko_KR"] autorelease]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSLocale *locale =[[NSLocale alloc] initWithLocaleIdentifier:@"ko_KR"];
+    [dateFormatter setLocale:locale];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     
-    
-    return [dateFormatter stringFromDate:date];
+    NSString* result=[dateFormatter stringFromDate:date];
+    [date release];
+    [locale release];
+    [dateFormatter release];
+    return result;
 }
 
 +(double)metreTokilometre:(double)metre
