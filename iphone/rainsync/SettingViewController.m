@@ -42,6 +42,20 @@
     [bview release];
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    double weight = [[NSUserDefaults standardUserDefaults] doubleForKey:@"weight"];
+    if(!weight)
+    {
+        weight=50;
+        [[NSUserDefaults standardUserDefaults] setDouble:weight forKey:@"weight"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
+    text.text = [NSString stringWithFormat:@"%.1lf", weight];
+    
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -111,13 +125,24 @@
     return headerView;
 }
 
--(void)cancelNumberPad{
-    [text resignFirstResponder];
-    text.text = @"";
-}
 
 -(void)doneWithNumberPad{
-    NSString *numberFromTheKeyboard = text.text;
+    double weight=0;
+    
+    @try {
+        weight = [text.text doubleValue];
+        if(weight==0)
+            weight=50;
+    }
+    @catch (NSException *exception) {
+        weight=50;
+    }
+
+    
+    
+    [[NSUserDefaults standardUserDefaults] setDouble:weight forKey:@"weight"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    text.text = [NSString stringWithFormat:@"%.1lf", weight];
     [text resignFirstResponder];
 }
 
@@ -136,18 +161,25 @@
     
     switch (indexPath.section) {
         case 0:
+        {
+            UIView *weight_view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 180, 20)] autorelease];
+            
+            UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(160,0 , 20, 20)] autorelease];
+            label.text=@"kg";
+            
             cell.textLabel.text = @"몸무게 설정";
-            text = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 180, 20)];
-            text.placeholder = @"60 kg";
+            text = [[[UITextField alloc] initWithFrame:CGRectMake(0, 0, 155, 18)] autorelease];
+            text.placeholder = @"50";
             [text setKeyboardType:UIKeyboardTypeDecimalPad];
             [text setTextAlignment:NSTextAlignmentRight];
-            cell.accessoryView = text;
+            
+            [weight_view addSubview:label];
+            [weight_view addSubview:text];
+            cell.accessoryView = weight_view;
             
             UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
             numberToolbar.barStyle = UIBarStyleBlackTranslucent;
             numberToolbar.items = [NSArray arrayWithObjects:
-                                   [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
-                                   [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                                    [[UIBarButtonItem alloc]initWithTitle:@"Apply" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)],
                                    nil];
             [numberToolbar sizeToFit];
@@ -157,6 +189,7 @@
             //=self;
             
             break;
+        }
         case 1:
             switch (indexPath.row) {
                 case 0:

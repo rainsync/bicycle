@@ -11,7 +11,6 @@
 @interface SettingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     UITextField *text;
-    int weight;
 }
 @property (nonatomic, retain) IBOutlet UITableView *settingTableView;
 @end

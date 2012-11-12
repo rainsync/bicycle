@@ -27,11 +27,33 @@
 {
     [super viewDidLoad];
 
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    int sel = [[NSUserDefaults standardUserDefaults] integerForKey:@"gps_opt"];
+    if(!sel)
+    {
+        sel=2;
+        [[NSUserDefaults standardUserDefaults] setInteger:sel forKey:@"gps_opt"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
+    for (UITableViewCell *cell in [self.tableView visibleCells]) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
+    [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sel-1 inSection:0]].accessoryType = UITableViewCellAccessoryCheckmark;
+    
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,10 +90,10 @@
         
         switch (indexPath.row) {
             case 0:
-                cell.textLabel.text = @"최상 급";
+                cell.textLabel.text = @"최상 급 (배터리 소모 심함)";
                 break;
             case 1:
-                cell.textLabel.text = @"베스트 급";
+                cell.textLabel.text = @"베스트 급 (권장)";
                 break;
             case 2:
                 cell.textLabel.text = @"10미터 급";
@@ -96,7 +118,24 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"gps_opt"];
+    
+
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:[indexPath row]+1 forKey:@"gps_opt"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [tableView deselectRowAtIndexPath:indexPath animated:FALSE];
+    
+    for (UITableViewCell *cell in [self.tableView visibleCells]) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
+    [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+    
+    //[self.navigationController popViewControllerAnimated:TRUE];
+    
+    
 }
+
+
 
 @end
