@@ -12,6 +12,8 @@
 
 @end
 
+#define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"-568":@""]
+
 @implementation GpsOptionTableView
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -27,7 +29,12 @@
 {
     [super viewDidLoad];
 
-
+    UIView* bview = [[UIView alloc] init];
+    bview.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:getNibName(@"background")]];
+    [self.tableView setBackgroundView:bview];
+    [bview release];
+    self.tableView.separatorColor = [UIColor blackColor];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -78,7 +85,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return @"감도 설정에 따라 배터리소모가 달라질 수 있습니다.";
+    return @"감도 설정에 따라 정확도와\n배터리소모가 달라질 수 있습니다.";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -111,6 +118,9 @@
     }
     
     // Configure the cell...
+    cell.backgroundColor = [UIColor blackColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
     return cell;
 }
 

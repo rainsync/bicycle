@@ -47,6 +47,7 @@
 		04E3BB481651025F001D8745 /* GpsOptionTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB461651025E001D8745 /* GpsOptionTableView.xib */; };
 		04E3BB5316512256001D8745 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3C075164BD8EF00047992 /* Default-568h@2x.png */; };
 		04E3BB57165128FE001D8745 /* pause_SingleRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB56165128FE001D8745 /* pause_SingleRiding@2x.png */; };
+		04E3BB591651405C001D8745 /* customDisclosure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB581651405C001D8745 /* customDisclosure@2x.png */; };
 		04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */; };
 		04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */; };
 		04EC923C1641183100E99EB5 /* ProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC923A1641183100E99EB5 /* ProfileEditViewController.m */; };
@@ -201,6 +202,7 @@
 		04E3BB451651025E001D8745 /* GpsOptionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GpsOptionTableView.m; sourceTree = "<group>"; };
 		04E3BB461651025E001D8745 /* GpsOptionTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GpsOptionTableView.xib; sourceTree = "<group>"; };
 		04E3BB56165128FE001D8745 /* pause_SingleRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause_SingleRiding@2x.png"; sourceTree = "<group>"; };
+		04E3BB581651405C001D8745 /* customDisclosure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "customDisclosure@2x.png"; sourceTree = "<group>"; };
 		04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
 		04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
 		04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteUserViewController.xib; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 		0457895A16426692008E56CA /* icon */ = {
 			isa = PBXGroup;
 			children = (
+				04E3BB581651405C001D8745 /* customDisclosure@2x.png */,
 				04E3BB2C1650DE03001D8745 /* cyc.png */,
 				047AD61C164D1FDE00983365 /* teamRiding@2x.png */,
 				047AD61D164D1FDE00983365 /* singleRiding@2x.png */,
@@ -758,6 +761,7 @@
 				04E3BB481651025F001D8745 /* GpsOptionTableView.xib in Resources */,
 				04E3BB5316512256001D8745 /* Default-568h@2x.png in Resources */,
 				04E3BB57165128FE001D8745 /* pause_SingleRiding@2x.png in Resources */,
+				04E3BB591651405C001D8745 /* customDisclosure@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

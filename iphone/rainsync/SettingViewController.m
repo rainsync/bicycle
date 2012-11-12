@@ -7,7 +7,6 @@
 //
 
 #import "SettingViewController.h"
-#import "PrettyKit.h"
 #import "GpsOptionTableView.h"
 
 #define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"-568":@""]
@@ -67,7 +66,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -77,9 +76,11 @@
         return 1;
     }
     if (section == 1) {
-        return 2;
+        return 1;
     }
-    
+    if (section == 2) {
+        return 1;
+    }
     return 0;
 }
 
@@ -88,8 +89,8 @@
     NSArray *titles;
     titles = [NSArray arrayWithObjects:
               @"몸무게",                                      //map
-              @"지도 설정",               //location
-              nil];
+              @"GPS 설정",               //location
+              @"지도 설정", nil];
     
     return [titles objectAtIndex:section];
 }
@@ -99,17 +100,7 @@
     UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)] autorelease];
     [headerView setBackgroundColor:[UIColor clearColor]];
     
-    
-    if (section == 0) {
-        UILabel *headerLabel=[[UILabel alloc]initWithFrame:CGRectMake(5,0,300,44)];
-        headerLabel.backgroundColor= [UIColor clearColor];
-        headerLabel.text= [NSString stringWithFormat:@"GPS 설정"];
-        headerLabel.font = [UIFont boldSystemFontOfSize:17];
-        headerLabel.textColor = [UIColor whiteColor];
-        [headerView addSubview: headerLabel];
-        [headerLabel release];
-    }
-    else if (section == 1) {
+    if (section == 1) {
         UILabel *recordLabel=[[UILabel alloc]initWithFrame:CGRectMake(5,0,300,44)];
         recordLabel.backgroundColor= [UIColor clearColor];
         recordLabel.text=@"GPS 설정";
@@ -117,6 +108,15 @@
         recordLabel.textColor = [UIColor whiteColor];
         [headerView addSubview: recordLabel];
         [recordLabel release];
+    }
+    else if (section == 2) {
+        UILabel *headerLabel=[[UILabel alloc]initWithFrame:CGRectMake(5,0,300,44)];
+        headerLabel.backgroundColor= [UIColor clearColor];
+        headerLabel.text= [NSString stringWithFormat:@"기록 측정 중 이동경로 그리기"];
+        headerLabel.font = [UIFont boldSystemFontOfSize:17];
+        headerLabel.textColor = [UIColor whiteColor];
+        [headerView addSubview: headerLabel];
+        [headerLabel release];
     }
     else {
         [headerView setBackgroundColor:[UIColor clearColor]];
@@ -150,26 +150,30 @@
 {
     static NSString *CellIdentifier = @"Cell";
  
-    PrettyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[PrettyTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
-        cell.tableViewBackgroundColor = tableView.backgroundColor;
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+//        cell.tableViewBackgroundColor = tableView.backgroundColor;
     }
     
     // Configure the cell...
-    [cell prepareForTableView:tableView indexPath:indexPath];
+//    [cell prepareForTableView:tableView indexPath:indexPath];
     
     switch (indexPath.section) {
         case 0:
         {
             UIView *weight_view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 180, 20)] autorelease];
-            
+            weight_view.backgroundColor = [UIColor blackColor];
             UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(160,0 , 20, 20)] autorelease];
             label.text=@"kg";
+            label.textColor = [UIColor whiteColor];
+            label.backgroundColor = [UIColor blackColor];
             
             cell.textLabel.text = @"몸무게 설정";
-            text = [[[UITextField alloc] initWithFrame:CGRectMake(0, 0, 155, 18)] autorelease];
+            cell.textLabel.textColor = [UIColor whiteColor];
+            text = [[[UITextField alloc] initWithFrame:CGRectMake(0, 0, 155, 22)] autorelease];
             text.placeholder = @"50";
+            text.textColor = [UIColor whiteColor];
             [text setKeyboardType:UIKeyboardTypeDecimalPad];
             [text setTextAlignment:NSTextAlignmentRight];
             
@@ -185,36 +189,41 @@
             [numberToolbar sizeToFit];
             
             text.inputAccessoryView =numberToolbar;
-
-            //=self;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             break;
         }
-        case 1:
-            switch (indexPath.row) {
-                case 0:
-                    cell.textLabel.text = @"GPS 설정";
-                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    break;
-                case 1:
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    [cell.textLabel setText:@"주행 중 이동경로 표시"];
-                    UIView		*viewCell = [[UIView alloc] initWithFrame:CGRectMake(70, 0, 160, 40)];
-                    UISwitch	*drawRouteSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(70, 6, 94, 27)];
-                    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"drawRoute"] ) [drawRouteSwitch setOn:YES animated:NO];
-                    else [drawRouteSwitch setOn:NO animated:NO];
-                    
-                    [viewCell addSubview:drawRouteSwitch];
-                    [drawRouteSwitch addTarget:self action:@selector(saveRouteOption:) forControlEvents:UIControlEventValueChanged];
-                    cell.accessoryView = viewCell;
-                    [drawRouteSwitch release];
-                    [viewCell		release];
-                    break;
-            }
+        case 1:            
+            cell.textLabel.text = @"GPS 설정";
+
+            UIButton *myAccessoryButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
+            [myAccessoryButton setBackgroundColor:[UIColor clearColor]];
+            [myAccessoryButton setImage:[UIImage imageNamed:@"customDisclosure"] forState:UIControlStateNormal];
+            [cell setAccessoryView:myAccessoryButton];
+            [myAccessoryButton release];
+
+            break;
+        case 2:
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell.textLabel setText:@"실시간 경로"];
+            UIView		*viewCell = [[UIView alloc] initWithFrame:CGRectMake(70, 0, 160, 40)];
+            UISwitch	*drawRouteSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(70, 6, 94, 27)];
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"drawRoute"] ) [drawRouteSwitch setOn:YES animated:NO];
+            else [drawRouteSwitch setOn:NO animated:NO];
+            
+            [viewCell addSubview:drawRouteSwitch];
+            [drawRouteSwitch addTarget:self action:@selector(saveRouteOption:) forControlEvents:UIControlEventValueChanged];
+            cell.accessoryView = viewCell;
+            [drawRouteSwitch release];
+            [viewCell		release];
+            break;
             break;
     }
 
-    cell.cornerRadius = 10;
+//    cell.cornerRadius = 10;
+    cell.backgroundColor = [UIColor blackColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
     
     return cell;
 }
@@ -229,9 +238,9 @@
 
 #pragma mark - Table view delegate
 
--(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return tableView.rowHeight + [PrettyTableViewCell tableView:tableView neededHeightForIndexPath:indexPath];
-}
+//-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return tableView.rowHeight + [PrettyTableViewCell tableView:tableView neededHeightForIndexPath:indexPath];
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -250,7 +259,7 @@
                     [gpsTableView release];
                     break;
                 case 1:
-                    NSLog(@"주행 중 경로선 옵션 설정");
+                    NSLog(@"켬/끔");
                     break;
             }
         default:
