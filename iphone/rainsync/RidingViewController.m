@@ -7,6 +7,7 @@
 //
 
 #import "RidingViewController.h"
+#define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"~568":@""]
 
 @interface RidingViewController ()
 
@@ -88,7 +89,7 @@
     {
         switch (page) {
             case 0:
-                controller = [[DashBoardViewController alloc] initWithNibName:@"DashBoardViewController" bundle:nil];
+                controller = [[DashBoardViewController alloc] initWithNibName:getNibName(@"DashBoardViewController") bundle:nil];
                 break;
                 
             case 1:

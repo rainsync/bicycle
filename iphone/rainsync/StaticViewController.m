@@ -90,7 +90,7 @@
     
     if (cell == nil) {
         cell = [[PrettyTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.tableViewBackgroundColor = tableView.backgroundColor;
+//        cell.tableViewBackgroundColor = tableView.backgroundColor;
         cell.gradientStartColor = start_color;
         cell.gradientEndColor = end_color;
     }
