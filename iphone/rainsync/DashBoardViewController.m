@@ -145,13 +145,14 @@
         case 0:
         {
             [ridingManager discardStatus];
+            break;
         }
         case 1:
         {
             [ridingManager loadStatus];
             [self locationManager:ridingManager];
             [self updateTime:ridingManager];
-            
+            break;
             
             
         }
