@@ -98,10 +98,13 @@
         _time =0;
         _calorie = 0;
         _start_date = [[NSDate date] timeIntervalSince1970];
-    
+        
         locations = [[NSMutableArray alloc] init];
+        
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsRiding"];
-        [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
+        [[NSUserDefaults standardUserDefaults] setDouble:_time forKey:@"time"];
+        [[NSUserDefaults standardUserDefaults] setDouble:_totalDistance forKey:@"distance"];
+        [[NSUserDefaults standardUserDefaults] setDouble:_calorie forKey:@"calorie"];
         [[NSUserDefaults standardUserDefaults] setDouble:_start_date forKey:@"start_date"];
         [[NSUserDefaults standardUserDefaults]synchronize];
         
@@ -115,7 +118,7 @@
 {
     [[NSUserDefaults standardUserDefaults] setDouble:_time forKey:@"time"];
     [[NSUserDefaults standardUserDefaults] setDouble:_totalDistance forKey:@"distance"];
-    [[NSUserDefaults standardUserDefaults] setInteger:_calorie forKey:@"calorie"];
+    [[NSUserDefaults standardUserDefaults] setDouble:_calorie forKey:@"calorie"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -125,6 +128,7 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsRiding"];
     [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
     [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"distance"];
+    [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"calorie"];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
