@@ -22,7 +22,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"구성원 초대";
 
         // Custom initialization
     }
@@ -45,6 +44,16 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
+    self.navigationItem.title = @"구성원 초대";
+    self.userTableView.rowHeight = 60;
+    self.userTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.userTableView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+    
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:nil action:nil] autorelease];
+    
+    [self.userTableView dropShadows];
+    [self customizeNavBar];
+
 }
     
 - (void)viewWillAppear:(BOOL)animated {
