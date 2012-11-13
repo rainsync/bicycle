@@ -11,14 +11,16 @@
 @implementation Queue
 
 - (id)init{
-    contents = [[[NSMutableArray alloc]init] autorelease];
-    return [super init];
+    [super init];
+    contents = [[NSMutableArray alloc]init];
+    return self;
 
 }
 
 - (void)dealloc{
-    [contents release];
     [super dealloc];
+    [contents release];
+
 }
 
 - (id)pop
