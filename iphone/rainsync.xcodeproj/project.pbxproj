@@ -53,6 +53,8 @@
 		04E3BB57165128FE001D8745 /* pause_SingleRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB56165128FE001D8745 /* pause_SingleRiding@2x.png */; };
 		04E3BB591651405C001D8745 /* customDisclosure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB581651405C001D8745 /* customDisclosure@2x.png */; };
 		04E7584916529BF000D933FC /* UIColor+ColorWithHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E7584816529BF000D933FC /* UIColor+ColorWithHex.m */; };
+		04E758581652A8BF00D933FC /* MemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E758561652A8BE00D933FC /* MemberViewController.m */; };
+		04E758591652A8BF00D933FC /* MemberViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E758571652A8BE00D933FC /* MemberViewController.xib */; };
 		04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */; };
 		04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */; };
 		04EC923C1641183100E99EB5 /* ProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC923A1641183100E99EB5 /* ProfileEditViewController.m */; };
@@ -208,6 +210,9 @@
 		04E3BB581651405C001D8745 /* customDisclosure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "customDisclosure@2x.png"; sourceTree = "<group>"; };
 		04E7584716529BF000D933FC /* UIColor+ColorWithHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorWithHex.h"; sourceTree = "<group>"; };
 		04E7584816529BF000D933FC /* UIColor+ColorWithHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorWithHex.m"; sourceTree = "<group>"; };
+		04E758551652A8BE00D933FC /* MemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberViewController.h; sourceTree = "<group>"; };
+		04E758561652A8BE00D933FC /* MemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberViewController.m; sourceTree = "<group>"; };
+		04E758571652A8BE00D933FC /* MemberViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemberViewController.xib; sourceTree = "<group>"; };
 		04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
 		04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
 		04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteUserViewController.xib; sourceTree = "<group>"; };
@@ -645,6 +650,9 @@
 				04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */,
 				04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */,
 				04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */,
+				04E758551652A8BE00D933FC /* MemberViewController.h */,
+				04E758561652A8BE00D933FC /* MemberViewController.m */,
+				04E758571652A8BE00D933FC /* MemberViewController.xib */,
 				55910F901637F4E800B007CA /* RidingViewController.h */,
 				55910F911637F4E800B007CA /* RidingViewController.m */,
 				55910F921637F4E800B007CA /* RidingViewController.xib */,
@@ -768,6 +776,7 @@
 				04B1E870165171E60086F56A /* stopGroupRiding@2x.png in Resources */,
 				04B1E871165171E60086F56A /* pauseGroupRiding@2x.png in Resources */,
 				04B1E872165171E60086F56A /* startGroupRiding@2x.png in Resources */,
+				04E758591652A8BF00D933FC /* MemberViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -849,6 +858,7 @@
 				55CAB2A0165006FF0052AB2E /* Utility.m in Sources */,
 				04E3BB471651025F001D8745 /* GpsOptionTableView.m in Sources */,
 				04E7584916529BF000D933FC /* UIColor+ColorWithHex.m in Sources */,
+				04E758581652A8BF00D933FC /* MemberViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

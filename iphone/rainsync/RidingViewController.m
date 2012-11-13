@@ -96,7 +96,7 @@
                 controller = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
                 break;
             case 2:
-                controller = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
+                controller = [[MemberViewController alloc] initWithNibName:@"MemberViewController" bundle:nil];
             default:
                 break;
         }
