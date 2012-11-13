@@ -102,6 +102,7 @@
         }
         
         [controllers replaceObjectAtIndex:page withObject:controller];
+        [self addChildViewController:controller];
         [controller release];
     }
     

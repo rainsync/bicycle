@@ -9,14 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "RidingViewController.h"
 
-@interface GroupRideViewController : UIViewController {
-//RidingViewController *ridingViewController;
+@interface GroupRideViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+    
 }
-//@property (retain, nonatomic) RidingViewController *ridingViewController;
+@property (retain, nonatomic) IBOutlet UITableView *userTableView;
 @property (retain, nonatomic) IBOutlet UIButton *startRdingBtn;
 @property (retain, nonatomic) IBOutlet UIButton *inviteUserBtn;
-@property (retain, nonatomic) IBOutlet UISwitch *GroupRiding;
 
-- (IBAction)inviteUser:(id)sender;
-- (IBAction)startRiding:(id)sender;
 @end

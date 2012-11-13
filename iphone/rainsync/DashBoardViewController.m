@@ -96,9 +96,10 @@
     NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"]);
     if(![ridingManager isRiding] && [[[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"] isEqualToString:@"Group"]) {    // 시작 전이고 싱글라이딩이 아니라면
         GroupRideViewController *groupRideViewController = [[GroupRideViewController alloc] initWithNibName:@"GroupRideViewController" bundle:nil];
-        [self presentModalViewController:groupRideViewController animated:YES];
-        
+        //[self presentModalViewController:groupRideViewController animated:YES];
+        [self.parentViewController.navigationController pushViewController:groupRideViewController animated:YES];
         [groupRideViewController release];
+        
     }
     else if(!paused){
         paused=true;
