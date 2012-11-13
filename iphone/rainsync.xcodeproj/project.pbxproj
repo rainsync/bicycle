@@ -52,6 +52,7 @@
 		04E3BB5316512256001D8745 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3C075164BD8EF00047992 /* Default-568h@2x.png */; };
 		04E3BB57165128FE001D8745 /* pause_SingleRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB56165128FE001D8745 /* pause_SingleRiding@2x.png */; };
 		04E3BB591651405C001D8745 /* customDisclosure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB581651405C001D8745 /* customDisclosure@2x.png */; };
+		04E7584916529BF000D933FC /* UIColor+ColorWithHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E7584816529BF000D933FC /* UIColor+ColorWithHex.m */; };
 		04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */; };
 		04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */; };
 		04EC923C1641183100E99EB5 /* ProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC923A1641183100E99EB5 /* ProfileEditViewController.m */; };
@@ -205,6 +206,8 @@
 		04E3BB461651025E001D8745 /* GpsOptionTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GpsOptionTableView.xib; sourceTree = "<group>"; };
 		04E3BB56165128FE001D8745 /* pause_SingleRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause_SingleRiding@2x.png"; sourceTree = "<group>"; };
 		04E3BB581651405C001D8745 /* customDisclosure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "customDisclosure@2x.png"; sourceTree = "<group>"; };
+		04E7584716529BF000D933FC /* UIColor+ColorWithHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorWithHex.h"; sourceTree = "<group>"; };
+		04E7584816529BF000D933FC /* UIColor+ColorWithHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorWithHex.m"; sourceTree = "<group>"; };
 		04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
 		04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
 		04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteUserViewController.xib; sourceTree = "<group>"; };
@@ -472,6 +475,8 @@
 				558A5A311642389C00BC22ED /* Queue.m */,
 				55CAB29E165006FF0052AB2E /* Utility.h */,
 				55CAB29F165006FF0052AB2E /* Utility.m */,
+				04E7584716529BF000D933FC /* UIColor+ColorWithHex.h */,
+				04E7584816529BF000D933FC /* UIColor+ColorWithHex.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -843,6 +848,7 @@
 				04DC76BB164EECDF00289E27 /* PrettyToolbar.m in Sources */,
 				55CAB2A0165006FF0052AB2E /* Utility.m in Sources */,
 				04E3BB471651025F001D8745 /* GpsOptionTableView.m in Sources */,
+				04E7584916529BF000D933FC /* UIColor+ColorWithHex.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
