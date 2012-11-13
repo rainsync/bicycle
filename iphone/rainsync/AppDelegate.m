@@ -15,6 +15,10 @@
 
 #define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"-568":@""]
 
+NSString *const FBSessionStateChangedNotification =
+@"kr.rainsync.Cyclery:FBSessionStateChangedNotification";
+
+
 @implementation AppDelegate
 
 - (void)dealloc
@@ -31,7 +35,7 @@
 
     [UIApplication sharedApplication].idleTimerDisabled = YES;  // application can't lock screen automatically
 
-    [FBProfilePictureView class];
+    
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
@@ -49,22 +53,22 @@
     }
 
 
-//    [[NSUserDefaults standardUserDefaults]synchronize];
-//    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"token"];
-//    
-//    NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:@"token"];
-//    if(!token){
-//        NSLog(@"%@", getNibName(@"FirstSettingViewController"));
-//        FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:getNibName(@"FirstSettingViewController") bundle:nil];
-//
-//        
-//        self.viewController = firstSettingViewController;
-//        
-//    } else {
-//        
-//        self.viewController = [[ViewController alloc] init];
-//    }
-    self.viewController = [[ViewController alloc] init];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"token"];
+    
+    NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:@"token"];
+    if(!token){
+        NSLog(@"%@", getNibName(@"FirstSettingViewController"));
+        FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:getNibName(@"FirstSettingViewController") bundle:nil];
+
+        
+        self.viewController = firstSettingViewController;
+        
+    } else {
+        
+        self.viewController = [[ViewController alloc] init];
+    }
+    //self.viewController = [[ViewController alloc] init];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
@@ -101,12 +105,9 @@
     [FBSession.activeSession close];
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    NSLog(url.absoluteString);
-    
-    // Do something with the url here
-}
+
+
+
 
 
 // FBSample logic
@@ -126,6 +127,59 @@
     // attempt to extract a token from the url
     return [FBSession.activeSession handleOpenURL:url];
 }
+
+/*
+ * Callback for session changes.
+ */
+- (void)sessionStateChanged:(FBSession *)session
+                      state:(FBSessionState) state
+                      error:(NSError *)error
+{
+    switch (state) {
+        case FBSessionStateOpen:
+            if (!error) {
+                // We have a valid session
+                NSLog(@"User session found");
+            }
+            break;
+        case FBSessionStateClosed:
+        case FBSessionStateClosedLoginFailed:
+            [FBSession.activeSession closeAndClearTokenInformation];
+            break;
+        default:
+            break;
+    }
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:FBSessionStateChangedNotification
+     object:session];
+    
+    if (error) {
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:@"Error"
+                                  message:error.localizedDescription
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+/*
+ * Opens a Facebook session and optionally shows the login UX.
+ */
+- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
+    return [FBSession openActiveSessionWithReadPermissions:nil
+                                              allowLoginUI:allowLoginUI
+                                         completionHandler:^(FBSession *session,
+                                                             FBSessionState state,
+                                                             NSError *error) {
+                                             [self sessionStateChanged:session
+                                                                 state:state
+                                                                 error:error];
+                                         }];
+}
+
 
 
 

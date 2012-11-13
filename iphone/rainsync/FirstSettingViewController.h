@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import "NetUtility.h"
 
 @interface FirstSettingViewController : UIViewController
 @property (retain, nonatomic) IBOutlet UIButton *fbButton;
