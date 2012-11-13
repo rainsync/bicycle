@@ -20,16 +20,16 @@ enum req_type{
 
 
 @interface NetUtility : NSObject{
-    @private NSMutableData* responseData;
-    //@private void (^ block)(NSData*);
-    
+    //@private NSMutableData* responseData;
+    @private void (^block)(int, NSDictionary*);
+        
     @private NSMutableArray* arr;
     @private Queue *queue;
     @private NSString *server;
     
 }
-@property (nonatomic, strong) NSMutableData* responseData;
-@property (nonatomic, strong) void (^block)(int, NSDictionary*);
+//@property (nonatomic, strong) NSMutableData* responseData;
+//@property (nonatomic, strong) void (^block)(int, NSDictionary*);
 -(id)initwithBlock:(void (^)(int, NSDictionary*))block;
 
 -(void) dealloc;

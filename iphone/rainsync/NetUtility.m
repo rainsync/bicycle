@@ -11,41 +11,35 @@
 
 
 @implementation NetUtility
-@synthesize responseData, block;
 
--(id)initwithBlock:(void (^)(int, NSDictionary*))block{
-    responseData = [[[NSMutableData alloc] init] autorelease];
+-(id)initwithBlock:(void (^)(int, NSDictionary*))b{
+
+    
+
     
     queue = [[Queue alloc]init];
-    arr = [[NSMutableArray alloc]init];
     
+    arr = [[NSMutableArray alloc]init];
     server = @"http://api.bicy.kr";
-    self.block = block;
+    block = b;
     
     return self;
     
 }
 
 -(void)dealloc{
-    [queue release];
     [super dealloc];
+    [queue release];
+    [arr release];
+    [block release];
     
 }
 
--(void) getURL:(NSString *)url{
-    responseData = [[NSMutableData alloc]init];
-    
-                    
-    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [[NSURLConnection alloc] initWithRequest:req delegate:self];
-    //[req release];
-
-    
-    
-    
-}
 
 -(void) postURL:(NSString*)url withData:(NSData*)data{
+    
+
+    
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] ];
     [req setHTTPMethod:@"POST"];
     [req setValue:[NSString stringWithFormat:@"%d",[data length]] forHTTPHeaderField:@"Content-Length"];
@@ -54,14 +48,14 @@
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:req success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSLog(@"connectionDidFinishLoading");
 
-        
+
         NSMutableArray *res = JSON;
         for(NSDictionary* dic in res){
             if([queue count]){
-                self.block([[queue pop] intValue], dic);
+                block([[queue pop] intValue], dic);
             }
         }
-        
+
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
 
@@ -69,11 +63,11 @@
         NSLog(@"%@",[error localizedDescription]);
         
         
+        
     }];
     [operation setJSONReadingOptions:NSJSONReadingMutableLeaves];
     [operation start];
-    [operation release];
-    //[req release];
+
 
     
     
