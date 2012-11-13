@@ -39,32 +39,31 @@
     NSString* RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
     if(!RidingType){
         RidingType = @"Single";
-        [[NSUserDefaults standardUserDefaults] setValue:RidingType forKey:@"RidingType"];
-    }
-    
+        [[NSUserDefaults standardUserDefaults] setObject:RidingType forKey:@"RidingType"];
+    }    
     
     if([[RidingManager getInstance] isRiding]){
-        NSLog(@"Riding..");
+        NSLog(@"Now Riding..");
         
     }
 
 
-//    [[NSUserDefaults standardUserDefaults]synchronize];
-//    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"token"];
-//    
-//    NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:@"token"];
-//    if(!token){
-//        NSLog(@"%@", getNibName(@"FirstSettingViewController"));
-//        FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:getNibName(@"FirstSettingViewController") bundle:nil];
-//
-//        
-//        self.viewController = firstSettingViewController;
-//        
-//    } else {
-//        
-//        self.viewController = [[ViewController alloc] init];
-//    }
-    self.viewController = [[ViewController alloc] init];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"token"];
+    
+    NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:@"token"];
+    if(!token){
+        NSLog(@"%@", getNibName(@"FirstSettingViewController"));
+        FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:getNibName(@"FirstSettingViewController") bundle:nil];
+
+        
+        self.viewController = firstSettingViewController;
+        
+    } else {
+        
+        self.viewController = [[ViewController alloc] init];
+    }
+
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

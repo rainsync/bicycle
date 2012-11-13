@@ -87,7 +87,10 @@
 //	[self.view insertSubview:ridingController.view atIndex:0];
 //    [self.view addSubview:ridingController.view];
 //	[ridingController release];
+    
+    [self dismissModalViewControllerAnimated:YES];
 }
+
 
 - (void)didReceiveMemoryWarning
 {

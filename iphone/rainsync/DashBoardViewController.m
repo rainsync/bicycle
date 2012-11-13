@@ -7,6 +7,7 @@
 //
 
 #import "DashBoardViewController.h"
+#import "GroupRideViewController.h"
 #import "PrettyKit.h"
 
 @interface DashBoardViewController ()
@@ -21,8 +22,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
-
+    
         
         // Custom initialization
     }
@@ -92,7 +92,15 @@
 - (IBAction)statusChanged:(id)sender {
     RidingManager *ridingManager = [RidingManager getInstance];
     
-    if(!paused){
+    NSLog(@"%d", [ridingManager isRiding]);
+    NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"]);
+    if(![ridingManager isRiding] && [[[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"] isEqualToString:@"Group"]) {    // 시작 전이고 싱글라이딩이 아니라면
+        GroupRideViewController *groupRideViewController = [[GroupRideViewController alloc] initWithNibName:@"GroupRideViewController" bundle:nil];
+        [self presentModalViewController:groupRideViewController animated:YES];
+        
+        [groupRideViewController release];
+    }
+    else if(!paused){
         paused=true;
         [ridingManager loadStatus];
         [ridingManager startRiding];
@@ -119,8 +127,12 @@
     
 
     // Do any additional setup after loading the view from its nib.
-
-    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"] isEqualToString:@"Single"]) {
+        [_modeChangeButton setTitle:@"그룹모드로" forState:UIControlStateNormal];
+    }
+    else {
+        [_modeChangeButton setTitle:@"싱글모드로" forState:UIControlStateNormal];
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -152,6 +164,8 @@
         case 0:
         {
             [ridingManager discardStatus];
+//            [_stopButton setEnabled:NO];
+//            [_stopLabel setAlpha:0.5f];
             break;
         }
         case 1:
@@ -180,6 +194,7 @@
     [distanceLabel release];
     [_statusLabel release];
     [_stopLabel release];
+    [_modeChangeButton release];
     [super dealloc];
 }
 
@@ -199,7 +214,19 @@
     [self setDistanceLabel:nil];
     [self setStatusLabel:nil];
     [self setStopLabel:nil];
+    [self setModeChangeButton:nil];
     [super viewDidUnload];
 }
 
+- (IBAction)modeChange:(id)sender {
+    NSLog(@"%@", [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"]);
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"] isEqualToString:@"Single"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"Group" forKey:@"RidingType"];
+        [_modeChangeButton setTitle:@"싱글모드로" forState:UIControlStateNormal];
+    }
+    else {
+        [[NSUserDefaults standardUserDefaults] setObject:@"Single" forKey:@"RidingType"];
+        [_modeChangeButton setTitle:@"그룹모드로" forState:UIControlStateNormal];
+    }
+}
 @end
