@@ -136,6 +136,7 @@
 		55B1D8051650FA930032D86C /* DashBoardViewController-568.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B1D8041650FA930032D86C /* DashBoardViewController-568.xib */; };
 		55B1D8071650FAB30032D86C /* FirstSettingViewController-568.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B1D8061650FAB30032D86C /* FirstSettingViewController-568.xib */; };
 		55B1D8091650FB5C0032D86C /* background-568@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55B1D8081650FB5C0032D86C /* background-568@2x.png */; };
+		55BAA8E6165358D900D4401E /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BAA8E5165358D900D4401E /* Login.m */; };
 		55CAB2A0165006FF0052AB2E /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CAB29F165006FF0052AB2E /* Utility.m */; };
 /* End PBXBuildFile section */
 
@@ -298,6 +299,8 @@
 		55B1D8041650FA930032D86C /* DashBoardViewController-568.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DashBoardViewController-568.xib"; sourceTree = "<group>"; };
 		55B1D8061650FAB30032D86C /* FirstSettingViewController-568.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FirstSettingViewController-568.xib"; sourceTree = "<group>"; };
 		55B1D8081650FB5C0032D86C /* background-568@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-568@2x.png"; sourceTree = "<group>"; };
+		55BAA8E4165358D900D4401E /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
+		55BAA8E5165358D900D4401E /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
 		55CAB29E165006FF0052AB2E /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		55CAB29F165006FF0052AB2E /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -472,6 +475,8 @@
 				558A5A311642389C00BC22ED /* Queue.m */,
 				55CAB29E165006FF0052AB2E /* Utility.h */,
 				55CAB29F165006FF0052AB2E /* Utility.m */,
+				55BAA8E4165358D900D4401E /* Login.h */,
+				55BAA8E5165358D900D4401E /* Login.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -845,6 +850,7 @@
 				04DC76BB164EECDF00289E27 /* PrettyToolbar.m in Sources */,
 				55CAB2A0165006FF0052AB2E /* Utility.m in Sources */,
 				04E3BB471651025F001D8745 /* GpsOptionTableView.m in Sources */,
+				55BAA8E6165358D900D4401E /* Login.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

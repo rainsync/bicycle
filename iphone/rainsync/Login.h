@@ -7,7 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NetUtility.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface Login : NSObject
+{
+    @private void (^success)(void);
+    @private void (^fail)(NSError* error);
+    @private NSString *Session;
+    @private NetUtility *net;
+    
+    
+}
+
++(Login*)getInstance;
+- (NSString *)getSession;
+- (void)join:(void(^)(void))success withFail:(void(^)(NSError* error))fail;
+
+- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
+- (void)loginWithFacebookSession;
+- (void)joinWithFacebookSession;
 
 @end

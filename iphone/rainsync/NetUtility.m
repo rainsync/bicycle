@@ -9,21 +9,15 @@
 #import "NetUtility.h"
 
 
-
 @implementation NetUtility
 
--(id)initwithBlock:(void (^)(int message, NSDictionary* json))success_block withFail:(void (^)(NSError* error))fail_block{
+-(id)initwithHandler:(id)obj{
 
     
-
-    
+    handler = obj;
     queue = [[Queue alloc]init];
-    
     arr = [[NSMutableArray alloc]init];
     server = @"http://api.bicy.kr";
-    success = success_block;
-    fail = fail_block;
-    
     
     return self;
     
@@ -33,15 +27,12 @@
     [super dealloc];
     [queue release];
     [arr release];
-    [success release];
-    [fail release];
     
 }
 
 
 -(void) postURL:(NSString*)url withData:(NSData*)data{
     
-
     
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] ];
     [req setHTTPMethod:@"POST"];
@@ -52,18 +43,24 @@
         NSLog(@"connectionDidFinishLoading");
 
 
+
+        
         NSMutableArray *res = JSON;
         for(NSDictionary* dic in res){
             if([queue count]){
-                success([[queue pop] intValue], dic);
+                NSNumber *item = [queue pop];
+                if([handler respondsToSelector:@selector(reqSuccess: withJSON:)])
+                    [handler reqSuccess:[item intValue] withJSON:dic];
+                [item release];
+                
             }
         }
 
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"connectionDidFinish Fail Return..");
-        fail(error);
-        
+        if([handler respondsToSelector:@selector(reqFail:)])
+            [handler reqFail:error];
         
         
     }];

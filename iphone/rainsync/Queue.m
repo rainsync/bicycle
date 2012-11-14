@@ -1,4 +1,4 @@
-//
+ //
 //  Stack.m
 //  rainsync
 //
@@ -26,7 +26,7 @@
 - (id)pop
 {
     // nil if [self count] == 0
-    id lastObject = [[[contents lastObject] retain] autorelease];
+    id lastObject = [contents lastObject];
     if (lastObject)
         [contents removeLastObject];
     return lastObject;

@@ -20,37 +20,15 @@
 //@synthesize selectFbOrGeneralView, nameAndAvatarSettingView, compeletionSettingView;
 
 
-- (void)sessionStateChanged:(FBSession *)session
+
+
+- (void)loginWithFacebook:(NSString*)passkey
 {
-    NetUtility *net = [[NetUtility alloc] initwithBlock:^(int msg, NSDictionary * dic) {
-        if(msg==account_register)
-        {
-            
-            NSInteger state=[[dic objectForKey:@"state"] intValue];
-            
-            if(state==0)
-            {
-                
-                NSInteger uid=[[dic objectForKey:@"uid"] intValue];
-                NSString *passkey=[dic objectForKey:@"passkey"];
-                NSLog([NSString stringWithFormat:@"STATE %d UID %d PASSKEY %@", state, uid, passkey]);
-                [[NSUserDefaults standardUserDefaults] setObject:FBSession.activeSession.accessToken forKey:@"token"];
-                
-                ViewController *viewController = [[ViewController alloc] init];
-                [[[UIApplication sharedApplication] keyWindow]setRootViewController:viewController];
-                
-                
-            }
-            
-        }
-        
-        //NSLog(@"rc2 %d ",[net retainCount]);
-        //[net release];
-    }];
-    
-    [net account_registerwithAcessToken:FBSession.activeSession.accessToken withNick:@"" withPhoto:@""];
-    [net end];
+    ViewController *viewController = [[ViewController alloc] init];
+    [[[UIApplication sharedApplication] keyWindow]setRootViewController:viewController];
 }
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,8 +37,6 @@
     if (self) {
         // Custom initialization
 
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionStateChanged:) name:FBSessionStateChangedNotification object:nil];
-        
         
     }
     return self;
@@ -82,8 +58,15 @@
 - (IBAction)fbLogin:(id)sender {
     // get the app delegate so that we can access the session property
     
-    
-    [[[UIApplication sharedApplication] delegate] openSessionWithAllowLoginUI:YES];
+    [[Login getInstance] join:^{
+        ViewController *viewController = [[ViewController alloc] init];
+        [[[UIApplication sharedApplication] keyWindow]setRootViewController:viewController];
+        [self.view removeFromSuperview];
+        [viewController release];
+    } withFail:^(NSError *error) {
+        
+    }];
+   
 
     
 }
