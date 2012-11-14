@@ -59,7 +59,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"프로필", @"프로필");
-        net = [[NetUtility alloc] initwithHandler:self];
+        [[NetUtility getInstance] addHandler:self];
         // Custom initialization
     }
     return self;
@@ -77,8 +77,8 @@
     //[_disableView setHidden:YES];
     [[Login getInstance] join:^{
         [_disableView setHidden:TRUE];
-        [net account_profile_get:[[Login getInstance] getSession]];
-        [net end];
+        [[NetUtility getInstance] account_profile_get:[[Login getInstance] getSession]];
+        [[NetUtility getInstance] end];
     } withFail:^(NSError *error) {
         [_disableView setHidden:FALSE];
     }];
@@ -94,8 +94,8 @@
     if(session)
     {
         
-        [net account_profile_get:session];
-        [net end];
+        [[NetUtility getInstance] account_profile_get:session];
+        [[NetUtility getInstance] end];
         [_disableView setHidden:TRUE];
         
     }else{
@@ -117,12 +117,14 @@
 }
 
 - (void)dealloc {
+    [super dealloc];
+    
     [_Name release];
     [_profileImageView release];
     [_disableView release];
     [_loginButton release];
     [_Email release];
-    [super dealloc];
+
 }
 - (void)viewDidUnload {
     [self setName:nil];

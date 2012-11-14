@@ -32,9 +32,7 @@
 {
     [super init];
     Session=nil;
-    
-    net = [[NetUtility alloc] initwithHandler:self];
-           
+    [[NetUtility getInstance] addHandler:self];
     return self;
 }
 
@@ -83,7 +81,6 @@
 -(void)dealloc
 {
     [super dealloc];
-    [net release];
     
 }
 
@@ -123,8 +120,8 @@
 
 - (void)joinWithFacebookSession{
     
-    [net account_registerwithAcessToken:FBSession.activeSession.accessToken withNick:@"" withPhoto:@""];
-    [net end];
+    [[NetUtility getInstance] account_registerwithAcessToken:FBSession.activeSession.accessToken withNick:@"" withPhoto:@""];
+    [[NetUtility getInstance] end];
 }
 
 
@@ -133,8 +130,8 @@
 - (void)loginWithFacebookSession
 {
     
-    [net account_auth:FBSession.activeSession.accessToken];
-    [net end];
+    [[NetUtility getInstance] account_auth:FBSession.activeSession.accessToken];
+    [[NetUtility getInstance] end];
     
 }
 

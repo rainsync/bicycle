@@ -13,11 +13,6 @@
 #import "Login.h"
 
 @interface ProfileViewController : UIViewController
-{
-    NetUtility *net;
-    
-}
-
 
 @property (retain, nonatomic) IBOutlet UILabel *Name;
 @property (retain, nonatomic) IBOutlet UILabel *Email;

@@ -15,8 +15,7 @@
     @private void (^success)(void);
     @private void (^fail)(NSError* error);
     @private NSString *Session;
-    @private NetUtility *net;
-    
+
     
 }
 
