@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
+#import "Login.h"
 
 @interface FirstSettingViewController : UIViewController
 @property (retain, nonatomic) IBOutlet UIButton *fbButton;

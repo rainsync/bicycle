@@ -13,7 +13,10 @@
     
 }
 @property (retain, nonatomic) IBOutlet UITableView *userTableView;
-@property (retain, nonatomic) IBOutlet UIButton *startRdingBtn;
-@property (retain, nonatomic) IBOutlet UIButton *inviteUserBtn;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *selectButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *inviteButton;
+
+@property (nonatomic, retain) NSMutableArray *selectedUserArray;
 
 @end

@@ -9,43 +9,31 @@
 #import "NetUtility.h"
 
 
-
 @implementation NetUtility
-@synthesize responseData, block;
 
--(id)initwithBlock:(void (^)(int, NSDictionary*))block{
-    responseData = [[[NSMutableData alloc] init] autorelease];
+-(id)initwithHandler:(id)obj{
+
     
+    handler = obj;
     queue = [[Queue alloc]init];
     arr = [[NSMutableArray alloc]init];
-    
     server = @"http://api.bicy.kr";
-    self.block = block;
     
     return self;
     
 }
 
 -(void)dealloc{
-    [queue release];
     [super dealloc];
+    [queue release];
+    [arr release];
     
 }
 
--(void) getURL:(NSString *)url{
-    responseData = [[NSMutableData alloc]init];
-    
-                    
-    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [[NSURLConnection alloc] initWithRequest:req delegate:self];
-    //[req release];
-
-    
-    
-    
-}
 
 -(void) postURL:(NSString*)url withData:(NSData*)data{
+    
+    
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] ];
     [req setHTTPMethod:@"POST"];
     [req setValue:[NSString stringWithFormat:@"%d",[data length]] forHTTPHeaderField:@"Content-Length"];
@@ -54,26 +42,31 @@
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:req success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSLog(@"connectionDidFinishLoading");
 
+
+
         
         NSMutableArray *res = JSON;
         for(NSDictionary* dic in res){
             if([queue count]){
-                self.block([[queue pop] intValue], dic);
+                NSNumber *item = [queue pop];
+                if([handler respondsToSelector:@selector(reqSuccess: withJSON:)])
+                    [handler reqSuccess:[item intValue] withJSON:dic];
+                [item release];
+                
             }
         }
-        
+
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-
-        NSLog(@"connectionDidFinishLoading");
-        NSLog(@"%@",[error localizedDescription]);
+        NSLog(@"connectionDidFinish Fail Return..");
+        if([handler respondsToSelector:@selector(reqFail:)])
+            [handler reqFail:error];
         
         
     }];
     [operation setJSONReadingOptions:NSJSONReadingMutableLeaves];
     [operation start];
-    [operation release];
-    //[req release];
+
 
     
     

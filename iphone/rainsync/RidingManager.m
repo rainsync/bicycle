@@ -45,8 +45,11 @@
 //m/s
 -(double)avgSpeed
 {
+    double result=_totalDistance/_time;
+    if(result==NAN || result==INFINITY)
+        result=0;
     
-    return _totalDistance/_time;
+    return result;
 }
 
 

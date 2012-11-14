@@ -15,6 +15,8 @@
 
 #define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"-568":@""]
 
+
+
 @implementation AppDelegate
 
 - (void)dealloc
@@ -25,17 +27,21 @@
 }
 
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginWithFacebook:) name:@"loginWithFacebook" object:nil];
+    
     [BugSenseCrashController sharedInstanceWithBugSenseAPIKey:@"001a166a"];  // add BugSense
 
     [UIApplication sharedApplication].idleTimerDisabled = YES;  // application can't lock screen automatically
 
-    [FBProfilePictureView class];
+
+    
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
-
+    
     NSString* RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
     if(!RidingType){
         RidingType = @"Single";
@@ -47,25 +53,23 @@
         
     }
 
-
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"session"];
     [[NSUserDefaults standardUserDefaults]synchronize];
-    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"token"];
     
-    NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:@"token"];
-    if(!token){
-        NSLog(@"%@", getNibName(@"FirstSettingViewController"));
-        FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:getNibName(@"FirstSettingViewController") bundle:nil];
-
-        
-        self.viewController = firstSettingViewController;
-        
-    } else {
-        
+    if([[Login getInstance] getSession])
+    {
         self.viewController = [[ViewController alloc] init];
+        self.window.rootViewController = self.viewController;
+        [self.window makeKeyAndVisible];
+        
+    }else{
+        FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:getNibName(@"FirstSettingViewController") bundle:nil];
+        self.viewController = firstSettingViewController;
+        self.window.rootViewController = self.viewController;
+        [self.window makeKeyAndVisible];
     }
+    //self.viewController = [[ViewController alloc] init];
 
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
     return YES;
 }
 
@@ -100,12 +104,8 @@
     [FBSession.activeSession close];
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    NSLog(url.absoluteString);
-    
-    // Do something with the url here
-}
+
+
 
 
 // FBSample logic
@@ -125,6 +125,8 @@
     // attempt to extract a token from the url
     return [FBSession.activeSession handleOpenURL:url];
 }
+
+
 
 
 

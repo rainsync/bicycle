@@ -42,7 +42,7 @@
     else
         speedLabel.text = [NSString stringWithFormat:@"%.2lf", [Utility mpsTokph:[manager current_location].speed]];
     
-    avgLabel.text = [NSString stringWithFormat:@"%.2lf", [Utility mpsTokph:[manager avgSpeed]]];
+    
 
     calorieLabel.text = [NSString stringWithFormat:@"%.2lf", [manager calorie] ];
     
@@ -53,7 +53,8 @@
 
 - (void)updateTime:(RidingManager*)manager
 {
-
+    
+    avgLabel.text = [NSString stringWithFormat:@"%.2lf", [Utility mpsTokph:[manager avgSpeed]]];
     timeLabel.text = [Utility getStringTime:[manager time]];
     
 }

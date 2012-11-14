@@ -85,9 +85,14 @@
         prev_line = [[CrumbPath alloc] initWithCenterCoordinate:newLocation.coordinate];
         [self.mapView addOverlay:prev_line];
         [route_lines replaceObjectAtIndex:pos withObject:prev_line];
+        
+        NSLog(@"changed..");
+        
+        
     }else{
     
         MKMapRect updateRect = [prev_line addCoordinate:newLocation.coordinate];
+        NSLog(@"%lf %lf %lf %lf %p %p gg", updateRect.origin.x, updateRect.origin.y, updateRect.size.height,updateRect.size.width, route_views[pos], [NSNull null]);
         
         if (!MKMapRectIsNull(updateRect) && route_views[pos]!=[NSNull null])
         {
@@ -102,6 +107,9 @@
         }
         
     }
+    
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 1000, 1000);
+    [_mapView setRegion:region animated:YES];
     //if(prev_line != [NSNull null])
     //    [self.mapView removeOverlay:prev_line];
     
@@ -115,7 +123,7 @@
 - (void)locationManager:(RidingManager *)manager
 {
     
-    
+
     int num= [self getUserNum:@"me"];
     [self addPoint:num withLocation:[manager current_location]];
     

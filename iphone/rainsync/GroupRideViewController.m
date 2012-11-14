@@ -16,6 +16,9 @@
 #define start_color [UIColor colorWithHex:0xEEEEEE]
 #define end_color [UIColor colorWithHex:0xDEDEDE]
 
+static NSString *kInvitePartialTitle = @"초대 (%d)";
+
+
 @implementation GroupRideViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -42,6 +45,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _selectedUserArray = [NSArray arrayWithObjects:@"김승원", @"노연재", @"최태양", nil];
     
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"구성원 초대";
@@ -49,8 +53,8 @@
     self.userTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.userTableView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:nil action:nil] autorelease];
-    
+    self.userTableView.allowsMultipleSelection = YES;  // 복수선택 가능
+
     [self.userTableView dropShadows];
     [self customizeNavBar];
 
@@ -67,22 +71,12 @@
     [super viewWillDisappear:animated];
 }
 
-- (IBAction)startRiding:(id)sender {
-
-//    RidingViewController *ridingController = [[RidingViewController alloc] initWithNibName:@"RidingViewController" bundle:nil];
-    //[self.view.superview addSubview:ridingController.view];
-    
-  //  [[[UIApplication sharedApplication] keyWindow] setRootViewController:ridingController];
-    
-    //	self.ridingViewController = ridingController;
-//	[self.view insertSubview:ridingController.view atIndex:0];
-//    [self.view addSubview:ridingController.view];
-//	[ridingController release];
-    
+-(void)onDoneClick:(id)sender
+{
+    // 선택된 유저 초대 푸쉬 보내고 서버 접속 유도
     [self.navigationController popViewControllerAnimated:YES];
-    
-}
 
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -91,12 +85,10 @@
 }
 
 - (void)dealloc {
-    [_inviteUserBtn release];
     [_userTableView release];
     [super dealloc];
 }
 - (void)viewDidUnload {
-    [self setInviteUserBtn:nil];
     [self setUserTableView:nil];
     [super viewDidUnload];
 }
@@ -112,7 +104,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return [_selectedUserArray count];
 }
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -121,31 +113,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    if (indexPath.row == 1) {
-        static NSString *GridCellIdentifier = @"GridCell";
-        
-        PrettyGridTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:GridCellIdentifier];
-        if (cell == nil) {
-            cell = [[[PrettyGridTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:GridCellIdentifier] autorelease];
-            cell.tableViewBackgroundColor = tableView.backgroundColor;
-            cell.gradientStartColor = start_color;
-            cell.gradientEndColor = end_color;
-        }
-        cell.numberOfElements = 2;
-        [cell setActionBlock:^(NSIndexPath *indexPath, int selectedIndex) {
-            [cell deselectAnimated:YES];
-        }];
-        [cell prepareForTableView:tableView indexPath:indexPath];
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:18];
-        [cell setText:@"Text 1" atIndex:0];
-        [cell setText:@"Text 2" atIndex:1];
-        [cell setDetailText:@"Subtitle" atIndex:0];
-        [cell setDetailText:@"Subtitle" atIndex:1];
-        
-        return cell;
-    }
-    
     static NSString *CellIdentifier = @"Cell";
     
     PrettyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -154,14 +121,17 @@
         cell.tableViewBackgroundColor = tableView.backgroundColor;
         cell.gradientStartColor = start_color;
         cell.gradientEndColor = end_color;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;    // 셀 선택 시 하이라이트 효과 해제
     }
     [cell prepareForTableView:tableView indexPath:indexPath];
-    cell.textLabel.text = @"Text";
+
+	cell.textLabel.text = [_selectedUserArray objectAtIndex:indexPath.row];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     
+    NSString *profile = [[NSBundle mainBundle] pathForResource:@"profile_sample.jpg" ofType: nil];
+    cell.imageView.image = [UIImage imageWithContentsOfFile:profile];
     
     return cell;
-
 }
 
 #pragma mark -
@@ -169,7 +139,29 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.userTableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSArray *selectedRows = [self.userTableView indexPathsForSelectedRows];
+    NSString *inviteButtonTitle = [NSString stringWithFormat:kInvitePartialTitle, selectedRows.count];
+    
+    if (selectedRows.count > 0) {
+        self.navigationItem.rightBarButtonItem = _inviteButton; // 네비바 오른쪽 버튼 초대버튼 생성
+    }
+    _inviteButton.title = inviteButtonTitle;
+
+    [self.userTableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *selectedRows = [self.userTableView indexPathsForSelectedRows];
+    NSString *inviteButtonTitle = [NSString stringWithFormat:kInvitePartialTitle, selectedRows.count];
+    [self.userTableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+
+    if (selectedRows.count != 0) {
+        _inviteButton.title = inviteButtonTitle;
+    }
+    else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 }
 
 @end
