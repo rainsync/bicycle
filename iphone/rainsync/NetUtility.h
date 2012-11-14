@@ -21,8 +21,9 @@ enum req_type{
 
 @interface NetUtility : NSObject{
     //@private NSMutableData* responseData;
-    @private void (^block)(int, NSDictionary*);
-        
+    @private void (^success)(int, NSDictionary*);
+    @private void (^fail)(NSError *);
+    
     @private NSMutableArray* arr;
     @private Queue *queue;
     @private NSString *server;
@@ -30,7 +31,7 @@ enum req_type{
 }
 //@property (nonatomic, strong) NSMutableData* responseData;
 //@property (nonatomic, strong) void (^block)(int, NSDictionary*);
--(id)initwithBlock:(void (^)(int, NSDictionary*))block;
+-(id)initwithBlock:(void (^)(int message, NSDictionary* json))success_block withFail:(void (^)(NSError* error))fail_block;
 
 -(void) dealloc;
 //:(void (^)(NSData*))block

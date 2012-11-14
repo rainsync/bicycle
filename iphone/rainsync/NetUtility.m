@@ -12,7 +12,7 @@
 
 @implementation NetUtility
 
--(id)initwithBlock:(void (^)(int, NSDictionary*))b{
+-(id)initwithBlock:(void (^)(int message, NSDictionary* json))success_block withFail:(void (^)(NSError* error))fail_block{
 
     
 
@@ -21,7 +21,9 @@
     
     arr = [[NSMutableArray alloc]init];
     server = @"http://api.bicy.kr";
-    block = b;
+    success = success_block;
+    fail = fail_block;
+    
     
     return self;
     
@@ -31,7 +33,8 @@
     [super dealloc];
     [queue release];
     [arr release];
-    [block release];
+    [success release];
+    [fail release];
     
 }
 
@@ -52,15 +55,14 @@
         NSMutableArray *res = JSON;
         for(NSDictionary* dic in res){
             if([queue count]){
-                block([[queue pop] intValue], dic);
+                success([[queue pop] intValue], dic);
             }
         }
 
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-
-        NSLog(@"connectionDidFinishLoading");
-        NSLog(@"%@",[error localizedDescription]);
+        NSLog(@"connectionDidFinish Fail Return..");
+        fail(error);
         
         
         
