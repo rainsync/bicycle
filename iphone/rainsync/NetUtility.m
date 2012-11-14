@@ -11,16 +11,26 @@
 
 @implementation NetUtility
 
--(id)initwithHandler:(id)obj{
+-(id)init{
 
     
-    handler = obj;
+    handler = [[NSMutableArray alloc] init];
     queue = [[Queue alloc]init];
     arr = [[NSMutableArray alloc]init];
     server = @"http://api.bicy.kr";
     
     return self;
     
+}
+
+- (void)addHandler:(id)handle
+{
+    [handler addObject:handle];
+}
+
+- (void)removeHandler:(id)handle
+{
+    [handle removeHandler:handle];
 }
 
 -(void)dealloc{
@@ -49,8 +59,11 @@
         for(NSDictionary* dic in res){
             if([queue count]){
                 NSNumber *item = [queue pop];
-                if([handler respondsToSelector:@selector(reqSuccess: withJSON:)])
-                    [handler reqSuccess:[item intValue] withJSON:dic];
+                for (id handle in handler) {
+                    if([handle respondsToSelector:@selector(reqSuccess: withJSON:)])
+                        [handle reqSuccess:[item intValue] withJSON:dic];
+                }
+
                 [item release];
                 
             }
@@ -59,9 +72,10 @@
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"connectionDidFinish Fail Return..");
-        if([handler respondsToSelector:@selector(reqFail:)])
-            [handler reqFail:error];
-        
+        for (id handle in handler) {
+        if([handle respondsToSelector:@selector(reqFail:)])
+            [handle reqFail:error];
+        }
         
     }];
     [operation setJSONReadingOptions:NSJSONReadingMutableLeaves];

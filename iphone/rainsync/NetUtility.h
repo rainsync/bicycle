@@ -23,7 +23,7 @@ enum req_type{
 
     @private void (^success)(int, NSDictionary*);
     @private void (^fail)(NSError *);
-    id handler;
+    NSMutableArray *handler;
     @private NSMutableArray* arr;
     @private Queue *queue;
     @private NSString *server;
@@ -32,6 +32,7 @@ enum req_type{
 
 -(id)initwithHandler:(id)obj;
 -(void) dealloc;
+- (void)addHandler:(id)handle;
 //:(void (^)(NSData*))block
 -(void) getURL:(NSString *)url;
 -(void) postURL:(NSString*)url withData:(NSData*)data;
