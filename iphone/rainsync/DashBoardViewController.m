@@ -45,10 +45,37 @@
     
 
     calorieLabel.text = [NSString stringWithFormat:@"%.2lf", [manager calorie] ];
-    
     distanceLabel.text = [NSString stringWithFormat:@"%.2lf", [Utility metreTokilometre:[manager totalDistance]]];
     
     
+    double cal = [manager calorie];
+    double dist = [Utility metreTokilometre:[manager totalDistance]];
+    double cspeed = [Utility mpsTokph:[manager current_location].speed];
+    
+    for (int i=0; i<10; i++) {
+        if (i == (int)cal/100)
+            _cal_100.image = [numberArray objectAtIndex:i];;
+        if (i == (int)cal/10%10)
+            _cal_10.image = [numberArray objectAtIndex:i];
+        if (i == (int)cal%10)
+            _cal_1.image = [numberArray objectAtIndex:i];
+        
+        if (i == (int)(dist*10)%10)    // 소수 첫째자리
+            _dist_decimal.image = [numberArray objectAtIndex:i];
+        if (i == (int)dist%10)
+            _dist_1.image = [numberArray objectAtIndex:i];
+        if (i == (int)dist/10%10)
+            _dist_10.image = [numberArray objectAtIndex:i];
+        if (i == (int)dist/100)
+            _dist_100.image = [numberArray objectAtIndex:i];
+        
+        if (i == (int)(cspeed*10)%10)
+            _curr_decimal.image = [numberArray objectAtIndex:i];
+        if (i == (int)cspeed%10)
+            _curr_1.image = [numberArray objectAtIndex:i];
+        if (i == (int)cspeed/10%10)
+            _curr_10.image = [numberArray objectAtIndex:i];
+    }
 }
 
 - (void)updateTime:(RidingManager*)manager
@@ -57,14 +84,14 @@
     avgLabel.text = [NSString stringWithFormat:@"%.2lf", [Utility mpsTokph:[manager avgSpeed]]];
     timeLabel.text = [Utility getStringTime:[manager time]];
     
+    double aspeed = [Utility mpsTokph:[manager avgSpeed]];
     int h = [Utility getTimeHour:[manager time]];
     int m = [Utility getTimeMinute:[manager time]];
     int s = [Utility getTimeSecond:[manager time]];
 
     for (int i=0; i<10; i++) {
         if (i==h/10)
-//            NSLog(@"%@", [numberArray objectAtIndex:i]);
-            _time_hour10.image = (UIImage *)[numberArray objectAtIndex:i];
+            _time_hour10.image = [numberArray objectAtIndex:i];
         if (i==h%10)
             _time_hour1.image = [numberArray objectAtIndex:i];
         if (i==m/10)
@@ -75,6 +102,13 @@
             _time_second10.image = [numberArray objectAtIndex:i];
         if (i==s%10)
             _time_second1.image = [numberArray objectAtIndex:i];
+        
+        if (i == (int)(aspeed*10)%10)
+            _avg_decimal.image = [numberArray objectAtIndex:i];
+        if (i == (int)aspeed%10)
+            _avg_1.image = [numberArray objectAtIndex:i];
+        if (i == (int)aspeed/10%10)
+            _avg_10.image = [numberArray objectAtIndex:i]; 
     }
 }
 
@@ -235,6 +269,19 @@
     [_time_hour10 release];
     
     [numberArray release];
+    [_dist_decimal release];
+    [_dist_1 release];
+    [_dist_10 release];
+    [_dist_100 release];
+    [_avg_decimal release];
+    [_avg_1 release];
+    [_avg_10 release];
+    [_curr_decimal release];
+    [_curr_1 release];
+    [_curr_10 release];
+    [_cal_1 release];
+    [_cal_10 release];
+    [_cal_100 release];
     [super dealloc];
 }
 
@@ -263,6 +310,19 @@
     [self setTime_hour10:nil];
     
     numberArray = nil;
+    [self setDist_decimal:nil];
+    [self setDist_1:nil];
+    [self setDist_10:nil];
+    [self setDist_100:nil];
+    [self setAvg_decimal:nil];
+    [self setAvg_1:nil];
+    [self setAvg_10:nil];
+    [self setCurr_decimal:nil];
+    [self setCurr_1:nil];
+    [self setCurr_10:nil];
+    [self setCal_1:nil];
+    [self setCal_10:nil];
+    [self setCal_100:nil];
     [super viewDidUnload];
 }
 
