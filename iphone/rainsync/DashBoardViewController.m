@@ -63,17 +63,18 @@
 
     for (int i=0; i<10; i++) {
         if (i==h/10)
-            _time_hour10.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d", i]];
+//            NSLog(@"%@", [numberArray objectAtIndex:i]);
+            _time_hour10.image = (UIImage *)[numberArray objectAtIndex:i];
         if (i==h%10)
-            _time_hour1.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d", i]];
+            _time_hour1.image = [numberArray objectAtIndex:i];
         if (i==m/10)
-            _time_minute10.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d", i]];
+            _time_minute10.image = [numberArray objectAtIndex:i];
         if (i==m%10)
-            _time_minute1.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d", i]];
+            _time_minute1.image = [numberArray objectAtIndex:i];
         if (i==s/10)
-            _time_second10.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d", i]];
+            _time_second10.image = [numberArray objectAtIndex:i];
         if (i==s%10)
-            _time_second1.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d", i]];
+            _time_second1.image = [numberArray objectAtIndex:i];
     }
 }
 
@@ -145,18 +146,13 @@
 {
     [super viewDidLoad];
     
-    // Number Image Initialize
-    number0 = [[UIImage alloc] initWithContentsOfFile:@"0.png"];
-    number1 = [[UIImage alloc] initWithContentsOfFile:@"1.png"];
-    number2 = [[UIImage alloc] initWithContentsOfFile:@"2.png"];
-    number3 = [[UIImage alloc] initWithContentsOfFile:@"3.png"];
-    number4 = [[UIImage alloc] initWithContentsOfFile:@"4.png"];
-    number5 = [[UIImage alloc] initWithContentsOfFile:@"5.png"];
-    number6 = [[UIImage alloc] initWithContentsOfFile:@"6.png"];
-    number7 = [[UIImage alloc] initWithContentsOfFile:@"7.png"];
-    number8 = [[UIImage alloc] initWithContentsOfFile:@"8.png"];
-    number9 = [[UIImage alloc] initWithContentsOfFile:@"9.png"];
-    
+    numberArray = [[NSMutableArray alloc] init];
+    for (int i=0; i<10; i++) {
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%d.png", i] ofType:nil];
+        UIImage *numberImage = [UIImage imageWithContentsOfFile:filePath];
+        [numberArray addObject:numberImage];
+    }   // 숫자 이미지 초기화
+
 
     // Do any additional setup after loading the view from its nib.
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"] isEqualToString:@"Single"]) {
@@ -238,16 +234,7 @@
     [_time_hour1 release];
     [_time_hour10 release];
     
-    [number0 release];
-    [number1 release];
-    [number2 release];
-    [number3 release];
-    [number4 release];
-    [number5 release];
-    [number6 release];
-    [number7 release];
-    [number8 release];
-    [number9 release];
+    [numberArray release];
     [super dealloc];
 }
 
@@ -274,18 +261,9 @@
     [self setTime_minute10:nil];
     [self setTime_hour1:nil];
     [self setTime_hour10:nil];
-    [super viewDidUnload];
     
-    number0 = nil;
-    number1 = nil;
-    number2 = nil;
-    number3 = nil;
-    number4 = nil;
-    number5 = nil;
-    number6 = nil;
-    number7 = nil;
-    number8 = nil;
-    number9 = nil;
+    numberArray = nil;
+    [super viewDidUnload];
 }
 
 - (IBAction)modeChange:(id)sender {
