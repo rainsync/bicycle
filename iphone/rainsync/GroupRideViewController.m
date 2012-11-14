@@ -86,11 +86,49 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
 
 - (void)dealloc {
     [_userTableView release];
+    [_inviteButton release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setUserTableView:nil];
+    [self setInviteButton:nil];
     [super viewDidUnload];
+}
+
+- (IBAction)inviteUser:(id)sender {
+    // open a dialog with just an OK button
+	NSString *actionTitle = @"선택하신 이용자에게 초대 메세지를 보내시겠습니까?";
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:actionTitle
+                                                             delegate:self
+                                                    cancelButtonTitle:@"아니오"
+                                               destructiveButtonTitle:@"네"
+                                                    otherButtonTitles:nil];
+	actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+	[actionSheet showFromTabBar:self.tabBarController.tabBar];	// show from our table view (pops up in the middle of the table)
+	[actionSheet release];
+}
+
+#pragma mark -
+#pragma mark Action Sheet Delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	// the user clicked one of the OK/Cancel buttons
+	if (buttonIndex == 0)
+	{
+        NSArray *selectedRows = [self.userTableView indexPathsForSelectedRows];
+        if (selectedRows.count > 0)
+        {
+            for (NSIndexPath *selectionIndex in selectedRows)
+            {
+                NSLog(@"%d", selectionIndex.row);
+            }
+        }
+    }
+    else {
+        
+    }
 }
 
 #pragma mark -
@@ -163,5 +201,6 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
         self.navigationItem.rightBarButtonItem = nil;
     }
 }
+
 
 @end

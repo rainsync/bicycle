@@ -80,7 +80,7 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUIBarButtonItem" id="998247189">
+			<object class="IBUIBarButtonItem" id="899357581">
 				<string key="IBUITitle">Invite</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUIStyle">1</int>
@@ -108,7 +108,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">inviteButton</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="998247189"/>
+						<reference key="destination" ref="899357581"/>
 					</object>
 					<int key="connectionID">33</int>
 				</object>
@@ -127,6 +127,14 @@
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">25</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">inviteUser:</string>
+						<reference key="source" ref="899357581"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">34</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -163,7 +171,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">32</int>
-						<reference key="object" ref="998247189"/>
+						<reference key="object" ref="899357581"/>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Bar Button Item - inviteButton</string>
 					</object>
@@ -182,30 +190,31 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">33</int>
+			<int key="maxID">34</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">GroupRideViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">inviteUser:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">inviteUser:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">inviteUser:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="cancelButton">UIBarButtonItem</string>
 						<string key="inviteButton">UIBarButtonItem</string>
-						<string key="selectButton">UIBarButtonItem</string>
 						<string key="userTableView">UITableView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="cancelButton">
-							<string key="name">cancelButton</string>
-							<string key="candidateClassName">UIBarButtonItem</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="inviteButton">
 							<string key="name">inviteButton</string>
-							<string key="candidateClassName">UIBarButtonItem</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="selectButton">
-							<string key="name">selectButton</string>
 							<string key="candidateClassName">UIBarButtonItem</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="userTableView">

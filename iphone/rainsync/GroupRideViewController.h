@@ -9,14 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "RidingViewController.h"
 
-@interface GroupRideViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface GroupRideViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate> {
     
 }
 @property (retain, nonatomic) IBOutlet UITableView *userTableView;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *selectButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *inviteButton;
 
 @property (nonatomic, retain) NSMutableArray *selectedUserArray;
 
+- (IBAction)inviteUser:(id)sender;
 @end
