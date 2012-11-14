@@ -7,6 +7,7 @@
 //
 
 #import "MemberViewController.h"
+#import "MemberCustomCell.h"
 #import "PrettyKit.h"
 
 @interface MemberViewController ()
@@ -31,6 +32,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,6 +41,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    [_tableView release];
+    [super dealloc];
+}
+- (void)viewDidUnload {
+    [self setTableView:nil];
+    [super viewDidUnload];
+}
 
 #pragma mark - Table view data source
 
@@ -50,53 +60,34 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return 3;
 }
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return tableView.rowHeight + [PrettyTableViewCell tableView:tableView neededHeightForIndexPath:indexPath];
+    return 73;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    if (indexPath.row == 1) {
-        static NSString *GridCellIdentifier = @"GridCell";
-        
-        PrettyGridTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:GridCellIdentifier];
-        if (cell == nil) {
-            cell = [[[PrettyGridTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:GridCellIdentifier] autorelease];
-            cell.tableViewBackgroundColor = tableView.backgroundColor;
-            cell.gradientStartColor = start_color;
-            cell.gradientEndColor = end_color;
-        }
-        cell.numberOfElements = 2;
-        [cell setActionBlock:^(NSIndexPath *indexPath, int selectedIndex) {
-            [cell deselectAnimated:YES];
-        }];
-        [cell prepareForTableView:tableView indexPath:indexPath];
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:18];
-        [cell setText:@"Text 1" atIndex:0];
-        [cell setText:@"Text 2" atIndex:1];
-        [cell setDetailText:@"Subtitle" atIndex:0];
-        [cell setDetailText:@"Subtitle" atIndex:1];
-        
-        return cell;
-    }
-    
-    static NSString *CellIdentifier = @"Cell";
-    
-    PrettyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    MemberCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MemberCustomCell"];
+
     if (cell == nil) {
-        cell = [[[PrettyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        cell.tableViewBackgroundColor = tableView.backgroundColor;
-        cell.gradientStartColor = start_color;
-        cell.gradientEndColor = end_color;
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MemberCustomCell" owner:self options:nil];
+
+        for (id oneObject in nib)
+			if ([oneObject isKindOfClass:[MemberCustomCell class]])
+                cell = (MemberCustomCell *)oneObject;
     }
-    [cell prepareForTableView:tableView indexPath:indexPath];
-    cell.textLabel.text = @"Text";
-    cell.textLabel.backgroundColor = [UIColor clearColor];
     
+    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"tableBg.png" ofType:nil];
+    cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:imagePath]];
+    NSString *profileImagePath = [[NSBundle mainBundle] pathForResource:@"profile_sample.jpg" ofType:nil];
+    cell.memerImage.image = [UIImage imageWithContentsOfFile:profileImagePath];
+    cell.memberName.text = @"김승원";
+    cell.memberSpeed.text = @"15.1";
+    cell.serverStatus.text = @"접속 중";
+    NSString *statusImagePath = [[NSBundle mainBundle] pathForResource:@"greenLight.png" ofType: nil];
+    cell.serverStatusImage.image = [UIImage imageWithContentsOfFile:statusImagePath];
     
     return cell;
     
@@ -148,12 +139,4 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)dealloc {
-    [_tableView release];
-    [super dealloc];
-}
-- (void)viewDidUnload {
-    [self setTableView:nil];
-    [super viewDidUnload];
-}
 @end
