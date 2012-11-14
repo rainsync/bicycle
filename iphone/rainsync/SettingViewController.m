@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 #import "GpsOptionTableView.h"
+#import "UIColor+ColorWithHex.h"
 
 #define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"-568":@""]
 
@@ -208,6 +209,8 @@
             [cell.textLabel setText:@"실시간 경로"];
             UIView		*viewCell = [[UIView alloc] initWithFrame:CGRectMake(70, 0, 160, 40)];
             UISwitch	*drawRouteSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(70, 6, 94, 27)];
+            drawRouteSwitch.onTintColor = [UIColor colorWithHexString:@"008fd5"];
+            
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"drawRoute"] ) [drawRouteSwitch setOn:YES animated:NO];
             else [drawRouteSwitch setOn:NO animated:NO];
             

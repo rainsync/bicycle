@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "PrettyKit.h"
+#import "UIColor+ColorWithHex.h"
 
 @interface ViewController ()
 
@@ -47,10 +48,11 @@
     
     // 네이비게이션 바가 필요한 프로필 탭, 통계 탭, 설정 탭은 네비게이션 컨트롤러에 뷰 삽입하여 탭바 컨트롤러에 삽임한다.
     //self.viewControllers = @[ridingViewController, profileNavController,staticsNavController, settingNavController];
-    self.viewControllers = @[ridingViewController,profileNavController,staticsNavController, settingNavController];
-
+    self.viewControllers = @[ridingViewNavController, profileNavController,staticsNavController, settingNavController];
+ 
+    self.tabBar.selectedImageTintColor = [UIColor colorWithHexString:@"008fd5"];
     [ridingViewController release];
-    //[profile release];
+    [profile release];
     [statics release];
     [setting release];
     
@@ -77,9 +79,5 @@
 }
 - (void)viewDidUnload {
     [super viewDidUnload];
-}
-
-- (void)changeToRiding {
-    
 }
 @end
