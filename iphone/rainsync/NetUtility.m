@@ -123,6 +123,16 @@
 }
 
 
+-(void) account_friend_list{
+    
+    
+    NSString* session = [[Login getInstance] getSession];
+    if(session){
+    [queue push:[[NSNumber alloc]initWithInt:account_friend_list]];
+    [arr addObject:[[[NSDictionary alloc] initWithObjects:@[@"account-friend-list", session] forKeys:@[@"type", @"sid"]] autorelease]];
+    }
+}
+
 -(void) end{
     NSError* error;
     NSData* data = [NSJSONSerialization dataWithJSONObject:arr options:NSJSONReadingMutableLeaves error:&error];
