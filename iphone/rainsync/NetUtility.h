@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "Queue.h"
 #import "AFJSONRequestOperation.h"
+#import "Login.h"
 
 enum req_type{
     account_register=1,
     account_auth=2,
     account_profile_get=3,
+    account_friend_list=4,
     
 };
 
@@ -39,6 +41,6 @@ enum req_type{
 -(void) account_registerwithAcessToken:(NSString*)accesstoken withNick:(NSString*)nick withPhoto:(NSString*)photo;
 -(void) account_auth:(NSString*)accesstoken;
 -(void) account_profile_get:(NSString*)sid;
-
+-(void) account_friend_list;
 -(void) end;
 @end

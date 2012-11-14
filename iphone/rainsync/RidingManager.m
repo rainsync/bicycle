@@ -81,7 +81,9 @@
             _time = [[NSUserDefaults standardUserDefaults] doubleForKey:@"time"];
             _calorie = [[NSUserDefaults standardUserDefaults] doubleForKey:@"calorie"];
             _start_date = [[NSUserDefaults standardUserDefaults] doubleForKey:@"start_date"];
-            if(_totalDistance==0 && _time ==0 && _calorie ==0 && _start_date==0)
+            _last_riding = [[NSUserDefaults standardUserDefaults] integerForKey:@"last_riding"];
+
+            if(_totalDistance==0 && _time ==0 && _calorie ==0 && _start_date==0 && _last_riding==0)
                 @throw [NSException exceptionWithName:@"Setting" reason:@"old data is not correct" userInfo:nil];
             
         }
@@ -90,6 +92,7 @@
             _time =0;
             _calorie =0;
             _start_date =[[NSDate date] timeIntervalSince1970];
+            _last_riding=0;
         }
         
         
@@ -101,7 +104,7 @@
         _time =0;
         _calorie = 0;
         _start_date = [[NSDate date] timeIntervalSince1970];
-        
+        _last_riding=0;
         locations = [[NSMutableArray alloc] init];
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsRiding"];
@@ -135,6 +138,7 @@
     [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"time"];
     [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"distance"];
     [[NSUserDefaults standardUserDefaults] setDouble:0 forKey:@"calorie"];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"last_riding"];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
@@ -143,6 +147,12 @@
 - (void)startRiding
 {
 
+    if(!_last_riding){
+        _last_riding = [ridingDB createRecording];
+        [[NSUserDefaults standardUserDefaults] setInteger:_last_riding forKey:@"last_riding"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
     
     oldt=[[NSDate date] timeIntervalSince1970];
     //[locmanager set]
@@ -182,6 +192,7 @@
     
     [locmanager startUpdatingLocation];
     [locmanager startUpdatingHeading];
+
     
     timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(checkTime:) userInfo:nil repeats:YES];
 
@@ -197,7 +208,7 @@
     
     [self saveStatus];
     
-    [ridingDB saveLocation:locations];
+    [ridingDB  saveLocation:_last_riding withLocation:locations];
     [locations removeAllObjects];
     
     
@@ -236,6 +247,7 @@
 
 
 
+
 # pragma mark -
 # pragma mark AlertView Delegate
 
@@ -244,7 +256,7 @@
     switch (buttonIndex) {
         case 0:
         {
-            [ridingDB discardRecording];
+            [ridingDB deleteRecord:_last_riding];
             NSLog(@"저장 취소");
             break;
         }

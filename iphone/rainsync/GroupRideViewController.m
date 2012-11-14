@@ -21,11 +21,47 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
 
 @implementation GroupRideViewController
 
+- (void) reqSuccess:(int)message withJSON:(NSDictionary *)dic {
+    switch (message) {
+        case account_friend_list:
+        {
+            NSInteger state=[[dic objectForKey:@"state"] intValue];
+            
+            
+            if(state==0){
+                NSMutableArray *friends=[dic objectForKey:@"friends"];
+                for (NSMutableDictionary *dic in friends) {
+                    [[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[dic objectForKey:@"picture"]]] autorelease];
+                    [_selectedUserArray addObject:dic];
+                }
+                
+                
+                [_userTableView reloadData];
+            }
+            
+            break;
+            
+        }
+        default:
+        {
+            NSError *error=[NSError errorWithDomain:@"서버로 부터 잘못된 데이터가 전송되었습니다." code:-2 userInfo:nil];
+            break;
+        }
+    }
+    
+}
+
+- (void)reqFail:(NSError*)error
+{
+    //[self showError:error];
+}
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-
+        [[NetUtility getInstance] addHandler:self];
         // Custom initialization
     }
     return self;
@@ -45,7 +81,10 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _selectedUserArray = [NSArray arrayWithObjects:@"김승원", @"노연재", @"최태양", nil];
+    [[NetUtility getInstance] account_friend_list];
+    [[NetUtility getInstance]end];
+    
+    _selectedUserArray = [[NSMutableArray alloc] init];
     
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"구성원 초대";
@@ -163,11 +202,15 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
     }
     [cell prepareForTableView:tableView indexPath:indexPath];
 
-	cell.textLabel.text = [_selectedUserArray objectAtIndex:indexPath.row];
+    NSDictionary *dic=[_selectedUserArray objectAtIndex:indexPath.row];
+    
+	cell.textLabel.text = [dic objectForKey:@"nick"];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     
-    NSString *profile = [[NSBundle mainBundle] pathForResource:@"profile_sample.jpg" ofType: nil];
-    cell.imageView.image = [UIImage imageWithContentsOfFile:profile];
+    //NSString *profile = [[NSBundle mainBundle] pathForResource:@"profile_sample.jpg" ofType: nil];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"picture"]]];
+
+    //cell.imageView.image = [UIImage imageWithContentsOfFile:profile];
     
     return cell;
 }
