@@ -72,8 +72,6 @@
 		04E7585B1652AA7A00D933FC /* profile_sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04E7585A1652AA7900D933FC /* profile_sample.jpg */; };
 		04E758621652B7AD00D933FC /* MemberCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E758611652B7AC00D933FC /* MemberCustomCell.m */; };
 		04E758681652B80F00D933FC /* MemberCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E758671652B80E00D933FC /* MemberCustomCell.xib */; };
-		04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */; };
-		04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */; };
 		04EC923C1641183100E99EB5 /* ProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC923A1641183100E99EB5 /* ProfileEditViewController.m */; };
 		04EC923D1641183100E99EB5 /* ProfileEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EC923B1641183100E99EB5 /* ProfileEditViewController.xib */; };
 		04F7CD77164938E100D2866D /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7CD75164938E000D2866D /* DetailViewController.m */; };
@@ -249,9 +247,6 @@
 		04E758601652B7AC00D933FC /* MemberCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberCustomCell.h; sourceTree = "<group>"; };
 		04E758611652B7AC00D933FC /* MemberCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberCustomCell.m; sourceTree = "<group>"; };
 		04E758671652B80E00D933FC /* MemberCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemberCustomCell.xib; sourceTree = "<group>"; };
-		04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
-		04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
-		04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteUserViewController.xib; sourceTree = "<group>"; };
 		04EC92391641183100E99EB5 /* ProfileEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileEditViewController.h; sourceTree = "<group>"; };
 		04EC923A1641183100E99EB5 /* ProfileEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileEditViewController.m; sourceTree = "<group>"; };
 		04EC923B1641183100E99EB5 /* ProfileEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileEditViewController.xib; sourceTree = "<group>"; };
@@ -729,9 +724,6 @@
 				5570A94516355152008E2F50 /* DashBoardViewController.xib */,
 				55B1D8041650FA930032D86C /* DashBoardViewController-568.xib */,
 				045E4B731653C10900D8B69D /* Group Mode */,
-				04EC92311640DA7C00E99EB5 /* InviteUserViewController.h */,
-				04EC92321640DA7C00E99EB5 /* InviteUserViewController.m */,
-				04EC92331640DA7C00E99EB5 /* InviteUserViewController.xib */,
 				04E758601652B7AC00D933FC /* MemberCustomCell.h */,
 				04E758611652B7AC00D933FC /* MemberCustomCell.m */,
 				04E758671652B80E00D933FC /* MemberCustomCell.xib */,
@@ -824,7 +816,6 @@
 				55910F941637F4E800B007CA /* RidingViewController.xib in Resources */,
 				559110021638207700B007CA /* GroupRideViewController.xib in Resources */,
 				0483FE1F163E5FA8005D804F /* FirstSettingViewController.xib in Resources */,
-				04EC92351640DA7C00E99EB5 /* InviteUserViewController.xib in Resources */,
 				04EC923D1641183100E99EB5 /* ProfileEditViewController.xib in Resources */,
 				0457896316426860008E56CA /* Facebook_icon.png in Resources */,
 				5513073C164956B0005653B1 /* fells_loop.gpx in Resources */,
@@ -928,7 +919,6 @@
 				55910F931637F4E800B007CA /* RidingViewController.m in Sources */,
 				559110011638207700B007CA /* GroupRideViewController.m in Sources */,
 				0483FE1E163E5FA8005D804F /* FirstSettingViewController.m in Sources */,
-				04EC92341640DA7C00E99EB5 /* InviteUserViewController.m in Sources */,
 				04EC923C1641183100E99EB5 /* ProfileEditViewController.m in Sources */,
 				5545FD8A1644DA7F00D9E4ED /* AFHTTPClient.m in Sources */,
 				5545FD8C1644DA7F00D9E4ED /* AFHTTPRequestOperation.m in Sources */,
