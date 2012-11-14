@@ -15,4 +15,7 @@
 +(double)metreTokilometre:(double)metre;
 +(double)mpsTokph:(double)mps;
 
++(int)getTimeSecond:(double)time;
++(int)getTimeMinute:(double)time;
++(int)getTimeHour:(double)time;
 @end

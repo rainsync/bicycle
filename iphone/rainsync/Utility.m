@@ -72,6 +72,16 @@
     
 }
 
++(int)getTimeSecond:(double)time {
+    return (int)time%60;
+}
++(int)getTimeMinute:(double)time {   
+    return (int)time/60%60;
+}
++(int)getTimeHour:(double)time {
+    return (int)time/60/60%24;
+}
+
 +(NSString*)timeToDate:(double)time
 {
     

@@ -57,6 +57,24 @@
     avgLabel.text = [NSString stringWithFormat:@"%.2lf", [Utility mpsTokph:[manager avgSpeed]]];
     timeLabel.text = [Utility getStringTime:[manager time]];
     
+    int h = [Utility getTimeHour:[manager time]];
+    int m = [Utility getTimeMinute:[manager time]];
+    int s = [Utility getTimeSecond:[manager time]];
+
+    for (int i=0; i<10; i++) {
+        if (i==h/10)
+            _time_hour10.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d", i]];
+        if (i==h%10)
+            _time_hour1.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d", i]];
+        if (i==m/10)
+            _time_minute10.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d", i]];
+        if (i==m%10)
+            _time_minute1.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d", i]];
+        if (i==s/10)
+            _time_second10.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d", i]];
+        if (i==s%10)
+            _time_second1.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d", i]];
+    }
 }
 
 
@@ -126,6 +144,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Number Image Initialize
+    number0 = [[UIImage alloc] initWithContentsOfFile:@"0.png"];
+    number1 = [[UIImage alloc] initWithContentsOfFile:@"1.png"];
+    number2 = [[UIImage alloc] initWithContentsOfFile:@"2.png"];
+    number3 = [[UIImage alloc] initWithContentsOfFile:@"3.png"];
+    number4 = [[UIImage alloc] initWithContentsOfFile:@"4.png"];
+    number5 = [[UIImage alloc] initWithContentsOfFile:@"5.png"];
+    number6 = [[UIImage alloc] initWithContentsOfFile:@"6.png"];
+    number7 = [[UIImage alloc] initWithContentsOfFile:@"7.png"];
+    number8 = [[UIImage alloc] initWithContentsOfFile:@"8.png"];
+    number9 = [[UIImage alloc] initWithContentsOfFile:@"9.png"];
     
 
     // Do any additional setup after loading the view from its nib.
@@ -201,6 +231,23 @@
     [_statusLabel release];
     [_stopLabel release];
     [_modeChangeButton release];
+    [_time_second1 release];
+    [_time_second10 release];
+    [_time_minute1 release];
+    [_time_minute10 release];
+    [_time_hour1 release];
+    [_time_hour10 release];
+    
+    [number0 release];
+    [number1 release];
+    [number2 release];
+    [number3 release];
+    [number4 release];
+    [number5 release];
+    [number6 release];
+    [number7 release];
+    [number8 release];
+    [number9 release];
     [super dealloc];
 }
 
@@ -221,7 +268,24 @@
     [self setStatusLabel:nil];
     [self setStopLabel:nil];
     [self setModeChangeButton:nil];
+    [self setTime_second1:nil];
+    [self setTime_second10:nil];
+    [self setTime_minute1:nil];
+    [self setTime_minute10:nil];
+    [self setTime_hour1:nil];
+    [self setTime_hour10:nil];
     [super viewDidUnload];
+    
+    number0 = nil;
+    number1 = nil;
+    number2 = nil;
+    number3 = nil;
+    number4 = nil;
+    number5 = nil;
+    number6 = nil;
+    number7 = nil;
+    number8 = nil;
+    number9 = nil;
 }
 
 - (IBAction)modeChange:(id)sender {

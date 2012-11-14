@@ -11,6 +11,8 @@
 #import "RidingDB.h"
 #import "Utility.h"
 
+@class RidingDB;
+
 @interface RidingManager : NSObject <CLLocationManagerDelegate, UIAlertViewDelegate>
 {
 
