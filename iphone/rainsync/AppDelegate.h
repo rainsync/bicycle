@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <FacebookSDK/FacebookSDK.h>
 #import "RidingManager.h"
 #import <BugSense-iOS/BugSenseCrashController.h>
+#import "Login.h"
 
-extern NSString *const FBSessionStateChangedNotification;
+//extern NSString *const FBSessionStateChangedNotification;
 @class ViewController;
 
 
@@ -21,7 +21,7 @@ extern NSString *const FBSessionStateChangedNotification;
     
 }
 
-- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
+
 
 @property (strong, nonatomic) UIWindow *window;
 

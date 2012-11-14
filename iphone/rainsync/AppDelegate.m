@@ -15,8 +15,6 @@
 
 #define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"-568":@""]
 
-NSString *const FBSessionStateChangedNotification =
-@"kr.rainsync.Cyclery:FBSessionStateChangedNotification";
 
 
 @implementation AppDelegate
@@ -29,17 +27,21 @@ NSString *const FBSessionStateChangedNotification =
 }
 
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginWithFacebook:) name:@"loginWithFacebook" object:nil];
+    
     [BugSenseCrashController sharedInstanceWithBugSenseAPIKey:@"001a166a"];  // add BugSense
 
     [UIApplication sharedApplication].idleTimerDisabled = YES;  // application can't lock screen automatically
+
 
     
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
-
+    
     NSString* RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
     if(!RidingType){
         RidingType = @"Single";
@@ -52,25 +54,23 @@ NSString *const FBSessionStateChangedNotification =
         
     }
 
-
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"session"];
     [[NSUserDefaults standardUserDefaults]synchronize];
-    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"token"];
     
-    NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:@"token"];
-    if(!token){
-        NSLog(@"%@", getNibName(@"FirstSettingViewController"));
-        FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:getNibName(@"FirstSettingViewController") bundle:nil];
-
-        
-        self.viewController = firstSettingViewController;
-        
-    } else {
-        
+    if([[Login getInstance] getSession])
+    {
         self.viewController = [[ViewController alloc] init];
+        self.window.rootViewController = self.viewController;
+        [self.window makeKeyAndVisible];
+        
+    }else{
+        FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:getNibName(@"FirstSettingViewController") bundle:nil];
+        self.viewController = firstSettingViewController;
+        self.window.rootViewController = self.viewController;
+        [self.window makeKeyAndVisible];
     }
     //self.viewController = [[ViewController alloc] init];
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
+
     return YES;
 }
 
@@ -109,7 +109,6 @@ NSString *const FBSessionStateChangedNotification =
 
 
 
-
 // FBSample logic
 // The native facebook application transitions back to an authenticating application when the user
 // chooses to either log in, or cancel. The url passed to this method contains the token in the
@@ -128,57 +127,6 @@ NSString *const FBSessionStateChangedNotification =
     return [FBSession.activeSession handleOpenURL:url];
 }
 
-/*
- * Callback for session changes.
- */
-- (void)sessionStateChanged:(FBSession *)session
-                      state:(FBSessionState) state
-                      error:(NSError *)error
-{
-    switch (state) {
-        case FBSessionStateOpen:
-            if (!error) {
-                // We have a valid session
-                NSLog(@"User session found");
-            }
-            break;
-        case FBSessionStateClosed:
-        case FBSessionStateClosedLoginFailed:
-            [FBSession.activeSession closeAndClearTokenInformation];
-            break;
-        default:
-            break;
-    }
-    
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:FBSessionStateChangedNotification
-     object:session];
-    
-    if (error) {
-        UIAlertView *alertView = [[UIAlertView alloc]
-                                  initWithTitle:@"Error"
-                                  message:error.localizedDescription
-                                  delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-        [alertView show];
-    }
-}
-
-/*
- * Opens a Facebook session and optionally shows the login UX.
- */
-- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
-    return [FBSession openActiveSessionWithReadPermissions:nil
-                                              allowLoginUI:allowLoginUI
-                                         completionHandler:^(FBSession *session,
-                                                             FBSessionState state,
-                                                             NSError *error) {
-                                             [self sessionStateChanged:session
-                                                                 state:state
-                                                                 error:error];
-                                         }];
-}
 
 
 
