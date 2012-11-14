@@ -9,15 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "sqlite3.h"
 #import <CoreLocation/CoreLocation.h>
-
+#import "RidingManager.h"
 
 @interface RidingDB : NSObject{
     sqlite3 *ridingDB;
 
 }
-- (void)saveRecording:(RidingDB *)manager;
+- (int)createRecording;
+- (void)saveLocation:(int)row_id withLocation:(NSMutableArray*)locations;
 
-- (NSMutableArray *)loadDB;
+//- (void)saveRecording:(RidingManager *)manager;
+
+- (NSMutableArray *)loadRidings;
+- (NSMutableDictionary *)loadRiding:(int)index;
+
 - (void)deleteRecord:(int)index;
 
 @end

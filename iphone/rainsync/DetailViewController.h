@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "Utility.h"
+#import "RidingDB.h"
+
 @interface DetailViewController : UIViewController <MKMapViewDelegate>
 {
     MKPolyline *routeLine;

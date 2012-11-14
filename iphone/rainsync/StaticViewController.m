@@ -64,7 +64,7 @@
     if(_recordings)
         [_recordings release];
     
-    _recordings = [ridingdb loadDB]; // Database loaded
+    _recordings = [ridingdb loadRidings]; // Database loaded
     [self.tableView reloadData];
 }
 
@@ -183,7 +183,7 @@
 	NSLog(@"didSelectRowAtIndexPath : %d", row);
 	NSDictionary *rowData = [_recordings objectAtIndex:row];
 
-    DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil WithRawData:rowData];
+    DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil withID:[[rowData objectForKey:@"id"] intValue]];
     
     [self.navigationController pushViewController:detailViewController animated:YES];
     UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];

@@ -17,12 +17,16 @@
 
 @implementation DetailViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil WithRawData:(NSMutableDictionary *)data
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withID:(int)index
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         view = [NSNull null];
-        rawdata = data;
+        
+        RidingDB *ridingdb =[[RidingDB alloc] init];
+        rawdata = [ridingdb loadRiding:index];
+        [ridingdb release];
+        
         // Custom initialization      
 //        self.navigationItem.rightBarButtonItem = self.editButtonItem;
     }
@@ -73,6 +77,7 @@
 - (void)dealloc {
     [_mapView release];
     [_detailTableView release];
+    [rawdata release];
     [super dealloc];
 }
 - (void)viewDidUnload {
