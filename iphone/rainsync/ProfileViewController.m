@@ -48,7 +48,7 @@
 
 - (void)reqFail:(NSError*)error
 {
-    [self showError:error];
+    //[self showError:error];
 }
 
 

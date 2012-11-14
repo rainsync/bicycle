@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RidingViewController.h"
 #import "NetUtility.h"
+#import "AFImageRequestOperation.h"
 
 @interface GroupRideViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate> {
     

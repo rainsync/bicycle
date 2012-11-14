@@ -53,8 +53,8 @@
         
     }
 
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"session"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
+    //[[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"session"];
+    //[[NSUserDefaults standardUserDefaults]synchronize];
     
     if([[Login getInstance] getSession])
     {

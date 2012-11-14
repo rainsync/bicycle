@@ -11,6 +11,9 @@
 #import "RidingDB.h"
 #import "Utility.h"
 
+@class RidingDB;
+
+
 @interface RidingManager : NSObject <CLLocationManagerDelegate, UIAlertViewDelegate>
 {
 
@@ -37,7 +40,7 @@
 @property (nonatomic, readonly) double calorie;
 @property (nonatomic, readonly) double max_speed;
 @property (nonatomic, readonly) CLLocation *current_location;
-
+@property (nonatomic, readonly) int last_riding;
 
 - (id)init;
 - (void)startRiding;

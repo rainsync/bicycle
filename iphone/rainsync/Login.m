@@ -62,13 +62,13 @@
             break;
         }
             
-        default:
-        {
-            NSError *error=[NSError errorWithDomain:@"서버로 부터 잘못된 데이터가 전송되었습니다." code:-2 userInfo:nil];
-            [self showError:error];
-            fail(error);
-            break;
-        }
+//        default:
+//        {
+//            NSError *error=[NSError errorWithDomain:@"서버로 부터 잘못된 데이터가 전송되었습니다." code:-2 userInfo:nil];
+//            [self showError:error];
+//            fail(error);
+//            break;
+//        }
     }
 
 }

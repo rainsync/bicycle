@@ -31,8 +31,10 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
             if(state==0){
                 NSMutableArray *friends=[dic objectForKey:@"friends"];
                 for (NSMutableDictionary *dic in friends) {
-                    [_selectedUserArray addObject:[dic objectForKey:@"nick"]];
+                    [[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[dic objectForKey:@"picture"]]] autorelease];
+                    [_selectedUserArray addObject:dic];
                 }
+                
                 
                 [_userTableView reloadData];
             }
@@ -200,11 +202,15 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
     }
     [cell prepareForTableView:tableView indexPath:indexPath];
 
-	cell.textLabel.text = [_selectedUserArray objectAtIndex:indexPath.row];
+    NSDictionary *dic=[_selectedUserArray objectAtIndex:indexPath.row];
+    
+	cell.textLabel.text = [dic objectForKey:@"nick"];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     
-    NSString *profile = [[NSBundle mainBundle] pathForResource:@"profile_sample.jpg" ofType: nil];
-    cell.imageView.image = [UIImage imageWithContentsOfFile:profile];
+    //NSString *profile = [[NSBundle mainBundle] pathForResource:@"profile_sample.jpg" ofType: nil];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"picture"]]];
+
+    //cell.imageView.image = [UIImage imageWithContentsOfFile:profile];
     
     return cell;
 }
