@@ -23,6 +23,23 @@
     
 }
 
+
++(NetUtility*)getInstance
+{
+    static NetUtility* _instance = nil;
+    if(_instance == nil)
+    {
+        @synchronized(self)
+        {
+            if(_instance == nil)
+            {
+                _instance = [[NetUtility alloc] init];
+            }
+        }
+    }
+    return _instance;
+}
+
 - (void)addHandler:(id)handle
 {
     [handler addObject:handle];

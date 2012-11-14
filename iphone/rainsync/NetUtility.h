@@ -29,8 +29,8 @@ enum req_type{
     @private NSString *server;
     
 }
-
--(id)initwithHandler:(id)obj;
++(NetUtility*)getInstance;
+-(id)init;
 -(void) dealloc;
 - (void)addHandler:(id)handle;
 //:(void (^)(NSData*))block
