@@ -15,6 +15,7 @@
 @interface DashBoardViewController : UIViewController <CoreLocationControllerDelegate>
 {
     bool paused;
+    bool first;
     BOOL isSingleMode;
 }
 @property (nonatomic, retain) IBOutlet UILabel *speedLabel;

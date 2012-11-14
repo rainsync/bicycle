@@ -22,7 +22,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-    
+        first=true;
         
         // Custom initialization
     }
@@ -139,6 +139,7 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
+    if(first){
     RidingManager *ridingManager = [RidingManager getInstance];
 
     
@@ -154,7 +155,9 @@
         [_stopLabel setAlpha:0.5f];
     }
     paused = false;
-
+    first=false;
+        
+    }
     
     
 }
@@ -162,17 +165,18 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     RidingManager *ridingManager = [RidingManager getInstance];
+    [ridingManager loadStatus];
     switch (buttonIndex) {
         case 0:
         {
-            [ridingManager discardStatus];
+            [ridingManager stopRiding];
 //            [_stopButton setEnabled:NO];
 //            [_stopLabel setAlpha:0.5f];
             break;
         }
         case 1:
         {
-            [ridingManager loadStatus];
+            
             [self locationManager:ridingManager];
             [self updateTime:ridingManager];
             break;
