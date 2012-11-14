@@ -45,12 +45,11 @@
     NSString* RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
     if(!RidingType){
         RidingType = @"Single";
-        [[NSUserDefaults standardUserDefaults] setValue:RidingType forKey:@"RidingType"];
-    }
-    
+        [[NSUserDefaults standardUserDefaults] setObject:RidingType forKey:@"RidingType"];
+    }    
     
     if([[RidingManager getInstance] isRiding]){
-        NSLog(@"Riding..");
+        NSLog(@"Now Riding..");
         
     }
 

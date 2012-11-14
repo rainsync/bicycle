@@ -15,7 +15,7 @@
 @interface DashBoardViewController : UIViewController <CoreLocationControllerDelegate>
 {
     bool paused;
-    
+    BOOL isSingleMode;
 }
 @property (nonatomic, retain) IBOutlet UILabel *speedLabel;
 @property (nonatomic, retain) IBOutlet UILabel *avgLabel;
@@ -26,4 +26,6 @@
 @property (retain, nonatomic) IBOutlet UILabel *stopLabel;
 @property (retain, nonatomic) IBOutlet UIButton *statusButton;
 @property (retain, nonatomic) IBOutlet UILabel *statusLabel;
+@property (retain, nonatomic) IBOutlet UIButton *modeChangeButton;
+- (IBAction)modeChange:(id)sender;
 @end

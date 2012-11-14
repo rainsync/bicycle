@@ -29,7 +29,8 @@
     //[self addChildViewController:ridingViewController];
     
     RidingViewController *ridingViewController = [[RidingViewController alloc] initWithNibName:@"RidingViewController" bundle:nil];
-//    UINavigationController *ridingViewNavController = [[UINavigationController alloc] initWithRootViewController:ridingViewController];
+    UINavigationController *ridingViewNavController = [[UINavigationController alloc] initWithRootViewController:ridingViewController];
+    [ridingViewNavController setValue:[[[PrettyNavigationBar alloc] init] autorelease] forKeyPath:@"navigationBar"];
 
     
     ProfileViewController* profile = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
