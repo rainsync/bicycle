@@ -40,6 +40,21 @@
 @property (retain, nonatomic) IBOutlet UIImageView *time_hour1;
 @property (retain, nonatomic) IBOutlet UIImageView *time_hour10;
 
+@property (retain, nonatomic) IBOutlet UIImageView *dist_decimal;
+@property (retain, nonatomic) IBOutlet UIImageView *dist_1;
+@property (retain, nonatomic) IBOutlet UIImageView *dist_10;
+@property (retain, nonatomic) IBOutlet UIImageView *dist_100;
 
+@property (retain, nonatomic) IBOutlet UIImageView *curr_decimal;
+@property (retain, nonatomic) IBOutlet UIImageView *curr_1;
+@property (retain, nonatomic) IBOutlet UIImageView *curr_10;
+
+@property (retain, nonatomic) IBOutlet UIImageView *avg_decimal;
+@property (retain, nonatomic) IBOutlet UIImageView *avg_1;
+@property (retain, nonatomic) IBOutlet UIImageView *avg_10;
+
+@property (retain, nonatomic) IBOutlet UIImageView *cal_1;
+@property (retain, nonatomic) IBOutlet UIImageView *cal_10;
+@property (retain, nonatomic) IBOutlet UIImageView *cal_100;
 - (IBAction)modeChange:(id)sender;
 @end

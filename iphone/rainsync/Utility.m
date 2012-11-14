@@ -110,4 +110,65 @@
     return mps*3.6;
 }
 
++(UIImage*)numberImagify:(NSString*)number
+{
+    static NSMutableArray *font=nil;
+    
+    if(font==nil){
+        font = [[NSMutableArray alloc] init];
+        for (int i=0; i<10; i++) {
+            font[i]=[UIImage imageNamed:[NSString stringWithFormat:@"%d.png",i]];
+        }
+        
+        font[10]=[UIImage imageNamed:@"dot.png"];
+        font[11]=[UIImage imageNamed:@"_.png"];
+        
+        //[font addObject:[UIImage imageNamed:@"dot.png"]];
+    }
+    
+    CGFloat width=0;
+    
+    for(int i=0; i<[number length]; ++i)
+    {
+        char ch=[number characterAtIndex:i];
+        if(ch>='0' && ch<='9')
+        {
+            width+=((UIImage*)font[ch-'0']).size.width;
+        }else if(ch=='.'){
+            width+=((UIImage*)font[10]).size.width;
+        }else if(ch==':'){
+            width+=((UIImage*)font[11]).size.width;
+        }
+    }
+    
+    
+    UIGraphicsBeginImageContext(CGSizeMake(width, ((UIImage*)font[0]).size.height));
+    width=0;
+    for(int i=0; i<[number length]; ++i)
+    {
+        char ch=[number characterAtIndex:i];
+        UIImage *buf;
+        if(ch>='0' && ch<='9')
+        {
+            buf=font[ch-'0'];
+            [buf drawInRect:CGRectMake(width, 0, buf.size.width, buf.size.height)];
+            width+=buf.size.width;
+        }else if(ch=='.'){
+            buf=[font objectAtIndex:10];
+            [buf drawInRect:CGRectMake(width, 0, buf.size.width, buf.size.height)];
+            width+=buf.size.width;
+        }else if(ch==':'){
+            buf=[font objectAtIndex:11];
+            [buf drawInRect:CGRectMake(width, 0, buf.size.width, buf.size.height)];
+            width+=buf.size.width;
+        }
+    }
+   
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+    
+}
+
+
 @end
