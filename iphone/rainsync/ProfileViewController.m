@@ -9,11 +9,48 @@
 #import "ProfileViewController.h"
 #import "ProfileEditViewController.h"
 
-@interface ProfileViewController ()
 
-@end
 
 @implementation ProfileViewController
+
+
+- (void) reqSuccess:(int)message withJSON:(NSDictionary *)dic {
+    switch (message) {
+        case account_profile_get:
+        {
+            NSInteger state=[[dic objectForKey:@"state"] intValue];
+            NSString *nick=[dic objectForKey:@"nick"];
+            NSString *picture=[dic objectForKey:@"picture"];
+            NSString *email=[dic objectForKey:@"email"];
+            
+            if(state==0){
+            [_Name setText:nick];
+            [_Email setText:email];
+            [_profileImageView setImageWithURL:[[[NSURL alloc] initWithString:picture]autorelease]];    
+            NSLog([NSString stringWithFormat:@"STATE %d NICK %@ PICTURE %@ EMAIL %@", state, nick, picture, email]);
+            
+            
+            
+                
+            }
+            
+            break;
+
+        }
+        default:
+        {
+            NSError *error=[NSError errorWithDomain:@"서버로 부터 잘못된 데이터가 전송되었습니다." code:-2 userInfo:nil];
+            break;
+        }
+    }
+    
+}
+
+- (void)reqFail:(NSError*)error
+{
+    [self showError:error];
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -22,7 +59,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"프로필", @"프로필");
-        
+        net = [[NetUtility alloc] initwithHandler:self];
         // Custom initialization
     }
     return self;
@@ -36,9 +73,35 @@
 }
 
 - (IBAction)login:(id)sender {
-    [_disableView setHidden:YES];
-
+    
+    //[_disableView setHidden:YES];
+    [[Login getInstance] join:^{
+        [_disableView setHidden:TRUE];
+        [net account_profile_get:[[Login getInstance] getSession]];
+        [net end];
+    } withFail:^(NSError *error) {
+        [_disableView setHidden:FALSE];
+    }];
+    
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    NSString *session =[[Login getInstance] getSession];
+    if(session)
+    {
+        
+        [net account_profile_get:session];
+        [net end];
+        [_disableView setHidden:TRUE];
+        
+    }else{
+        [_disableView setHidden:FALSE];
+    }
+    
 }
 
 - (void)editProfile {
@@ -58,6 +121,7 @@
     [_profileImageView release];
     [_disableView release];
     [_loginButton release];
+    [_Email release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -65,6 +129,7 @@
     [self setProfileImageView:nil];
     [self setDisableView:nil];
     [self setLoginButton:nil];
+    [self setEmail:nil];
     [super viewDidUnload];
 }
 @end
