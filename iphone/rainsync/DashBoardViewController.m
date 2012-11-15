@@ -38,78 +38,35 @@
 
     
     if([manager current_location].speed == -1)
-        speedLabel.text = @"00.0";
+        speedLabel.image = [Utility numberImagify:@"00.0"];
     else
-        speedLabel.text = [NSString stringWithFormat:@"%.2lf", [Utility mpsTokph:[manager current_location].speed]];
+        speedLabel.image = [Utility numberImagify:[NSString stringWithFormat:@"%.1lf", [Utility mpsTokph:[manager current_location].speed]]];
     
     
 
-    calorieLabel.text = [NSString stringWithFormat:@"%.2lf", [manager calorie] ];
-    distanceLabel.text = [NSString stringWithFormat:@"%.2lf", [Utility metreTokilometre:[manager totalDistance]]];
+    calorieLabel.image = [Utility numberImagify:[NSString stringWithFormat:@"%.1lf", [manager calorie] ]];
+    distanceLabel.image = [Utility numberImagify:[NSString stringWithFormat:@"%.1lf", [Utility metreTokilometre:[manager totalDistance]]]];
     
     
     double cal = [manager calorie];
     double dist = [Utility metreTokilometre:[manager totalDistance]];
     double cspeed = [Utility mpsTokph:[manager current_location].speed];
     
-    for (int i=0; i<10; i++) {
-        if (i == (int)cal/100)
-            _cal_100.image = [numberArray objectAtIndex:i];;
-        if (i == (int)cal/10%10)
-            _cal_10.image = [numberArray objectAtIndex:i];
-        if (i == (int)cal%10)
-            _cal_1.image = [numberArray objectAtIndex:i];
-        
-        if (i == (int)(dist*10)%10)    // 소수 첫째자리
-            _dist_decimal.image = [numberArray objectAtIndex:i];
-        if (i == (int)dist%10)
-            _dist_1.image = [numberArray objectAtIndex:i];
-        if (i == (int)dist/10%10)
-            _dist_10.image = [numberArray objectAtIndex:i];
-        if (i == (int)dist/100)
-            _dist_100.image = [numberArray objectAtIndex:i];
-        
-        if (i == (int)(cspeed*10)%10)
-            _curr_decimal.image = [numberArray objectAtIndex:i];
-        if (i == (int)cspeed%10)
-            _curr_1.image = [numberArray objectAtIndex:i];
-        if (i == (int)cspeed/10%10)
-            _curr_10.image = [numberArray objectAtIndex:i];
-    }
+
 }
 
 - (void)updateTime:(RidingManager*)manager
 {
     
-    avgLabel.text = [NSString stringWithFormat:@"%.2lf", [Utility mpsTokph:[manager avgSpeed]]];
-    timeLabel.text = [Utility getStringTime:[manager time]];
+    avgLabel.image = [Utility numberImagify:[NSString stringWithFormat:@"%.1lf", [Utility mpsTokph:[manager avgSpeed]]]];
+    timeLabel.image = [Utility numberImagify:[Utility getStringTime:[manager time]]];
     
     double aspeed = [Utility mpsTokph:[manager avgSpeed]];
     int h = [Utility getTimeHour:[manager time]];
     int m = [Utility getTimeMinute:[manager time]];
     int s = [Utility getTimeSecond:[manager time]];
 
-    for (int i=0; i<10; i++) {
-        if (i==h/10)
-            _time_hour10.image = [numberArray objectAtIndex:i];
-        if (i==h%10)
-            _time_hour1.image = [numberArray objectAtIndex:i];
-        if (i==m/10)
-            _time_minute10.image = [numberArray objectAtIndex:i];
-        if (i==m%10)
-            _time_minute1.image = [numberArray objectAtIndex:i];
-        if (i==s/10)
-            _time_second10.image = [numberArray objectAtIndex:i];
-        if (i==s%10)
-            _time_second1.image = [numberArray objectAtIndex:i];
-        
-        if (i == (int)(aspeed*10)%10)
-            _avg_decimal.image = [numberArray objectAtIndex:i];
-        if (i == (int)aspeed%10)
-            _avg_1.image = [numberArray objectAtIndex:i];
-        if (i == (int)aspeed/10%10)
-            _avg_10.image = [numberArray objectAtIndex:i]; 
-    }
+
 }
 
 
@@ -131,12 +88,12 @@
     
     RidingManager *ridingManager = [RidingManager getInstance];
     [ridingManager stopRiding];
-    timeLabel.text = @"00:00:00";
-    speedLabel.text = @"00.0";
-    distanceLabel.text = @"0.00";
-    avgLabel.text = @"00.0";
-    speedLabel.text = @"00.0";
-    calorieLabel.text = @"0.00";
+    timeLabel.image = [Utility numberImagify:@"00:00:00"];
+    speedLabel.image = [Utility numberImagify:@"00.0"];
+    distanceLabel.image = [Utility numberImagify:@"0.00"];
+    avgLabel.image = [Utility numberImagify:@"00.0"];
+    speedLabel.image = [Utility numberImagify:@"00.0"];
+    calorieLabel.image = [Utility numberImagify:@"0.00"];
     [self.stopButton setEnabled:NO];
     [self.stopLabel setAlpha:0.5f];
     
@@ -199,7 +156,16 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
+
+    
     if(first){
+        timeLabel.image = [Utility numberImagify:@"00:00:00"];
+        speedLabel.image = [Utility numberImagify:@"00.0"];
+        distanceLabel.image = [Utility numberImagify:@"0.00"];
+        avgLabel.image = [Utility numberImagify:@"00.0"];
+        speedLabel.image = [Utility numberImagify:@"00.0"];
+        calorieLabel.image = [Utility numberImagify:@"0.00"];
+        
     RidingManager *ridingManager = [RidingManager getInstance];
 
     
@@ -261,27 +227,9 @@
     [_statusLabel release];
     [_stopLabel release];
     [_modeChangeButton release];
-    [_time_second1 release];
-    [_time_second10 release];
-    [_time_minute1 release];
-    [_time_minute10 release];
-    [_time_hour1 release];
-    [_time_hour10 release];
-    
+
     [numberArray release];
-    [_dist_decimal release];
-    [_dist_1 release];
-    [_dist_10 release];
-    [_dist_100 release];
-    [_avg_decimal release];
-    [_avg_1 release];
-    [_avg_10 release];
-    [_curr_decimal release];
-    [_curr_1 release];
-    [_curr_10 release];
-    [_cal_1 release];
-    [_cal_10 release];
-    [_cal_100 release];
+    [_test release];
     [super dealloc];
 }
 
@@ -323,6 +271,7 @@
     [self setCal_1:nil];
     [self setCal_10:nil];
     [self setCal_100:nil];
+    [self setTest:nil];
     [super viewDidUnload];
 }
 
