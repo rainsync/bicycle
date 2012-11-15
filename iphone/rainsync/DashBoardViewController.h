@@ -31,5 +31,6 @@
 @property (retain, nonatomic) IBOutlet UIButton *statusButton;
 @property (retain, nonatomic) IBOutlet UILabel *statusLabel;
 @property (retain, nonatomic) IBOutlet UIButton *modeChangeButton;
+@property (retain, nonatomic) IBOutlet UILabel *modeLabel;
 - (IBAction)modeChange:(id)sender;
 @end

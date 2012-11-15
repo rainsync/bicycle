@@ -38,7 +38,7 @@
 
     
     if([manager current_location].speed == -1)
-        speedLabel.image = [Utility numberImagify:@"00.0"];
+        speedLabel.image = [Utility numberImagify:@"0.0"];
     else
         speedLabel.image = [Utility numberImagify:[NSString stringWithFormat:@"%.1lf", [Utility mpsTokph:[manager current_location].speed]]];
     
@@ -48,19 +48,9 @@
     distanceLabel.image = [Utility numberImagify:[NSString stringWithFormat:@"%.1lf", [Utility metreTokilometre:[manager totalDistance]]]];
     
     
-    double cal = [manager calorie];
-    double dist = [Utility metreTokilometre:[manager totalDistance]];
-    double cspeed = [Utility mpsTokph:[manager current_location].speed];
-    
     calorieLabel.image = [Utility numberImagify:[NSString stringWithFormat:@"%.1lf", [manager calorie] ]];
     distanceLabel.image = [Utility numberImagify:[NSString stringWithFormat:@"%.1lf", [Utility metreTokilometre:[manager totalDistance]]]];
     
-    
-    double cal = [manager calorie];
-    double dist = [Utility metreTokilometre:[manager totalDistance]];
-    double cspeed = [Utility mpsTokph:[manager current_location].speed];
-    
-
 }
 
 - (void)updateTime:(RidingManager*)manager
@@ -69,11 +59,6 @@
     avgLabel.image = [Utility numberImagify:[NSString stringWithFormat:@"%.1lf", [Utility mpsTokph:[manager avgSpeed]]]];
     timeLabel.image = [Utility numberImagify:[Utility getStringTime:[manager time]]];
     
-    double aspeed = [Utility mpsTokph:[manager avgSpeed]];
-    int h = [Utility getTimeHour:[manager time]];
-    int m = [Utility getTimeMinute:[manager time]];
-    int s = [Utility getTimeSecond:[manager time]];
-
 
 }
 
@@ -97,11 +82,11 @@
     RidingManager *ridingManager = [RidingManager getInstance];
     [ridingManager stopRiding];
     timeLabel.image = [Utility numberImagify:@"00:00:00"];
-    speedLabel.image = [Utility numberImagify:@"00.0"];
-    distanceLabel.image = [Utility numberImagify:@"0.00"];
-    avgLabel.image = [Utility numberImagify:@"00.0"];
-    speedLabel.image = [Utility numberImagify:@"00.0"];
-    calorieLabel.image = [Utility numberImagify:@"0.00"];
+    speedLabel.image = [Utility numberImagify:@"0.0"];
+    distanceLabel.image = [Utility numberImagify:@"0.0"];
+    avgLabel.image = [Utility numberImagify:@"0.0"];
+    speedLabel.image = [Utility numberImagify:@"0.0"];
+    calorieLabel.image = [Utility numberImagify:@"0.0"];
     [self.stopButton setEnabled:NO];
     [self.stopLabel setAlpha:0.5f];
     
@@ -150,9 +135,11 @@
     // Do any additional setup after loading the view from its nib.
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"] isEqualToString:@"Single"]) {
         [_modeChangeButton setTitle:@"그룹모드로" forState:UIControlStateNormal];
+        [_modeLabel setText:@"Single Riding"];
     }
     else {
         [_modeChangeButton setTitle:@"싱글모드로" forState:UIControlStateNormal];
+        [_modeLabel setText:@"Group Riding"];
     }
 }
 
@@ -162,11 +149,11 @@
     
     if(first){
         timeLabel.image = [Utility numberImagify:@"00:00:00"];
-        speedLabel.image = [Utility numberImagify:@"00.0"];
-        distanceLabel.image = [Utility numberImagify:@"0.00"];
-        avgLabel.image = [Utility numberImagify:@"00.0"];
-        speedLabel.image = [Utility numberImagify:@"00.0"];
-        calorieLabel.image = [Utility numberImagify:@"0.00"];
+        speedLabel.image = [Utility numberImagify:@"0.0"];
+        distanceLabel.image = [Utility numberImagify:@"0.0"];
+        avgLabel.image = [Utility numberImagify:@"0.0"];
+        speedLabel.image = [Utility numberImagify:@"0.0"];
+        calorieLabel.image = [Utility numberImagify:@"0.0"];
         
     RidingManager *ridingManager = [RidingManager getInstance];
 
@@ -229,6 +216,7 @@
     [_statusLabel release];
     [_stopLabel release];
     [_modeChangeButton release];
+    [_modeLabel release];
     [super dealloc];
 }
 
@@ -251,6 +239,7 @@
     [self setModeChangeButton:nil];
 
     [self setTest:nil];
+    [self setModeLabel:nil];
     [super viewDidUnload];
 }
 
@@ -259,10 +248,12 @@
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"] isEqualToString:@"Single"]) {
         [[NSUserDefaults standardUserDefaults] setObject:@"Group" forKey:@"RidingType"];
         [_modeChangeButton setTitle:@"싱글모드로" forState:UIControlStateNormal];
+        [_modeLabel setText:@"Group Riding"];
     }
     else {
         [[NSUserDefaults standardUserDefaults] setObject:@"Single" forKey:@"RidingType"];
         [_modeChangeButton setTitle:@"그룹모드로" forState:UIControlStateNormal];
+        [_modeLabel setText:@"Single Riding"];
     }
 }
 @end
