@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 
-@interface ProfileEditViewController : UIViewController <UIImagePickerControllerDelegate, UIActionSheetDelegate> {
+@interface ProfileEditViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate> {
     BOOL newMedia;  // 새로운 사진인지 판단하는 불린값
 }
 
 @property (retain, nonatomic) IBOutlet UITextField *nameTextField;
 @property (retain, nonatomic) IBOutlet UIButton *profileImageBtn;
+@property (retain, nonatomic) IBOutlet UITableView *tableView;
 
 - (void)cancelAndBack;
 - (void)saveEditProfile;
