@@ -18,11 +18,9 @@
     bool first;
     BOOL isSingleMode;
     
-    NSMutableArray *numberArray;
+
 }
 //@property (nonatomic, retain) NSMutableArray *numberArray;
-@property (retain, nonatomic) IBOutlet UIImageView *test;
-
 @property (nonatomic, retain) IBOutlet UIImageView *speedLabel;
 @property (nonatomic, retain) IBOutlet UIImageView *avgLabel;
 @property (nonatomic, retain) IBOutlet UIImageView *timeLabel;

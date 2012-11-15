@@ -137,12 +137,6 @@
 {
     [super viewDidLoad];
     
-    numberArray = [[NSMutableArray alloc] init];
-    for (int i=0; i<10; i++) {
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%d.png", i] ofType:nil];
-        UIImage *numberImage = [UIImage imageWithContentsOfFile:filePath];
-        [numberArray addObject:numberImage];
-    }   // 숫자 이미지 초기화
 
 
     // Do any additional setup after loading the view from its nib.
@@ -227,9 +221,6 @@
     [_statusLabel release];
     [_stopLabel release];
     [_modeChangeButton release];
-
-    [numberArray release];
-    [_test release];
     [super dealloc];
 }
 
@@ -250,27 +241,7 @@
     [self setStatusLabel:nil];
     [self setStopLabel:nil];
     [self setModeChangeButton:nil];
-    [self setTime_second1:nil];
-    [self setTime_second10:nil];
-    [self setTime_minute1:nil];
-    [self setTime_minute10:nil];
-    [self setTime_hour1:nil];
-    [self setTime_hour10:nil];
-    
-    numberArray = nil;
-    [self setDist_decimal:nil];
-    [self setDist_1:nil];
-    [self setDist_10:nil];
-    [self setDist_100:nil];
-    [self setAvg_decimal:nil];
-    [self setAvg_1:nil];
-    [self setAvg_10:nil];
-    [self setCurr_decimal:nil];
-    [self setCurr_1:nil];
-    [self setCurr_10:nil];
-    [self setCal_1:nil];
-    [self setCal_10:nil];
-    [self setCal_100:nil];
+
     [self setTest:nil];
     [super viewDidUnload];
 }
