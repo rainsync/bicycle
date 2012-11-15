@@ -40,6 +40,8 @@
     bview.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:getNibName(@"background")]];
     [_settingTableView setBackgroundView:bview];
     [bview release];
+    self.settingTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.settingTableView.separatorColor = [UIColor colorWithHexString:@"0x333333"];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -164,11 +166,11 @@
         case 0:
         {
             UIView *weight_view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 180, 20)] autorelease];
-            weight_view.backgroundColor = [UIColor blackColor];
+            weight_view.backgroundColor = [UIColor colorWithHexString:@"0x3f4547"];
             UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(160,0 , 20, 20)] autorelease];
             label.text=@"kg";
             label.textColor = [UIColor whiteColor];
-            label.backgroundColor = [UIColor blackColor];
+            label.backgroundColor = [UIColor colorWithHexString:@"0x3f4547"];
             
             cell.textLabel.text = @"몸무게 설정";
             cell.textLabel.textColor = [UIColor whiteColor];
@@ -224,7 +226,7 @@
     }
 
 //    cell.cornerRadius = 10;
-    cell.backgroundColor = [UIColor blackColor];
+    cell.backgroundColor = [UIColor colorWithHexString:@"0x3f4547"];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     

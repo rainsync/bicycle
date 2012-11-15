@@ -9,6 +9,7 @@
 #import "ProfileViewController.h"
 #import "ProfileEditViewController.h"
 #import "PrettyKit.h"
+#import "UIColor+ColorWithHex.h"
 
 @implementation ProfileViewController
 
@@ -73,7 +74,13 @@
     self.editProfileButton.title = @"수정";
     
     NSString *bgPath = [[NSBundle mainBundle] pathForResource:@"background@2x.png" ofType:nil];
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:bgPath]];
+    UIView* bview = [[UIView alloc] init];
+    bview.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:bgPath]];
+    [self.tableView setBackgroundView:bview];
+    [bview release];
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.separatorColor = [UIColor colorWithHexString:@"0x333333"];
 }
 
 - (IBAction)login:(id)sender {
@@ -149,7 +156,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 5;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -158,100 +165,36 @@
     if (section == 0) {
         return 3;
     }
-    if (section == 1) {
-        return 1;
-    }
-    if (section == 2) {
-        return 1;
-    }
-    if (section == 3) {
-        return 20;
-    }
-    if (section == 4) {
-        return 1;
-    }
-    
+
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    static NSString *SegmentedCellIdentifier = @"SegmentedCell";
-    PrettySegmentedControlTableViewCell *segmentedCell;
-    static NSString *GridCellIdentifier = @"GridCell";
-    PrettyGridTableViewCell *gridCell;
-    
+    static NSString *CellIdentifier = @"Cell";    
     
     PrettyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[PrettyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        cell.tableViewBackgroundColor = tableView.backgroundColor;
-    }
-    
-    switch (indexPath.section) {
-        case 1:
-            switch (indexPath.row) {
-                case 0:
-                    segmentedCell = [tableView dequeueReusableCellWithIdentifier:SegmentedCellIdentifier];
-                    if (segmentedCell == nil) {
-                        segmentedCell = [[[PrettySegmentedControlTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SegmentedCellIdentifier] autorelease];
-                    }
-                    [segmentedCell prepareForTableView:tableView indexPath:indexPath];
-                    segmentedCell.titles = [NSArray arrayWithObjects:@"1", @"2", @"3", @"4", nil];
-                    segmentedCell.tableViewBackgroundColor = tableView.backgroundColor;
-                    return segmentedCell;
-                default:
-                    break;
-            }
-            
-            break;
-        case 2:
-            gridCell = [tableView dequeueReusableCellWithIdentifier:GridCellIdentifier];
-            if (gridCell == nil) {
-                gridCell = [[[PrettyGridTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:GridCellIdentifier] autorelease];
-                gridCell.tableViewBackgroundColor = tableView.backgroundColor;
-                gridCell.actionBlock = ^(NSIndexPath *indexPath, int selectedIndex) {
-                    [gridCell deselectAnimated:YES];
-                };
-            }
-            [gridCell prepareForTableView:tableView indexPath:indexPath];
-            gridCell.numberOfElements = 3;
-            [gridCell setText:@"One" atIndex:0];
-            [gridCell setDetailText:@"Detail Text" atIndex:0];
-            [gridCell setText:@"Two" atIndex:1];
-            [gridCell setDetailText:@"Detail Text" atIndex:1];
-            [gridCell setText:@"Three" atIndex:2];
-            [gridCell setDetailText:@"Detail Text" atIndex:2];
-            return gridCell;
-        case 4:
-            gridCell = [tableView dequeueReusableCellWithIdentifier:GridCellIdentifier];
-            if (gridCell == nil) {
-                gridCell = [[[PrettyGridTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:GridCellIdentifier] autorelease];
-                gridCell.tableViewBackgroundColor = tableView.backgroundColor;
-                gridCell.actionBlock = ^(NSIndexPath *indexPath, int selectedIndex) {
-                    [gridCell deselectAnimated:YES];
-                };
-            }
-            [gridCell prepareForTableView:tableView indexPath:indexPath];
-            gridCell.numberOfElements = 2;
-            [gridCell setText:@"Four" atIndex:0];
-            [gridCell setText:@"Five" atIndex:1];
-            return gridCell;
-            
-        default:
-            break;
+//        cell.tableViewBackgroundColor = tableView.backgroundColor;
+//        cell.backgroundColor = tableView.backgroundColor;
+//        NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"tableTile.png" ofType:nil];
+//        cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:imagePath]];
+//        cell.contentView.backgroundColor = [UIColor colorWithHexString:@"0x5E5E5E"];
+//        cell.contentView.layer.cornerRadius = 10;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.opaque = NO;
     }
     
     // Configure the cell...
+    
     [cell prepareForTableView:tableView indexPath:indexPath];
     cell.textLabel.text = @"Text";
-    if (indexPath.section == 0) {
-        cell.cornerRadius = 20;
-    }
-    else {
-        cell.cornerRadius = 10;
-    }
+    cell.cornerRadius = 10;
+    cell.backgroundColor = [UIColor colorWithHexString:@"0x3f4547"];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.borderColor = [UIColor colorWithHexString:@"0x333333"];
     
     return cell;
 }

@@ -32,6 +32,8 @@
 		047AD61F164D1FDE00983365 /* singleRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047AD61D164D1FDE00983365 /* singleRiding@2x.png */; };
 		0483FE1E163E5FA8005D804F /* FirstSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */; };
 		0483FE1F163E5FA8005D804F /* FirstSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */; };
+		0494D2821655246F0004FC36 /* dashboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0494D2811655246F0004FC36 /* dashboard@2x.png */; };
+		0494D29416556C130004FC36 /* tableTile.png in Resources */ = {isa = PBXBuildFile; fileRef = 0494D29316556C130004FC36 /* tableTile.png */; };
 		04ADF5B7163EABE000F825B4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04ADF5B6163EABE000F825B4 /* MobileCoreServices.framework */; };
 		04B1E870165171E60086F56A /* stopGroupRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B1E86D165171E60086F56A /* stopGroupRiding@2x.png */; };
 		04B1E871165171E60086F56A /* pauseGroupRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B1E86E165171E60086F56A /* pauseGroupRiding@2x.png */; };
@@ -195,6 +197,8 @@
 		0483FE1B163E5FA8005D804F /* FirstSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstSettingViewController.h; sourceTree = "<group>"; };
 		0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstSettingViewController.m; sourceTree = "<group>"; };
 		0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstSettingViewController.xib; sourceTree = "<group>"; };
+		0494D2811655246F0004FC36 /* dashboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dashboard@2x.png"; sourceTree = "<group>"; };
+		0494D29316556C130004FC36 /* tableTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tableTile.png; sourceTree = "<group>"; };
 		04ADF5B6163EABE000F825B4 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		04B1E86D165171E60086F56A /* stopGroupRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stopGroupRiding@2x.png"; sourceTree = "<group>"; };
 		04B1E86E165171E60086F56A /* pauseGroupRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pauseGroupRiding@2x.png"; sourceTree = "<group>"; };
@@ -385,6 +389,7 @@
 		0457895A16426692008E56CA /* icon */ = {
 			isa = PBXGroup;
 			children = (
+				0494D29316556C130004FC36 /* tableTile.png */,
 				04E7585A1652AA7900D933FC /* profile_sample.jpg */,
 				04E3BB581651405C001D8745 /* customDisclosure@2x.png */,
 				04E3BB2C1650DE03001D8745 /* cyc.png */,
@@ -415,6 +420,7 @@
 				04E3BB241650D025001D8745 /* background@2x.png */,
 				55B1D8081650FB5C0032D86C /* background-568@2x.png */,
 				045B5660164A5481005CEC8A /* dashboard.png */,
+				0494D2811655246F0004FC36 /* dashboard@2x.png */,
 				04DC7696164EEA8000289E27 /* stopSwitch@2x.png */,
 				04DC7697164EEA8000289E27 /* stopButton@2x.png */,
 			);
@@ -874,6 +880,8 @@
 				047865391653B6C00004DFE2 /* yellowLight.png in Resources */,
 				55D386221654C8A200076749 /* _.png in Resources */,
 				55D386251654C8E600076749 /* dot.png in Resources */,
+				0494D2821655246F0004FC36 /* dashboard@2x.png in Resources */,
+				0494D29416556C130004FC36 /* tableTile.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1150,8 +1158,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "89A1BC66-DFAA-4983-9258-DDABB70414E9";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "89A1BC66-DFAA-4983-9258-DDABB70414E9";
+				PROVISIONING_PROFILE = "8767AB9F-16F2-4C95-8314-F0E667BDDECF";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8767AB9F-16F2-4C95-8314-F0E667BDDECF";
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

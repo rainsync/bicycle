@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIColor+ColorWithHex.h"
 
 #define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"-568":@""]
 
@@ -65,8 +66,8 @@
     bview.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:getNibName(@"background")]];
     [_detailTableView setBackgroundView:bview];
     [bview release];
-    _detailTableView.separatorColor = [UIColor blackColor];
-}
+    self.detailTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.detailTableView.separatorColor = [UIColor colorWithHexString:@"0x333333"];}
 
 - (void)didReceiveMemoryWarning
 {
@@ -286,7 +287,7 @@
 //    }
     
     // set cell attributes
-    cell.backgroundColor = [UIColor blackColor];
+    cell.backgroundColor = [UIColor colorWithHexString:@"0x3f4547"];
     cell.textLabel.text = key;
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
@@ -294,7 +295,7 @@
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:17];
     cell.detailTextLabel.textColor = [UIColor colorWithHex:0x3D89BF];
     cell.detailTextLabel.backgroundColor = [UIColor clearColor];
-    
+
     return cell;
 }
 
