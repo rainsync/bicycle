@@ -52,6 +52,14 @@
     double dist = [Utility metreTokilometre:[manager totalDistance]];
     double cspeed = [Utility mpsTokph:[manager current_location].speed];
     
+    calorieLabel.image = [Utility numberImagify:[NSString stringWithFormat:@"%.1lf", [manager calorie] ]];
+    distanceLabel.image = [Utility numberImagify:[NSString stringWithFormat:@"%.1lf", [Utility metreTokilometre:[manager totalDistance]]]];
+    
+    
+    double cal = [manager calorie];
+    double dist = [Utility metreTokilometre:[manager totalDistance]];
+    double cspeed = [Utility mpsTokph:[manager current_location].speed];
+    
 
 }
 
