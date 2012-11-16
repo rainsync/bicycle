@@ -312,33 +312,39 @@ NSInteger type = [[RidingManager getInstance] ridingType];
 
 - (IBAction)modeChange:(id)sender {
 
-    int direction = 1;//[sender tag] == ROTATE_LEFT_TAG ? -1 : 1;
-	CABasicAnimation* rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-	rotationAnimation.toValue = [NSNumber numberWithFloat:(1 * M_PI) * direction];
-	rotationAnimation.duration = 1.0f;
-	rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-	[_bottom_dashboard addAnimation:rotationAnimation forKey:@"rotateAnimation"];
-    _bottom_dashboard.transform = CGAffineTransformRotate(_bottom_dashboard.transform, 1 * M_PI);
-    
-
     NSInteger type = [[RidingManager getInstance] ridingType];
+    
+    CABasicAnimation* rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.removedOnCompletion = NO;
+    rotationAnimation.fillMode = kCAFillModeForwards;
+    rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    rotationAnimation.delegate = self;
     
     if (type==0) {
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"RidingType"];
         [_modeChangeButton setTitle:@"싱글모드로" forState:UIControlStateNormal];
         [_modeLabel setText:@"Group Riding"];
-
         
+        rotationAnimation.fromValue = [NSNumber numberWithInt:0];
+        rotationAnimation.toValue = [NSNumber numberWithFloat:M_PI];//(1 * M_PI) * direction];
+        rotationAnimation.duration = 1.0f;
+        [_bottom_dashboard addAnimation:rotationAnimation forKey:@"rotateAnimation"];       
     }
     else if(type==1)
     {
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"RidingType"];
         [_modeChangeButton setTitle:@"그룹모드로" forState:UIControlStateNormal];
         [_modeLabel setText:@"Single Riding"];
+        
+        rotationAnimation.fromValue = [NSNumber numberWithInt:M_PI];
+        rotationAnimation.toValue = [NSNumber numberWithFloat:0];//(1 * M_PI) * direction];
+        rotationAnimation.duration = 1.0f;
+        [_bottom_dashboard addAnimation:rotationAnimation forKey:@"rotateAnimation"];
     }
     
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.parentViewController refreshPageControl];
+    
 }
 
 - (void)hudWasHidden:(MBProgressHUD *)HUD {
