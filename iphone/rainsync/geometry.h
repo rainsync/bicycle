@@ -39,7 +39,7 @@ typedef struct {
 
 typedef double point[DIMENSION];
 
-#define MAXPOLY		200	/* maximum number of points in a polygon */
+#define MAXPOLY		65536	/* maximum number of points in a polygon */
 
 typedef struct {
 	int n;			/* number of points in polygon */

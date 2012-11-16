@@ -57,6 +57,57 @@
     
 }
 
+- (void)setRoute:(NSMutableArray *)locations
+{
+    int count = [locations count]>65536?65536:[locations count];
+    NSLog(@"count %d",[locations count]);
+    
+    point *p = malloc(sizeof(point)*count);
+    
+    int i=0;
+    
+    for (CLLocation *location in locations) {
+        p[i][X] = location.coordinate.latitude;
+        p[i][Y] = location.coordinate.longitude;
+        i++;
+        
+        
+    }
+    polygon poly;
+    convex_hull(p, [locations count], &poly);
+    double minX=INFINITY,minY=INFINITY,maxX=-INFINITY,maxY=-INFINITY;
+    
+    for (int i=0; i!=poly.n; i++) {
+        if(minX>poly.p[i][X])
+            minX=poly.p[i][X];
+        
+        if(minY>poly.p[i][Y])
+            minY=poly.p[i][Y];
+        
+        if(maxX<poly.p[i][X])
+            maxX=poly.p[i][X];
+        
+        if(maxY<poly.p[i][Y])
+            maxY=poly.p[i][Y];
+        
+    }
+    
+
+    NSLog(@"%lf %lf %lf %lf", minX, maxX, minY,maxY);
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    
+    span.latitudeDelta=(maxX-minX);
+    span.longitudeDelta=(maxY-minY);
+    region.span=span;
+
+    region.center=CLLocationCoordinate2DMake((maxX+minX)/2, (maxY+minY)/2);
+    [self.mapView setRegion:region animated:TRUE];
+    [self.mapView regionThatFits:region];
+    
+    
+}
+
 
 - (void)viewDidLoad
 {
@@ -327,6 +378,7 @@
     _mapView.mapType = MKMapTypeStandard;
     //[_mapView setScrollEnabled:NO];
     
+   
     
     
     NSMutableArray * locations = [rawdata objectForKey:@"locations"];
@@ -355,7 +407,8 @@
     [self.mapView addOverlay:routeLine];
     //    //point.latitude /= [locations count];
     //    //point.longitude /= [locations count];
-    [self setMapCenter:mid];
+    [self setRoute:locations];
+    //[self setMapCenter:mid];
     
     //MKMapRectMake(southWestPoint.x, southWestPoint.y, northEastPoint.x - southWestPoint.x, northEastPoint.y - southWestPoint.y);
     

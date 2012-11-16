@@ -27,9 +27,7 @@
  */
 
 
-#include "bool.h"
-#include "geometry.h"
-#include <math.h>
+
 #include "convexhull.h"
 
 point first_point;		/* first hull point */
@@ -40,7 +38,7 @@ void convex_hull(point in[], int n, polygon *hull)
 {
 	int i;			/* input counter */
 	int top;		/* current hull size */
-	bool smaller_angle();
+	BOOL smaller_angle();
 	
 	if (n <= 3) { 		/* all points on hull! */
 		for (i=0; i<n; i++)
@@ -80,7 +78,7 @@ void sort_and_remove_duplicates(point in[], int *n)
     int i;                  /* counter */
     int oldn;               /* number of points before deletion */
     int hole;               /* index marked for potential deletion */
-	bool leftlower();
+	BOOL leftlower();
     
 	qsort(in, *n, sizeof(point), leftlower);
     
@@ -115,7 +113,7 @@ void sort_and_remove_duplicates(point in[], int *n)
 //}
 
 
-bool leftlower(point *p1, point *p2)
+BOOL leftlower(point *p1, point *p2)
 {
 	if ((*p1)[X] < (*p2)[X]) return (-1);
 	if ((*p1)[X] > (*p2)[X]) return (1);
@@ -143,7 +141,7 @@ bool leftlower(point *p1, point *p2)
  }
  */
 
-bool smaller_angle(point *p1, point *p2)
+BOOL smaller_angle(point *p1, point *p2)
 {
 	if (collinear(first_point,*p1,*p2)) {
 		if (distance(first_point,*p1) <= distance(first_point,*p2))

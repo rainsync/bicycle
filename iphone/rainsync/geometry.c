@@ -31,7 +31,7 @@
 #include "geometry.h"
 #include <math.h>
 
-points_to_line(point p1, point p2, line *l)
+void points_to_line(point p1, point p2, line *l)
 {
 	if (p1[X] == p2[X]) {
 		l->a = 1;
@@ -44,20 +44,20 @@ points_to_line(point p1, point p2, line *l)
 	}
 }
 
-point_and_slope_to_line(point p, double m, line *l)
+void point_and_slope_to_line(point p, double m, line *l)
 {
 	l->a = -m;
 	l->b = 1;
 	l->c = -((l->a*p[X]) + (l->b*p[Y]));
 }
 
-bool parallelQ(line l1, line l2)
+BOOL parallelQ(line l1, line l2)
 {
 	return ( (fabs(l1.a-l2.a) <= EPSILON) &&
             (fabs(l1.b-l2.b) <= EPSILON) );
 }
 
-bool same_lineQ(line l1, line l2)
+BOOL same_lineQ(line l1, line l2)
 {
 	return ( parallelQ(l1,l2) && (fabs(l1.c-l2.c) <= EPSILON) );
 }
@@ -149,13 +149,13 @@ void segment_to_points(segment s, point p1, point p2)
 }
 
 
-bool point_in_box(point p, point b1, point b2)
+BOOL point_in_box(point p, point b1, point b2)
 {
 	return( (p[X] >= min(b1[X],b2[X])) && (p[X] <= max(b1[X],b2[X]))
            && (p[Y] >= min(b1[Y],b2[Y])) && (p[Y] <= max(b1[Y],b2[Y])) );
 }
 
-bool segments_intersect(segment s1, segment s2)
+BOOL segments_intersect(segment s1, segment s2)
 {
 	line l1,l2;		/* lines containing the input segments */
 	point p;		/* intersection point */
@@ -187,21 +187,21 @@ double triangle_area(point a, point b, point c)
 	return( fabs(signed_triangle_area(a,b,c)) );
 }
 
-bool ccw(point a, point b, point c)
+BOOL ccw(point a, point b, point c)
 {
 	double signed_triangle_area();
     
 	return (signed_triangle_area(a,b,c) > EPSILON);
 }
 
-bool cw(point a, point b, point c)
+BOOL cw(point a, point b, point c)
 {
 	double signed_triangle_area();
     
 	return (signed_triangle_area(a,b,c) < - EPSILON);
 }
 
-bool collinear(point a, point b, point c)
+BOOL collinear(point a, point b, point c)
 {
 	double signed_triangle_area();
     
