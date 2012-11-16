@@ -37,7 +37,7 @@
             
             sqlite3_stmt *statement;
             
-            statement = [self getSQLStatement:ridingDB WithQuery:@"CREATE TABLE IF NOT EXISTS RIDINGS (ID INTEGER PRIMARY KEY AUTOINCREMENT, START_DATE REAL, END_DATE REAL, TIME REAL, DISTANCE REAL, SPEED REAL, MAX_SPEED REAL, CALORIE REAL)"];
+            statement = [self getSQLStatement:ridingDB WithQuery:@"CREATE TABLE IF NOT EXISTS RIDINGS (ID INTEGER PRIMARY KEY AUTOINCREMENT, START_DATE REAL, END_DATE REAL, TIME REAL, DISTANCE REAL, SPEED REAL, MAX_SPEED REAL, CALORIE REAL, RIDING_TYPE INTEGER)"];
 
 
             //sqlite3_exec 와는 다르게 sqlite3_step은 성공시 sqlite_done을 반환 함으로써 성공을 알린다.
@@ -125,7 +125,7 @@
     
     //(ID INTEGER PRIMARY KEY AUTOINCREMENT, START_DATE REAL, END_DATE REAL, TIME REAL, DISTANCE REAL, SPEED REAL, MAX_SPEED REAL, CALORIE REAL)
     
-    statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO RIDINGS (start_date,end_date, time, distance, speed,max_speed, calorie) VALUES (%lf, %lf, %lf, %lf, %lf,%lf, %lf)", [[NSDate date] timeIntervalSince1970], 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f]];
+    statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO RIDINGS (start_date,end_date, time, distance, speed,max_speed, calorie, riding_type) VALUES (%lf, %lf, %lf, %lf, %lf,%lf, %lf, %d)", [[NSDate date] timeIntervalSince1970], 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, [[RidingManager getInstance] ridingType]]];
     
     if (sqlite3_step(statement) == SQLITE_DONE) {
         NSLog(@"Record Added");
@@ -215,7 +215,7 @@
             [dic setObject:[[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 5)] autorelease] forKey:@"speed"];
             [dic setObject:[[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 6)] autorelease] forKey:@"max_speed"];
             [dic setObject:[[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 7)] autorelease] forKey:@"calorie"];
-            
+            [dic setObject:[[[NSNumber alloc] initWithInt: sqlite3_column_double(statement, 8)] autorelease] forKey:@"riding_type"];
             
             
             [ridings addObject:dic];
@@ -258,7 +258,7 @@
                 [riding setObject:[[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 5)] autorelease] forKey:@"speed"];
                 [riding setObject:[[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 6)] autorelease] forKey:@"max_speed"];
                 [riding setObject:[[[NSNumber alloc] initWithDouble: sqlite3_column_double(statement, 7)] autorelease] forKey:@"calorie"];
-            
+                [riding setObject:[[[NSNumber alloc] initWithInt: sqlite3_column_double(statement, 8)] autorelease] forKey:@"riding_type"];
 
                 
 
