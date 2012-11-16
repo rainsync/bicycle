@@ -282,6 +282,7 @@ NSInteger type = [[RidingManager getInstance] ridingType];
     [_stopLabel release];
     [_modeChangeButton release];
     [_modeLabel release];
+    [_bottom_dashboard release];
     [super dealloc];
 }
 
@@ -305,10 +306,21 @@ NSInteger type = [[RidingManager getInstance] ridingType];
 
     [self setTest:nil];
     [self setModeLabel:nil];
+    [self setBottom_dashboard:nil];
     [super viewDidUnload];
 }
 
 - (IBAction)modeChange:(id)sender {
+
+    int direction = 1;//[sender tag] == ROTATE_LEFT_TAG ? -1 : 1;
+	CABasicAnimation* rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+	rotationAnimation.toValue = [NSNumber numberWithFloat:(1 * M_PI) * direction];
+	rotationAnimation.duration = 1.0f;
+	rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+	[_bottom_dashboard addAnimation:rotationAnimation forKey:@"rotateAnimation"];
+    _bottom_dashboard.transform = CGAffineTransformRotate(_bottom_dashboard.transform, 1 * M_PI);
+    
+
     NSInteger type = [[RidingManager getInstance] ridingType];
     
     if (type==0) {

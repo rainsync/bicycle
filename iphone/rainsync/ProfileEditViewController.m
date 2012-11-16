@@ -40,6 +40,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    bikeArray = [[NSArray alloc] initWithObjects:@"로드", @"하이브리드", @"픽시", @"산악", nil];
     
     NSString *bgPath = [[NSBundle mainBundle] pathForResource:@"background@2x.png" ofType:nil];
     UIView* bview = [[UIView alloc] init];
@@ -71,7 +72,7 @@
 }
 
 - (IBAction)backgroundTap:(id)sender {
-    [_nameTextField resignFirstResponder];
+    [sender resignFirstResponder];
 }
 
 #pragma mark -
@@ -153,11 +154,54 @@
 
 - (void)dealloc {
     [_tableView release];
+    [_bikeCategoryPickerView release];
+    [_bikeSelectView release];
+    [_bikeSelectToolbar release];
+    [_selectBikeBarButton release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setTableView:nil];
+    [self setBikeCategoryPickerView:nil];
+    [self setBikeSelectView:nil];
+    [self setBikeSelectToolbar:nil];
+    [self setSelectBikeBarButton:nil];
     [super viewDidUnload];
+}
+
+#pragma mark -
+#pragma mark UIPickerViewDelegate
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+//	if (pickerView == myPickerView)	// don't show selection for the custom picker
+//	{
+//		// report the selection to the UI label
+//		label.text = [NSString stringWithFormat:@"%@ - %d",
+//                      [bikeArray objectAtIndex:[pickerView selectedRowInComponent:0]],
+//                      [pickerView selectedRowInComponent:1]];
+//	}
+}
+
+
+#pragma mark -
+#pragma mark UIPickerViewDataSource
+
+#pragma mark -
+#pragma mark Picker Data Source Methods
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+	return 1;
+}
+- (NSInteger)pickerView:(UIPickerView *)pickerView
+numberOfRowsInComponent:(NSInteger)component{
+	return [bikeArray count];
+}
+
+#pragma mark Picker Delegate Methods
+- (NSString *)pickerView:(UIPickerView *)pickerView
+			 titleForRow:(NSInteger)row
+			forComponent:(NSInteger)component{
+	return [bikeArray objectAtIndex:row];
 }
 
 #pragma mark - Table view data source
@@ -165,7 +209,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -175,7 +219,7 @@
         return 3;
     }
     
-    return 0;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -185,18 +229,61 @@
     PrettyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[PrettyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        cell.tableViewBackgroundColor = tableView.backgroundColor;
+    }
+    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            cell.textLabel.text = @"지역";
+            cell.detailTextLabel.text = @"경기";
+        }
+        else if (indexPath.row == 1) {
+            cell.textLabel.text = @"나이";
+            cell.detailTextLabel.text = @"20대";
+        }
+        else {
+            cell.textLabel.text = @"성별";
+            cell.detailTextLabel.text = @"남자";
+        }
+    }
+    else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            cell.textLabel.text = @"자전거종";
+            cell.detailTextLabel.text = @"로드바이크";
+            
+        
+            
+            
+        }
+        else if (indexPath.row == 1) {
+            UIView *bikeNameView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 180, 20)] autorelease];
+            bikeNameView.backgroundColor = [UIColor colorWithHexString:@"0x3f4547"];
+            
+            cell.textLabel.text = @"모델명";
+            cell.detailTextLabel.text = @"IGUANA-V7";
+            bikeNameTextField = [[[UITextField alloc] initWithFrame:CGRectMake(0, 0, 155, 20)] autorelease];
+            bikeNameTextField.placeholder = @"자전거 모델명";
+            bikeNameTextField.textColor = [UIColor whiteColor];
+            [bikeNameTextField setKeyboardType:UIKeyboardTypeDefault];
+            [bikeNameTextField setTextAlignment:NSTextAlignmentRight];
+            [bikeNameTextField setReturnKeyType:UIReturnKeyDone];
+            [bikeNameTextField addTarget:self action:@selector(textFieldDoneEditing:) forControlEvents:UIControlEventEditingDidEndOnExit];
+            [bikeNameView addSubview:bikeNameTextField];
+            cell.accessoryView = bikeNameView;
+        }
+    }
+    else {
+        
     }
     
     // Configure the cell...
     [cell prepareForTableView:tableView indexPath:indexPath];
-    cell.textLabel.text = @"Text";
     cell.cornerRadius = 10;
     cell.backgroundColor = [UIColor colorWithHexString:@"0x3f4547"];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.borderColor = [UIColor colorWithHexString:@"0x333333"];    
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return cell;
 }
 
@@ -255,7 +342,16 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 1)
+        if (indexPath.row == 0) {
+            [_bikeSelectView setHidden:NO];
+        }
 }
 
+
+- (IBAction)selectBikeDone:(id)sender {
+    [_bikeSelectView setHidden:YES];
+}
 @end

@@ -169,7 +169,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -179,7 +179,7 @@
         return 3;
     }
 
-    return 0;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -188,25 +188,47 @@
     
     PrettyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[PrettyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-//        cell.tableViewBackgroundColor = tableView.backgroundColor;
-//        cell.backgroundColor = tableView.backgroundColor;
-//        NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"tableTile.png" ofType:nil];
-//        cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:imagePath]];
-//        cell.contentView.backgroundColor = [UIColor colorWithHexString:@"0x5E5E5E"];
-//        cell.contentView.layer.cornerRadius = 10;
+        cell = [[[PrettyTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.opaque = NO;
+    }
+    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            cell.textLabel.text = @"지역";
+            cell.detailTextLabel.text = @"경기";
+        }
+        else if (indexPath.row == 1) {
+            cell.textLabel.text = @"나이";
+            cell.detailTextLabel.text = @"20대";
+        }
+        else {
+            cell.textLabel.text = @"성별";
+            cell.detailTextLabel.text = @"남자";
+        }
+    }
+    else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            cell.textLabel.text = @"자전거종";
+            cell.detailTextLabel.text = @"로드바이크";
+        }
+        else if (indexPath.row == 1) {
+            cell.textLabel.text = @"모델명";
+            cell.detailTextLabel.text = @"IGUANA-V7";
+        }
+    }
+    else {
+        
     }
     
     // Configure the cell...
     
     [cell prepareForTableView:tableView indexPath:indexPath];
-    cell.textLabel.text = @"Text";
     cell.cornerRadius = 10;
     cell.backgroundColor = [UIColor colorWithHexString:@"0x3f4547"];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
     cell.borderColor = [UIColor colorWithHexString:@"0x333333"];
     
     return cell;
