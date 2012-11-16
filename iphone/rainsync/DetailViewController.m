@@ -36,30 +36,13 @@
 }
 
 
--(void)setMapCenter:(CLLocationCoordinate2D)location
-{
-    //[self.mapView setCenterCoordinate:location zoomLevel:13 animated:YES];
-    
-    
-    NSLog(@"Current Location : %f, %f",location.latitude,location.longitude);
-    MKCoordinateRegion region;
-    MKCoordinateSpan span;
-    span.latitudeDelta=0.01;
-    span.longitudeDelta=0.01;
-    region.span=span;
-    //location.latitude=(float *)(self.appDelegate.currentLocationLatitude);
-    //location.latitude=self.appDelegate.currentLocationLongitude;
-    region.center=location;
-    [self.mapView setRegion:region animated:TRUE];
-    [self.mapView regionThatFits:region];
-    
-    
-    
-}
+
 
 - (void)setRoute:(NSMutableArray *)locations
 {
-
+    if([locations count]==0)
+        return;
+    
     int i=0;
     double minX=INFINITY,minY=INFINITY,maxX=-INFINITY,maxY=-INFINITY;
     
