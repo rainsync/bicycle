@@ -297,8 +297,12 @@
 
 }
 
-
-
+//0 single 1 group
+- (NSInteger)ridingType
+{
+    NSInteger type=[[NSUserDefaults standardUserDefaults] integerForKey:@"RidingType"];
+    return type;
+}
 
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
