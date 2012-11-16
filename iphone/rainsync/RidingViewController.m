@@ -30,9 +30,17 @@
     return self;
 }
 
+- (void)refreshPageControl{
+    NSInteger type = [[RidingManager getInstance] ridingType];
+    if(type==0)
+        kNumberOfPages=2;
+    else if(type==1)
+        kNumberOfPages=3;
+    
+    pageControl.numberOfPages = kNumberOfPages;
+}
 
-
-- (void)refreshPageControl
+- (void)initPageControl
 {
     
     NSInteger type = [[RidingManager getInstance] ridingType];
@@ -46,7 +54,7 @@
     // view controllers are created lazily
     // in the meantime, load the array with placeholders which will be replaced on demand
     controllers = [[NSMutableArray alloc] init];
-    for (unsigned i = 0; i < kNumberOfPages; i++)
+    for (unsigned i = 0; i < 3; i++)
     {
 		[controllers addObject:[NSNull null]];
     }
@@ -184,7 +192,7 @@
 {
 
     
-    [self refreshPageControl];
+    
     
     [[self navigationController] setNavigationBarHidden:true];
     
@@ -198,7 +206,7 @@
 {
     [super viewDidLoad];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    
+    [self initPageControl];
     // Do any additional setup after loading the view from its nib.
 }
 
