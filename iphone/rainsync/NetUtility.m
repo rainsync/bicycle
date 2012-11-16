@@ -133,6 +133,16 @@
     }
 }
 
+
+-(void) race_info{
+    NSString* session = [[Login getInstance] getSession];
+    if(session){
+        [queue push:[[NSNumber alloc]initWithInt:race_info]];
+        [arr addObject:[[[NSDictionary alloc] initWithObjects:@[@"race-info", session] forKeys:@[@"type", @"sid"]] autorelease]];
+    }
+}
+
+
 -(void) end{
     NSError* error;
     NSData* data = [NSJSONSerialization dataWithJSONObject:arr options:NSJSONReadingMutableLeaves error:&error];
