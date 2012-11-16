@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Login.h"
-
-@interface FirstSettingViewController : UIViewController
+#import "MBProgressHUD.h"
+@interface FirstSettingViewController : UIViewController <MBProgressHUDDelegate>
 @property (retain, nonatomic) IBOutlet UIButton *fbButton;
 @property (retain, nonatomic) IBOutlet UIButton *generalLoginButton;
+@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 
 - (void)viewWillAppear:(BOOL)animated;
 
