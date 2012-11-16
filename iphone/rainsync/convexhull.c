@@ -1,261 +1,159 @@
-/*
- * Chris' implementation of Graham's Scan
- * Copyright (C) 2003 Chris Harrison
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+/*	convex-hull.c
+ 
+ Compute convex hulls of points in the plane using the
+ Gries/Graham scan algorithm.
+ 
+ begun: September 13, 2002
+ by: Steven Skiena
  */
 
 /*
- * Adapted for C99 by Ben Brame, April 2009.
+ Copyright 2003 by Steven S. Skiena; all rights reserved.
+ 
+ Permission is granted for use in non-commerical applications
+ provided this copyright notice remains intact and unchanged.
+ 
+ This program appears in my book:
+ 
+ "Programming Challenges: The Programming Contest Training Manual"
+ by Steven Skiena and Miguel Revilla, Springer-Verlag, New York 2003.
+ 
+ See our website www.programming-challenges.com for additional information.
+ 
+ This book can be ordered from Amazon.com at
+ 
+ http://www.amazon.com/exec/obidos/ASIN/0387001638/thealgorithmrepo/
+ 
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
+#include "bool.h"
+#include "geometry.h"
 #include <math.h>
-#include <time.h>
+#include "convexhull.h"
 
-#define TRUE 1
-#define FALSE 0
+point first_point;		/* first hull point */
 
-//--------------------POINT DATA STRUCTURE---------------------------
-struct point
+
+
+void convex_hull(point in[], int n, polygon *hull)
 {
-    int x; //X POSITION
-    int y; //Y POSITION
-    struct point *next; //POINTER TO NEXT NODE IN THE LIST
-    struct point *prev; //POINTER TO PREVIOUS NODE IN THE LIST
-    float angle; //INTERMEDIATE ANGLE VALUE STORAGE
-};
-
-
-//--------------------GLOBAL VARIABLES---------------------------
-const int NumPoints = 50; // n<1000
-struct point* firstPoint; //GLOBAL POINTER TO MIN POINT IN DOUBLELY LINKED LIST
-
-
-//--------------------GRAHAM'S SCAN FUNCTIONS---------------------------
-void grahamInit(); //INITIALIZE VARIABLES, RANDOMLY GENERATE POINTS,
-//LOCATE MIN POINT, AND SORT POINTS BY RELATIVE ANGLES
-void grahamMain(); //SETUP, RUN GRAHAM'S SCAN, AND DISPLAY RESULTS
-void grahamScan(struct point *P); //ACTUAL GRAHAM'S SCAN PROCEDURE
-int isConvexPoint(struct point *P); //TEST POINT FOR CONVEXITY
-void addPoint(struct point Point); //ADDS POINT TO DOUBLELY LINKED LIST (USED DURING SORTING)
-double findAngle(double x1, double y1, double x2, double y2); //FIND ANGLE GIVEN TWO POINTS
-
-
-//--------------------AUXILARY GRAPHICS FUNCTIONS---------------------------
-void drawPermeter(int color); //DRAWS PERIMETER WITH 3 COLOR POSSIBILITIES
-void printPoints(); //PRINTS ALL POINTS IN DOUBLELY LINKED LIST
-
-
-//--------------------MAIN---------------------------
-/*
-int main(int argc, char *argv[])
-{
-    srand(time(NULL)); //SEED THE RANDOM NUMBER GENERATER WITH THE TIME
-    grahamMain(); //RUN ENTIRE GRAHAM'S SCAN PROCEDURE
-    return 0; //EXIT
-}
-*/
-
-void grahamMain()
-{
-    grahamInit(); //INITIALIZE DATA FOR GRAHAM'S SCAN
-    printPoints(); //PRINT OUT SORTED POINTS
-    grahamScan(firstPoint->next); //RUN GRAHAM'S SCAN STARTING AT SECOND NODE CLOCKWISE
-	printf("\n\n\n");
-    printPoints(); //PRINT OUT CONVEX HULL
-}
-
-
-void grahamScan(struct point *P)
-{
-    struct point *tempPrev, *tempNext;
-    
-    if (P==firstPoint) //IF RETURNED TO FIRST POINT, DONE
-        return;
-    
-    if (!isConvexPoint(P)) //IF POINT IS CONCAVE, ELIMINATE FROM PERIMETER
-    {
-        tempPrev=P->prev;
-        tempNext=P->next;
-        tempPrev->next=tempNext;
-        tempNext->prev=tempPrev;
-        free(P); //FREE MEMORY
-        grahamScan(tempPrev); //RUN GRAHAM'S SCAN ON PREVIOUS POINT TO CHECK IF CONVEXITY HAS CHANGED IT
-        
-    }
-    else //POINT IS CONVEX
-        grahamScan(P->next); //PROCEED TO NEXT POINT
-}
-
-
-void grahamInit()
-{
-    int minPoint=0;
-    double tempAngle=0;
-    struct point tempPoints[1000]; //CREATE STATIC ARRAY FOR RANDOM POINT GENERATION
-    struct point *tempPtr;
-    int i,k;
+	int i;			/* input counter */
+	int top;		/* current hull size */
+	bool smaller_angle();
 	
-    firstPoint=NULL; //INIT FIRSTPOINT POINTER
+	if (n <= 3) { 		/* all points on hull! */
+		for (i=0; i<n; i++)
+            copy_point(in[i],hull->p[i]);
+		hull->n = n;
+		return;
+	}
     
-    for (i=0;i<NumPoints;i++) //GENERATE RANDOM POINTS
-    {
-        tempPoints[i].x=rand()%400+50;
-        tempPoints[i].y=rand()%400+50;
-    }
+	sort_and_remove_duplicates(in,&n);
+	copy_point(in[0],&first_point);
     
-    for (k=1;k<NumPoints;k++)  //FIND MIN POINT
-        if (tempPoints[k].y<tempPoints[minPoint].y)
-            minPoint=k;
+	qsort(&in[1], n-1, sizeof(point), smaller_angle);
     
-    for (i=0;i<NumPoints;i++) //SORT RANDOM POINTS
-    {
-        tempPoints[i].angle=findAngle(tempPoints[minPoint].x,tempPoints[minPoint].y,tempPoints[i].x,tempPoints[i].y);
-        addPoint(tempPoints[i]);
-    }
+	copy_point(first_point,hull->p[0]);
+	copy_point(in[1],hull->p[1]);
     
-    tempPtr=firstPoint;
-    do  //FIND LAST NODE IN LINKED LIST
-    {
-        tempPtr=tempPtr->next;
-    } while (tempPtr->next!=NULL);
+	copy_point(first_point,in[n]);	/* sentinel to avoid special case */
+	top = 1;
+	i = 2;
     
-    tempPtr->next=firstPoint; //COMPLETE CIRCULAR LINKED LIST
-    firstPoint->prev=tempPtr; //COMPLETE CIRCULAR LINKED LIST
+	while (i <= n) {
+		if (!ccw(hull->p[top-1], hull->p[top], in[i]))
+			top = top-1;	/* top not on hull */
+		else {
+			top = top+1;
+            copy_point(in[i],hull->p[top]);
+			i = i+1;
+		}
+	}
+    
+	hull->n = top;
 }
 
-int isConvexPoint(struct point* P)
+
+void sort_and_remove_duplicates(point in[], int *n)
 {
-
-    double CWAngle=findAngle(P->x,P->y,P->prev->x,P->prev->y); //COMPUTE CLOCKWISE ANGLE
-    double CCWAngle=findAngle(P->x,P->y,P->next->x,P->next->y); //COMPUTER COUNTERCLOCKWISE ANGLE
-    double difAngle;
+    int i;                  /* counter */
+    int oldn;               /* number of points before deletion */
+    int hole;               /* index marked for potential deletion */
+	bool leftlower();
     
+	qsort(in, *n, sizeof(point), leftlower);
     
-    if (CWAngle>CCWAngle)
-    {
-        difAngle=CWAngle-CCWAngle;  //COMPUTE DIFFERENCE BETWEEN THE TWO ANGLES
-        
-        if (difAngle>180)
-            return FALSE; //POINT IS CONCAVE
-        else
-            return TRUE; //POINT IS CONVEX
+    oldn = *n;
+	hole = 1;
+    for (i=1; i<oldn; i++) {
+		if ((in[hole-1][X] == in[i][X]) && (in[hole-1][Y] == in[i][Y]))
+            (*n)--;
+        else {
+            copy_point(in[i],in[hole]);
+            hole = hole + 1;
+        }
     }
-    else if (CWAngle<CCWAngle)
-    {
-        difAngle=CCWAngle-CWAngle;  //COMPUTE DIFFERENCE BETWEEN THE TWO ANGLES
-        
-        if (difAngle>180)
-            return TRUE; //POINT IS CONVEX
-        else
-            return FALSE; //POINT IS CONCAVE
-    }
-    else if (CWAngle == CCWAngle)
-        return FALSE; //POINT IS COLINEAR
+    copy_point(in[oldn-1],in[hole]);
 }
 
 
-void addPoint(struct point Point)
+
+//main(){
+//	point in[MAXPOLY];		/* input points */
+//	polygon hull;			/* convex hull */
+//	int n;				/* number of points */
+//	int i;				/* counter */
+//    
+//	scanf("%d",&n);
+//	for (i=0; i<n; i++)
+//		scanf("%lf %lf",&in[i][X],&in[i][Y]);
+//    
+//	convex_hull(in,n,&hull);
+//    
+//	print_polygon(&hull);
+//}
+
+
+bool leftlower(point *p1, point *p2)
 {
-    struct point *tempPoint,*tempPointA,*tempPointB, *curPoint;
+	if ((*p1)[X] < (*p2)[X]) return (-1);
+	if ((*p1)[X] > (*p2)[X]) return (1);
     
-    //ALLOCATE A NEW POINT STRUCTURE AND INITIALIZE INTERNAL VARIABLES
-    tempPoint = (struct point*)malloc(sizeof(struct point));
-    tempPoint->x=Point.x;
-    tempPoint->y=Point.y;
-    tempPoint->angle=Point.angle;
-    tempPoint->next=NULL;
-    tempPoint->prev=NULL;
+    if ((*p1)[Y] < (*p2)[Y]) return (-1);
+    if ((*p1)[Y] > (*p2)[Y]) return (1);
     
-    
-    if (firstPoint==NULL) //TEST IF LIST IS EMPTY
-    {
-        firstPoint=tempPoint;
-        return;
-    }
-    
-    if (firstPoint->next==NULL && tempPoint->angle >= firstPoint->angle)
-        //TEST IF ONLY ONE NODE IN LIST AND CURRENT NODE HAS GREATER ANGLE
-    {
-        firstPoint->next=tempPoint;
-        tempPoint->prev=firstPoint;
-        return;
-    }
-    
-    curPoint=firstPoint;
-    
-    while (tempPoint->angle >= curPoint->angle && curPoint->next!=NULL)
-        //CONTINUE THROUGH LIST UNTIL A NODE IS FOUND WITH A GREATER ANGLE THAN CURRENT NODE
-        curPoint=curPoint->next;
-    
-    if (curPoint==firstPoint) //TEST IF NODE IS FIRSTPOINT.  IF SO, ADD AT FRONT OF LIST.
-    {
-        firstPoint->prev=tempPoint;
-        tempPoint->next=firstPoint;
-        firstPoint=tempPoint;
-        return;
-    }
-    else if (curPoint->next==NULL && tempPoint->angle >= curPoint->angle)
-        //TEST IF WHILE LOOP REACHED FINAL NODE IN LIST.  IF SO, ADD AT END OF THE LIST.
-    {
-        curPoint->next=tempPoint;
-        tempPoint->prev=curPoint;
-        return;
-    }
-    else //OTHERWISE, INTERMEDIATE NODE HAS BEEN FOUND.  INSERT INTO LIST.
-    {
-        tempPointA=curPoint->prev;
-        tempPointB=curPoint->prev->next;
-        tempPoint->next=tempPointB;
-        tempPoint->prev=tempPointA;
-        tempPoint->prev->next=tempPoint;
-        tempPoint->next->prev=tempPoint;
-    }
-    
-    return;
+	return(0);
 }
 
-double findAngle(double x1, double y1, double x2, double y2)
+/*
+ bool leftlower(point *p1, point *p2)
+ {
+ if (fabs((*p1)[X] - (*p2)[X]) > EPSILON) {
+ if ((*p1)[X] < (*p2)[X]) return (-1);
+ if ((*p1)[X] > (*p2)[X]) return (1);
+ }
+ 
+ if (fabs((*p1)[Y] - (*p2)[Y]) > EPSILON) {
+ if ((*p1)[Y] < (*p2)[Y]) return (-1);
+ if ((*p1)[Y] > (*p2)[Y]) return (1);
+ }
+ 
+ return(0);
+ }
+ */
+
+bool smaller_angle(point *p1, point *p2)
 {
-    double deltaX=(double)(x2-x1);
-    double deltaY=(double)(y2-y1);
-    double angle;
+	if (collinear(first_point,*p1,*p2)) {
+		if (distance(first_point,*p1) <= distance(first_point,*p2))
+			return(-1);
+		else
+			return(1);
+	}
     
-    if (deltaX==0 && deltaY==0)
-        return 0;
-    
-    angle=atan2(deltaY,deltaX)*57.295779513082;
-    
-    if (angle < 0)
-        angle += 360.;
-    
-    return angle;
+	if (ccw(first_point,*p1,*p2))
+		return(-1);
+	else
+		return(1);
 }
-
-
-void printPoints()
-{
-    struct point *curPoint=firstPoint;
-    
-    do
-	{
-		printf("angle: %f x: %d y: %d\n", curPoint->angle, curPoint->x, curPoint->y);
-        curPoint=curPoint->next;
-    } while (curPoint!=firstPoint); //CONTINUE UNTIL HAVING LOOPED BACK AROUND TO FIRSTPOINT
-}
-
