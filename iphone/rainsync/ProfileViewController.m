@@ -83,14 +83,27 @@
     self.tableView.separatorColor = [UIColor colorWithHexString:@"0x333333"];
 }
 
+- (void)hudWasHidden:(MBProgressHUD *)HUD {
+	// Remove HUD from screen when the HUD was hidded
+	[HUD removeFromSuperview];
+	[HUD release];
+	HUD = nil;
+}
+
 - (IBAction)login:(id)sender {
+    
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+    HUD.dimBackground = YES;
+    [HUD show:TRUE];
     
     //[_disableView setHidden:YES];
     [[Login getInstance] join:^{
+        [HUD hide:TRUE];
         [_disableView setHidden:TRUE];
         [[NetUtility getInstance] account_profile_get:[[Login getInstance] getSession]];
         [[NetUtility getInstance] end];
     } withFail:^(NSError *error) {
+        [HUD hide:TRUE];
         [_disableView setHidden:FALSE];
     }];
     

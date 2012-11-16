@@ -11,8 +11,8 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "UIImageView+AFNetworking.h"
 #import "Login.h"
-
-@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+#import "MBProgressHUD.h"
+@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MBProgressHUDDelegate>
 
 @property (retain, nonatomic) IBOutlet UILabel *Name;
 @property (retain, nonatomic) IBOutlet UILabel *Email;
