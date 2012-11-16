@@ -88,6 +88,8 @@
         
         NSLog(@"changed..");
         
+        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 1000, 1000);
+        [_mapView setRegion:region animated:YES];
         
     }else{
     
@@ -104,12 +106,14 @@
             updateRect = MKMapRectInset(updateRect, -lineWidth, -lineWidth);
             // Ask the overlay view to update just the changed area.
             [route_views[pos] setNeedsDisplayInMapRect:updateRect];
+            MKCoordinateRegion region=_mapView.region;
+            region.center = newLocation.coordinate;
+            [_mapView setRegion:region animated:YES];
         }
         
     }
     
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 1000, 1000);
-    [_mapView setRegion:region animated:YES];
+
     //if(prev_line != [NSNull null])
     //    [self.mapView removeOverlay:prev_line];
     
