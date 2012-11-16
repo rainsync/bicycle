@@ -59,39 +59,29 @@
 
 - (void)setRoute:(NSMutableArray *)locations
 {
-    int count = [locations count]>65536?65536:[locations count];
-    NSLog(@"count %d",[locations count]);
-    
-    point *p = malloc(sizeof(point)*count);
-    
+
     int i=0;
+    double minX=INFINITY,minY=INFINITY,maxX=-INFINITY,maxY=-INFINITY;
     
     for (CLLocation *location in locations) {
-        p[i][X] = location.coordinate.latitude;
-        p[i][Y] = location.coordinate.longitude;
+        
+        if(minX>location.coordinate.latitude)
+            minX=location.coordinate.latitude;
+        
+        if(minY>location.coordinate.longitude)
+            minY=location.coordinate.longitude;
+        
+        if(maxX<location.coordinate.latitude)
+            maxX=location.coordinate.latitude;
+        
+        if(maxY<location.coordinate.longitude)
+            maxY=location.coordinate.longitude;
+
         i++;
         
         
     }
-    polygon poly;
-    convex_hull(p, [locations count], &poly);
-    double minX=INFINITY,minY=INFINITY,maxX=-INFINITY,maxY=-INFINITY;
-    
-    for (int i=0; i!=poly.n; i++) {
-        if(minX>poly.p[i][X])
-            minX=poly.p[i][X];
-        
-        if(minY>poly.p[i][Y])
-            minY=poly.p[i][Y];
-        
-        if(maxX<poly.p[i][X])
-            maxX=poly.p[i][X];
-        
-        if(maxY<poly.p[i][Y])
-            maxY=poly.p[i][Y];
-        
-    }
-    
+
 
     NSLog(@"%lf %lf %lf %lf", minX, maxX, minY,maxY);
     MKCoordinateRegion region;

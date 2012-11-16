@@ -159,8 +159,6 @@
 		55BAA8E6165358D900D4401E /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BAA8E5165358D900D4401E /* Login.m */; };
 		55BCD6C5165620A100FA9133 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BCD6C4165620A100FA9133 /* MBProgressHUD.m */; };
 		55BCD6C6165620A100FA9133 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BCD6C4165620A100FA9133 /* MBProgressHUD.m */; };
-		55BCD6DD1656621700FA9133 /* convexhull.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BCD6DB1656621700FA9133 /* convexhull.c */; };
-		55BCD6DF1656676700FA9133 /* geometry.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BCD6DE1656676600FA9133 /* geometry.c */; };
 		55CAB2A0165006FF0052AB2E /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CAB29F165006FF0052AB2E /* Utility.m */; };
 		55D386221654C8A200076749 /* _.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D386211654C8A200076749 /* _.png */; };
 		55D386251654C8E600076749 /* dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D386241654C8E600076749 /* dot.png */; };
@@ -333,7 +331,6 @@
 		5570A953163557EE008E2F50 /* CoreLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreLocationController.h; sourceTree = "<group>"; };
 		5570A954163557FC008E2F50 /* CoreLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreLocationController.m; sourceTree = "<group>"; };
 		5570A9561635765D008E2F50 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		55802059165669CE00724CAC /* convexhull.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = convexhull.h; sourceTree = "<group>"; };
 		558A5A301642389C00BC22ED /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
 		558A5A311642389C00BC22ED /* Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Queue.m; sourceTree = "<group>"; };
 		55910F901637F4E800B007CA /* RidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RidingViewController.h; sourceTree = "<group>"; };
@@ -355,10 +352,6 @@
 		55BAA8E5165358D900D4401E /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
 		55BCD6C3165620A100FA9133 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
 		55BCD6C4165620A100FA9133 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
-		55BCD6DB1656621700FA9133 /* convexhull.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = convexhull.c; sourceTree = "<group>"; };
-		55BCD6DE1656676600FA9133 /* geometry.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = geometry.c; sourceTree = "<group>"; };
-		55BCD6E01656678600FA9133 /* geometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = geometry.h; sourceTree = "<group>"; };
-		55BCD6E11656679600FA9133 /* bool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bool.h; sourceTree = "<group>"; };
 		55CAB29E165006FF0052AB2E /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		55CAB29F165006FF0052AB2E /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		55D386211654C8A200076749 /* _.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _.png; sourceTree = "<group>"; };
@@ -592,11 +585,6 @@
 				04E7584816529BF000D933FC /* UIColor+ColorWithHex.m */,
 				55BAA8E4165358D900D4401E /* Login.h */,
 				55BAA8E5165358D900D4401E /* Login.m */,
-				55BCD6DB1656621700FA9133 /* convexhull.c */,
-				55802059165669CE00724CAC /* convexhull.h */,
-				55BCD6DE1656676600FA9133 /* geometry.c */,
-				55BCD6E01656678600FA9133 /* geometry.h */,
-				55BCD6E11656679600FA9133 /* bool.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1000,8 +988,6 @@
 				04E758621652B7AD00D933FC /* MemberCustomCell.m in Sources */,
 				55BAA8E6165358D900D4401E /* Login.m in Sources */,
 				55BCD6C5165620A100FA9133 /* MBProgressHUD.m in Sources */,
-				55BCD6DD1656621700FA9133 /* convexhull.c in Sources */,
-				55BCD6DF1656676700FA9133 /* geometry.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

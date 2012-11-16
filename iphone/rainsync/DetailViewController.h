@@ -10,7 +10,6 @@
 #import <MapKit/MapKit.h>
 #import "Utility.h"
 #import "RidingDB.h"
-#import "convexhull.h"
 
 
 @interface DetailViewController : UIViewController <MKMapViewDelegate>
