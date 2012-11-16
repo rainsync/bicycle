@@ -32,12 +32,23 @@
 
 - (void)refreshPageControl{
     NSInteger type = [[RidingManager getInstance] ridingType];
-    if(type==0)
+    if(type==0){
         kNumberOfPages=2;
-    else if(type==1)
+        UIViewController *controller=[controllers objectAtIndex:2];
+        if(controller!=[NSNull null])
+            [controller.view setHidden:TRUE];
+    }
+    else if(type==1){
+     
         kNumberOfPages=3;
+        UIViewController *controller=[controllers objectAtIndex:2];
+        if(controller!=[NSNull null])
+            [controller.view setHidden:FALSE];
     
+    }
     pageControl.numberOfPages = kNumberOfPages;
+    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * kNumberOfPages, scrollView.frame.size.height);
+    
 }
 
 - (void)initPageControl
