@@ -47,21 +47,10 @@
     
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    
-    
-    NSString* RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
-    if(!RidingType){
-        RidingType = @"Single";
-        [[NSUserDefaults standardUserDefaults] setObject:RidingType forKey:@"RidingType"];
-    }    
-    
-    if([[RidingManager getInstance] isRiding]){
-        NSLog(@"Now Riding..");
-        
-    }
 
-    //[[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"session"];
-    //[[NSUserDefaults standardUserDefaults]synchronize];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"session"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
     
     if([[Login getInstance] getSession])
     {
