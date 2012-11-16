@@ -23,12 +23,60 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         first=true;
-        
+        hud=nil;
+        //0 
+        group_ride_mode=0;
+        [[NetUtility getInstance] addHandler:self];
         // Custom initialization
     }
     return self;
 }
 
+
+- (void) reqSuccess:(int)message withJSON:(NSDictionary *)dic {
+    switch (message) {
+        case race_info:
+        {
+            NSInteger state=[[dic objectForKey:@"state"] intValue];
+            NSMutableArray *participants=[dic objectForKey:@"participants"];
+
+            
+            if(state==0){
+                if([participants count]==0){
+                        //no one? thne invite!
+                    group_ride_mode=1;
+                }else{
+                    //invited? then ride start
+                    group_ride_mode=2;
+                }
+                
+                
+            }else{
+                NSError *error=[NSError errorWithDomain:@"잘못된 요청" code:state userInfo:nil];
+                [self reqFail:error];
+            }
+            break;
+            
+        }
+        default:
+        {
+            NSError *error=[NSError errorWithDomain:@"서버로 부터 잘못된 데이터가 전송되었습니다." code:-2 userInfo:nil];
+            [self reqFail:error];
+            break;
+        }
+    }
+    
+}
+
+- (void)reqFail:(NSError*)error
+{
+    if(hud)
+    [hud hide:TRUE];
+    
+    group_ride_mode=0;
+    
+    //[self showError:error];
+}
 
 
 
@@ -105,8 +153,19 @@
         [self.parentViewController.navigationController pushViewController:groupRideViewController animated:YES];
         [groupRideViewController release];
         
+        hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+        hud.delegate=self;
+        hud.dimBackground=TRUE;
+        [hud show:TRUE];
+        NetUtility *net = [NetUtility getInstance];
+        [net race_info];
+        [net end];
+        
+        
     }
-    else if(!paused){
+    if(!paused){
+        if([ridingManager ridingType]==0)
+        {
         paused=true;
         [ridingManager loadStatus];
         [ridingManager startRiding];
@@ -114,7 +173,12 @@
         [self.statusLabel setText:@"멈추기"];
         [self.stopButton setEnabled:NO];
         [self.stopLabel setAlpha:0.5f];
-        
+            
+        }else{
+            
+            
+            
+        }
     }else{
         
         [ridingManager pauseRiding];
@@ -131,17 +195,17 @@
 {
     [super viewDidLoad];
     
+NSInteger type = [[RidingManager getInstance] ridingType];
 
-
-    // Do any additional setup after loading the view from its nib.
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"] isEqualToString:@"Single"]) {
+    if (type==0) {
         [_modeChangeButton setTitle:@"그룹모드로" forState:UIControlStateNormal];
-        [_modeLabel setText:@"Single Riding"];
+       [_modeLabel setText:@"Single Riding"];
     }
-    else {
-        [_modeChangeButton setTitle:@"싱글모드로" forState:UIControlStateNormal];
+    else if(type==1){
+      [_modeChangeButton setTitle:@"싱글모드로" forState:UIControlStateNormal];
         [_modeLabel setText:@"Group Riding"];
     }
+    
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -245,16 +309,30 @@
 }
 
 - (IBAction)modeChange:(id)sender {
-    NSLog(@"%@", [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"]);
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"] isEqualToString:@"Single"]) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"Group" forKey:@"RidingType"];
+    NSInteger type = [[RidingManager getInstance] ridingType];
+    
+    if (type==0) {
+        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"RidingType"];
         [_modeChangeButton setTitle:@"싱글모드로" forState:UIControlStateNormal];
         [_modeLabel setText:@"Group Riding"];
+
+        
     }
-    else {
-        [[NSUserDefaults standardUserDefaults] setObject:@"Single" forKey:@"RidingType"];
+    else if(type==1)
+    {
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"RidingType"];
         [_modeChangeButton setTitle:@"그룹모드로" forState:UIControlStateNormal];
         [_modeLabel setText:@"Single Riding"];
     }
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.parentViewController refreshPageControl];
+}
+
+- (void)hudWasHidden:(MBProgressHUD *)HUD {
+	// Remove HUD from screen when the HUD was hidded
+	[HUD removeFromSuperview];
+	[HUD release];
+	HUD = nil;
 }
 @end

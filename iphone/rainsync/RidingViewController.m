@@ -32,13 +32,13 @@
 
 
 
-- (void)awakeFromNib
+- (void)refreshPageControl
 {
     
-    RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
-    if([RidingType isEqualToString:@"Single"])
+    NSInteger type = [[RidingManager getInstance] ridingType];
+    if(type==0)
         kNumberOfPages=2;
-    else
+    else if(type==1)
         kNumberOfPages=3;
     
     
@@ -182,6 +182,10 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+
+    
+    [self refreshPageControl];
+    
     [[self navigationController] setNavigationBarHidden:true];
     
 }
@@ -194,7 +198,7 @@
 {
     [super viewDidLoad];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    [self awakeFromNib];
+    
     // Do any additional setup after loading the view from its nib.
 }
 
