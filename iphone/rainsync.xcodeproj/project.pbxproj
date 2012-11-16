@@ -38,6 +38,7 @@
 		04B1E870165171E60086F56A /* stopGroupRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B1E86D165171E60086F56A /* stopGroupRiding@2x.png */; };
 		04B1E871165171E60086F56A /* pauseGroupRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B1E86E165171E60086F56A /* pauseGroupRiding@2x.png */; };
 		04B1E872165171E60086F56A /* startGroupRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B1E86F165171E60086F56A /* startGroupRiding@2x.png */; };
+		04BA767C1656509A0041A31F /* circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BA767B1656509A0041A31F /* circle@2x.png */; };
 		04C3C04C164BCBD700047992 /* BugSense-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C3C04B164BCBD600047992 /* BugSense-iOS.framework */; };
 		04C3C050164BCC1100047992 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C3C04F164BCC1100047992 /* SystemConfiguration.framework */; };
 		04C3C052164BCC1B00047992 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C3C051164BCC1B00047992 /* libz.dylib */; };
@@ -203,6 +204,7 @@
 		04B1E86D165171E60086F56A /* stopGroupRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stopGroupRiding@2x.png"; sourceTree = "<group>"; };
 		04B1E86E165171E60086F56A /* pauseGroupRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pauseGroupRiding@2x.png"; sourceTree = "<group>"; };
 		04B1E86F165171E60086F56A /* startGroupRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startGroupRiding@2x.png"; sourceTree = "<group>"; };
+		04BA767B1656509A0041A31F /* circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle@2x.png"; sourceTree = "<group>"; };
 		04C3C04B164BCBD600047992 /* BugSense-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "BugSense-iOS.framework"; sourceTree = "<group>"; };
 		04C3C04F164BCC1100047992 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		04C3C051164BCC1B00047992 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -408,6 +410,7 @@
 		045B5666164A5490005CEC8A /* dashboardImage */ = {
 			isa = PBXGroup;
 			children = (
+				04BA767B1656509A0041A31F /* circle@2x.png */,
 				04B1E86D165171E60086F56A /* stopGroupRiding@2x.png */,
 				04B1E86E165171E60086F56A /* pauseGroupRiding@2x.png */,
 				04B1E86F165171E60086F56A /* startGroupRiding@2x.png */,
@@ -436,6 +439,9 @@
 				04E758551652A8BE00D933FC /* MemberViewController.h */,
 				04E758561652A8BE00D933FC /* MemberViewController.m */,
 				04E758571652A8BE00D933FC /* MemberViewController.xib */,
+				04E758601652B7AC00D933FC /* MemberCustomCell.h */,
+				04E758611652B7AC00D933FC /* MemberCustomCell.m */,
+				04E758671652B80E00D933FC /* MemberCustomCell.xib */,
 			);
 			name = "Group Mode";
 			sourceTree = "<group>";
@@ -736,9 +742,6 @@
 				5570A94516355152008E2F50 /* DashBoardViewController.xib */,
 				55B1D8041650FA930032D86C /* DashBoardViewController-568.xib */,
 				045E4B731653C10900D8B69D /* Group Mode */,
-				04E758601652B7AC00D933FC /* MemberCustomCell.h */,
-				04E758611652B7AC00D933FC /* MemberCustomCell.m */,
-				04E758671652B80E00D933FC /* MemberCustomCell.xib */,
 				55910F901637F4E800B007CA /* RidingViewController.h */,
 				55910F911637F4E800B007CA /* RidingViewController.m */,
 				55910F921637F4E800B007CA /* RidingViewController.xib */,
@@ -882,6 +885,7 @@
 				55D386251654C8E600076749 /* dot.png in Resources */,
 				0494D2821655246F0004FC36 /* dashboard@2x.png in Resources */,
 				0494D29416556C130004FC36 /* tableTile.png in Resources */,
+				04BA767C1656509A0041A31F /* circle@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
