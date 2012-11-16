@@ -16,6 +16,7 @@ enum req_type{
     account_auth=2,
     account_profile_get=3,
     account_friend_list=4,
+    race_info=5,
     
 };
 
@@ -42,5 +43,6 @@ enum req_type{
 -(void) account_auth:(NSString*)accesstoken;
 -(void) account_profile_get:(NSString*)sid;
 -(void) account_friend_list;
+-(void) race_info;
 -(void) end;
 @end

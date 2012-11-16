@@ -50,5 +50,6 @@
 + (RidingManager *)getInstance;
 - (double)avgSpeed;
 - (void)discard;
+- (NSInteger)ridingType;
 
 @end

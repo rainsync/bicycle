@@ -22,12 +22,6 @@
 
 
 
-- (void)loginWithFacebook:(NSString*)passkey
-{
-    ViewController *viewController = [[ViewController alloc] init];
-    [[[UIApplication sharedApplication] keyWindow]setRootViewController:viewController];
-}
-
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -56,21 +50,33 @@
 
 
 - (IBAction)fbLogin:(id)sender {
-    // get the app delegate so that we can access the session property
     
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.dimBackground = YES;
+    HUD.delegate = self;
+    
+    
+    // get the app delegate so that we can access the session property
     [[Login getInstance] join:^{
+        [HUD hide:YES];
         ViewController *viewController = [[ViewController alloc] init];
         [[[UIApplication sharedApplication] keyWindow]setRootViewController:viewController];
         [self.view removeFromSuperview];
         [viewController release];
     } withFail:^(NSError *error) {
-        
+        [HUD hide:YES];
     }];
    
 
     
 }
 
+- (void)hudWasHidden:(MBProgressHUD *)HUD {
+	// Remove HUD from screen when the HUD was hidded
+	[HUD removeFromSuperview];
+	[HUD release];
+	HUD = nil;
+}
 
 - (IBAction)generalLogin:(id)sender {
 
@@ -83,11 +89,16 @@
 - (void)dealloc {
     [_fbButton release];
     [_generalLoginButton release];
+    [_indicator release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setFbButton:nil];
     [self setGeneralLoginButton:nil];
+    [self setIndicator:nil];
     [super viewDidUnload];
 }
+
+
+
 @end
