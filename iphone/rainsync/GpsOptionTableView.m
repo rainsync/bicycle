@@ -7,6 +7,7 @@
 //
 
 #import "GpsOptionTableView.h"
+#import "UIColor+ColorWithHex.h"
 
 @interface GpsOptionTableView ()
 
@@ -33,7 +34,8 @@
     bview.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:getNibName(@"background")]];
     [self.tableView setBackgroundView:bview];
     [bview release];
-    self.tableView.separatorColor = [UIColor blackColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.separatorColor = [UIColor colorWithHexString:@"0x333333"];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -118,7 +120,7 @@
     }
     
     // Configure the cell...
-    cell.backgroundColor = [UIColor blackColor];
+    cell.backgroundColor = [UIColor colorWithHexString:@"0x3f4547"];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     return cell;

@@ -12,13 +12,15 @@
 #import "UIImageView+AFNetworking.h"
 #import "Login.h"
 
-@interface ProfileViewController : UIViewController
+@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UILabel *Name;
 @property (retain, nonatomic) IBOutlet UILabel *Email;
 @property (retain, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (retain, nonatomic) IBOutlet UIView *disableView;
 @property (retain, nonatomic) IBOutlet UIButton *loginButton;
+@property (retain, nonatomic) IBOutlet UIBarButtonItem *editProfileButton;
+@property (retain, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)login:(id)sender;
-- (void)editProfile;     // 프로필 수정 함수
+- (IBAction)editProfile:(id)sender;
 @end
