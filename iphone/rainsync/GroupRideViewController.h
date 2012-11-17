@@ -12,7 +12,7 @@
 #import "AFImageRequestOperation.h"
 
 @interface GroupRideViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate> {
-    
+    NetUtility *net;
 }
 @property (retain, nonatomic) IBOutlet UITableView *userTableView;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *inviteButton;

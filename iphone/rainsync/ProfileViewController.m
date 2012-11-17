@@ -29,7 +29,8 @@
             [_profileImageView setImageWithURL:[[[NSURL alloc] initWithString:picture]autorelease]];    
             NSLog([NSString stringWithFormat:@"STATE %d NICK %@ PICTURE %@ EMAIL %@", state, nick, picture, email]);
             
-            
+                
+                
             
                 
             }
@@ -59,7 +60,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"프로필", @"프로필");
-        [[NetUtility getInstance] addHandler:self];
+        net= [self.tabBarController getNetUtility];
+        [net addHandler:self];
         // Custom initialization
     }
     return self;
@@ -100,8 +102,8 @@
     [[Login getInstance] join:^{
         [HUD hide:TRUE];
         [_disableView setHidden:TRUE];
-        [[NetUtility getInstance] account_profile_get:[[Login getInstance] getSession]];
-        [[NetUtility getInstance] end];
+        [net account_profile_get:[[Login getInstance] getSession]];
+        [net end];
     } withFail:^(NSError *error) {
         [HUD hide:TRUE];
         [_disableView setHidden:FALSE];
@@ -123,8 +125,8 @@
     if(session)
     {
         
-        [[NetUtility getInstance] account_profile_get:session];
-        [[NetUtility getInstance] end];
+        [net account_profile_get:session];
+        [net end];
         [_disableView setHidden:TRUE];
         
     }else{

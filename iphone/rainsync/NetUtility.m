@@ -18,27 +18,12 @@
     queue = [[Queue alloc]init];
     arr = [[NSMutableArray alloc]init];
     server = @"http://api.bicy.kr";
+    Session=nil;
     
     return self;
     
 }
 
-
-+(NetUtility*)getInstance
-{
-    static NetUtility* _instance = nil;
-    if(_instance == nil)
-    {
-        @synchronized(self)
-        {
-            if(_instance == nil)
-            {
-                _instance = [[NetUtility alloc] init];
-            }
-        }
-    }
-    return _instance;
-}
 
 - (void)addHandler:(id)handle
 {
@@ -57,6 +42,16 @@
     
 }
 
+- (NSString *)getSession
+{
+    if(Session==nil){
+        NSString *saved = [[NSUserDefaults standardUserDefaults] stringForKey:@"session"];
+        if(saved)
+            Session=saved;
+    }
+    
+    return Session;
+}
 
 -(void) postURL:(NSString*)url withData:(NSData*)data{
     
@@ -70,12 +65,34 @@
         NSLog(@"connectionDidFinishLoading");
 
 
-
-        
         NSMutableArray *res = JSON;
         for(NSDictionary* dic in res){
             if([queue count]){
                 NSNumber *item = [queue pop];
+                
+                switch ([item intValue]) {
+                    case account_register:
+                    {
+                        NSInteger state=[[dic objectForKey:@"state"] intValue];
+                        NSInteger uid=[[dic objectForKey:@"uid"] intValue];
+                        NSString *passkey=[dic objectForKey:@"passkey"];
+                        NSLog([NSString stringWithFormat:@"STATE %d UID %d PASSKEY %@", state, uid, passkey]);
+                        break;
+                    }
+                    case account_auth:
+                    {
+                        NSInteger state=[[dic objectForKey:@"state"] intValue];
+                        NSString *sessid=[dic objectForKey:@"sessid"];
+                        if(state==0){
+                            NSLog([NSString stringWithFormat:@"STATE %d SESSION %@", state, sessid]);
+                            Session = sessid;
+                            [[NSUserDefaults standardUserDefaults] setObject:Session forKey:@"session"];
+                            [[NSUserDefaults standardUserDefaults]synchronize];
+                        }
+                        break;
+                    }
+                }
+                        
                 for (id handle in handler) {
                     if([handle respondsToSelector:@selector(reqSuccess: withJSON:)])
                         [handle reqSuccess:[item intValue] withJSON:dic];
@@ -93,6 +110,7 @@
         if([handle respondsToSelector:@selector(reqFail:)])
             [handle reqFail:error];
         }
+        
         
     }];
     [operation setJSONReadingOptions:NSJSONReadingMutableLeaves];

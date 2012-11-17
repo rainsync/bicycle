@@ -61,7 +61,8 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [[NetUtility getInstance] addHandler:self];
+        net = [self.tabBarController getNetUtility];
+        [net addHandler:self];
         // Custom initialization
     }
     return self;
@@ -81,8 +82,8 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[NetUtility getInstance] account_friend_list];
-    [[NetUtility getInstance]end];
+    [net account_friend_list];
+    [net end];
     
     _selectedUserArray = [[NSMutableArray alloc] init];
     

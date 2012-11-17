@@ -28,7 +28,8 @@
         
         
         group_ride_mode=0;
-        [[NetUtility getInstance] addHandler:self];
+        net = [self.tabBarController getNetUtility];
+        [net addHandler:self];
         ridingManager=[self.tabBarController getRidingManager];
         
         // Custom initialization
@@ -159,7 +160,6 @@
         hud.delegate=self;
         hud.dimBackground=TRUE;
         [hud show:TRUE];
-        NetUtility *net = [NetUtility getInstance];
         [net race_info];
         [net end];
         

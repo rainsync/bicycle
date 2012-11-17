@@ -24,6 +24,11 @@
     
 }
 
+- (NetUtility *)getNetUtility
+{
+    return net;
+}
+
 - (id)init
 {
     [super init];

@@ -11,6 +11,7 @@
 #import "RidingManager.h"
 #import "Utility.h"
 #import "MBProgressHUD.h"
+#import "NetUtility.h"
 
 @interface DashBoardViewController : UIViewController <CoreLocationControllerDelegate, MBProgressHUDDelegate>
 {
@@ -20,6 +21,7 @@
     int group_ride_mode;
     MBProgressHUD *hud;
     RidingManager *ridingManager;
+    NetUtility *net;
 
 }
 //@property (nonatomic, retain) NSMutableArray *numberArray;

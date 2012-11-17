@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Queue.h"
 #import "AFJSONRequestOperation.h"
-#import "Login.h"
+#import "FBLogin.h"
 
 enum req_type{
     account_register=1,
@@ -30,6 +30,7 @@ enum req_type{
     @private NSMutableArray* arr;
     @private Queue *queue;
     @private NSString *server;
+    @private NSString *Session;
     
 }
 +(NetUtility*)getInstance;
