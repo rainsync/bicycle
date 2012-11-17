@@ -13,6 +13,8 @@
 #import "Login.h"
 #import "MBProgressHUD.h"
 @interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MBProgressHUDDelegate>
+{
+}
 
 @property (retain, nonatomic) IBOutlet UILabel *Name;
 @property (retain, nonatomic) IBOutlet UILabel *Email;
