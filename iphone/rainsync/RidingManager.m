@@ -12,24 +12,6 @@
 @implementation RidingManager
 
 
-
-
-+(RidingManager*)getInstance
-{
-    static RidingManager* _instance = nil;
-    if(_instance == nil)
-    {
-        @synchronized(self)
-        {
-            if(_instance == nil)
-            {
-                _instance = [[RidingManager alloc] init];
-            }
-        }
-    }
-    return _instance;
-}
-
 - (id)init
 {
     
@@ -148,7 +130,7 @@
 {
 
     if(!_last_riding){
-        _last_riding = [ridingDB createRecording];
+        _last_riding = [ridingDB createRecording:self];
         [[NSUserDefaults standardUserDefaults] setInteger:_last_riding forKey:@"last_riding"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         

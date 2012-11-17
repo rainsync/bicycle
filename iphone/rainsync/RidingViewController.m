@@ -23,15 +23,16 @@
     if (self) {
         self.title = NSLocalizedString(@"라이딩", @"라이딩");
         UIImage *img = [UIImage imageNamed:@"bikeIcon"];
-        [self.tabBarItem setImage:img];        
+        [self.tabBarItem setImage:img];
         
+        ridingManager = [self.tabBarController getRidingManager];
         // Custom initialization
     }
     return self;
 }
 
 - (void)refreshPageControl{
-    NSInteger type = [[RidingManager getInstance] ridingType];
+    NSInteger type = [ridingManager ridingType];
     if(type==0){
         kNumberOfPages=2;
         UIViewController *controller=[controllers objectAtIndex:2];
@@ -54,7 +55,7 @@
 - (void)initPageControl
 {
     
-    NSInteger type = [[RidingManager getInstance] ridingType];
+    NSInteger type = [ridingManager ridingType];
     if(type==0)
         kNumberOfPages=2;
     else if(type==1)
@@ -108,14 +109,29 @@
     {
         switch (page) {
             case 0:
-                controller = [[DashBoardViewController alloc] initWithNibName:getNibName(@"DashBoardViewController") bundle:nil];
+                controller = [DashBoardViewController alloc];       
                 break;
                 
             case 1:
-                controller = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
+                controller = [MapViewController alloc];          
                 break;
             case 2:
-                controller = [[MemberViewController alloc] initWithNibName:@"MemberViewController" bundle:nil];
+                controller = [MemberViewController alloc];        
+            default:
+                break;
+        }
+        
+        [self addChildViewController:controller];
+        
+        switch (page) {
+            case 0:
+                [controller initWithNibName:getNibName(@"DashBoardViewController") bundle:nil];
+                break;
+            case 1:
+                [controller initWithNibName:@"MapViewController" bundle:nil];
+                break;
+            case 2:
+                [controller initWithNibName:@"MemberViewController" bundle:nil];
             default:
                 break;
         }
@@ -204,7 +220,7 @@
 
     
     
-    
+    [super viewWillAppear:animated];
     [[self navigationController] setNavigationBarHidden:true];
     
 }
