@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MemberViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@property (retain, nonatomic) IBOutlet UIView *myView;
 @property (retain, nonatomic) IBOutlet UIImageView *myImageView;
 @property (retain, nonatomic) IBOutlet UILabel *myNameLabel;
 @property (retain, nonatomic) IBOutlet UILabel *mySpeedLabel;
