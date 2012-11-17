@@ -24,9 +24,13 @@
     if (self) {
         first=true;
         hud=nil;
-        //0 
+        //0
+        
+        
         group_ride_mode=0;
         [[NetUtility getInstance] addHandler:self];
+        ridingManager=[self.tabBarController getRidingManager];
+        
         // Custom initialization
     }
     return self;
@@ -128,7 +132,6 @@
     paused = false;
     [self.statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
     
-    RidingManager *ridingManager = [RidingManager getInstance];
     [ridingManager stopRiding];
     timeLabel.image = [Utility numberImagify:@"00:00:00"];
     speedLabel.image = [Utility numberImagify:@"0.0"];
@@ -143,8 +146,7 @@
 }
 
 - (IBAction)statusChanged:(id)sender {
-    RidingManager *ridingManager = [RidingManager getInstance];
-    
+
     NSLog(@"%d", [ridingManager isRiding]);
     NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"]);
     if(![ridingManager isRiding] && [ridingManager ridingType]==1) {    // 시작 전이고 싱글라이딩이 아니라면
@@ -195,7 +197,7 @@
 {
     [super viewDidLoad];
     
-NSInteger type = [[RidingManager getInstance] ridingType];
+NSInteger type = [ridingManager ridingType];
 
     if (type==0) {
         [_modeChangeButton setTitle:@"그룹모드로" forState:UIControlStateNormal];
@@ -220,7 +222,6 @@ NSInteger type = [[RidingManager getInstance] ridingType];
         speedLabel.image = [Utility numberImagify:@"0.0"];
         calorieLabel.image = [Utility numberImagify:@"0.0"];
         
-    RidingManager *ridingManager = [RidingManager getInstance];
 
     
     [ridingManager addTarget:self];
@@ -244,7 +245,7 @@ NSInteger type = [[RidingManager getInstance] ridingType];
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    RidingManager *ridingManager = [RidingManager getInstance];
+
     [ridingManager loadStatus];
     switch (buttonIndex) {
         case 0:
@@ -312,7 +313,7 @@ NSInteger type = [[RidingManager getInstance] ridingType];
 
 - (IBAction)modeChange:(id)sender {
 
-    NSInteger type = [[RidingManager getInstance] ridingType];
+    NSInteger type = [ridingManager ridingType];
     
     CABasicAnimation* rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     rotationAnimation.removedOnCompletion = NO;

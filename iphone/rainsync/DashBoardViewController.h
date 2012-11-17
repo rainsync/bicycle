@@ -19,6 +19,7 @@
     BOOL isSingleMode;
     int group_ride_mode;
     MBProgressHUD *hud;
+    RidingManager *ridingManager;
 
 }
 //@property (nonatomic, retain) NSMutableArray *numberArray;

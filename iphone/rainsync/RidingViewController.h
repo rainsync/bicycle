@@ -17,6 +17,7 @@
     NSMutableArray* controllers;
     @private BOOL pageControlUsed;
     @private int kNumberOfPages;
+    RidingManager *ridingManager;
 
     
     

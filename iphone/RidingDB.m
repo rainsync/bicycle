@@ -119,13 +119,13 @@
    
 }
 
-- (int)createRecording
+- (int)createRecording:(RidingManager *)manager
 {
     sqlite3_stmt *statement;
     
     //(ID INTEGER PRIMARY KEY AUTOINCREMENT, START_DATE REAL, END_DATE REAL, TIME REAL, DISTANCE REAL, SPEED REAL, MAX_SPEED REAL, CALORIE REAL)
     
-    statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO RIDINGS (start_date,end_date, time, distance, speed,max_speed, calorie, riding_type) VALUES (%lf, %lf, %lf, %lf, %lf,%lf, %lf, %d)", [[NSDate date] timeIntervalSince1970], 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, [[RidingManager getInstance] ridingType]]];
+    statement = [self getSQLStatement:ridingDB WithQuery:[NSString stringWithFormat:@"INSERT INTO RIDINGS (start_date,end_date, time, distance, speed,max_speed, calorie, riding_type) VALUES (%lf, %lf, %lf, %lf, %lf,%lf, %lf, %d)", [[NSDate date] timeIntervalSince1970], 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, [manager ridingType]]];
     
     if (sqlite3_step(statement) == SQLITE_DONE) {
         NSLog(@"Record Added");

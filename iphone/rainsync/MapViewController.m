@@ -25,8 +25,9 @@
         route_lines = [[NSMutableArray alloc]init];
         route_views = [[NSMutableArray alloc]init];
         
-        RidingManager *ridingManager =[RidingManager getInstance];
-         [ridingManager addTarget:self];
+        ridingManager = [self.tabBarController getRidingManager];
+        
+        [ridingManager addTarget:self];
         
         [self getUserNum:@"me"];
 
@@ -43,8 +44,6 @@
     [self setHeading:self];
 //    [self setTrackUser:self];
     
-    
-    RidingManager *ridingManager =[RidingManager getInstance];
     
     if([ridingManager isRiding]){
     

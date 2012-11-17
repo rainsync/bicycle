@@ -20,7 +20,7 @@
     NSMutableArray *route_lines;
     NSMutableArray *route_views;
     NSArray *line_color;
-
+    RidingManager *ridingManager;
     
     BOOL isHeading;
 }
