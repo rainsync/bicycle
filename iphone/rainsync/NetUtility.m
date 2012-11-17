@@ -98,6 +98,11 @@
                         [handle reqSuccess:[item intValue] withJSON:dic];
                 }
 
+                for (id handle in handler) {
+                    if([handle respondsToSelector:@selector(reqEnd)])
+                        [handle reqEnd];
+                }
+                
                 [item release];
                 
             }
@@ -111,6 +116,10 @@
             [handle reqFail:error];
         }
         
+        for (id handle in handler) {
+        if([handle respondsToSelector:@selector(reqEnd)])
+            [handle reqEnd];
+        }
         
     }];
     [operation setJSONReadingOptions:NSJSONReadingMutableLeaves];
