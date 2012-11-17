@@ -9,6 +9,7 @@
 #import "MemberViewController.h"
 #import "MemberCustomCell.h"
 #import "PrettyKit.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface MemberViewController ()
 
@@ -33,6 +34,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    
+    CALayer *layer = [_myImageView layer];
+    [layer setMasksToBounds:YES];
+    [layer setCornerRadius:30.0];   // 프로필 사진에 레이어를 씌워 라운딩 처리
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,10 +48,16 @@
 
 - (void)dealloc {
     [_tableView release];
+    [_myImageView release];
+    [_myNameLabel release];
+    [_mySpeedLabel release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setTableView:nil];
+    [self setMyImageView:nil];
+    [self setMyNameLabel:nil];
+    [self setMySpeedLabel:nil];
     [super viewDidUnload];
 }
 

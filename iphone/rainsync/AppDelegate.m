@@ -104,7 +104,7 @@
 //push : APNS 에 장치 등록 성공시 자동실행
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 	NSLog(@"deviceToken : %@", deviceToken);
-    
+    [self sendDeviceTokenToRemote:deviceToken];
 	/*
 	 여기에 당신의 서버와 통신하는 부분을 만들것.
 	 푸시를 누구에게 보낼지를 결정하는 것이 바로 deviceToken 값이다.
