@@ -48,9 +48,9 @@
     }
     [_profileImageView setImageWithURL:[[NSURL alloc] initWithString:_profile]];
     [_nameTextField setText:[NSString stringWithFormat:@"%@", _name]];
-    [_ageSelectButton setTitle:[NSString stringWithFormat:@"%@", _age] forState:UIControlStateNormal];
-    [_regionSelectButton setTitle:[NSString stringWithFormat:@"%@", _region] forState:UIControlStateNormal];
-    [_bikeSelectButton setTitle:[NSString stringWithFormat:@"%@", _bike] forState:UIControlStateNormal];
+    [_ageLabel setText:[NSString stringWithFormat:@"%@", _age]];
+    [_regionLabel setText:[NSString stringWithFormat:@"%@", _region]];
+    [_bikeLabel setText:[NSString stringWithFormat:@"%@", _bike]];
     
     [self createAgePicker];
 	[self createRegionPicker];
@@ -65,9 +65,9 @@
 {
 	CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
 	CGRect pickerRect = CGRectMake(	0.0,
-                                   screenRect.size.height - 42.0 - size.height,
+                                   screenRect.size.height - 42.0 - size.height + 52,
                                    size.width,
-                                   size.height);
+                                   size.height - 44);
 	return pickerRect;
 }
 
@@ -179,6 +179,10 @@
 	_currentPicker = picker;	// remember the current picker so we can remove it later when another one is chosen
 }
 
+- (IBAction)hidePicker:(id)sender {
+    _currentPicker.hidden = !_currentPicker.hidden;
+}
+
 - (IBAction)textFieldDoneEditing:(id)sender {
     [sender resignFirstResponder];
 }
@@ -208,7 +212,7 @@
 }
 
 - (IBAction)selectBike:(id)sender {
-    [self showPicker:_regionPickerView];
+    [self showPicker:_bikePickerView];
 }
 
 #pragma mark -
@@ -350,7 +354,10 @@
     }
 	return [_regionArray count];
 }
-
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+	return 40.0;
+}
 #pragma mark Picker Delegate Methods
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
 	NSString *returnStr = @"";
@@ -361,8 +368,9 @@
     else if (pickerView == _agePickerView) {
         return [_ageArray objectAtIndex:row];
     }
-	return [_regionArray objectAtIndex:row];
-
+    else {
+        return [_regionArray objectAtIndex:row];
+    }
 
 	return returnStr;
 }
