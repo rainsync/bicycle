@@ -30,7 +30,8 @@
 
     queue = [[Queue alloc]init];
     fblogin = [[FBLogin alloc] init];
-    Session=nil;
+    Session=[self getSession];
+    
     return self;
     
 }

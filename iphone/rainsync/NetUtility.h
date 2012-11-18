@@ -32,11 +32,11 @@ enum req_type{
 }
 
 -(id)init;
--(void) dealloc;
--(void) accountRegisterWithFaceBook:(NSString*)accesstoken Withblock:(void(^)(NSDictionary *res, NSError *error))block;
--(void) accountProfilegGetWithblock:(void(^)(NSDictionary *res, NSError *error))block;
--(void) accountAuthWith:(NSString*)accesstoken Withblock:(void(^)(NSDictionary *res, NSError *error))block;
--(void) accountFriendListWithblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void)dealloc;
+-(void)accountRegisterWithFaceBook:(NSString*)accesstoken Withblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void)accountProfilegGetWithblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void)accountAuthWith:(NSString*)accesstoken Withblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void)accountFriendListWithblock:(void(^)(NSDictionary *res, NSError *error))block;
 -(void)raceInfoWithBlock:(void(^)(NSDictionary *res, NSError *error))block;
 -(void)loginFaceBookWithblock:(void(^)(FBSession *session, NSError* error))block;
 -(void)RegisterWithFaceBookAndLogin:(void(^)(NSError* error))block;
