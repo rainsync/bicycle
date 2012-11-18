@@ -23,13 +23,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         first=true;
-        hud=nil;
         //0
         
         
         group_ride_mode=0;
         net = [self.tabBarController getNetUtility];
-        [net addHandler:self];
         ridingManager=[self.tabBarController getRidingManager];
         
         // Custom initialization
@@ -38,50 +36,6 @@
 }
 
 
-- (void) reqSuccess:(int)message withJSON:(NSDictionary *)dic {
-    switch (message) {
-        case race_info:
-        {
-            NSInteger state=[[dic objectForKey:@"state"] intValue];
-            NSMutableArray *participants=[dic objectForKey:@"participants"];
-
-            
-            if(state==0){
-                if([participants count]==0){
-                        //no one? thne invite!
-                    group_ride_mode=1;
-                }else{
-                    //invited? then ride start
-                    group_ride_mode=2;
-                }
-                
-                
-            }else{
-                NSError *error=[NSError errorWithDomain:@"잘못된 요청" code:state userInfo:nil];
-                [self reqFail:error];
-            }
-            break;
-            
-        }
-        default:
-        {
-            NSError *error=[NSError errorWithDomain:@"서버로 부터 잘못된 데이터가 전송되었습니다." code:-2 userInfo:nil];
-            [self reqFail:error];
-            break;
-        }
-    }
-    
-}
-
-- (void)reqFail:(NSError*)error
-{
-    if(hud)
-    [hud hide:TRUE];
-    
-    group_ride_mode=0;
-    
-    //[self showError:error];
-}
 
 
 
@@ -151,18 +105,41 @@
     NSLog(@"%d", [ridingManager isRiding]);
     NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"]);
     if(![ridingManager isRiding] && [ridingManager ridingType]==1) {    // 시작 전이고 싱글라이딩이 아니라면
-        GroupRideViewController *groupRideViewController = [[GroupRideViewController alloc] initWithNibName:@"GroupRideViewController" bundle:nil];
+        GroupRideViewController *groupRideViewController = [GroupRideViewController alloc];
+                                                         
         //[self presentModalViewController:groupRideViewController animated:YES];
-        [self.parentViewController.navigationController pushViewController:groupRideViewController animated:YES];
+        [self.navigationController pushViewController:groupRideViewController animated:NO];
+        [groupRideViewController initWithNibName:@"GroupRideViewController" bundle:nil];
         [groupRideViewController release];
-        
-        hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
-        hud.delegate=self;
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
         hud.dimBackground=TRUE;
         [hud show:TRUE];
-        [net race_info];
-        [net end];
-        
+        [net raceInfoWithBlock:^(NSDictionary *res, NSError *error) {
+            if(error){
+                [hud release];
+            }else{
+                
+                NSInteger state=[[res objectForKey:@"state"] intValue];
+                NSMutableArray *participants=[res objectForKey:@"participants"];
+                
+                
+                if(state==0){
+                    if([participants count]==0){
+                        //no one? thne invite!
+                        group_ride_mode=1;
+                    }else{
+                        //invited? then ride start
+                        group_ride_mode=2;
+                    }
+                    
+                    
+                }else{
+                    group_ride_mode=0;
+                }
+
+            }
+        }];
+
         
     }
     if(!paused){
@@ -348,10 +325,4 @@ NSInteger type = [ridingManager ridingType];
     
 }
 
-- (void)hudWasHidden:(MBProgressHUD *)HUD {
-	// Remove HUD from screen when the HUD was hidded
-	[HUD removeFromSuperview];
-	[HUD release];
-	HUD = nil;
-}
 @end

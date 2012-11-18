@@ -29,6 +29,8 @@
 
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        net=[[NetUtility alloc] init];
+
         // Custom initialization
 
         
@@ -49,34 +51,31 @@
 }
 
 
+
+
 - (IBAction)fbLogin:(id)sender {
     
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.dimBackground = YES;
-    HUD.delegate = self;
-    
-    
-    // get the app delegate so that we can access the session property
-    [[Login getInstance] join:^{
-        [HUD hide:YES];
-        ViewController *viewController = [[ViewController alloc] init];
-        [[[UIApplication sharedApplication] keyWindow]setRootViewController:viewController];
-        [self.view removeFromSuperview];
-        [viewController release];
-    } withFail:^(NSError *error) {
-        [HUD hide:YES];
+    [HUD show:TRUE];
+    [net RegisterWithFaceBookAndLogin:^(NSError *error) {
+        if(error){
+            UIAlertView *view= [[UIAlertView alloc] initWithTitle:@"ERROR" message:error.description delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [view show];
+            [view release];
+        }else{
+            ViewController *viewController = [[ViewController alloc] init];
+            [[[UIApplication sharedApplication] keyWindow]setRootViewController:viewController];
+            [self.view removeFromSuperview];
+            [viewController release];
+        }
+        [HUD release];
     }];
-   
 
-    
+
 }
 
-- (void)hudWasHidden:(MBProgressHUD *)HUD {
-	// Remove HUD from screen when the HUD was hidded
-	[HUD removeFromSuperview];
-	[HUD release];
-	HUD = nil;
-}
+
 
 - (IBAction)generalLogin:(id)sender {
 
@@ -87,10 +86,11 @@
 }
 
 - (void)dealloc {
+    [super dealloc];
     [_fbButton release];
     [_generalLoginButton release];
     [_indicator release];
-    [super dealloc];
+    [net release];
 }
 - (void)viewDidUnload {
     [self setFbButton:nil];

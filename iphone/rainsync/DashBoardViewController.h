@@ -13,13 +13,12 @@
 #import "MBProgressHUD.h"
 #import "NetUtility.h"
 
-@interface DashBoardViewController : UIViewController <CoreLocationControllerDelegate, MBProgressHUDDelegate>
+@interface DashBoardViewController : UIViewController <CoreLocationControllerDelegate>
 {
     bool paused;
     bool first;
     BOOL isSingleMode;
     int group_ride_mode;
-    MBProgressHUD *hud;
     RidingManager *ridingManager;
     NetUtility *net;
 

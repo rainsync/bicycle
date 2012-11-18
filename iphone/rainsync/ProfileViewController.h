@@ -10,9 +10,9 @@
 #import "NetUtility.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "UIImageView+AFNetworking.h"
-#import "Login.h"
+#import "FBLogin.h"
 #import "MBProgressHUD.h"
-@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MBProgressHUDDelegate>
+@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     NetUtility *net;
 }
