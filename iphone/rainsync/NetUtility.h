@@ -8,42 +8,37 @@
 
 #import <Foundation/Foundation.h>
 #import "Queue.h"
+#import "AFHTTPClient.h"
 #import "AFJSONRequestOperation.h"
 #import "FBLogin.h"
 
 enum req_type{
+    none_req=0,
     account_register=1,
     account_auth=2,
     account_profile_get=3,
     account_friend_list=4,
     race_info=5,
-    
 };
 
 
 
-@interface NetUtility : NSObject{
-
-    @private void (^success)(int, NSDictionary*);
-    @private void (^fail)(NSError *);
-    NSMutableArray *handler;
-    @private NSMutableArray* arr;
+@interface NetUtility : AFHTTPClient{
     @private Queue *queue;
-    @private NSString *server;
+
     @private NSString *Session;
+    @private FBLogin *fblogin;
     
 }
-+(NetUtility*)getInstance;
+
 -(id)init;
 -(void) dealloc;
-- (void)addHandler:(id)handle;
-//:(void (^)(NSData*))block
--(void) getURL:(NSString *)url;
--(void) postURL:(NSString*)url withData:(NSData*)data;
--(void) account_registerwithAcessToken:(NSString*)accesstoken withNick:(NSString*)nick withPhoto:(NSString*)photo;
--(void) account_auth:(NSString*)accesstoken;
--(void) account_profile_get:(NSString*)sid;
--(void) account_friend_list;
--(void) race_info;
--(void) end;
+-(void) accountRegisterWithFaceBook:(NSString*)accesstoken Withblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void) accountProfilegGetWithblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void) accountAuthWith:(NSString*)accesstoken Withblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void) accountFriendListWithblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void)raceInfoWithBlock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void)loginFaceBookWithblock:(void(^)(FBSession *session, NSError* error))block;
+-(void)RegisterWithFaceBookAndLogin:(void(^)(NSError* error))block;
+
 @end
