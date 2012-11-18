@@ -16,9 +16,16 @@
 @interface ProfileViewController : UIViewController
 {
     NetUtility *net;
+    
+    NSString *profilePath;
 }
 @property (retain, nonatomic) IBOutlet UILabel *Name;
 @property (retain, nonatomic) IBOutlet UILabel *Email;
+@property (retain, nonatomic) IBOutlet UILabel *Gender;
+@property (retain, nonatomic) IBOutlet UILabel *Region;
+@property (retain, nonatomic) IBOutlet UILabel *Age;
+@property (retain, nonatomic) IBOutlet UILabel *Bike;
+
 @property (retain, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (retain, nonatomic) IBOutlet UIView *disableView;
 @property (retain, nonatomic) IBOutlet UIButton *loginButton;

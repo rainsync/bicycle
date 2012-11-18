@@ -40,7 +40,7 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
     navBar.gradientEndColor = [UIColor colorWithHex:0xAA0000];
     navBar.bottomLineColor = [UIColor colorWithHex:0x990000];
     navBar.tintColor = navBar.gradientEndColor;
-    navBar.roundedCornerRadius = 8;
+//    navBar.roundedCornerRadius = 8;
 }
 
 - (void)viewDidLoad
@@ -54,7 +54,9 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
     self.navigationItem.title = @"구성원 초대";
     self.userTableView.rowHeight = 60;
     self.userTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.userTableView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+
+    NSString *bgPath = [[NSBundle mainBundle] pathForResource:@"background-568@2x.png" ofType: nil];
+    self.userTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:bgPath]];
     
     self.userTableView.allowsMultipleSelection = YES;  // 복수선택 가능
 

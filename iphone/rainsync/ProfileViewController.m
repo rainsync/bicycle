@@ -69,6 +69,12 @@
 
 - (IBAction)editProfile:(id)sender {
     ProfileEditViewController *profileEditViewController = [[ProfileEditViewController alloc] initWithNibName:@"ProfileEditViewController" bundle:nil];
+    profileEditViewController.profile = profilePath;
+    profileEditViewController.name = _Name.text;
+    profileEditViewController.gender = _Gender.text;
+    profileEditViewController.region = _Region.text;
+    profileEditViewController.age = _Age.text;
+    profileEditViewController.bike = _Bike.text;
     [self.navigationController pushViewController:profileEditViewController animated:YES];
     [profileEditViewController release];
 }
@@ -94,6 +100,7 @@
             NSString *nick=[res objectForKey:@"nick"];
             NSString *picture=[res objectForKey:@"picture"];
             NSString *email=[res objectForKey:@"email"];
+            profilePath = [[NSString alloc] initWithString:picture];
             
             if(state==0){
                 [_Name setText:nick];
@@ -128,6 +135,10 @@
     [_disableView release];
     [_loginButton release];
     [_Email release];
+    [_Gender release];
+    [_Age release];
+    [_Region release];
+    [_Bike release];
     [super dealloc];
 
 }
@@ -138,6 +149,10 @@
     [self setLoginButton:nil];
     [self setEmail:nil];
     [self setEditProfileButton:nil];
+    [self setGender:nil];
+    [self setAge:nil];
+    [self setRegion:nil];
+    [self setBike:nil];
     [super viewDidUnload];
 }
 
