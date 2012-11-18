@@ -12,7 +12,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "Login.h"
 #import "MBProgressHUD.h"
-@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MBProgressHUDDelegate>
+@interface ProfileViewController : UIViewController <MBProgressHUDDelegate>
 {
 }
 
@@ -22,7 +22,6 @@
 @property (retain, nonatomic) IBOutlet UIView *disableView;
 @property (retain, nonatomic) IBOutlet UIButton *loginButton;
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *editProfileButton;
-@property (retain, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)login:(id)sender;
 - (IBAction)editProfile:(id)sender;
 @end

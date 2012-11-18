@@ -14,10 +14,14 @@
     
     UITextField *bikeNameTextField;
     NSArray *bikeArray;
+    NSArray *ageArray;
 }
 
 @property (retain, nonatomic) IBOutlet UITextField *nameTextField;
 @property (retain, nonatomic) IBOutlet UIButton *profileImageBtn;
+@property (retain, nonatomic) IBOutlet UIButton *ageSelectButton;
+@property (retain, nonatomic) IBOutlet UIButton *regionSelectButton;
+@property (retain, nonatomic) IBOutlet UIButton *bikeSelectButton;
 
 @property (retain, nonatomic) IBOutlet UIView *bikeSelectView;
 @property (retain, nonatomic) IBOutlet UIToolbar *bikeSelectToolbar;

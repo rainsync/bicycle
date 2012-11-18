@@ -41,6 +41,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     bikeArray = [[NSArray alloc] initWithObjects:@"로드", @"하이브리드", @"픽시", @"산악", nil];
+    ageArray = [[NSArray alloc] initWithObjects:@"10대", @"20대", @"30대", @"40대", @"50대", @"60대 이상", nil];
     
 }
 
@@ -67,7 +68,7 @@
 }
 
 - (IBAction)backgroundTap:(id)sender {
-    [sender resignFirstResponder];
+    [_nameTextField resignFirstResponder];
 }
 
 #pragma mark -
@@ -152,6 +153,9 @@
     [_bikeSelectView release];
     [_bikeSelectToolbar release];
     [_selectBikeBarButton release];
+    [_ageSelectButton release];
+    [_regionSelectButton release];
+    [_bikeSelectButton release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -159,6 +163,9 @@
     [self setBikeSelectView:nil];
     [self setBikeSelectToolbar:nil];
     [self setSelectBikeBarButton:nil];
+    [self setAgeSelectButton:nil];
+    [self setRegionSelectButton:nil];
+    [self setBikeSelectButton:nil];
     [super viewDidUnload];
 }
 

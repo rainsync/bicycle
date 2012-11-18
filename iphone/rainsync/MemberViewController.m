@@ -86,8 +86,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MemberCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MemberCustomCell"];
-    NSString *light_borderPath = [[NSBundle mainBundle] pathForResource:@"light_border.png" ofType:nil];
-    NSString *dark_borderPath = [[NSBundle mainBundle] pathForResource:@"dark_border.png" ofType:nil];
+    NSString *light_borderPath = [[NSBundle mainBundle] pathForResource:@"light_border@2x.png" ofType:nil];
+    NSString *dark_borderPath = [[NSBundle mainBundle] pathForResource:@"dark_border@2x.png" ofType:nil];
 
     if (cell == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MemberCustomCell" owner:self options:nil];

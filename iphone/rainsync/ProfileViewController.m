@@ -73,6 +73,9 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
+    NSString *profileBg = [[NSBundle mainBundle] pathForResource:@"background@2x.jpg" ofType:nil];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:profileBg]];
+    
     self.navigationItem.rightBarButtonItem = self.editProfileButton;
     self.editProfileButton.title = @"수정";
     
@@ -83,9 +86,11 @@
 
 - (void)hudWasHidden:(MBProgressHUD *)HUD {
 	// Remove HUD from screen when the HUD was hidded
+    if(HUD){
 	[HUD removeFromSuperview];
 	[HUD release];
 	HUD = nil;
+    }
 }
 
 - (IBAction)login:(id)sender {
@@ -138,9 +143,7 @@
 }
 
 - (void)dealloc {
-    [_editProfileButton release];
-    [_tableView release];
-    [super dealloc];
+    [_editProfileButton release];    [super dealloc];
     
     [_Name release];
     [_profileImageView release];
@@ -156,7 +159,6 @@
     [self setLoginButton:nil];
     [self setEmail:nil];
     [self setEditProfileButton:nil];
-    [self setTableView:nil];
     [super viewDidUnload];
 }
 
