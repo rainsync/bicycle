@@ -194,6 +194,12 @@
     pageControlUsed = NO;
 }
 
+- (void)setPage:(int)page
+{
+    pageControl.currentPage=page;
+    [self changePage:self];
+}
+
 - (IBAction)changePage:(id)sender
 {
     
@@ -234,6 +240,9 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     [self initPageControl];
+
+    
+
     // Do any additional setup after loading the view from its nib.
 }
 

@@ -170,6 +170,8 @@
 		55CAB2A0165006FF0052AB2E /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CAB29F165006FF0052AB2E /* Utility.m */; };
 		55D386221654C8A200076749 /* _.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D386211654C8A200076749 /* _.png */; };
 		55D386251654C8E600076749 /* dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D386241654C8E600076749 /* dot.png */; };
+		55E607811658EE4400A4F1C9 /* nobody.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 55E607801658EE4400A4F1C9 /* nobody.jpg */; };
+		55E607821658EE4400A4F1C9 /* nobody.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 55E607801658EE4400A4F1C9 /* nobody.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -372,6 +374,7 @@
 		55CAB29F165006FF0052AB2E /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		55D386211654C8A200076749 /* _.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _.png; sourceTree = "<group>"; };
 		55D386241654C8E600076749 /* dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dot.png; sourceTree = "<group>"; };
+		55E607801658EE4400A4F1C9 /* nobody.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nobody.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -413,6 +416,7 @@
 		0457895A16426692008E56CA /* icon */ = {
 			isa = PBXGroup;
 			children = (
+				55E607801658EE4400A4F1C9 /* nobody.jpg */,
 				04E7585A1652AA7900D933FC /* profile_sample.jpg */,
 				0457896216426860008E56CA /* Facebook_icon.png */,
 			);
@@ -976,6 +980,7 @@
 				049958A3165803080043D3AA /* light_border.png in Resources */,
 				049958A6165804D80043D3AA /* memberHeader.png in Resources */,
 				049958A7165804D80043D3AA /* memberHeader@2x.png in Resources */,
+				55E607811658EE4400A4F1C9 /* nobody.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -988,6 +993,7 @@
 				5591100C1638241500B007CA /* SettingViewController.xib in Resources */,
 				5513073D164956B0005653B1 /* fells_loop.gpx in Resources */,
 				04F7CD7A164938E100D2866D /* DetailViewController.xib in Resources */,
+				55E607821658EE4400A4F1C9 /* nobody.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

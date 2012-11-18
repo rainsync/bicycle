@@ -68,16 +68,14 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
     [net accountFriendListWithblock:^(NSDictionary *res, NSError *error) {
         NSInteger state=[[res objectForKey:@"state"] intValue];
         
-        
         if(state==0){
             NSMutableArray *friends=[res objectForKey:@"friends"];
             for (NSMutableDictionary *dic in friends) {
-                [[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[dic objectForKey:@"picture"]]] autorelease];
                 [_selectedUserArray addObject:dic];
+                [_userTableView reloadData];
             }
             
             
-            [_userTableView reloadData];
         }
         
         
@@ -128,6 +126,45 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
 	actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
 	[actionSheet showFromTabBar:self.tabBarController.tabBar];	// show from our table view (pops up in the middle of the table)
 	[actionSheet release];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+        {
+            MBProgressHUD *HUD=[MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+            [HUD show:TRUE];
+            NSMutableArray *arr = [[[NSMutableArray alloc] init] autorelease];
+            for (NSIndexPath *path in [_userTableView indexPathsForSelectedRows]) {
+                [arr addObject:[[_selectedUserArray objectAtIndex:[_userTableView cellForRowAtIndexPath:path].tag] objectForKey:@"uid"]];
+            }
+            
+            [net raceInviteWithtarget:arr Withblock:^(NSDictionary *res, NSError *error) {
+                if(error)
+                {
+                    
+                }else{
+                    NSInteger state= [[res objectForKey:@"state"] intValue];
+                    if(state==0)
+                    {
+                        [self.navigationController popViewControllerAnimated:TRUE];
+                    }
+                }
+                
+                [HUD hide:TRUE];
+            }];
+            //예 버튼
+            
+            break;
+        }
+        case 1:
+            //아니오 버튼
+            break;
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark -
@@ -188,11 +225,13 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
     
 	cell.textLabel.text = [dic objectForKey:@"nick"];
     cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.tag =indexPath.row;
     
-    //NSString *profile = [[NSBundle mainBundle] pathForResource:@"profile_sample.jpg" ofType: nil];
-    [cell.imageView setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"picture"]]];
-
-    //cell.imageView.image = [UIImage imageWithContentsOfFile:profile];
+   
+    
+    //cell.imageView.frame=rect;
+    [cell.imageView setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"picture"]] placeholderImage:[UIImage imageNamed:@"nobody.jpg"]];
+    
     
     return cell;
 }
