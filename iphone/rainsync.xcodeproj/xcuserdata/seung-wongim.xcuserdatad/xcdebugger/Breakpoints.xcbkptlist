@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "rainsync/ProfileViewController.m"
-         timestampString = "374919021.561303"
+         timestampString = "374926756.356783"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "133"
-         endingLineNumber = "133"
+         startingLineNumber = "144"
+         endingLineNumber = "144"
          landmarkName = "-viewDidUnload"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "rainsync/ProfileViewController.m"
-         timestampString = "374919021.561303"
+         timestampString = "374926756.356783"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "123"
-         endingLineNumber = "123"
+         startingLineNumber = "130"
+         endingLineNumber = "130"
          landmarkName = "-dealloc"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "rainsync/ProfileViewController.m"
-         timestampString = "374919021.561303"
+         timestampString = "374926756.356783"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "118"
-         endingLineNumber = "118"
+         startingLineNumber = "125"
+         endingLineNumber = "125"
          landmarkName = "-didReceiveMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>
