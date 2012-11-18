@@ -7,10 +7,7 @@
 //
 
 #import "MemberViewController.h"
-#import "MemberCustomCell.h"
-#import "PrettyKit.h"
-#import "UIColor+ColorWithHex.h"
-#import <QuartzCore/QuartzCore.h>
+
 
 @interface MemberViewController ()
 
@@ -33,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view from its nib.
     NSString *bgPath = [[NSBundle mainBundle] pathForResource:@"background-568@2x.png" ofType: nil];
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:bgPath]];
@@ -47,6 +45,17 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)ShowMember:(NSMutableArray *)parti
+{
+    participants = parti;
+    for (NSMutableDictionary *dic in participants) {
+        NSLog(@"%@ ww", [dic objectForKey:@"nick"]);
+    }
+    if([participants count]){
+        [_tableView reloadData];
+    }
 }
 
 - (void)dealloc {
@@ -68,15 +77,10 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return [participants count];
 }
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -96,6 +100,9 @@
 			if ([oneObject isKindOfClass:[MemberCustomCell class]])
                 cell = (MemberCustomCell *)oneObject;
     }
+
+    
+
     
     if (indexPath.row % 2) {
         cell.contentView.backgroundColor = [UIColor colorWithHexString:@"0x222f38"];    // 밝은쪽 셀
@@ -106,11 +113,14 @@
         cell.coverImage.image = [UIImage imageWithContentsOfFile:dark_borderPath];
     }
     
-    NSString *profileImagePath = [[NSBundle mainBundle] pathForResource:@"profile_sample.jpg" ofType:nil];
-    cell.memberImage.image = [UIImage imageWithContentsOfFile:profileImagePath];
+        NSLog(@"fff %d",indexPath.row);
+    NSMutableDictionary *person = [participants objectAtIndex:indexPath.row];
+    
+    //NSString *profileImagePath = [[NSBundle mainBundle] pathForResource:@"profile_sample.jpg" ofType:nil];
+    [cell.memberImage setImageWithURL:[NSURL URLWithString:[person objectForKey:@"picture"]] placeholderImage:[UIImage imageNamed:@"nobody.jpg"]];
     
     cell.memberNumber.text = [NSString stringWithFormat:@"%d", indexPath.row+1];
-    cell.memberName.text = @"김승원";
+    cell.memberName.text = [person objectForKey:@"nick"];
     cell.memberSpeed.text = @"15.1";
     cell.serverStatus.text = @"접속 중";
     NSString *statusImagePath = [[NSBundle mainBundle] pathForResource:@"bLight.png" ofType: nil];
