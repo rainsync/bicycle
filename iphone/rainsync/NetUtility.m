@@ -27,6 +27,7 @@
     
     self.parameterEncoding = AFJSONParameterEncoding;
     
+    
 
     queue = [[Queue alloc]init];
     fblogin = [[FBLogin alloc] init];
@@ -107,9 +108,19 @@
 }
 
 
--(void)raceInfoWithBlock:(void(^)(NSDictionary *res, NSError *error))block{
+-(void)raceInfoWithblock:(void(^)(NSDictionary *res, NSError *error))block{
     if(Session){
         [self postPath:@"/" parameters:[[[NSDictionary alloc] initWithObjects:@[@"race-info", Session] forKeys:@[@"type", @"sid"]] autorelease] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            block(responseObject, nil);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            block(nil,error);
+        }];
+    }
+}
+
+-(void)raceInviteWithtarget:(NSMutableArray *)arr Withblock:(void(^)(NSDictionary *res, NSError *error))block{
+    if(Session){
+        [self postPath:@"/" parameters:[[[NSDictionary alloc] initWithObjects:@[@"race-invite", Session, arr] forKeys:@[@"type", @"sid", @"targets"]] autorelease] success:^(AFHTTPRequestOperation *operation, id responseObject) {
             block(responseObject, nil);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             block(nil,error);
