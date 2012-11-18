@@ -18,4 +18,5 @@
 +(int)getTimeSecond:(double)time;
 +(int)getTimeMinute:(double)time;
 +(int)getTimeHour:(double)time;
++(UIImage*)numberImagify:(NSString*)number;
 @end

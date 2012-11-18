@@ -105,18 +105,15 @@
     NSLog(@"%d", [ridingManager isRiding]);
     NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"]);
     if(![ridingManager isRiding] && [ridingManager ridingType]==1) {    // 시작 전이고 싱글라이딩이 아니라면
-        GroupRideViewController *groupRideViewController = [GroupRideViewController alloc];
-                                                         
-        //[self presentModalViewController:groupRideViewController animated:YES];
-        [self.navigationController pushViewController:groupRideViewController animated:NO];
-        [groupRideViewController initWithNibName:@"GroupRideViewController" bundle:nil];
-        [groupRideViewController release];
+
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
         hud.dimBackground=TRUE;
         [hud show:TRUE];
-        [net raceInfoWithBlock:^(NSDictionary *res, NSError *error) {
+        [net raceInfoWithblock:^(NSDictionary *res, NSError *error) {
             if(error){
-                [hud release];
+                UIAlertView *view= [[UIAlertView alloc] initWithTitle:@"ERROR" message:error.description delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [view show];
+                [view release];
             }else{
                 
                 NSInteger state=[[res objectForKey:@"state"] intValue];
@@ -127,8 +124,15 @@
                     if([participants count]==0){
                         //no one? thne invite!
                         group_ride_mode=1;
+                        GroupRideViewController *groupRideViewController = [GroupRideViewController alloc];
+                        
+                        //[self presentModalViewController:groupRideViewController animated:YES];
+                        [self.navigationController pushViewController:groupRideViewController animated:NO];
+                        [groupRideViewController initWithNibName:@"GroupRideViewController" bundle:nil];
+                        [groupRideViewController release];
+                        
                     }else{
-                        //invited? then ride start
+                        [self.parentViewController setPage:2];
                         group_ride_mode=2;
                     }
                     
@@ -136,6 +140,7 @@
                 }else{
                     group_ride_mode=0;
                 }
+                [hud hide:TRUE];
 
             }
         }];
