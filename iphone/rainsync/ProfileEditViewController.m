@@ -40,17 +40,118 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    bikeArray = [[NSArray alloc] initWithObjects:@"로드", @"하이브리드", @"픽시", @"산악", nil];
-    ageArray = [[NSArray alloc] initWithObjects:@"10대", @"20대", @"30대", @"40대", @"50대", @"60대 이상", nil];
     
+    if ([_gender isEqualToString:@"남자"]) {
+        [_genderSegment setSelected:0];
+    } else {
+        [_genderSegment setSelected:1];
+    }
+    [_profileImageView setImageWithURL:[[NSURL alloc] initWithString:_profile]];
+    [_nameTextField setText:[NSString stringWithFormat:@"%@", _name]];
+    [_ageSelectButton setTitle:[NSString stringWithFormat:@"%@", _age] forState:UIControlStateNormal];
+    [_regionSelectButton setTitle:[NSString stringWithFormat:@"%@", _region] forState:UIControlStateNormal];
+    [_bikeSelectButton setTitle:[NSString stringWithFormat:@"%@", _bike] forState:UIControlStateNormal];
+    
+    [self createAgePicker];
+	[self createRegionPicker];
+	[self createBikePicker];
 }
+
+#pragma mark -
+#pragma mark UIPickerView
+
+// return the picker frame based on its size, positioned at the bottom of the page
+- (CGRect)pickerFrameWithSize:(CGSize)size
+{
+	CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+	CGRect pickerRect = CGRectMake(	0.0,
+                                   screenRect.size.height - 42.0 - size.height,
+                                   size.width,
+                                   size.height);
+	return pickerRect;
+}
+
+- (void)createAgePicker
+{
+	_ageArray = [[NSArray alloc] initWithObjects:@"10대", @"20대", @"30대", @"40대", @"50대", @"60대 이상", nil];
+	// note we are using CGRectZero for the dimensions of our picker view,
+	// this is because picker views have a built in optimum size,
+	// you just need to set the correct origin in your view.
+	//
+	// position the picker at the bottom
+	_agePickerView = [[UIPickerView alloc] initWithFrame:CGRectZero];
+	
+	_agePickerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+	CGSize pickerSize = [_agePickerView sizeThatFits:CGSizeZero];
+	_agePickerView.frame = [self pickerFrameWithSize:pickerSize];
+    
+	_agePickerView.showsSelectionIndicator = YES;	// note this is default to NO
+	
+	// this view controller is the data source and delegate
+	_agePickerView.delegate = self;
+	_agePickerView.dataSource = self;
+	
+	// add this picker to our view controller, initially hidden
+	_agePickerView.hidden = YES;
+	[self.view addSubview:_agePickerView];
+}
+
+- (void)createRegionPicker
+{
+	_regionArray = [[NSArray alloc] initWithObjects:@"서울", @"경기", @"인천", @"충북", @"충남", @"대전", @"강원", @"경북", @"경남", @"대구", @"부산", @"전북", @"전남", @"광주", @"제주", @"해외", nil];
+	// note we are using CGRectZero for the dimensions of our picker view,
+	// this is because picker views have a built in optimum size,
+	// you just need to set the correct origin in your view.
+	//
+	// position the picker at the bottom
+	_regionPickerView = [[UIPickerView alloc] initWithFrame:CGRectZero];
+	
+	_regionPickerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+	CGSize pickerSize = [_regionPickerView sizeThatFits:CGSizeZero];
+	_regionPickerView.frame = [self pickerFrameWithSize:pickerSize];
+    
+	_regionPickerView.showsSelectionIndicator = YES;	// note this is default to NO
+	
+	// this view controller is the data source and delegate
+	_regionPickerView.delegate = self;
+	_regionPickerView.dataSource = self;
+	
+	// add this picker to our view controller, initially hidden
+	_regionPickerView.hidden = YES;
+	[self.view addSubview:_regionPickerView];
+}
+
+- (void)createBikePicker
+{
+	_bikeArray = [[NSArray alloc] initWithObjects:@"로드", @"하이브리드", @"픽시", @"산악", nil];
+	// note we are using CGRectZero for the dimensions of our picker view,
+	// this is because picker views have a built in optimum size,
+	// you just need to set the correct origin in your view.
+	//
+	// position the picker at the bottom
+	_bikePickerView = [[UIPickerView alloc] initWithFrame:CGRectZero];
+	
+	_bikePickerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+	CGSize pickerSize = [_bikePickerView sizeThatFits:CGSizeZero];
+	_bikePickerView.frame = [self pickerFrameWithSize:pickerSize];
+    
+	_bikePickerView.showsSelectionIndicator = YES;	// note this is default to NO
+	
+	// this view controller is the data source and delegate
+	_bikePickerView.delegate = self;
+	_bikePickerView.dataSource = self;
+	
+	// add this picker to our view controller, initially hidden
+	_bikePickerView.hidden = YES;
+	[self.view addSubview:_bikePickerView];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 - (void)cancelAndBack;
 {
@@ -63,12 +164,51 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark -
+#pragma mark Actions
+
+- (void)showPicker:(UIView *)picker
+{
+	// hide the current picker and show the new one
+	if (_currentPicker)
+	{
+		_currentPicker.hidden = YES;
+    }
+	picker.hidden = NO;
+	
+	_currentPicker = picker;	// remember the current picker so we can remove it later when another one is chosen
+}
+
 - (IBAction)textFieldDoneEditing:(id)sender {
     [sender resignFirstResponder];
 }
 
 - (IBAction)backgroundTap:(id)sender {
     [_nameTextField resignFirstResponder];
+}
+
+-(IBAction)toggleControls: (id)sender {
+	if([sender selectedSegmentIndex] == 0) {
+        _gender = [NSString stringWithFormat:@"남자"];
+	} else {
+        _gender = [NSString stringWithFormat:@"여자"];
+	}
+}
+
+//- (IBAction)selectBikeDone:(id)sender {
+//    [self showPicker:_bikePickerView];
+//}
+
+- (IBAction)selectAge:(id)sender {
+    [self showPicker:_agePickerView];
+}
+
+- (IBAction)selectRegion:(id)sender {
+    [self showPicker:_regionPickerView];
+}
+
+- (IBAction)selectBike:(id)sender {
+    [self showPicker:_regionPickerView];
 }
 
 #pragma mark -
@@ -150,22 +290,30 @@
 
 - (void)dealloc {
     [_bikeCategoryPickerView release];
-    [_bikeSelectView release];
     [_bikeSelectToolbar release];
     [_selectBikeBarButton release];
     [_ageSelectButton release];
     [_regionSelectButton release];
     [_bikeSelectButton release];
+    [_genderSegment release];
+    [_profileImageView release];
+    [_ageLabel release];
+    [_regionLabel release];
+    [_bikeLabel release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setBikeCategoryPickerView:nil];
-    [self setBikeSelectView:nil];
     [self setBikeSelectToolbar:nil];
     [self setSelectBikeBarButton:nil];
     [self setAgeSelectButton:nil];
     [self setRegionSelectButton:nil];
     [self setBikeSelectButton:nil];
+    [self setGenderSegment:nil];
+    [self setProfileImageView:nil];
+    [self setAgeLabel:nil];
+    [self setRegionLabel:nil];
+    [self setBikeLabel:nil];
     [super viewDidUnload];
 }
 
@@ -174,13 +322,18 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-//	if (pickerView == myPickerView)	// don't show selection for the custom picker
-//	{
-//		// report the selection to the UI label
-//		label.text = [NSString stringWithFormat:@"%@ - %d",
-//                      [bikeArray objectAtIndex:[pickerView selectedRowInComponent:0]],
-//                      [pickerView selectedRowInComponent:1]];
-//	}
+    if (pickerView == _bikePickerView) {
+        [_bikeLabel setText:[NSString stringWithFormat:@"%@", [_bikeArray objectAtIndex:[_bikePickerView selectedRowInComponent:0]]]];
+        NSLog(@"%@", [_bikeArray objectAtIndex:[_bikePickerView selectedRowInComponent:0]]);
+    }
+    else if (pickerView == _agePickerView) {
+        [_ageLabel setText:[NSString stringWithFormat:@"%@", [_ageArray objectAtIndex:[_agePickerView selectedRowInComponent:0]]]];
+        NSLog(@"%@", [_ageArray objectAtIndex:[_agePickerView selectedRowInComponent:0]]);
+    }
+    else {
+        [_regionLabel setText:[NSString stringWithFormat:@"%@", [_regionArray objectAtIndex:[_regionPickerView selectedRowInComponent:0]]]];
+        NSLog(@"%@", [_regionArray objectAtIndex:[_regionPickerView selectedRowInComponent:0]]);
+    }
 }
 
 #pragma mark -
@@ -188,20 +341,32 @@
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
 	return 1;
 }
-- (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component{
-	return [bikeArray count];
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    if (pickerView == _bikePickerView) {
+        return [_bikeArray count];
+    }
+    else if (pickerView == _agePickerView) {
+        return [_ageArray count];
+    }
+	return [_regionArray count];
 }
 
 #pragma mark Picker Delegate Methods
-- (NSString *)pickerView:(UIPickerView *)pickerView
-			 titleForRow:(NSInteger)row
-			forComponent:(NSInteger)component{
-	return [bikeArray objectAtIndex:row];
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+	NSString *returnStr = @"";
+	
+	if (pickerView == _bikePickerView) {
+        returnStr = [_bikeArray objectAtIndex:row];
+    }
+    else if (pickerView == _agePickerView) {
+        return [_ageArray objectAtIndex:row];
+    }
+	return [_regionArray objectAtIndex:row];
+
+
+	return returnStr;
 }
 
 
-- (IBAction)selectBikeDone:(id)sender {
-    [_bikeSelectView setHidden:YES];
-}
+
 @end
