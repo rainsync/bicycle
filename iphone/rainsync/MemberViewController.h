@@ -7,8 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UIImageView+AFNetworking.h"
+#import "MemberCustomCell.h"
+#import "PrettyKit.h"
+#import "UIColor+ColorWithHex.h"
+#import <QuartzCore/QuartzCore.h>
 @interface MemberViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+{
+    NSMutableArray * participants;
+
+}
 @property (retain, nonatomic) IBOutlet UIView *myView;
 @property (retain, nonatomic) IBOutlet UIImageView *myImageView;
 @property (retain, nonatomic) IBOutlet UILabel *myNameLabel;

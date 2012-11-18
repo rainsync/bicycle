@@ -91,7 +91,9 @@
 
         [net accountProfilegGetWithblock:^(NSDictionary *res, NSError *error) {
             if(error){
-                
+                UIAlertView *view= [[UIAlertView alloc] initWithTitle:@"ERROR" message:error.description delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [view show];
+                [view release];
             }else{
                 
             NSInteger state=[[res objectForKey:@"state"] intValue];
