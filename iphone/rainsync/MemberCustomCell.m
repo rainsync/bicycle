@@ -27,8 +27,10 @@
 }
 
 - (void)dealloc {
-    [_memerImage release];
+    [_memberImage release];
     [_memberName release];
+    [_coverImage release];
+    [_memberNumber release];
     [_serverStatusImage release];
     [_serverStatus release];
     [_memberSpeed release];
