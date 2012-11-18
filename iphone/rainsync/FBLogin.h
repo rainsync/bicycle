@@ -11,9 +11,10 @@
 
 @interface FBLogin : NSObject
 {
-    NSMutableArray *handler;
+
+    @private void (^end)(FBSession *session, NSError* error);
+    
 }
 
-- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
-
+- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI Withblock:(void(^)(FBSession *session, NSError* error))block;
 @end

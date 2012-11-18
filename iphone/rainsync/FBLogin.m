@@ -14,22 +14,14 @@
 - (id)init
 {
     [super init];
-    handler = [[NSMutableArray alloc] init];
-    
     return self;
 }
 
-
-- (void)addHandler:(id)handle
-{
-    [handler addObject:handle];
-}
 
 
 -(void)dealloc
 {
     [super dealloc];
-    
 }
 
 
@@ -44,10 +36,7 @@
     switch (state) {
         case FBSessionStateOpen:
             if (!error) {
-                for (id handle in handler) {
-                    if([handle respondsToSelector:@selector(FBloginFail:)])
-                        [handle FBloginSuccess:session];
-                }
+                end(session, nil);
                 // We have a valid session
                 NSLog(@"User session found");
             }
@@ -64,20 +53,17 @@
     
     
     if(error){
-        for (id handle in handler) {
-            if([handle respondsToSelector:@selector(FBloginFail:)])
-                [handle FBloginFail:error];
-        }
-
-    }else{
-        
+        end(nil,error);
     }
+
+    
 }
 
 /*
  * Opens a Facebook session and optionally shows the login UX.
  */
-- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
+- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI Withblock:(void(^)(FBSession *session, NSError* error))block{
+    end = block;
     return [FBSession openActiveSessionWithReadPermissions:nil
                                               allowLoginUI:allowLoginUI
                                          completionHandler:^(FBSession *session,
