@@ -17,6 +17,8 @@
 @interface ViewController : UITabBarController //<UIAppearance>
 {
     RidingManager *ridingManager;
+    NetUtility *net;
+    
 }
 - (void) changeToRiding;
 @end

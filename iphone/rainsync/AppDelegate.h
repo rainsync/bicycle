@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RidingManager.h"
 #import <BugSense-iOS/BugSenseCrashController.h>
-#import "Login.h"
+#import "NetUtility.h"
 
 //extern NSString *const FBSessionStateChangedNotification;
 @class ViewController;

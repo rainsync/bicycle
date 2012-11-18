@@ -10,12 +10,13 @@
 #import "NetUtility.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "UIImageView+AFNetworking.h"
-#import "Login.h"
+#import "FBLogin.h"
 #import "MBProgressHUD.h"
-@interface ProfileViewController : UIViewController <MBProgressHUDDelegate>
-{
-}
 
+@interface ProfileViewController : UIViewController
+{
+    NetUtility *net;
+}
 @property (retain, nonatomic) IBOutlet UILabel *Name;
 @property (retain, nonatomic) IBOutlet UILabel *Email;
 @property (retain, nonatomic) IBOutlet UIImageView *profileImageView;

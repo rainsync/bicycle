@@ -52,7 +52,9 @@
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"session"];
     [[NSUserDefaults standardUserDefaults]synchronize];
     
-    if([[Login getInstance] getSession])
+    NetUtility *net = [[[NetUtility alloc] init] autorelease];
+    
+    if([net getSession])
     {
         self.viewController = [[ViewController alloc] init];
         self.window.rootViewController = self.viewController;

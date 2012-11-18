@@ -24,11 +24,16 @@
     
 }
 
+- (NetUtility *)getNetUtility
+{
+    return net;
+}
+
 - (id)init
 {
     [super init];
     ridingManager = [[RidingManager alloc] init];
-
+    net = [[NetUtility alloc] init];
     
     RidingViewController *riding = [RidingViewController alloc];
     UINavigationController *ridingViewNavController = [UINavigationController alloc];

@@ -15,42 +15,6 @@
 @implementation ProfileViewController
 
 
-- (void) reqSuccess:(int)message withJSON:(NSDictionary *)dic {
-    switch (message) {
-        case account_profile_get:
-        {
-            NSInteger state=[[dic objectForKey:@"state"] intValue];
-            NSString *nick=[dic objectForKey:@"nick"];
-            NSString *picture=[dic objectForKey:@"picture"];
-            NSString *email=[dic objectForKey:@"email"];
-            
-            if(state==0){
-            [_Name setText:nick];
-            [_Email setText:email];
-            [_profileImageView setImageWithURL:[[[NSURL alloc] initWithString:picture]autorelease]];    
-            NSLog([NSString stringWithFormat:@"STATE %d NICK %@ PICTURE %@ EMAIL %@", state, nick, picture, email]);
-            
-            
-            
-                
-            }
-            
-            break;
-
-        }
-        default:
-        {
-            NSError *error=[NSError errorWithDomain:@"서버로 부터 잘못된 데이터가 전송되었습니다." code:-2 userInfo:nil];
-            break;
-        }
-    }
-    
-}
-
-- (void)reqFail:(NSError*)error
-{
-    //[self showError:error];
-}
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -60,7 +24,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"프로필", @"프로필");
-        [[NetUtility getInstance] addHandler:self];
+        net= [self.tabBarController getNetUtility];
         // Custom initialization
         
 
@@ -84,32 +48,23 @@
     [layer setCornerRadius:30.0];   // 프로필 사진에 레이어를 씌워 라운딩 처리
 }
 
-- (void)hudWasHidden:(MBProgressHUD *)HUD {
-	// Remove HUD from screen when the HUD was hidded
-    if(HUD){
-	[HUD removeFromSuperview];
-	[HUD release];
-	HUD = nil;
-    }
-}
-
 - (IBAction)login:(id)sender {
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
     HUD.dimBackground = YES;
     [HUD show:TRUE];
     
-    //[_disableView setHidden:YES];
-    [[Login getInstance] join:^{
+    [net RegisterWithFaceBookAndLogin:^(NSError *error) {
+        if(error){
+            UIAlertView *view= [[UIAlertView alloc] initWithTitle:@"ERROR" message:error.description delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [view show];
+            [view release];
+        }else{
+            [_disableView setHidden:TRUE];
+            [self viewDidAppear:FALSE];
+        }
         [HUD hide:TRUE];
-        [_disableView setHidden:TRUE];
-        [[NetUtility getInstance] account_profile_get:[[Login getInstance] getSession]];
-        [[NetUtility getInstance] end];
-    } withFail:^(NSError *error) {
-        [HUD hide:TRUE];
-        [_disableView setHidden:FALSE];
     }];
-    
 }
 
 - (IBAction)editProfile:(id)sender {
@@ -122,13 +77,35 @@
 {
     [super viewDidAppear:animated];
     
-    NSString *session =[[Login getInstance] getSession];
+    NSString *session =[net getSession];
     if(session)
     {
-        
-        [[NetUtility getInstance] account_profile_get:session];
-        [[NetUtility getInstance] end];
         [_disableView setHidden:TRUE];
+        
+
+        [net accountProfilegGetWithblock:^(NSDictionary *res, NSError *error) {
+            if(error){
+                
+            }else{
+                
+            NSInteger state=[[res objectForKey:@"state"] intValue];
+            NSString *nick=[res objectForKey:@"nick"];
+            NSString *picture=[res objectForKey:@"picture"];
+            NSString *email=[res objectForKey:@"email"];
+            
+            if(state==0){
+                [_Name setText:nick];
+                [_Email setText:email];
+                [_profileImageView setImageWithURL:[[NSURL alloc] initWithString:picture]];
+                NSLog([NSString stringWithFormat:@"STATE %d NICK %@ PICTURE %@ EMAIL %@", state, nick, picture, email]);
+                
+            }
+                
+            }
+
+        }];
+
+        
         
     }else{
         [_disableView setHidden:FALSE];
@@ -143,13 +120,13 @@
 }
 
 - (void)dealloc {
-    [_editProfileButton release];    [super dealloc];
-    
+    [_editProfileButton release];    
     [_Name release];
     [_profileImageView release];
     [_disableView release];
     [_loginButton release];
     [_Email release];
+    [super dealloc];
 
 }
 - (void)viewDidUnload {
