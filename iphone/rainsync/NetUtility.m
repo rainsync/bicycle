@@ -128,6 +128,27 @@
     }
 }
 
+-(void)raceSummaryWithblock:(void(^)(NSDictionary *res, NSError *error))block{
+    if(Session){
+        [self postPath:@"/" parameters:[[[NSDictionary alloc] initWithObjects:@[@"race-summary", Session] forKeys:@[@"type", @"sid"]] autorelease] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            block(responseObject, nil);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            block(nil,error);
+        }];
+    }
+}
+
+-(void)raceRecordWithpos:(NSString*)pos Withblock:(void(^)(NSDictionary *res, NSError *error))block{
+    if(Session){
+        [self postPath:@"/" parameters:[[[NSDictionary alloc] initWithObjects:@[@"race-record", Session, pos] forKeys:@[@"type", @"sid", @"pos"]] autorelease] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            block(responseObject, nil);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            block(nil,error);
+        }];
+    }
+}
+
+
 -(void)loginFaceBookWithblock:(void(^)(FBSession *session, NSError* error))block
 {
     [fblogin openSessionWithAllowLoginUI:TRUE Withblock:block];
