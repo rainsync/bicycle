@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingViewController : UIViewController
-
+@interface SettingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+{
+    UITextField *text;
+}
+@property (nonatomic, retain) IBOutlet UITableView *settingTableView;
 @end

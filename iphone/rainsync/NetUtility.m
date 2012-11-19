@@ -9,102 +9,177 @@
 #import "NetUtility.h"
 
 
-
 @implementation NetUtility
-@synthesize responseData, block;
 
--(id)initwithBlock:(void (^)(int, NSDictionary*))block{
-    responseData = [[[NSMutableData alloc] init] autorelease];
+-(id)init{
+
+    //[super init];
+
+    self = [super initWithBaseURL:[NSURL URLWithString:@"http://api.bicy.kr"]];
+    if (!self) {
+        return nil;
+    }
     
+    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    
+    // Accept HTTP Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
+	[self setDefaultHeader:@"Accept" value:@"application/json"];
+    
+    self.parameterEncoding = AFJSONParameterEncoding;
+    
+    
+
     queue = [[Queue alloc]init];
-    arr = [[NSMutableArray alloc]init];
-    
-    server = @"http://api.bicy.kr";
-    self.block = block;
+    fblogin = [[FBLogin alloc] init];
+    Session=[self getSession];
     
     return self;
     
 }
 
+
+
 -(void)dealloc{
     [queue release];
     [super dealloc];
-    
 }
 
--(void) getURL:(NSString *)url{
-    responseData = [[NSMutableData alloc]init];
-    
-                    
-    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [[NSURLConnection alloc] initWithRequest:req delegate:self];
-    //[req release];
-
-    
-    
-    
-}
-
--(void) postURL:(NSString*)url withData:(NSData*)data{
-    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] ];
-    [req setHTTPMethod:@"POST"];
-    
-    [req setValue:[NSString stringWithFormat:@"%d",[data length]] forHTTPHeaderField:@"Content-Length"];
-    [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [req setHTTPBody:data];
-    [[NSURLConnection alloc] initWithRequest:req delegate:self];
-    
-    //[req release];
-
-    
-    
-}
-
--(void) account_registerwithAcessToken:(NSString*)accesstoken withNick:(NSString*)nick withPhoto:(NSString*)photo{
-    [queue push:account_register];
-    [arr addObject:[[[NSDictionary alloc] initWithObjects:@[nick,accesstoken, photo] forKeys:@[@"nick", @"accesstoken", @"photo"]] autorelease]];
-    
-}
-
--(void) end{
-    NSError* error;
-    NSData* data = [NSJSONSerialization dataWithJSONObject:arr options:NSJSONReadingMutableLeaves error:&error];
-    [self postURL:server withData:data];
-    [arr removeAllObjects];
-
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSLog(@"didReceiveResponse");
-    [self.responseData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [self.responseData appendData:data];
-
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"didFailWithError");
-    //NSLog([NSString stringWithFormat:@"Connection failed: %@", [error description]]);
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"connectionDidFinishLoading");
-    NSLog(@"Succeeded! Received %d bytes of data",[self.responseData length]);
-    
-    NSError *error;
-    
-
-    NSMutableArray *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableContainers error:&error];
-    for(NSDictionary* dic in res){
-        if([queue count]){
-            self.block((int)[queue pop], dic);
-        }
+- (NSString *)getSession
+{
+    if(Session==nil){
+        NSString *saved = [[NSUserDefaults standardUserDefaults] stringForKey:@"session"];
+        if(saved)
+            Session=saved;
     }
-
-       
     
+    return Session;
+}
+
+
+-(void) accountRegisterWithFaceBook:(NSString*)accesstoken Withblock:(void(^)(NSDictionary *res, NSError *error))block{
+    [self postPath:@"/" parameters:[[[NSDictionary alloc] initWithObjects:@[@"account-register", accesstoken] forKeys:@[@"type",@"accesstoken"]] autorelease]  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        block(responseObject, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        block(nil,error);
+    }];
+
+    
+}
+
+-(void) accountProfilegGetWithblock:(void(^)(NSDictionary *res, NSError *error))block{
+    if(Session){
+        [self postPath:@"/" parameters:[[[NSDictionary alloc] initWithObjects:@[@"account-profile-get", Session] forKeys:@[@"type", @"sid"]] autorelease]  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            block(responseObject, nil);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            block(nil,error);
+        }];
+    }
+}
+
+-(void) accountAuthWith:(NSString*)accesstoken Withblock:(void(^)(NSDictionary *res, NSError *error))block {
+
+    [self postPath:@"/" parameters:[[[NSDictionary alloc] initWithObjects:@[@"account-auth", accesstoken] forKeys:@[@"type", @"accesstoken"]] autorelease]  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSInteger state=[[responseObject objectForKey:@"state"] intValue];
+        NSString *sessid=[responseObject objectForKey:@"sessid"];
+        if(state==0){
+            NSLog([NSString stringWithFormat:@"STATE %d SESSION %@", state, sessid]);
+            Session = sessid;
+            [[NSUserDefaults standardUserDefaults] setObject:Session forKey:@"session"];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+        }
+        
+        block(responseObject, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        block(nil,error);
+    }];
+
+
+}
+
+
+-(void) accountFriendListWithblock:(void(^)(NSDictionary *res, NSError *error))block {
+    if(Session){
+        [self postPath:@"/" parameters:[[[NSDictionary alloc] initWithObjects:@[@"account-friend-list", Session] forKeys:@[@"type", @"sid"]] autorelease]  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            block(responseObject, nil);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            block(nil,error);
+        }];
+    }
+}
+
+
+-(void)raceInfoWithblock:(void(^)(NSDictionary *res, NSError *error))block{
+    if(Session){
+        [self postPath:@"/" parameters:[[[NSDictionary alloc] initWithObjects:@[@"race-info", Session] forKeys:@[@"type", @"sid"]] autorelease] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            block(responseObject, nil);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            block(nil,error);
+        }];
+    }
+}
+
+-(void)raceInviteWithtarget:(NSMutableArray *)arr Withblock:(void(^)(NSDictionary *res, NSError *error))block{
+    if(Session){
+        [self postPath:@"/" parameters:[[[NSDictionary alloc] initWithObjects:@[@"race-invite", Session, arr] forKeys:@[@"type", @"sid", @"targets"]] autorelease] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            block(responseObject, nil);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            block(nil,error);
+        }];
+    }
+}
+
+-(void)raceSummaryWithblock:(void(^)(NSDictionary *res, NSError *error))block{
+    if(Session){
+        [self postPath:@"/" parameters:[[[NSDictionary alloc] initWithObjects:@[@"race-summary", Session] forKeys:@[@"type", @"sid"]] autorelease] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            block(responseObject, nil);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            block(nil,error);
+        }];
+    }
+}
+
+-(void)raceRecordWithpos:(NSMutableArray*)pos_arr Withblock:(void(^)(NSArray *res, NSError *error))block{
+    if(Session){
+        NSMutableArray * arr=[[[NSMutableArray alloc] init] autorelease];
+        for (CLLocation *loc in pos_arr) {            
+            NSDictionary * dic=[[[NSDictionary alloc] initWithObjects:@[@"race-record", Session, [NSString stringWithFormat:@"%0.6lf,%0.6lf",loc.coordinate.latitude, loc.coordinate.longitude]] forKeys:@[@"type", @"sid", @"pos"]] autorelease];
+            [arr addObject:dic];
+        }
+        
+        [self postPath:@"/" parameters:arr success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            block(responseObject, nil);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            block(nil,error);
+        }];
+    }
+}
+
+
+-(void)loginFaceBookWithblock:(void(^)(FBSession *session, NSError* error))block
+{
+    [fblogin openSessionWithAllowLoginUI:TRUE Withblock:block];
+}
+
+-(void)RegisterWithFaceBookAndLogin:(void(^)(NSError* error))block
+{
+    [self loginFaceBookWithblock:^(FBSession *session, NSError *error) {
+        if(error){
+            block(error);
+        }else{
+            [self accountRegisterWithFaceBook:session.accessToken Withblock:^(NSDictionary *res, NSError *error) {
+                if(error)
+                {
+                    block(error);
+                }else{
+                    [self accountAuthWith:session.accessToken Withblock:^(NSDictionary *res, NSError *error) {
+                        block(nil);
+                    }];
+                }
+            }];
+        }
+        
+        
+    }];
 }
 
 

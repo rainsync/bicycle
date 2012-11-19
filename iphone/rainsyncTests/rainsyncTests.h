@@ -7,8 +7,19 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
+#import "ProfileViewController.h"
 #import "NetUtility.h"
 
 @interface rainsyncTests : SenTestCase
+{
 
+    NSInteger worknum;
+    NSString* accessToken;
+    NSString* sessid;
+    NetUtility* net;
+    BOOL jobfinished;
+}
+@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) ProfileViewController *controller;
+//@property NSInteger worknum;
 @end

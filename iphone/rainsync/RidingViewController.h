@@ -9,18 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "DashBoardViewController.h"
 #import "MapViewController.h"
-#import "ProfileViewController.h"
+#import "MemberViewController.h"
+#import "RidingManager.h"
 
 @interface RidingViewController : UIViewController <UIScrollViewDelegate>
 {
     NSMutableArray* controllers;
     @private BOOL pageControlUsed;
-    @private NSString* RidingType;
     @private int kNumberOfPages;
-    
+    RidingManager *ridingManager;
+
     
     
 }
+
 @property (nonatomic, retain) IBOutlet UIPageControl* pageControl;
 @property (nonatomic, retain) IBOutlet UIScrollView* scrollView;
 @end

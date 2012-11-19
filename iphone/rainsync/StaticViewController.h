@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface StaticViewController : UIViewController
-
+#import "RidingDB.h"
+@interface StaticViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+{
+    RidingDB *ridingdb;
+    NSMutableArray *recordings;
+}
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) NSMutableArray *recordings;
 @end

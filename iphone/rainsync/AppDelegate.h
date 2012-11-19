@@ -7,11 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <FacebookSDK/FacebookSDK.h>
+#import "RidingManager.h"
+#import <BugSense-iOS/BugSenseCrashController.h>
+#import "NetUtility.h"
 
+//extern NSString *const FBSessionStateChangedNotification;
 @class ViewController;
 
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate> 
+{
+
+    
+}
+
+
 
 @property (strong, nonatomic) UIWindow *window;
 

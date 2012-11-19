@@ -7,6 +7,7 @@
 //
 
 #import "RidingViewController.h"
+#define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"-568":@""]
 
 @interface RidingViewController ()
 
@@ -16,31 +17,48 @@
 
 @synthesize scrollView, pageControl;
 
-
-
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"라이딩", @"라이딩");
-        //self.tabBarItem.image = [UIImag]
+        UIImage *img = [UIImage imageNamed:@"bikeIcon"];
+        [self.tabBarItem setImage:img];
+        
+        ridingManager = [self.tabBarController getRidingManager];
         // Custom initialization
     }
     return self;
 }
 
+- (void)refreshPageControl{
+    NSInteger type = [ridingManager ridingType];
+    if(type==0){
+        kNumberOfPages=2;
+        UIViewController *controller=[controllers objectAtIndex:2];
+        if(controller!=[NSNull null])
+            [controller.view setHidden:TRUE];
+    }
+    else if(type==1){
+     
+        kNumberOfPages=3;
+        UIViewController *controller=[controllers objectAtIndex:2];
+        if(controller!=[NSNull null])
+            [controller.view setHidden:FALSE];
+    
+    }
+    pageControl.numberOfPages = kNumberOfPages;
+    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * kNumberOfPages, scrollView.frame.size.height);
+    
+}
 
-
-
-
-- (void)awakeFromNib
+- (void)initPageControl
 {
     
-    RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
-    if([RidingType isEqualToString:@"Single"])
+    NSInteger type = [ridingManager ridingType];
+    if(type==0)
         kNumberOfPages=2;
-    else
+    else if(type==1)
         kNumberOfPages=3;
     
     
@@ -48,7 +66,7 @@
     // view controllers are created lazily
     // in the meantime, load the array with placeholders which will be replaced on demand
     controllers = [[NSMutableArray alloc] init];
-    for (unsigned i = 0; i < kNumberOfPages; i++)
+    for (unsigned i = 0; i < 3; i++)
     {
 		[controllers addObject:[NSNull null]];
     }
@@ -91,19 +109,35 @@
     {
         switch (page) {
             case 0:
-                controller = [[DashBoardViewController alloc] initWithNibName:@"DashBoardViewController" bundle:nil];
+                controller = [DashBoardViewController alloc];       
                 break;
                 
             case 1:
-                controller = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
+                controller = [MapViewController alloc];          
                 break;
             case 2:
-                controller = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
+                controller = [MemberViewController alloc];        
+            default:
+                break;
+        }
+        
+        [self addChildViewController:controller];
+        
+        switch (page) {
+            case 0:
+                [controller initWithNibName:getNibName(@"DashBoardViewController") bundle:nil];
+                break;
+            case 1:
+                [controller initWithNibName:@"MapViewController" bundle:nil];
+                break;
+            case 2:
+                [controller initWithNibName:@"MemberViewController" bundle:nil];
             default:
                 break;
         }
         
         [controllers replaceObjectAtIndex:page withObject:controller];
+        [self addChildViewController:controller];
         [controller release];
     }
     
@@ -136,6 +170,8 @@
     CGFloat pageWidth = scrollView.frame.size.width;
     int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     pageControl.currentPage = page;
+
+    
     //page;
     
     // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
@@ -158,10 +194,18 @@
     pageControlUsed = NO;
 }
 
+- (void)setPage:(int)page
+{
+    pageControl.currentPage=page;
+    [self changePage:self];
+}
+
 - (IBAction)changePage:(id)sender
 {
+    
+    
     int page = pageControl.currentPage;
-	
+
     // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
     [self loadScrollViewWithPage:page - 1];
     [self loadScrollViewWithPage:page];
@@ -179,12 +223,26 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self awakeFromNib];
+
+    
+    
+    [super viewWillAppear:animated];
+    [[self navigationController] setNavigationBarHidden:true];
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [[self navigationController] setNavigationBarHidden:false];
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    [self initPageControl];
+
     
+
     // Do any additional setup after loading the view from its nib.
 }
 

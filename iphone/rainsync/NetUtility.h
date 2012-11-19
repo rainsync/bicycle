@@ -8,32 +8,40 @@
 
 #import <Foundation/Foundation.h>
 #import "Queue.h"
+#import "AFHTTPClient.h"
+#import "AFJSONRequestOperation.h"
+#import "FBLogin.h"
 
 enum req_type{
-    account_register=0,
-    account_login=1,
-    
+    none_req=0,
+    account_register=1,
+    account_auth=2,
+    account_profile_get=3,
+    account_friend_list=4,
+    race_info=5,
 };
 
 
-@interface NetUtility : NSObject <NSURLConnectionDelegate>
-{
-    @private NSMutableData* responseData;
-    //@private void (^ block)(NSData*);
-    
-    @private NSMutableArray* arr;
+
+@interface NetUtility : AFHTTPClient{
     @private Queue *queue;
-    @private NSString *server;
+
+    @private NSString *Session;
+    @private FBLogin *fblogin;
     
 }
-@property (nonatomic, strong) NSMutableData* responseData;
-@property (nonatomic, strong) void (^block)(int, NSDictionary*);
--(id)initwithBlock:(void (^)(int, NSDictionary*))block;
 
--(void) dealloc;
-//:(void (^)(NSData*))block
--(void) getURL:(NSString *)url;
--(void) postURL:(NSString*)url withData:(NSData*)data;
--(void) account_registerwithAcessToken:(NSString*)accesstoken withNick:(NSString*)nick withPhoto:(NSString*)photo;
--(void) end;
+-(id)init;
+-(void)dealloc;
+-(void)accountRegisterWithFaceBook:(NSString*)accesstoken Withblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void)accountProfilegGetWithblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void)accountAuthWith:(NSString*)accesstoken Withblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void)accountFriendListWithblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void)raceInfoWithblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void)raceSummaryWithblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void)raceInviteWithtarget:(NSMutableArray *)arr Withblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void)raceRecordWithpos:(NSMutableArray*)pos_arr Withblock:(void(^)(NSArray *res, NSError *error))block;
+-(void)loginFaceBookWithblock:(void(^)(FBSession *session, NSError* error))block;
+-(void)RegisterWithFaceBookAndLogin:(void(^)(NSError* error))block;
+
 @end

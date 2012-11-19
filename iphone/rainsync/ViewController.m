@@ -7,36 +7,72 @@
 //
 
 #import "ViewController.h"
-
+#import "PrettyKit.h"
+#import "UIColor+ColorWithHex.h"
 
 @interface ViewController ()
 
 @end
 
+
 @implementation ViewController
+
+
+- (RidingManager *)getRidingManager
+{
+    return ridingManager;
+    
+}
+
+- (NetUtility *)getNetUtility
+{
+    return net;
+}
 
 - (id)init
 {
     [super init];
-    ridingViewController = [[RidingViewController alloc] initWithNibName:@"RidingViewController" bundle:nil];
-    [self addChildViewController:ridingViewController];
+    ridingManager = [[RidingManager alloc] init];
+    net = [[NetUtility alloc] init];
     
+    RidingViewController *riding = [RidingViewController alloc];
+    UINavigationController *ridingViewNavController = [UINavigationController alloc];
+    [ridingViewNavController initWithRootViewController:riding];
     
-    ProfileViewController* profile = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
-    UINavigationController *profileNavController = [[UINavigationController alloc] initWithRootViewController:profile];
+    ProfileViewController* profile = [ProfileViewController alloc];
+    UINavigationController *profileNavController = [UINavigationController alloc];
+    [profileNavController initWithRootViewController:profile];
     
-    GroupRideViewController* groupriding = [[GroupRideViewController alloc] initWithNibName:@"GroupRideViewController" bundle:nil];
-    UINavigationController *groupRidingNavController = [[UINavigationController alloc] initWithRootViewController:groupriding];
+    StaticViewController* statics = [StaticViewController alloc];
+    UINavigationController *staticsNavController = [UINavigationController alloc];
+    [staticsNavController initWithRootViewController:statics];
+                                                   
+    SettingViewController* setting = [SettingViewController alloc];  
+    UINavigationController *settingNavController = [UINavigationController alloc];
+    [settingNavController initWithRootViewController:setting];
+                                                   
 
-    StaticViewController* statics = [[StaticViewController alloc]initWithNibName:@"StaticViewController" bundle:nil];
-    UINavigationController *staticsNavController = [[UINavigationController alloc] initWithRootViewController:statics];
+    self.viewControllers = @[ridingViewNavController,profileNavController,staticsNavController, settingNavController];
     
-    SettingViewController* setting = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
-    UINavigationController *settingNavController = [[UINavigationController alloc] initWithRootViewController:setting];    
     
-    // 네이비게이션 바가 필요한 프로필 탭, 통계 탭, 설정 탭은 네비게이션 컨트롤러에 뷰 삽입하여 탭바 컨트롤러에 삽임한다.
-    self.viewControllers = @[profileNavController, groupRidingNavController, staticsNavController, settingNavController];
+    [riding initWithNibName:@"RidingViewController" bundle:nil];
+    [ridingViewNavController setValue:[[[PrettyNavigationBar alloc] init] autorelease] forKeyPath:@"navigationBar"];
     
+    [profile initWithNibName:@"ProfileViewController" bundle:nil];
+    [profileNavController setValue:[[[PrettyNavigationBar alloc] init] autorelease] forKeyPath:@"navigationBar"];
+    
+    [statics initWithNibName:@"StaticViewController" bundle:nil];
+    [staticsNavController setValue:[[[PrettyNavigationBar alloc] init] autorelease] forKeyPath:@"navigationBar"];
+    
+    [setting initWithNibName:@"SettingViewController" bundle:nil];
+    [settingNavController setValue:[[[PrettyNavigationBar alloc] init] autorelease] forKeyPath:@"navigationBar"];
+    
+    self.tabBar.selectedImageTintColor = [UIColor colorWithHexString:@"008fd5"];
+    
+    [riding release];
+    [profile release];
+    [statics release];
+    [setting release];
     
     return self;
     
@@ -61,9 +97,5 @@
 }
 - (void)viewDidUnload {
     [super viewDidUnload];
-}
-
-- (void)changeToRiding {
-    
 }
 @end

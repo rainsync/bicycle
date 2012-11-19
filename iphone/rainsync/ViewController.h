@@ -14,11 +14,11 @@
 #import "SettingViewController.h"
 
 
-@interface ViewController : UITabBarController
+@interface ViewController : UITabBarController //<UIAppearance>
 {
-    RidingViewController *ridingViewController;
+    RidingManager *ridingManager;
+    NetUtility *net;
+    
 }
-
 - (void) changeToRiding;
-
 @end

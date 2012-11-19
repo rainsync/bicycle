@@ -1,4 +1,4 @@
-//
+ //
 //  Stack.m
 //  rainsync
 //
@@ -10,21 +10,37 @@
 
 @implementation Queue
 
+- (id)init{
+    [super init];
+    contents = [[NSMutableArray alloc]init];
+    return self;
 
+}
+
+- (void)dealloc{
+    [super dealloc];
+    [contents release];
+
+}
 
 - (id)pop
 {
     // nil if [self count] == 0
-    id lastObject = [[[self lastObject] retain] autorelease];
+    id lastObject = [contents lastObject];
     if (lastObject)
-        [self removeLastObject];
+        [contents removeLastObject];
     return lastObject;
 }
 
+- (NSUInteger)count{
+
+    return [contents count];
+    
+}
 
 - (void)push:(id)obj
 {
-    [self addObject: obj];
+    [contents addObject: obj];
 }
 
 

@@ -12,6 +12,11 @@
 #import "DashBoardViewController.h"
 #import "FirstSettingViewController.h"
 
+
+#define getNibName(nibName) [NSString stringWithFormat:@"%@%@", nibName, ([UIScreen mainScreen].bounds.size.height == 568)? @"-568":@""]
+
+
+
 @implementation AppDelegate
 
 - (void)dealloc
@@ -22,44 +27,47 @@
 }
 
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //APNS 에 장치 등록
+	[application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+	
+	//Badge 개수 설정
+	application.applicationIconBadgeNumber = 0;
+	    
     
-    [FBProfilePictureView class];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginWithFacebook:) name:@"loginWithFacebook" object:nil];
+    
+    [BugSenseCrashController sharedInstanceWithBugSenseAPIKey:@"001a166a"];  // add BugSense
+
+    [UIApplication sharedApplication].idleTimerDisabled = YES;  // application can't lock screen automatically
+
+
+    
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    
 
-    NSString* RidingType = [[NSUserDefaults standardUserDefaults] stringForKey:@"RidingType"];
-    if(!RidingType){
-        RidingType = @"Single";
-        [[NSUserDefaults standardUserDefaults] setValue:RidingType forKey:@"RidingType"];
-    }
     
-    NSString* IsRiding = [[NSUserDefaults standardUserDefaults] stringForKey:@"IsRiding"];
-    if(!IsRiding){
-        IsRiding = @"Stop";
-        [[NSUserDefaults standardUserDefaults] setValue:IsRiding forKey:@"IsRiding"];
-        
-    }
+    //[[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"session"];
+    //[[NSUserDefaults standardUserDefaults]synchronize];
     
-    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"IsStart"];
+    NetUtility *net = [[[NetUtility alloc] init] autorelease];
     
-    NSString *IsStart = [[NSUserDefaults standardUserDefaults] stringForKey:@"IsStart"];
-    if(!IsStart){
-        FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:@"FirstSettingViewController" bundle:nil];
-//        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:firstSettingViewController];
-//        [navController.navigationBar setBarStyle:UIBarStyleBlack];
-        
-        self.viewController = firstSettingViewController;
-        
-    } else {
-        
+    if([net getSession])
+    {
         self.viewController = [[ViewController alloc] init];
+        self.window.rootViewController = self.viewController;
+        [self.window makeKeyAndVisible];
+        
+    }else{
+        FirstSettingViewController *firstSettingViewController = [[FirstSettingViewController alloc] initWithNibName:getNibName(@"FirstSettingViewController") bundle:nil];
+        self.viewController = firstSettingViewController;
+        self.window.rootViewController = self.viewController;
+        [self.window makeKeyAndVisible];
     }
-    
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
+    //self.viewController = [[ViewController alloc] init];
+
     return YES;
 }
 
@@ -88,9 +96,35 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+
+    
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [FBSession.activeSession close];
 }
+
+
+//push : APNS 에 장치 등록 성공시 자동실행
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+	NSLog(@"deviceToken : %@", deviceToken);
+    [self sendDeviceTokenToRemote:deviceToken];
+	/*
+	 여기에 당신의 서버와 통신하는 부분을 만들것.
+	 푸시를 누구에게 보낼지를 결정하는 것이 바로 deviceToken 값이다.
+	 내가 운영할 서버에 deviceToken 를 보내서 보관하자.
+	 */
+}
+
+//push : APNS 에 장치 등록 오류시 자동실행
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+	NSLog(@"deviceToken error : %@", error);
+}
+
+//push : 어플 실행중에 알림도착
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+	NSDictionary *aps = [userInfo valueForKey:@"aps"];
+	NSLog(@"userInfo Alert : %@", [aps valueForKey:@"alert"]);
+}
+
 
 // FBSample logic
 // The native facebook application transitions back to an authenticating application when the user
@@ -109,6 +143,8 @@
     // attempt to extract a token from the url
     return [FBSession.activeSession handleOpenURL:url];
 }
+
+
 
 
 

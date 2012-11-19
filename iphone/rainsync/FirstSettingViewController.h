@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
+#import "FBLogin.h"
+#import "NetUtility.h"
 
+#import "MBProgressHUD.h"
 @interface FirstSettingViewController : UIViewController
+{
+    NetUtility *net;
+    MBProgressHUD *HUD;
+}
 @property (retain, nonatomic) IBOutlet UIButton *fbButton;
 @property (retain, nonatomic) IBOutlet UIButton *generalLoginButton;
+@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 
 - (void)viewWillAppear:(BOOL)animated;
 
