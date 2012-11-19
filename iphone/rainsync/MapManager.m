@@ -37,7 +37,7 @@
 - (NSInteger) createUser:(NSInteger)userid
 {
     @synchronized(self){
-    [users addObject:[[NSNumber numberWithInt:userid] autorelease]];
+    [users addObject:[NSNumber numberWithInt:userid]];
     [route_lines addObject:[NSNull null]];
     //[route_views addObject:[NSNull null]];
     
@@ -49,7 +49,7 @@
 - (void) addPoint:(int)pos withLocation:(CLLocation *)newLocation
 {
     
-    
+    @synchronized(self){
     CrumbPath *prev_line = [route_lines objectAtIndex:pos];
     if(prev_line == [NSNull null])
     {
@@ -80,7 +80,7 @@
         }
         
     }
-    
+    }
 
     
     
