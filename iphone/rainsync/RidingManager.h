@@ -29,7 +29,7 @@
     RidingDB *ridingDB;
     NetUtility *net;
     MapManager *map;
-    
+    BOOL first_line;
     //inital speed
     
     

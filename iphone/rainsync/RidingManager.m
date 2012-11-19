@@ -30,6 +30,7 @@
         num =[map createUser:uid];
     }
     
+    first_line=false;
     return self;
 }
 
@@ -216,7 +217,7 @@
     
     [locations removeAllObjects];
     
-    if([self ridingType]==1){
+    if([self ridingType]==1 && first_line){
     [net raceSummaryWithblock:^(NSDictionary *res, NSError *error) {
         NSInteger state = [[res objectForKey:@"state"] intValue];
         if(state==0){
@@ -234,12 +235,13 @@
                 }
                 NSMutableArray *pos_arr=[dic objectForKey:key];
                 for (NSString *pos_str in pos_arr) {
+                    if(pos_str){
                     NSMutableArray *pos = [pos_str componentsSeparatedByString:@","];
                     //CLLocationCoordinate2D loc = CLLocationCoordinate2DMake([pos[0] doubleValue], [pos[1] doubleValue]);
                     double lat=[pos[0] doubleValue];
                     double lng=[pos[1] doubleValue];
                     [map addPoint:num withLocation:[[CLLocation alloc] initWithLatitude:lat longitude:lng]];
-                    
+                    }
                 }
                 
             }
@@ -351,8 +353,7 @@
     
 
     [map addPoint:0 withLocation:newLocation];
-
-    
+    first_line=true;
     
     [locations addObject:newLocation];
     
