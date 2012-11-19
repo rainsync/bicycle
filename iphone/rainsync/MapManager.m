@@ -22,7 +22,7 @@
 }
 - (NSInteger) getUserNum:(NSInteger)userid
 {
-    
+    @synchronized(self){
     for(int i=0; i<[users count]; ++i){
         NSInteger name= [[users objectAtIndex:i] intValue];
         if(name==userid)
@@ -30,18 +30,20 @@
     }
     
     return -1;
-
+    }
     
 }
 
 - (NSInteger) createUser:(NSInteger)userid
 {
+    @synchronized(self){
     [users addObject:[[NSNumber numberWithInt:userid] autorelease]];
     [route_lines addObject:[NSNull null]];
     //[route_views addObject:[NSNull null]];
     
     int i=[users count]-1;
     return i;
+    }
 }
 
 - (void) addPoint:(int)pos withLocation:(CLLocation *)newLocation
@@ -62,6 +64,9 @@
         
     }else{
         
+        if(pos!=0){
+            NSLog(@"TT RT");
+        }
         MKMapRect updateRect = [prev_line addCoordinate:newLocation.coordinate];
         NSLog(@"%lf %lf %lf %lf %p %p gg", updateRect.origin.x, updateRect.origin.y, updateRect.size.height,updateRect.size.width, route_views[pos], [NSNull null]);
         
