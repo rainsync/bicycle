@@ -136,8 +136,8 @@
                         [groupRideViewController release];
                         
                     }else{
-                        [self.parentViewController setPage:2];
-                        [[self.parentViewController.childViewControllers objectAtIndex:2] ShowMember:participants];
+                        //[self.parentViewController setPage:2];
+                        //[[self.parentViewController.childViewControllers objectAtIndex:2] ShowMember:participants];
                         group_ride_mode=2;
                         [ridingManager loadStatus];
                         [ridingManager startRiding];
