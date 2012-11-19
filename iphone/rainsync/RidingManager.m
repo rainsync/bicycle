@@ -23,6 +23,13 @@
     ridingDB = [[RidingDB alloc] init];
     net =[[NetUtility alloc]init];
     map =[[MapManager alloc] init];
+    
+    NSInteger uid = 0;
+    NSInteger num=[map getUserNum:uid];
+    if(num==-1){
+        num =[map createUser:uid];
+    }
+    
     return self;
 }
 
@@ -215,6 +222,7 @@
         if(state==0){
             NSMutableDictionary * dic =[res objectForKey:@"summary"];
             for (NSString *key in dic) {
+                NSLog(@"GGGGGG");
                 NSInteger uid = [key intValue];
                 NSInteger num=[map getUserNum:uid];
                 if(num==-1){
@@ -228,8 +236,9 @@
                 for (NSString *pos_str in pos_arr) {
                     NSMutableArray *pos = [pos_str componentsSeparatedByString:@","];
                     //CLLocationCoordinate2D loc = CLLocationCoordinate2DMake([pos[0] doubleValue], [pos[1] doubleValue]);
-
-                    [map addPoint:num withLocation:[[[CLLocation alloc] initWithLatitude:[pos[0] doubleValue] longitude:[pos[1] doubleValue]] autorelease] ];
+                    double lat=[pos[0] doubleValue];
+                    double lng=[pos[1] doubleValue];
+                    [map addPoint:num withLocation:[[CLLocation alloc] initWithLatitude:lat longitude:lng]];
                     
                 }
                 
@@ -339,14 +348,9 @@
     
     _current_location=newLocation;
     
-    NSInteger uid = 0;
-    NSInteger num=[map getUserNum:uid];
-    if(num==-1){
-        num =[map createUser:uid];
-    }
     
 
-    [map addPoint:num withLocation:newLocation];
+    [map addPoint:0 withLocation:newLocation];
 
     
     
