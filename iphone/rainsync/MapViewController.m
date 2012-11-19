@@ -34,8 +34,8 @@
     MKMapRect *rect=[[[noti userInfo] objectForKey:@"rect"] pointerValue];
     for (NSMutableArray *arr in path) {
         MKOverlayView *view=arr[1];
-        if(arr!=[NSNull null]){
-        [arr[1] setNeedsDisplayInMapRect:(*rect)];
+        if(view!=[NSNull null]){
+        [view setNeedsDisplayInMapRect:(*rect)];
         }
         
     }
