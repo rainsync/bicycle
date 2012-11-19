@@ -194,12 +194,15 @@
     
     [ridingDB  saveLocation:_last_riding withLocation:locations];
     if([self ridingType]==1){
-    [net raceRecordWithpos:locations Withblock:^(NSDictionary *res, NSError *error) {
-        NSInteger state = [[res objectForKey:@"state"] intValue];
-        if(state==0){
-            NSLog(@"record success!");
-            
+    [net raceRecordWithpos:locations Withblock:^(NSArray *res, NSError *error) {
+        for (NSMutableDictionary *dic in res) {
+            NSInteger state = [[dic objectForKey:@"state"] intValue];
+            if(state==0){
+                NSLog(@"record success!");
+                
+            }
         }
+
         
     }];
     }
