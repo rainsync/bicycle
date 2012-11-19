@@ -38,18 +38,22 @@
     RidingViewController *riding = [RidingViewController alloc];
     UINavigationController *ridingViewNavController = [UINavigationController alloc];
     [ridingViewNavController initWithRootViewController:riding];
+    [ridingViewNavController.tabBarItem initWithTitle:@"라이딩" image:[UIImage imageNamed:@"riding"] tag:0];
     
     ProfileViewController* profile = [ProfileViewController alloc];
     UINavigationController *profileNavController = [UINavigationController alloc];
     [profileNavController initWithRootViewController:profile];
+    [profileNavController.tabBarItem initWithTitle:@"내 정보" image:[UIImage imageNamed:@"profile2"] tag:1];
     
     StaticViewController* statics = [StaticViewController alloc];
     UINavigationController *staticsNavController = [UINavigationController alloc];
     [staticsNavController initWithRootViewController:statics];
+    [staticsNavController.tabBarItem initWithTitle:@"기록" image:[UIImage imageNamed:@"static"] tag:2];
                                                    
     SettingViewController* setting = [SettingViewController alloc];  
     UINavigationController *settingNavController = [UINavigationController alloc];
     [settingNavController initWithRootViewController:setting];
+    [settingNavController.tabBarItem initWithTitle:@"설정" image:[UIImage imageNamed:@"setting"] tag:3];
                                                    
 
     self.viewControllers = @[ridingViewNavController,profileNavController,staticsNavController, settingNavController];
