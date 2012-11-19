@@ -9,8 +9,15 @@
 /* Begin PBXBuildFile section */
 		0412D618165150380097F848 /* cyc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0412D617165150380097F848 /* cyc@2x.png */; };
 		0412D61A165150560097F848 /* singleRiding.png in Resources */ = {isa = PBXBuildFile; fileRef = 0412D619165150560097F848 /* singleRiding.png */; };
+		041C2DD2165A8AC20084765F /* singleStopRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041C2DCF165A8AC20084765F /* singleStopRiding@2x.png */; };
+		041C2DE0165A93890084765F /* startSingleRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041C2DDF165A93890084765F /* startSingleRiding@2x.png */; };
+		041C2DE2165A93D30084765F /* stopSingleRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041C2DE1165A93D30084765F /* stopSingleRiding@2x.png */; };
+		041C2DF0165AA1C50084765F /* startGroupRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041C2DEF165AA1C40084765F /* startGroupRiding@2x.png */; };
+		041C2DF2165AA1E20084765F /* pauseGroupRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041C2DF1165AA1E20084765F /* pauseGroupRiding@2x.png */; };
+		041C2DF4165AA20D0084765F /* pauseSingleRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041C2DF3165AA20D0084765F /* pauseSingleRiding@2x.png */; };
+		041C2DF6165AA2F10084765F /* modeChanger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041C2DF5165AA2F10084765F /* modeChanger@2x.png */; };
+		041C2DF8165AA5F90084765F /* dashboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041C2DF7165AA5F90084765F /* dashboard@2x.png */; };
 		043E8A97165A114000D415E5 /* profileTexture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 043E8A96165A114000D415E5 /* profileTexture@2x.png */; };
-		043E8A9A165A11B700D415E5 /* modeChangeDial@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 043E8A99165A11B700D415E5 /* modeChangeDial@2x.png */; };
 		043E8AA1165A133B00D415E5 /* static@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 043E8A9B165A133B00D415E5 /* static@2x.png */; };
 		043E8AA2165A133B00D415E5 /* profile3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 043E8A9C165A133B00D415E5 /* profile3@2x.png */; };
 		043E8AA3165A133B00D415E5 /* profile2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 043E8A9D165A133B00D415E5 /* profile2@2x.png */; };
@@ -36,7 +43,6 @@
 		047AD61F164D1FDE00983365 /* singleRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047AD61D164D1FDE00983365 /* singleRiding@2x.png */; };
 		0483FE1E163E5FA8005D804F /* FirstSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */; };
 		0483FE1F163E5FA8005D804F /* FirstSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */; };
-		0494D2821655246F0004FC36 /* dashboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0494D2811655246F0004FC36 /* dashboard@2x.png */; };
 		049958421657A6730043D3AA /* dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 049958411657A6720043D3AA /* dashboard.png */; };
 		049958481657A6900043D3AA /* fbBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 049958441657A6900043D3AA /* fbBtn.png */; };
 		049958491657A6900043D3AA /* fbBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049958451657A6900043D3AA /* fbBtn@2x.png */; };
@@ -60,8 +66,6 @@
 		049958A7165804D80043D3AA /* memberHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049958A5165804D80043D3AA /* memberHeader@2x.png */; };
 		04ADF5B7163EABE000F825B4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04ADF5B6163EABE000F825B4 /* MobileCoreServices.framework */; };
 		04B1E870165171E60086F56A /* stopGroupRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B1E86D165171E60086F56A /* stopGroupRiding@2x.png */; };
-		04B1E871165171E60086F56A /* pauseGroupRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B1E86E165171E60086F56A /* pauseGroupRiding@2x.png */; };
-		04B1E872165171E60086F56A /* startGroupRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B1E86F165171E60086F56A /* startGroupRiding@2x.png */; };
 		04BA767C1656509A0041A31F /* circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BA767B1656509A0041A31F /* circle@2x.png */; };
 		04BA768A16565BA30041A31F /* circle_dash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BA768916565BA30041A31F /* circle_dash@2x.png */; };
 		04C3C04C164BCBD700047992 /* BugSense-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C3C04B164BCBD600047992 /* BugSense-iOS.framework */; };
@@ -69,8 +73,6 @@
 		04C3C052164BCC1B00047992 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C3C051164BCC1B00047992 /* libz.dylib */; };
 		04C3C078164BD8EF00047992 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3C076164BD8EF00047992 /* Default@2x.png */; };
 		04D00614164C21EA00064370 /* compass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D00613164C21EA00064370 /* compass@2x.png */; };
-		04DC7693164EE9C700289E27 /* startSingleRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DC7691164EE9C700289E27 /* startSingleRiding@2x.png */; };
-		04DC7694164EE9C700289E27 /* stopSingleRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DC7692164EE9C700289E27 /* stopSingleRiding@2x.png */; };
 		04DC76B3164EECDF00289E27 /* PrettyCustomViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC76A1164EECDF00289E27 /* PrettyCustomViewTableViewCell.m */; };
 		04DC76B4164EECDF00289E27 /* PrettyGridTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC76A3164EECDF00289E27 /* PrettyGridTableViewCell.m */; };
 		04DC76B5164EECDF00289E27 /* PrettySegmentedControlTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC76A5164EECDF00289E27 /* PrettySegmentedControlTableViewCell.m */; };
@@ -86,7 +88,6 @@
 		04E3BB471651025F001D8745 /* GpsOptionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E3BB451651025E001D8745 /* GpsOptionTableView.m */; };
 		04E3BB481651025F001D8745 /* GpsOptionTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB461651025E001D8745 /* GpsOptionTableView.xib */; };
 		04E3BB5316512256001D8745 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3C075164BD8EF00047992 /* Default-568h@2x.png */; };
-		04E3BB57165128FE001D8745 /* pause_SingleRiding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB56165128FE001D8745 /* pause_SingleRiding@2x.png */; };
 		04E3BB591651405C001D8745 /* customDisclosure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E3BB581651405C001D8745 /* customDisclosure@2x.png */; };
 		04E7584916529BF000D933FC /* UIColor+ColorWithHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E7584816529BF000D933FC /* UIColor+ColorWithHex.m */; };
 		04E758581652A8BF00D933FC /* MemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E758561652A8BE00D933FC /* MemberViewController.m */; };
@@ -197,8 +198,15 @@
 /* Begin PBXFileReference section */
 		0412D617165150380097F848 /* cyc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cyc@2x.png"; sourceTree = "<group>"; };
 		0412D619165150560097F848 /* singleRiding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = singleRiding.png; sourceTree = "<group>"; };
+		041C2DCF165A8AC20084765F /* singleStopRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "singleStopRiding@2x.png"; sourceTree = "<group>"; };
+		041C2DDF165A93890084765F /* startSingleRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startSingleRiding@2x.png"; sourceTree = "<group>"; };
+		041C2DE1165A93D30084765F /* stopSingleRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stopSingleRiding@2x.png"; sourceTree = "<group>"; };
+		041C2DEF165AA1C40084765F /* startGroupRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startGroupRiding@2x.png"; sourceTree = "<group>"; };
+		041C2DF1165AA1E20084765F /* pauseGroupRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pauseGroupRiding@2x.png"; sourceTree = "<group>"; };
+		041C2DF3165AA20D0084765F /* pauseSingleRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pauseSingleRiding@2x.png"; sourceTree = "<group>"; };
+		041C2DF5165AA2F10084765F /* modeChanger@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modeChanger@2x.png"; sourceTree = "<group>"; };
+		041C2DF7165AA5F90084765F /* dashboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dashboard@2x.png"; sourceTree = "<group>"; };
 		043E8A96165A114000D415E5 /* profileTexture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileTexture@2x.png"; sourceTree = "<group>"; };
-		043E8A99165A11B700D415E5 /* modeChangeDial@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modeChangeDial@2x.png"; sourceTree = "<group>"; };
 		043E8A9B165A133B00D415E5 /* static@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "static@2x.png"; sourceTree = "<group>"; };
 		043E8A9C165A133B00D415E5 /* profile3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile3@2x.png"; sourceTree = "<group>"; };
 		043E8A9D165A133B00D415E5 /* profile2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile2@2x.png"; sourceTree = "<group>"; };
@@ -225,7 +233,6 @@
 		0483FE1B163E5FA8005D804F /* FirstSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstSettingViewController.h; sourceTree = "<group>"; };
 		0483FE1C163E5FA8005D804F /* FirstSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstSettingViewController.m; sourceTree = "<group>"; };
 		0483FE1D163E5FA8005D804F /* FirstSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstSettingViewController.xib; sourceTree = "<group>"; };
-		0494D2811655246F0004FC36 /* dashboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dashboard@2x.png"; sourceTree = "<group>"; };
 		049958411657A6720043D3AA /* dashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboard.png; sourceTree = "<group>"; };
 		049958441657A6900043D3AA /* fbBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fbBtn.png; sourceTree = "<group>"; };
 		049958451657A6900043D3AA /* fbBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fbBtn@2x.png"; sourceTree = "<group>"; };
@@ -249,8 +256,6 @@
 		049958A5165804D80043D3AA /* memberHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "memberHeader@2x.png"; sourceTree = "<group>"; };
 		04ADF5B6163EABE000F825B4 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		04B1E86D165171E60086F56A /* stopGroupRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stopGroupRiding@2x.png"; sourceTree = "<group>"; };
-		04B1E86E165171E60086F56A /* pauseGroupRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pauseGroupRiding@2x.png"; sourceTree = "<group>"; };
-		04B1E86F165171E60086F56A /* startGroupRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startGroupRiding@2x.png"; sourceTree = "<group>"; };
 		04BA767B1656509A0041A31F /* circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle@2x.png"; sourceTree = "<group>"; };
 		04BA768916565BA30041A31F /* circle_dash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_dash@2x.png"; sourceTree = "<group>"; };
 		04C3C04B164BCBD600047992 /* BugSense-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "BugSense-iOS.framework"; sourceTree = "<group>"; };
@@ -259,8 +264,6 @@
 		04C3C075164BD8EF00047992 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		04C3C076164BD8EF00047992 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		04D00613164C21EA00064370 /* compass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compass@2x.png"; sourceTree = "<group>"; };
-		04DC7691164EE9C700289E27 /* startSingleRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startSingleRiding@2x.png"; sourceTree = "<group>"; };
-		04DC7692164EE9C700289E27 /* stopSingleRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stopSingleRiding@2x.png"; sourceTree = "<group>"; };
 		04DC76A0164EECDF00289E27 /* PrettyCustomViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrettyCustomViewTableViewCell.h; sourceTree = "<group>"; };
 		04DC76A1164EECDF00289E27 /* PrettyCustomViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrettyCustomViewTableViewCell.m; sourceTree = "<group>"; };
 		04DC76A2164EECDF00289E27 /* PrettyGridTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrettyGridTableViewCell.h; sourceTree = "<group>"; };
@@ -286,7 +289,6 @@
 		04E3BB441651025E001D8745 /* GpsOptionTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GpsOptionTableView.h; sourceTree = "<group>"; };
 		04E3BB451651025E001D8745 /* GpsOptionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GpsOptionTableView.m; sourceTree = "<group>"; };
 		04E3BB461651025E001D8745 /* GpsOptionTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GpsOptionTableView.xib; sourceTree = "<group>"; };
-		04E3BB56165128FE001D8745 /* pause_SingleRiding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause_SingleRiding@2x.png"; sourceTree = "<group>"; };
 		04E3BB581651405C001D8745 /* customDisclosure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "customDisclosure@2x.png"; sourceTree = "<group>"; };
 		04E7584716529BF000D933FC /* UIColor+ColorWithHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorWithHex.h"; sourceTree = "<group>"; };
 		04E7584816529BF000D933FC /* UIColor+ColorWithHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorWithHex.m"; sourceTree = "<group>"; };
@@ -454,20 +456,21 @@
 		045B5666164A5490005CEC8A /* dashboardViewImage */ = {
 			isa = PBXGroup;
 			children = (
-				043E8A99165A11B700D415E5 /* modeChangeDial@2x.png */,
+				041C2DCF165A8AC20084765F /* singleStopRiding@2x.png */,
+				041C2DE1165A93D30084765F /* stopSingleRiding@2x.png */,
+				041C2DDF165A93890084765F /* startSingleRiding@2x.png */,
+				041C2DF3165AA20D0084765F /* pauseSingleRiding@2x.png */,
+				04B1E86D165171E60086F56A /* stopGroupRiding@2x.png */,
+				041C2DEF165AA1C40084765F /* startGroupRiding@2x.png */,
+				041C2DF1165AA1E20084765F /* pauseGroupRiding@2x.png */,
+				041C2DF5165AA2F10084765F /* modeChanger@2x.png */,
 				04E3BB2C1650DE03001D8745 /* cyc.png */,
 				0412D617165150380097F848 /* cyc@2x.png */,
 				04BA767B1656509A0041A31F /* circle@2x.png */,
 				04BA768916565BA30041A31F /* circle_dash@2x.png */,
-				04B1E86D165171E60086F56A /* stopGroupRiding@2x.png */,
-				04B1E86E165171E60086F56A /* pauseGroupRiding@2x.png */,
-				04B1E86F165171E60086F56A /* startGroupRiding@2x.png */,
-				04DC7691164EE9C700289E27 /* startSingleRiding@2x.png */,
-				04E3BB56165128FE001D8745 /* pause_SingleRiding@2x.png */,
-				04DC7692164EE9C700289E27 /* stopSingleRiding@2x.png */,
 				045B565D164A5481005CEC8A /* statusbar.png */,
 				049958411657A6720043D3AA /* dashboard.png */,
-				0494D2811655246F0004FC36 /* dashboard@2x.png */,
+				041C2DF7165AA5F90084765F /* dashboard@2x.png */,
 			);
 			name = dashboardViewImage;
 			sourceTree = "<group>";
@@ -958,21 +961,16 @@
 				04D00614164C21EA00064370 /* compass@2x.png in Resources */,
 				047AD61E164D1FDE00983365 /* teamRiding@2x.png in Resources */,
 				047AD61F164D1FDE00983365 /* singleRiding@2x.png in Resources */,
-				04DC7693164EE9C700289E27 /* startSingleRiding@2x.png in Resources */,
-				04DC7694164EE9C700289E27 /* stopSingleRiding@2x.png in Resources */,
 				04E3BB251650D025001D8745 /* background@2x.png in Resources */,
 				04E3BB2D1650DE03001D8745 /* cyc.png in Resources */,
 				55B1D8051650FA930032D86C /* DashBoardViewController-568.xib in Resources */,
 				55B1D8071650FAB30032D86C /* FirstSettingViewController-568.xib in Resources */,
 				04E3BB481651025F001D8745 /* GpsOptionTableView.xib in Resources */,
 				04E3BB5316512256001D8745 /* Default-568h@2x.png in Resources */,
-				04E3BB57165128FE001D8745 /* pause_SingleRiding@2x.png in Resources */,
 				04E3BB591651405C001D8745 /* customDisclosure@2x.png in Resources */,
 				0412D618165150380097F848 /* cyc@2x.png in Resources */,
 				0412D61A165150560097F848 /* singleRiding.png in Resources */,
 				04B1E870165171E60086F56A /* stopGroupRiding@2x.png in Resources */,
-				04B1E871165171E60086F56A /* pauseGroupRiding@2x.png in Resources */,
-				04B1E872165171E60086F56A /* startGroupRiding@2x.png in Resources */,
 				04E758591652A8BF00D933FC /* MemberViewController.xib in Resources */,
 				04E758681652B80F00D933FC /* MemberCustomCell.xib in Resources */,
 				04786523165386FD0004DFE2 /* 0.png in Resources */,
@@ -987,7 +985,6 @@
 				0478652C165386FD0004DFE2 /* 9.png in Resources */,
 				55D386221654C8A200076749 /* _.png in Resources */,
 				55D386251654C8E600076749 /* dot.png in Resources */,
-				0494D2821655246F0004FC36 /* dashboard@2x.png in Resources */,
 				04BA767C1656509A0041A31F /* circle@2x.png in Resources */,
 				04BA768A16565BA30041A31F /* circle_dash@2x.png in Resources */,
 				049958421657A6730043D3AA /* dashboard.png in Resources */,
@@ -1013,7 +1010,6 @@
 				049958A7165804D80043D3AA /* memberHeader@2x.png in Resources */,
 				55E607811658EE4400A4F1C9 /* nobody.jpg in Resources */,
 				043E8A97165A114000D415E5 /* profileTexture@2x.png in Resources */,
-				043E8A9A165A11B700D415E5 /* modeChangeDial@2x.png in Resources */,
 				043E8AA1165A133B00D415E5 /* static@2x.png in Resources */,
 				043E8AA2165A133B00D415E5 /* profile3@2x.png in Resources */,
 				043E8AA3165A133B00D415E5 /* profile2@2x.png in Resources */,
@@ -1022,6 +1018,14 @@
 				043E8AA6165A133B00D415E5 /* riding@2x.png in Resources */,
 				043E8AA8165A156400D415E5 /* riding2@2x.png in Resources */,
 				043E8AAA165A162D00D415E5 /* riding3@2x.png in Resources */,
+				041C2DD2165A8AC20084765F /* singleStopRiding@2x.png in Resources */,
+				041C2DE0165A93890084765F /* startSingleRiding@2x.png in Resources */,
+				041C2DE2165A93D30084765F /* stopSingleRiding@2x.png in Resources */,
+				041C2DF0165AA1C50084765F /* startGroupRiding@2x.png in Resources */,
+				041C2DF2165AA1E20084765F /* pauseGroupRiding@2x.png in Resources */,
+				041C2DF4165AA20D0084765F /* pauseSingleRiding@2x.png in Resources */,
+				041C2DF6165AA2F10084765F /* modeChanger@2x.png in Resources */,
+				041C2DF8165AA5F90084765F /* dashboard@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1302,8 +1306,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F981DD36-BDFC-4A1A-998A-60909A184D8B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F981DD36-BDFC-4A1A-998A-60909A184D8B";
+				PROVISIONING_PROFILE = "1F200167-3C8D-4ABC-A59C-B2A219791347";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1F200167-3C8D-4ABC-A59C-B2A219791347";
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

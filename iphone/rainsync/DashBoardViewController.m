@@ -97,13 +97,15 @@
     [self.stopButton setEnabled:NO];
     [self.stopLabel setAlpha:0.5f];
     
-    
+    [self.modeChangeButton setEnabled:YES];
+    [self.modeChangeLabel setEnabled:1.0f];
 }
 
 - (IBAction)statusChanged:(id)sender {
 
     NSLog(@"%d", [ridingManager isRiding]);
     NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"]);
+    
     if(![ridingManager isRiding] && [ridingManager ridingType]==1) {    // 시작 전이고 싱글라이딩이 아니라면
 
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
@@ -151,20 +153,19 @@
 
             }
         }];
-
-        
-    }
+           }
     if(!paused){
         if([ridingManager ridingType]==0)
         {
         paused=true;
         [ridingManager loadStatus];
         [ridingManager startRiding];
-        [self.statusButton setImage:[UIImage imageNamed:@"pause_SingleRiding"] forState:UIControlStateNormal];
+        [self.statusButton setImage:[UIImage imageNamed:@"pauseSingleRiding"] forState:UIControlStateNormal];
         [self.statusLabel setText:@"멈추기"];
         [self.stopButton setEnabled:NO];
         [self.stopLabel setAlpha:0.5f];
-            
+            [self.modeChangeButton setEnabled:NO];
+            [self.modeChangeLabel setAlpha:0.5f];
         }else{
             
             
@@ -179,6 +180,11 @@
         [self.statusLabel setText:@"달리기"];
         [self.stopButton setEnabled:YES];
         [self.stopLabel setAlpha:1.0f];
+
+        if (![ridingManager isRiding]) { // 일시정지지만 라이딩을 시작 안했을때만 모드 변경 가능
+            [self.modeChangeButton setEnabled:YES];
+            [self.modeChangeLabel setEnabled:1.0f];
+        }
     }
 }
 
@@ -189,12 +195,24 @@
 NSInteger type = [ridingManager ridingType];
 
     if (type==0) {
-        [_modeChangeButton setTitle:@"그룹모드로" forState:UIControlStateNormal];
        [_modeLabel setText:@"Single Riding"];
+        [_stopButton setImage:[UIImage imageNamed:@"stopSingleRiding"] forState:UIControlStateNormal];
+        [_statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];        
     }
     else if(type==1){
-      [_modeChangeButton setTitle:@"싱글모드로" forState:UIControlStateNormal];
         [_modeLabel setText:@"Group Riding"];
+        [_stopButton setImage:[UIImage imageNamed:@"stopGroupRiding"] forState:UIControlStateNormal];
+        [_statusButton setImage:[UIImage imageNamed:@"startGroupRiding"] forState:UIControlStateNormal];
+        
+        CABasicAnimation* rotationAnimation2 = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+        rotationAnimation2.removedOnCompletion = NO;
+        rotationAnimation2.fillMode = kCAFillModeForwards;
+        rotationAnimation2.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        rotationAnimation2.delegate = self;
+        rotationAnimation2.fromValue = [NSNumber numberWithInt:0];
+        rotationAnimation2.toValue = [NSNumber numberWithFloat:M_PI_2];//(1 * M_PI) * direction];
+        rotationAnimation2.duration = 0.5f;
+        [_modeChangeButton.imageView addAnimation:rotationAnimation2 forKey:@"rotateAnimation"];
     }
     
 }
@@ -273,6 +291,7 @@ NSInteger type = [ridingManager ridingType];
     [_modeChangeButton release];
     [_modeLabel release];
     [_bottom_dashboard release];
+    [_modeChangeLabel release];
     [super dealloc];
 }
 
@@ -297,39 +316,44 @@ NSInteger type = [ridingManager ridingType];
     [self setTest:nil];
     [self setModeLabel:nil];
     [self setBottom_dashboard:nil];
+    [self setModeChangeLabel:nil];
     [super viewDidUnload];
 }
 
 - (IBAction)modeChange:(id)sender {
 
     NSInteger type = [ridingManager ridingType];
-    
-    CABasicAnimation* rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.removedOnCompletion = NO;
-    rotationAnimation.fillMode = kCAFillModeForwards;
-    rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    rotationAnimation.delegate = self;
+        
+    CABasicAnimation* rotationAnimation2 = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation2.removedOnCompletion = NO;
+    rotationAnimation2.fillMode = kCAFillModeForwards;
+    rotationAnimation2.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    rotationAnimation2.delegate = self;
     
     if (type==0) {
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"RidingType"];
-        [_modeChangeButton setTitle:@"싱글모드로" forState:UIControlStateNormal];
+//        [_modeChangeButton setTitle:@"싱글모드로" forState:UIControlStateNormal];
+        [_stopButton setImage:[UIImage imageNamed:@"stopGroupRiding"] forState:UIControlStateNormal];
+        [_statusButton setImage:[UIImage imageNamed:@"startGroupRiding"] forState:UIControlStateNormal];
         [_modeLabel setText:@"Group Riding"];
         
-        rotationAnimation.fromValue = [NSNumber numberWithInt:0];
-        rotationAnimation.toValue = [NSNumber numberWithFloat:M_PI];//(1 * M_PI) * direction];
-        rotationAnimation.duration = 1.0f;
-        [_bottom_dashboard addAnimation:rotationAnimation forKey:@"rotateAnimation"];       
+        rotationAnimation2.fromValue = [NSNumber numberWithInt:0];
+        rotationAnimation2.toValue = [NSNumber numberWithFloat:M_PI_2];//(1 * M_PI) * direction];
+        rotationAnimation2.duration = 0.5f;
+        [_modeChangeButton.imageView addAnimation:rotationAnimation2 forKey:@"rotateAnimation"];
     }
     else if(type==1)
     {
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"RidingType"];
-        [_modeChangeButton setTitle:@"그룹모드로" forState:UIControlStateNormal];
+//        [_modeChangeButton setTitle:@"그룹모드로" forState:UIControlStateNormal];
+        [_stopButton setImage:[UIImage imageNamed:@"stopSingleRiding"] forState:UIControlStateNormal];
+        [_statusButton setImage:[UIImage imageNamed:@"singleStartRiding"] forState:UIControlStateNormal];
         [_modeLabel setText:@"Single Riding"];
         
-        rotationAnimation.fromValue = [NSNumber numberWithInt:M_PI];
-        rotationAnimation.toValue = [NSNumber numberWithFloat:0];//(1 * M_PI) * direction];
-        rotationAnimation.duration = 1.0f;
-        [_bottom_dashboard addAnimation:rotationAnimation forKey:@"rotateAnimation"];
+        rotationAnimation2.fromValue = [NSNumber numberWithFloat:M_PI_2];
+        rotationAnimation2.toValue = [NSNumber numberWithInt:0];//(1 * M_PI) * direction];
+        rotationAnimation2.duration = 0.5f;
+        [_modeChangeButton.imageView addAnimation:rotationAnimation2 forKey:@"rotateAnimation"];
     }
     
     [[NSUserDefaults standardUserDefaults] synchronize];
