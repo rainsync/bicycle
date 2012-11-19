@@ -10,7 +10,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import "RidingDB.h"
 #import "Utility.h"
-
+#import "NetUtility.h"
+#import "MapManager.h"
 @class RidingDB;
 
 @interface RidingManager : NSObject <CLLocationManagerDelegate, UIAlertViewDelegate>
@@ -26,6 +27,8 @@
 //    int calorie;
     int weight;
     RidingDB *ridingDB;
+    NetUtility *net;
+    MapManager *map;
     
     //inital speed
     

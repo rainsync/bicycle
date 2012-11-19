@@ -21,6 +21,8 @@
     
     targets = [[NSMutableArray alloc] init];
     ridingDB = [[RidingDB alloc] init];
+    net =[[NetUtility alloc]init];
+    map =[[MapManager alloc] init];
     return self;
 }
 
@@ -191,8 +193,50 @@
     [self saveStatus];
     
     [ridingDB  saveLocation:_last_riding withLocation:locations];
+    if([self ridingType]==1){
+    [net raceRecordWithpos:locations Withblock:^(NSDictionary *res, NSError *error) {
+        NSInteger state = [[res objectForKey:@"state"] intValue];
+        if(state==0){
+            NSLog(@"record success!");
+            
+        }
+        
+    }];
+    }
+    
     [locations removeAllObjects];
     
+    if([self ridingType]==1){
+    [net raceSummaryWithblock:^(NSDictionary *res, NSError *error) {
+        NSInteger state = [[res objectForKey:@"state"] intValue];
+        if(state==0){
+            NSMutableDictionary * dic =[res objectForKey:@"summary"];
+            for (NSString *key in dic) {
+                NSInteger uid = [key intValue];
+                NSInteger num=[map getUserNum:uid];
+                if(num==-1){
+                    num =[map createUser:uid];
+                    
+
+                    //add overlay noti
+                    
+                }
+                NSMutableArray *pos_arr=[dic objectForKey:key];
+                for (NSString *pos_str in pos_arr) {
+                    NSMutableArray *pos = [pos_str componentsSeparatedByString:@","];
+                    //CLLocationCoordinate2D loc = CLLocationCoordinate2DMake([pos[0] doubleValue], [pos[1] doubleValue]);
+
+                    [map addPoint:num withLocation:[[[CLLocation alloc] initWithLatitude:[pos[0] doubleValue] longitude:[pos[1] doubleValue]] autorelease] ];
+                    
+                }
+                
+            }
+            
+            
+        }
+        
+    }];
+    }
     
     
     for (id obj in targets) {
@@ -292,6 +336,15 @@
     
     _current_location=newLocation;
     
+    NSInteger uid = 0;
+    NSInteger num=[map getUserNum:uid];
+    if(num==-1){
+        num =[map createUser:uid];
+    }
+    
+
+    [map addPoint:num withLocation:newLocation];
+
     
     
     [locations addObject:newLocation];

@@ -7,7 +7,7 @@
 //
 
 #import "MapViewController.h"
-
+#import "CrumbPathView.h"
 
 @interface MapViewController ()
 
@@ -15,22 +15,58 @@
 
 @implementation MapViewController
 
+
+
+- (void)newOverlay:(NSNotification *)noti
+{
+    
+    id<MKOverlay> overlay=[[noti userInfo] objectForKey:@"line"];
+    
+    NSMutableArray *arr =[[NSMutableArray alloc] initWithArray:@[overlay, [NSNull null]]];
+    [path addObject:arr];
+    [self.mapView addOverlay:overlay];
+}
+
+
+- (void)newRect:(NSNotification *)noti
+{
+    
+    MKMapRect *rect=[[[noti userInfo] objectForKey:@"rect"] pointerValue];
+    for (NSMutableArray *arr in path) {
+        MKOverlayView *view=arr[1];
+        if(arr!=[NSNull null]){
+        [arr[1] setNeedsDisplayInMapRect:(*rect)];
+        }
+        
+    }
+//    MKZoomScale currentZoomScale = (CGFloat)(_mapView.bounds.size.width / _mapView.visibleMapRect.size.width);
+//    //            // Find out the line width at this zoom scale and outset the updateRect by that amount
+//                CGFloat lineWidth = MKRoadWidthAtZoomScale(currentZoomScale);
+//                updateRect = MKMapRectInset(updateRect, -lineWidth, -lineWidth);
+//    //            // Ask the overlay view to update just the changed area.
+//                [route_views[pos] setNeedsDisplayInMapRect:updateRect];
+//                MKCoordinateRegion region=_mapView.region;
+//            region.center = newLocation.coordinate;
+//                [_mapView setRegion:region animated:YES];
+
+}
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
 
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newOverlay:) name:@"newOverlay" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newRect:) name:@"newRect" object:nil];
+        path = [[NSMutableArray alloc] init];
+        
         line_color = [[NSArray alloc] initWithArray:@[[UIColor redColor],[UIColor greenColor], [UIColor blueColor], [UIColor blackColor], [UIColor whiteColor]]];
-        users = [[NSMutableArray alloc] init];
-        route_lines = [[NSMutableArray alloc]init];
-        route_views = [[NSMutableArray alloc]init];
         
         ridingManager = [self.tabBarController getRidingManager];
-        
         [ridingManager addTarget:self];
         
-        [self getUserNum:@"me"];
-
         
         // Custom initialization
     }
@@ -56,95 +92,6 @@
         // Do any additional setup after loading the view from its nib.
 }
 
-- (NSInteger) getUserNum:(NSString*)username
-{
-
-    for(int i=0; i<[users count]; ++i){
-        NSString* name= [users objectAtIndex:i];
-        if([name isEqualToString:username])
-            return i;
-        
-    }
-    
-    [users addObject:username];
-    [route_lines addObject:[NSNull null]];
-    [route_views addObject:[NSNull null]];
-    
-    int i=[users count]-1;
-    return i;
-    
-}
-- (void) addPoint:(int)pos withLocation:(CLLocation *)newLocation
-{
-
-
-    CrumbPath *prev_line = [route_lines objectAtIndex:pos];
-    if(prev_line == [NSNull null])
-    {
-        prev_line = [[CrumbPath alloc] initWithCenterCoordinate:newLocation.coordinate];
-        [self.mapView addOverlay:prev_line];
-        [route_lines replaceObjectAtIndex:pos withObject:prev_line];
-        
-        NSLog(@"changed..");
-        
-        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 1000, 1000);
-        [_mapView setRegion:region animated:YES];
-        
-    }else{
-    
-        MKMapRect updateRect = [prev_line addCoordinate:newLocation.coordinate];
-        NSLog(@"%lf %lf %lf %lf %p %p gg", updateRect.origin.x, updateRect.origin.y, updateRect.size.height,updateRect.size.width, route_views[pos], [NSNull null]);
-        
-        if (!MKMapRectIsNull(updateRect) && route_views[pos]!=[NSNull null])
-        {
-            // There is a non null update rect.
-            // Compute the currently visible map zoom scale
-            MKZoomScale currentZoomScale = (CGFloat)(_mapView.bounds.size.width / _mapView.visibleMapRect.size.width);
-            // Find out the line width at this zoom scale and outset the updateRect by that amount
-            CGFloat lineWidth = MKRoadWidthAtZoomScale(currentZoomScale);
-            updateRect = MKMapRectInset(updateRect, -lineWidth, -lineWidth);
-            // Ask the overlay view to update just the changed area.
-            [route_views[pos] setNeedsDisplayInMapRect:updateRect];
-            MKCoordinateRegion region=_mapView.region;
-            region.center = newLocation.coordinate;
-            [_mapView setRegion:region animated:YES];
-        }
-        
-    }
-    
-
-    //if(prev_line != [NSNull null])
-    //    [self.mapView removeOverlay:prev_line];
-    
-    
-    
-    //[route_lines replaceObjectAtIndex:pos withObject:prev_line];
-    
-    
-}
-
-- (void)locationManager:(RidingManager *)manager
-{
-    
-
-    int num= [self getUserNum:@"me"];
-    [self addPoint:num withLocation:[manager current_location]];
-    
-        
-}
-
-
-- (void) RidingStopped
-{
-    int num=[self getUserNum:@"me"];
-    
-    [users removeObjectAtIndex:num];
-    [route_views removeObjectAtIndex:num];
-    [route_lines removeObjectAtIndex:num];
-    [_mapView removeOverlays:_mapView.overlays];
-    
-    
-}
 
 
 
@@ -199,16 +146,18 @@
 
 	MKOverlayView* overlayView = nil;
 	
-    for(int i=0; i<[route_lines count]; ++i){
-        if(overlay == [route_lines objectAtIndex:i]){
-            MKPolylineView *view = [route_views objectAtIndex:i];
+    
+    for(int i=0; i<[path count]; ++i){
+        if(overlay == [path objectAtIndex:i][0]){
+            MKPolylineView *view = [path objectAtIndex:i][1];
             
                 if(view == [NSNull null])
                 {
-                    view = [[[CrumbPathView alloc] initWithOverlay:route_lines[i]] autorelease];
+                    view = [[[CrumbPathView alloc] initWithOverlay:overlay] autorelease];
                     [view setColor:line_color[i]];
                     
-                    [route_views replaceObjectAtIndex:i withObject:view];
+                    [[path objectAtIndex:i] replaceObjectAtIndex:1 withObject:view];
+                    
                     //view.fillColor = [UIColor redColor];
                     //view.strokeColor = [UIColor redColor];
                     //view.lineWidth = 3;
