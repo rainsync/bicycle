@@ -53,7 +53,9 @@
 @interface CrumbPathView : MKOverlayView
 {
     UIColor *color;
+    double width;
 }
+- (id)initWithOverlay:(id <MKOverlay>)overlay;
 -(void)setColor:(UIColor *)c;
-
+-(void)setWidth:(double)w;
 @end

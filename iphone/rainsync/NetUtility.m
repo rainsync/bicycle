@@ -138,9 +138,15 @@
     }
 }
 
--(void)raceRecordWithpos:(NSString*)pos Withblock:(void(^)(NSDictionary *res, NSError *error))block{
+-(void)raceRecordWithpos:(NSMutableArray*)pos_arr Withblock:(void(^)(NSArray *res, NSError *error))block{
     if(Session){
-        [self postPath:@"/" parameters:[[[NSDictionary alloc] initWithObjects:@[@"race-record", Session, pos] forKeys:@[@"type", @"sid", @"pos"]] autorelease] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSMutableArray * arr=[[[NSMutableArray alloc] init] autorelease];
+        for (CLLocation *loc in pos_arr) {            
+            NSDictionary * dic=[[[NSDictionary alloc] initWithObjects:@[@"race-record", Session, [NSString stringWithFormat:@"%0.6lf,%0.6lf",loc.coordinate.latitude, loc.coordinate.longitude]] forKeys:@[@"type", @"sid", @"pos"]] autorelease];
+            [arr addObject:dic];
+        }
+        
+        [self postPath:@"/" parameters:arr success:^(AFHTTPRequestOperation *operation, id responseObject) {
             block(responseObject, nil);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             block(nil,error);

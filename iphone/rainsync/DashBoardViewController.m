@@ -109,6 +109,10 @@
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
         hud.dimBackground=TRUE;
         [hud show:TRUE];
+        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"RidingType"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        
         [net raceInfoWithblock:^(NSDictionary *res, NSError *error) {
             if(error){
                 UIAlertView *view= [[UIAlertView alloc] initWithTitle:@"ERROR" message:error.description delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -132,9 +136,11 @@
                         [groupRideViewController release];
                         
                     }else{
-                        [self.parentViewController setPage:2];
-                        [[self.parentViewController.childViewControllers objectAtIndex:2] ShowMember:participants];
+                        //[self.parentViewController setPage:2];
+                        //[[self.parentViewController.childViewControllers objectAtIndex:2] ShowMember:participants];
                         group_ride_mode=2;
+                        [ridingManager loadStatus];
+                        [ridingManager startRiding];
                     }
                     
                     

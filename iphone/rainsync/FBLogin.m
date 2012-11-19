@@ -43,7 +43,7 @@
             break;
         case FBSessionStateClosed:
         case FBSessionStateClosedLoginFailed:
-            [FBSession.activeSession closeAndClearTokenInformation];
+            //[FBSession.activeSession closeAndClearTokenInformation];
             break;
         default:
             break;
@@ -56,6 +56,7 @@
         end(nil,error);
     }
 
+    Block_release(end);
     
 }
 
@@ -63,7 +64,7 @@
  * Opens a Facebook session and optionally shows the login UX.
  */
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI Withblock:(void(^)(FBSession *session, NSError* error))block{
-    end = block;
+    end = Block_copy(block);
     return [FBSession openActiveSessionWithReadPermissions:nil
                                               allowLoginUI:allowLoginUI
                                          completionHandler:^(FBSession *session,

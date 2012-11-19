@@ -16,12 +16,9 @@
 {
 
 
-    NSMutableArray *users;
-    NSMutableArray *route_lines;
-    NSMutableArray *route_views;
-    NSArray *line_color;
     RidingManager *ridingManager;
-    
+    NSMutableArray *path;
+    NSArray *line_color;
     BOOL isHeading;
 }
 @property (retain, nonatomic) IBOutlet MKMapView *mapView;

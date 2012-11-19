@@ -40,7 +40,7 @@ enum req_type{
 -(void)raceInfoWithblock:(void(^)(NSDictionary *res, NSError *error))block;
 -(void)raceSummaryWithblock:(void(^)(NSDictionary *res, NSError *error))block;
 -(void)raceInviteWithtarget:(NSMutableArray *)arr Withblock:(void(^)(NSDictionary *res, NSError *error))block;
--(void)raceRecordWithpos:(NSString*)pos Withblock:(void(^)(NSDictionary *res, NSError *error))block;
+-(void)raceRecordWithpos:(NSMutableArray*)pos_arr Withblock:(void(^)(NSArray *res, NSError *error))block;
 -(void)loginFaceBookWithblock:(void(^)(FBSession *session, NSError* error))block;
 -(void)RegisterWithFaceBookAndLogin:(void(^)(NSError* error))block;
 

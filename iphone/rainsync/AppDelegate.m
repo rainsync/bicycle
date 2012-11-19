@@ -49,8 +49,8 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 
     
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"session"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
+    //[[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"session"];
+    //[[NSUserDefaults standardUserDefaults]synchronize];
     
     NetUtility *net = [[[NetUtility alloc] init] autorelease];
     

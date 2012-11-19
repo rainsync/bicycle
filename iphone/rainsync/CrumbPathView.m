@@ -61,13 +61,19 @@
 
 @implementation CrumbPathView
 
+- (id)initWithOverlay:(id <MKOverlay>)overlay{
+    [super initWithOverlay:overlay];
+    width=1;
+    return self;
+}
 - (void)drawMapRect:(MKMapRect)mapRect
           zoomScale:(MKZoomScale)zoomScale
           inContext:(CGContextRef)context
 {
+
     CrumbPath *crumbs = (CrumbPath *)(self.overlay);
     
-    CGFloat lineWidth = MKRoadWidthAtZoomScale(zoomScale)/2;
+    CGFloat lineWidth = MKRoadWidthAtZoomScale(zoomScale)/2*width;
     
     // outset the map rect by the line width so that points just outside
     // of the currently drawn rect are included in the generated path.
@@ -188,6 +194,11 @@ static BOOL lineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect r)
 -(void)setColor:(UIColor*)c
 {
     color=c;
+}
+
+-(void)setWidth:(double)w
+{
+    width=w;
 }
 
 

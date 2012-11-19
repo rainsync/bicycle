@@ -62,11 +62,7 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
 
     [self.userTableView dropShadows];
     [self customizeNavBar];
-
-}
     
-- (void)viewWillAppear:(BOOL)animated {
-    //[self.navigationController setNavigationBarHidden:YES animated:animated];
     [net accountFriendListWithblock:^(NSDictionary *res, NSError *error) {
         NSInteger state=[[res objectForKey:@"state"] intValue];
         
@@ -82,6 +78,13 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
         
         
     }];
+    
+
+}
+    
+- (void)viewWillAppear:(BOOL)animated {
+    //[self.navigationController setNavigationBarHidden:YES animated:animated];
+
     
     [super viewWillAppear:animated];
 }
