@@ -50,6 +50,7 @@
 - (void)ShowMember:(NSMutableArray *)parti
 {
     participants = parti;
+    [parti retain];
     for (NSMutableDictionary *dic in participants) {
         NSLog(@"%@ ww", [dic objectForKey:@"nick"]);
     }
@@ -116,7 +117,6 @@
         NSLog(@"fff %d",indexPath.row);
     NSMutableDictionary *person = [participants objectAtIndex:indexPath.row];
     
-    //NSString *profileImagePath = [[NSBundle mainBundle] pathForResource:@"profile_sample.jpg" ofType:nil];
     [cell.memberImage setImageWithURL:[NSURL URLWithString:[person objectForKey:@"picture"]] placeholderImage:[UIImage imageNamed:@"nobody.jpg"]];
     
     cell.memberNumber.text = [NSString stringWithFormat:@"%d", indexPath.row+1];

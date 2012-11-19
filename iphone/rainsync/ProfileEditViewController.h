@@ -55,10 +55,10 @@
 - (IBAction)textFieldDoneEditing:(id)sender;    // 키보드 감추기
 - (IBAction)backgroundTap:(id)sender;           // 배경 터치시 키보드 감추기
 - (IBAction)callCameraAction:(id)sender;        // 카메라 메뉴 호출
-- (IBAction)selectBikeDone:(id)sender;
 
 - (IBAction)selectAge:(id)sender;
 - (IBAction)selectRegion:(id)sender;
 - (IBAction)selectBike:(id)sender;
 
+- (IBAction)hidePicker:(id)sender;
 @end

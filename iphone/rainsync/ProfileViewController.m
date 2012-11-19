@@ -23,7 +23,7 @@
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"프로필", @"프로필");
+        self.title = NSLocalizedString(@"내정보", @"내정보");
         net= [self.tabBarController getNetUtility];
         // Custom initialization
         
@@ -39,10 +39,7 @@
     // Do any additional setup after loading the view from its nib.
     NSString *profileBg = [[NSBundle mainBundle] pathForResource:@"background@2x.jpg" ofType:nil];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:profileBg]];
-    
-    self.navigationItem.rightBarButtonItem = self.editProfileButton;
-    self.editProfileButton.title = @"수정";
-    
+        
     CALayer *layer = [_profileImageView layer];
     [layer setMasksToBounds:YES];
     [layer setCornerRadius:30.0];   // 프로필 사진에 레이어를 씌워 라운딩 처리
@@ -62,6 +59,9 @@
         }else{
             [_disableView setHidden:TRUE];
             [self viewDidAppear:FALSE];
+            
+            self.navigationItem.rightBarButtonItem = self.editProfileButton;    // 로그인 했을때만 수정 가능
+            self.editProfileButton.title = @"수정";
         }
         [HUD hide:TRUE];
     }];
