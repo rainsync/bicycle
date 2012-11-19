@@ -67,7 +67,6 @@
         ridingManager = [self.tabBarController getRidingManager];
         [ridingManager addTarget:self];
         
-        
         // Custom initialization
     }
     return self;
@@ -145,16 +144,18 @@
 {
 
 	MKOverlayView* overlayView = nil;
-	
+    static int width=1;
     
     for(int i=0; i<[path count]; ++i){
         if(overlay == [path objectAtIndex:i][0]){
-            MKPolylineView *view = [path objectAtIndex:i][1];
+            CrumbPathView *view = [path objectAtIndex:i][1];
             
                 if(view == [NSNull null])
                 {
                     view = [[[CrumbPathView alloc] initWithOverlay:overlay] autorelease];
                     [view setColor:line_color[i]];
+                    width+=1;
+                    [view setWidth:10/(1<<width)];
                     
                     [[path objectAtIndex:i] replaceObjectAtIndex:1 withObject:view];
                     
