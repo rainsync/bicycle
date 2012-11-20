@@ -152,7 +152,7 @@
             
                 if(view == [NSNull null])
                 {
-                    view = [[[CrumbPathView alloc] initWithOverlay:overlay] autorelease];
+                    view = [[CrumbPathView alloc] initWithOverlay:overlay];
                     [view setColor:line_color[i]];
                     width+=1;
                     [view setWidth:10/(1<<width)];
