@@ -50,7 +50,6 @@
 - (void)ShowMember:(NSMutableArray *)parti
 {
     participants = parti;
-    [parti retain];
     for (NSMutableDictionary *dic in participants) {
         NSLog(@"%@ ww", [dic objectForKey:@"nick"]);
     }
@@ -75,6 +74,13 @@
     [self setMyView:nil];
     [super viewDidUnload];
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+
+    NSLog(@"TT");
+}
+
 
 #pragma mark - Table view data source
 
