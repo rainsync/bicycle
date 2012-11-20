@@ -12,9 +12,15 @@
 #import "PrettyKit.h"
 #import "UIColor+ColorWithHex.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Utility.h"
+#import "NetUtility.h"
+#import "RidingManager.h"
+
 @interface MemberViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray * participants;
+    RidingManager *ridingManager;
+    
 
 }
 @property (retain, nonatomic) IBOutlet UIView *myView;

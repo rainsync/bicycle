@@ -23,8 +23,109 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        //participants = [[NSMutableArray alloc] init];
+        RidingManager *manager=[self.tabBarController getRidingManager];
+        [manager addTarget:self];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(raceInit:) name:@"raceInit" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(raceInfo:) name:@"raceInfo" object:nil];
+        
+        participants=nil;
     }
     return self;
+}
+
+- (NSMutableDictionary *)getUser:(int)uid
+{
+
+    
+    for (NSMutableDictionary* dic in participants) {
+        if([[dic objectForKey:@"uid"] intValue]==uid)
+            return dic;
+    }
+    
+    return nil;
+}
+
+
+- (void)locationManager:(RidingManager *)manager
+{
+    
+    
+    if([manager current_location].speed == -1)
+        _mySpeedLabel.text = @"0.0";
+    else
+        _mySpeedLabel.text = [NSString stringWithFormat:@"%.1lf", [Utility mpsTokph:[manager current_location].speed]];
+    
+    
+}
+
+- (void)raceInit:(NSNotification*)noti
+{
+    if(participants)
+        [participants release];
+    
+    participants = [[NSMutableArray alloc] init];
+    
+    NSMutableArray * users=[noti userInfo];
+    for (NSDictionary *dic in users) {
+        [participants addObject:[[NSMutableDictionary alloc] initWithDictionary:dic]];
+    }
+    
+    
+    
+    NetUtility *net = [[NetUtility alloc] init];
+    
+    [net accountProfilegGetWithblock:^(NSDictionary *res, NSError *error) {
+        NSInteger state=[[res objectForKey:@"state"] intValue];
+        
+        
+        if(state==0){
+            NSString *nick=[res objectForKey:@"nick"];
+            NSString *picture=[res objectForKey:@"picture"];
+            NSString *email=[res objectForKey:@"email"];
+            [_myNameLabel setText:nick];
+            [_myImageView setImageWithURL:[NSURL URLWithString:picture] placeholderImage:[UIImage imageNamed:@"nobody.jpg"]];
+        
+        }
+        [net release];
+    }];
+    
+    
+    [_tableView reloadData];
+    
+}
+
+- (void)raceInfo:(NSNotification*)noti
+{
+    NSArray * users=[noti userInfo];
+    for (NSDictionary *dic in users) {
+        NSMutableDictionary *user = [self getUser:[[dic objectForKey:@"uid"] intValue]];
+        if(user)
+        {
+            NSArray* arr=[dic objectForKey:@"pos"];
+            NSString *t =[arr lastObject];
+
+            
+            if(arr){
+                NSArray *buf=[[arr lastObject] componentsSeparatedByString:@","];
+                double speed=[buf[2] doubleValue];
+                [user setObject:[NSNumber numberWithDouble:speed] forKey:@"speed"];
+            }
+            
+        }else{
+            [participants addObject:[dic copy]];
+        }
+        
+    }
+    
+    if([participants count])
+    {
+        
+        [_tableView reloadData];
+    }
+    
+    
 }
 
 - (void)viewDidLoad
@@ -47,16 +148,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)ShowMember:(NSMutableArray *)parti
-{
-    participants = parti;
-    for (NSMutableDictionary *dic in participants) {
-        NSLog(@"%@ ww", [dic objectForKey:@"nick"]);
-    }
-    if([participants count]){
-        [_tableView reloadData];
-    }
-}
 
 - (void)dealloc {
     [_tableView release];
@@ -64,6 +155,7 @@
     [_myNameLabel release];
     [_mySpeedLabel release];
     [_myView release];
+    [participants release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -126,8 +218,17 @@
     [cell.memberImage setImageWithURL:[NSURL URLWithString:[person objectForKey:@"picture"]] placeholderImage:[UIImage imageNamed:@"nobody.jpg"]];
     
     cell.memberNumber.text = [NSString stringWithFormat:@"%d", indexPath.row+1];
+    
+    NSString *nick = [person objectForKey:@"nick"];
+    NSNumber *speed= [person objectForKey:@"speed"];
+    if(nick)
     cell.memberName.text = [person objectForKey:@"nick"];
-    cell.memberSpeed.text = @"15.1";
+    
+    if(speed)
+    cell.memberSpeed.text = [NSString stringWithFormat:@"%0.1lf",[Utility mpsTokph:[speed doubleValue]]];
+    else
+    cell.memberSpeed.text = @"0";
+    
     cell.serverStatus.text = @"접속 중";
     NSString *statusImagePath = [[NSBundle mainBundle] pathForResource:@"bLight.png" ofType: nil];
     cell.serverStatusImage.image = [UIImage imageWithContentsOfFile:statusImagePath];

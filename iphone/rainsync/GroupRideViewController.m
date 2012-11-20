@@ -179,24 +179,24 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
 #pragma mark -
 #pragma mark Action Sheet Delegate
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-	// the user clicked one of the OK/Cancel buttons
-	if (buttonIndex == 0)
-	{
-        NSArray *selectedRows = [self.userTableView indexPathsForSelectedRows];
-        if (selectedRows.count > 0)
-        {
-            for (NSIndexPath *selectionIndex in selectedRows)
-            {
-                NSLog(@"%d", selectionIndex.row);
-            }
-        }
-    }
-    else {
-        
-    }
-}
+//- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+//{
+//	// the user clicked one of the OK/Cancel buttons
+//	if (buttonIndex == 0)
+//	{
+//        NSArray *selectedRows = [self.userTableView indexPathsForSelectedRows];
+//        if (selectedRows.count > 0)
+//        {
+//            for (NSIndexPath *selectionIndex in selectedRows)
+//            {
+//                NSLog(@"%d", selectionIndex.row);
+//            }
+//        }
+//    }
+//    else {
+//        
+//    }
+//}
 
 #pragma mark -
 #pragma mark Table view DataSource

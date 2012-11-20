@@ -175,10 +175,11 @@
                             [self.stopButton setEnabled:NO];
                             [self.stopLabel setAlpha:0.5f];
                             
-                            NSLog(@"retain count %d", [participants retainCount]);
-                            [participants retain];
                             [self.parentViewController setPage:2];
-                            [[self.parentViewController.childViewControllers objectAtIndex:2] ShowMember:participants];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"raceInit" object:nil userInfo:participants];
+                            
+                            
+                            
                             [ridingManager loadStatus];
                             [ridingManager startRiding];
                         }

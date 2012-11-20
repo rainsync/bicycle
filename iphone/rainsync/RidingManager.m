@@ -186,7 +186,7 @@
     [locmanager startUpdatingHeading];
 
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(checkTime:) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(checkTime:) userInfo:nil repeats:YES];
 
     
     
@@ -220,21 +220,27 @@
             {
                 NSInteger state = [[res objectForKey:@"state"] intValue];
                     if(state==0){
-                        NSMutableDictionary * dic =[res objectForKey:@"summary"];
-                        for (NSString *key in dic) {
-                            NSInteger uid = [key intValue];
+                        NSMutableArray * arr =[res objectForKey:@"summary"];
+                        if([arr count])
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"raceInfo" object:nil userInfo:arr];
+                        
+                        for (NSMutableDictionary *dic in arr) {
+                            NSInteger uid = [[dic objectForKey:@"uid"] intValue];
+                            
                             NSInteger num=[map getUserNum:uid];
                             if(num==-1){
                                 num =[map createUser:uid];
                             }
                             
-                            NSMutableArray *pos_arr=[dic objectForKey:key];
+                            NSMutableArray *pos_arr=[dic objectForKey:@"pos"];
+                            
+                            
                             for (NSString *pos_str in pos_arr) {
                                 if(pos_str){
                                     NSMutableArray *pos = [pos_str componentsSeparatedByString:@","];
                                     double lat=[pos[0] doubleValue];
                                     double lng=[pos[1] doubleValue];
-                                    //double speed=[pos[2] doubleValue];
+                                    double speed=[pos[2] doubleValue];
                                     [map addPoint:num withLocation:[[CLLocation alloc] initWithLatitude:lat longitude:lng]];
                                 }
                             }
