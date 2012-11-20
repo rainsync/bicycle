@@ -24,6 +24,7 @@
 @property (retain, nonatomic) IBOutlet UILabel *Region;
 @property (retain, nonatomic) IBOutlet UILabel *Age;
 @property (retain, nonatomic) IBOutlet UILabel *Bike;
+@property (retain, nonatomic) IBOutlet UIImageView *profileTexture;
 
 @property (retain, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (retain, nonatomic) IBOutlet UIView *disableView;

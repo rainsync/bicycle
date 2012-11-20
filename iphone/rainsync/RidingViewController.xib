@@ -62,13 +62,9 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUINumberOfPages">3</int>
-						<object class="NSColor" key="IBUIPageIndicatorTintColor">
+						<object class="NSColor" key="IBUICurrentPageIndicatorTintColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwLjU2MDc4NDMxMzcgMC44MzUyOTQxMTc2AA</bytes>
-						</object>
-						<object class="NSColor" key="IBUICurrentPageIndicatorTintColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MAA</bytes>
 						</object>
 					</object>
 				</array>
