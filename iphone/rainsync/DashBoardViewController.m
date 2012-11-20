@@ -25,6 +25,7 @@
         first=true;
         net = [self.tabBarController getNetUtility];
         ridingManager=[self.tabBarController getRidingManager];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(invited:) name:@"invited" object:nil];
         
         // Custom initialization
     }
@@ -101,6 +102,22 @@
     [self.modeChangeLabel setEnabled:1.0f];
 }
 
+//- (void)invited:(NSNotification*)noti{
+//    BOOL isInvited =[[[noti userInfo] objectForKey:@"isInvited"] boolValue];
+//    
+//    if(isInvited)
+//    {
+//        paused=true;
+//        [ridingManager loadStatus];
+//        [ridingManager startRiding];
+//        [self.statusLabel setText:@"멈추기"];
+//        [self.stopButton setEnabled:NO];
+//        [self.stopLabel setAlpha:0.5f];
+//    }else{
+//        
+//    }
+//}
+
 - (IBAction)statusChanged:(id)sender {
 
     NSLog(@"%d", [ridingManager isRiding]);
@@ -110,7 +127,13 @@
     if(!paused){
         if([ridingManager ridingType]==0)
         {
-        [self.statusButton setImage:[UIImage imageNamed:@"pauseSingleRiding"] forState:UIControlStateNormal];
+            [self.statusButton setImage:[UIImage imageNamed:@"pauseSingleRiding"] forState:UIControlStateNormal];
+            paused=true;
+            [ridingManager loadStatus];
+            [ridingManager startRiding];
+            [self.statusLabel setText:@"멈추기"];
+            [self.stopButton setEnabled:NO];
+            [self.stopLabel setAlpha:0.5f];
             
         }else{
         [self.statusButton setImage:[UIImage imageNamed:@"pauseGroupRiding"] forState:UIControlStateNormal];
@@ -134,12 +157,15 @@
                     
                     if(state==0){
                         if([participants count]==0){
-                            GroupRideViewController *groupRideViewController = [GroupRideViewController alloc];
-                            
+                            GroupRideViewController *groupRideViewController = [[GroupRideViewController alloc] initWithNibName:@"GroupRideViewController" bundle:nil];
                             //[self presentModalViewController:groupRideViewController animated:YES];
-                            [self.navigationController pushViewController:groupRideViewController animated:NO];
-                            [groupRideViewController initWithNibName:@"GroupRideViewController" bundle:nil];
+                            [self presentViewController:groupRideViewController animated:TRUE completion:nil];
+                                                       
+                            
+                            //[groupRideViewController initWithNibName:@"GroupRideViewController" bundle:nil];
                             [groupRideViewController release];
+                            
+
                             
                         }else{
                             NSLog(@"retain count %d", [participants retainCount]);
@@ -162,12 +188,7 @@
             }];
         }
         
-        paused=true;
-        [ridingManager loadStatus];
-        [ridingManager startRiding];
-        [self.statusLabel setText:@"멈추기"];
-        [self.stopButton setEnabled:NO];
-        [self.stopLabel setAlpha:0.5f];
+
         
         
     //pause!

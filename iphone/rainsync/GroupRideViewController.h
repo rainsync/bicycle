@@ -11,9 +11,8 @@
 #import "NetUtility.h"
 #import "AFImageRequestOperation.h"
 
-@interface GroupRideViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate> {
-    NetUtility *net;
-}
+@interface GroupRideViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
+
 @property (retain, nonatomic) IBOutlet UITableView *userTableView;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *inviteButton;
 

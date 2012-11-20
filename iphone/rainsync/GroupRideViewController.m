@@ -26,22 +26,12 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        net = [self.tabBarController getNetUtility];
         // Custom initialization
     }
     return self;
 }
 
-- (void) customizeNavBar {
-    PrettyNavigationBar *navBar = (PrettyNavigationBar *)self.navigationController.navigationBar;
-    
-    navBar.topLineColor = [UIColor colorWithHex:0xFF1000];
-    navBar.gradientStartColor = [UIColor colorWithHex:0xDD0000];
-    navBar.gradientEndColor = [UIColor colorWithHex:0xAA0000];
-    navBar.bottomLineColor = [UIColor colorWithHex:0x990000];
-    navBar.tintColor = navBar.gradientEndColor;
-//    navBar.roundedCornerRadius = 8;
-}
+
 
 - (void)viewDidLoad
 {
@@ -61,7 +51,9 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
     self.userTableView.allowsMultipleSelection = YES;  // 복수선택 가능
 
     [self.userTableView dropShadows];
-    [self customizeNavBar];
+    [_inviteButton setEnabled:FALSE];
+    
+    NetUtility *net =[[NetUtility alloc] init];
     
     [net accountFriendListWithblock:^(NSDictionary *res, NSError *error) {
         NSInteger state=[[res objectForKey:@"state"] intValue];
@@ -75,7 +67,7 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
             
             
         }
-        
+        [net release];
         
     }];
     
@@ -98,8 +90,7 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
 -(void)onDoneClick:(id)sender
 {
     // 선택된 유저 초대 푸쉬 보내고 서버 접속 유도
-    [self.navigationController popViewControllerAnimated:YES];
-
+    [self dismissModalViewControllerAnimated:TRUE];
 }
 
 - (void)didReceiveMemoryWarning
@@ -129,8 +120,16 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
                                                destructiveButtonTitle:@"네"
                                                     otherButtonTitles:nil];
 	actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-	[actionSheet showFromTabBar:self.tabBarController.tabBar];	// show from our table view (pops up in the middle of the table)
+	[actionSheet showInView:self.view];	// show from our table view (pops up in the middle of the table)
 	[actionSheet release];
+}
+
+
+- (IBAction)cancel:(id)sender {
+    [self dismissModalViewControllerAnimated:TRUE];
+//    NSDictionary *dic =[[NSDictionary alloc] initWithObjects:@[[NSNumber numberWithBool:FALSE]] forKeys:@[@"isInvited"]];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"invited" object:nil userInfo:dic];
+    
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -145,6 +144,7 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
                 [arr addObject:[[_selectedUserArray objectAtIndex:[_userTableView cellForRowAtIndexPath:path].tag] objectForKey:@"uid"]];
             }
             
+            NetUtility *net =[[NetUtility alloc] init];
             [net raceInviteWithtarget:arr Withblock:^(NSDictionary *res, NSError *error) {
                 if(error)
                 {
@@ -153,10 +153,14 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
                     NSInteger state= [[res objectForKey:@"state"] intValue];
                     if(state==0)
                     {
-                        [self.navigationController popViewControllerAnimated:TRUE];
+                        [self dismissModalViewControllerAnimated:FALSE];
+//                        NSDictionary *dic =[[NSDictionary alloc] initWithObjects:@[[NSNumber numberWithBool:TRUE]] forKeys:@[@"isInvited"]];
+//                        [[NSNotificationCenter defaultCenter] postNotificationName:@"invited" object:nil userInfo:dic];
+
                     }
                 }
                 
+                [net release];
                 [HUD hide:TRUE];
             }];
             //예 버튼
@@ -249,9 +253,7 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
     NSArray *selectedRows = [self.userTableView indexPathsForSelectedRows];
     NSString *inviteButtonTitle = [NSString stringWithFormat:kInvitePartialTitle, selectedRows.count];
     
-    if (selectedRows.count > 0) {
-        self.navigationItem.rightBarButtonItem = _inviteButton; // 네비바 오른쪽 버튼 초대버튼 생성
-    }
+    [_inviteButton setEnabled:YES];
     _inviteButton.title = inviteButtonTitle;
 
     [self.userTableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
@@ -265,9 +267,12 @@ static NSString *kInvitePartialTitle = @"초대 (%d)";
 
     if (selectedRows.count != 0) {
         _inviteButton.title = inviteButtonTitle;
+
     }
     else {
-        self.navigationItem.rightBarButtonItem = nil;
+        _inviteButton.title = @"초대";
+        [_inviteButton setEnabled:FALSE];
+        
     }
 }
 

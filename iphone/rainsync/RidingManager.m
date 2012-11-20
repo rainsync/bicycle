@@ -234,7 +234,7 @@
                                     NSMutableArray *pos = [pos_str componentsSeparatedByString:@","];
                                     double lat=[pos[0] doubleValue];
                                     double lng=[pos[1] doubleValue];
-                                    double speed=[pos[2] doubleValue];
+                                    //double speed=[pos[2] doubleValue];
                                     [map addPoint:num withLocation:[[CLLocation alloc] initWithLatitude:lat longitude:lng]];
                                 }
                             }
