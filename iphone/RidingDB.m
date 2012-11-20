@@ -109,7 +109,6 @@
            
            
            int code= sqlite3_step(statement2);
-           NSLog(@"code %d %f %f", code, location.coordinate.latitude, location.coordinate.longitude);
            sqlite3_finalize(statement2);
        }
 

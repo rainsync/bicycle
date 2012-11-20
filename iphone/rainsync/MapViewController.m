@@ -32,6 +32,14 @@
 {
     
     MKMapRect *rect=[[[noti userInfo] objectForKey:@"rect"] pointerValue];
+    // There is a non null update rect.
+    // Compute the currently visible map zoom scale
+    MKZoomScale currentZoomScale = (CGFloat)(_mapView.bounds.size.width / _mapView.visibleMapRect.size.width);
+    // Find out the line width at this zoom scale and outset the updateRect by that amount
+    CGFloat lineWidth = MKRoadWidthAtZoomScale(currentZoomScale);
+    *rect = MKMapRectInset(*rect, -lineWidth, -lineWidth);
+    // Ask the overlay view to update just the changed area.
+    
     for (NSMutableArray *arr in path) {
         MKOverlayView *view=arr[1];
         if(view!=[NSNull null]){
@@ -152,7 +160,7 @@
             
                 if(view == [NSNull null])
                 {
-                    view = [[[CrumbPathView alloc] initWithOverlay:overlay] autorelease];
+                    view = [[CrumbPathView alloc] initWithOverlay:overlay];
                     [view setColor:line_color[i]];
                     width+=1;
                     [view setWidth:10/(1<<width)];

@@ -23,10 +23,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         first=true;
-        //0
-        
-        
-        group_ride_mode=0;
         net = [self.tabBarController getNetUtility];
         ridingManager=[self.tabBarController getRidingManager];
         
@@ -85,7 +81,11 @@
 
 - (IBAction)stopRiding:(id)sender {
     paused = false;
-    [self.statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
+    if([ridingManager ridingType]==0){
+        [self.statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
+    }else{
+        [self.statusButton setImage:[UIImage imageNamed:@"startGroupRiding"] forState:UIControlStateNormal];
+    }
     
     [ridingManager stopRiding];
     timeLabel.image = [Utility numberImagify:@"00:00:00"];
@@ -105,83 +105,92 @@
 
     NSLog(@"%d", [ridingManager isRiding]);
     NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"RidingType"]);
-    
-    if(![ridingManager isRiding] && [ridingManager ridingType]==1) {    // 시작 전이고 싱글라이딩이 아니라면
 
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
-        hud.dimBackground=TRUE;
-        [hud show:TRUE];
-        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"RidingType"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        
-        [net raceInfoWithblock:^(NSDictionary *res, NSError *error) {
-            if(error){
-                UIAlertView *view= [[UIAlertView alloc] initWithTitle:@"ERROR" message:error.description delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
-                [view show];
-                [view release];
-            }else{
-                
-                NSInteger state=[[res objectForKey:@"state"] intValue];
-                NSMutableArray *participants=[res objectForKey:@"participants"];
-                
-                
-                if(state==0){
-                    if([participants count]==0){
-                        //no one? thne invite!
-                        group_ride_mode=1;
-                        GroupRideViewController *groupRideViewController = [GroupRideViewController alloc];
-                        
-                        //[self presentModalViewController:groupRideViewController animated:YES];
-                        [self.navigationController pushViewController:groupRideViewController animated:NO];
-                        [groupRideViewController initWithNibName:@"GroupRideViewController" bundle:nil];
-                        [groupRideViewController release];
-                        
-                    }else{
-                        //[self.parentViewController setPage:2];
-                        //[[self.parentViewController.childViewControllers objectAtIndex:2] ShowMember:participants];
-                        group_ride_mode=2;
-                        [ridingManager loadStatus];
-                        [ridingManager startRiding];
-                    }
-                    
-                    
-                }else{
-                    group_ride_mode=0;
-                }
-                [hud hide:TRUE];
-
-            }
-        }];
-           }
+    //start!
     if(!paused){
         if([ridingManager ridingType]==0)
         {
+        [self.statusButton setImage:[UIImage imageNamed:@"pauseSingleRiding"] forState:UIControlStateNormal];
+            
+        }else{
+        [self.statusButton setImage:[UIImage imageNamed:@"pauseGroupRiding"] forState:UIControlStateNormal];
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+            hud.dimBackground=TRUE;
+            [hud show:TRUE];
+            [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"RidingType"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            
+            [net raceInfoWithblock:^(NSDictionary *res, NSError *error) {
+                if(error){
+                    UIAlertView *view= [[UIAlertView alloc] initWithTitle:@"ERROR" message:error.description delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                    [view show];
+                    [view release];
+                }else{
+                    
+                    NSInteger state=[[res objectForKey:@"state"] intValue];
+                    NSMutableArray *participants=[res objectForKey:@"participants"];
+                    
+                    
+                    if(state==0){
+                        if([participants count]==0){
+                            GroupRideViewController *groupRideViewController = [GroupRideViewController alloc];
+                            
+                            //[self presentModalViewController:groupRideViewController animated:YES];
+                            [self.navigationController pushViewController:groupRideViewController animated:NO];
+                            [groupRideViewController initWithNibName:@"GroupRideViewController" bundle:nil];
+                            [groupRideViewController release];
+                            
+                        }else{
+                            NSLog(@"retain count %d", [participants retainCount]);
+                            
+                            [participants retain];
+                            [self.parentViewController setPage:2];
+                            [[self.parentViewController.childViewControllers objectAtIndex:2] ShowMember:participants];
+                            [ridingManager loadStatus];
+                            [ridingManager startRiding];
+                        }
+                        
+                        
+                    }else{
+                        
+                    }
+                    [hud hide:TRUE];
+                    
+                }
+
+            }];
+        }
+        
         paused=true;
         [ridingManager loadStatus];
         [ridingManager startRiding];
-        [self.statusButton setImage:[UIImage imageNamed:@"pauseSingleRiding"] forState:UIControlStateNormal];
         [self.statusLabel setText:@"멈추기"];
         [self.stopButton setEnabled:NO];
         [self.stopLabel setAlpha:0.5f];
-            [self.modeChangeButton setEnabled:NO];
-            [self.modeChangeLabel setAlpha:0.5f];
-        }else{
-            
-            
+        
+        
+    //pause!
+    }else{
+        if([ridingManager ridingType]==0)
+        {
+            [self.statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
+        }
+        else{
+            [self.statusButton setImage:[UIImage imageNamed:@"startGroupRiding"] forState:UIControlStateNormal];
             
         }
-    }else{
         
         [ridingManager pauseRiding];
-        
         paused =false;
+
         [self.statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
         if ([ridingManager ridingType] == 0) {
             [self.statusLabel setText:@"같이 달리기"];
         } else {
             [self.statusLabel setText:@"혼자 달리기"];
         }
+
         [self.stopButton setEnabled:YES];
         [self.stopLabel setAlpha:1.0f];
 
@@ -372,7 +381,7 @@ NSInteger type = [ridingManager ridingType];
         [_statusButton addAnimation:rotationAnimation forKey:@"rotateAnimation"];
         
         [_stopButton setImage:[UIImage imageNamed:@"stopSingleRiding"] forState:UIControlStateNormal];
-        [_statusButton setImage:[UIImage imageNamed:@"singleStartRiding"] forState:UIControlStateNormal];
+        [_statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
         [_modeLabel setText:@"Single Riding"];
         [self.statusLabel setText:@"혼자 달리기"];
         

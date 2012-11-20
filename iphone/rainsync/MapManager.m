@@ -16,13 +16,13 @@
    
     users = [[NSMutableArray alloc] init];
     route_lines = [[NSMutableArray alloc]init];
-    //route_views = [[NSMutableArray alloc]init];
+
     return self;
     
 }
 - (NSInteger) getUserNum:(NSInteger)userid
 {
-    @synchronized(self){
+    //@synchronized(self){
     for(int i=0; i<[users count]; ++i){
         NSInteger name= [[users objectAtIndex:i] intValue];
         if(name==userid)
@@ -30,26 +30,26 @@
     }
     
     return -1;
-    }
+    //}
     
 }
 
 - (NSInteger) createUser:(NSInteger)userid
 {
-    @synchronized(self){
+    //@synchronized(self){
     [users addObject:[NSNumber numberWithInt:userid]];
     [route_lines addObject:[NSNull null]];
     //[route_views addObject:[NSNull null]];
     
     int i=[users count]-1;
     return i;
-    }
+    //}
 }
 
 - (void) addPoint:(int)pos withLocation:(CLLocation *)newLocation
 {
     
-    @synchronized(self){
+
     CrumbPath *prev_line = [route_lines objectAtIndex:pos];
     if(prev_line == [NSNull null])
     {
@@ -64,23 +64,22 @@
         
     }else{
         
-        if(pos!=0){
-            NSLog(@"TT RT");
-        }
-        MKMapRect updateRect = [prev_line addCoordinate:newLocation.coordinate];
-        NSLog(@"%lf %lf %lf %lf %p %p gg", updateRect.origin.x, updateRect.origin.y, updateRect.size.height,updateRect.size.width, route_views[pos], [NSNull null]);
-        
-        if (!MKMapRectIsNull(updateRect) && route_views[pos]!=[NSNull null])
-        {
 
+        MKMapRect updateRect = [prev_line addCoordinate:newLocation.coordinate];
+        //NSLog(@"%lf %lf %lf %lf %p %p gg", updateRect.origin.x, updateRect.origin.y, updateRect.size.height,updateRect.size.width, route_views[pos], [NSNull null]);
+        
+        if (!MKMapRectIsNull(updateRect))
+        {
+            
             NSDictionary * dic = [[NSMutableDictionary alloc] initWithObjects:@[[NSValue valueWithPointer:&updateRect]] forKeys:@[@"rect"]];
+
             [[NSNotificationCenter defaultCenter] postNotificationName:@"newRect" object:nil userInfo:dic];
 
 
         }
         
     }
-    }
+
 
     
     
