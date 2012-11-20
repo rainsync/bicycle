@@ -44,5 +44,5 @@ enum req_type{
 -(void)postWitharr:(NSMutableArray *)arr Withblock:(void(^)(NSString* msg ,NSMutableDictionary *res, NSError *error))block;
 -(void)loginFaceBookWithblock:(void(^)(FBSession *session, NSError* error))block;
 -(void)RegisterWithFaceBookAndLogin:(void(^)(NSError* error))block;
-
+-(void)raceEndWithblock:(void(^)(NSDictionary *res, NSError *error))block;
 @end

@@ -128,6 +128,16 @@
     }
 }
 
+-(void)raceEndWithblock:(void(^)(NSDictionary *res, NSError *error))block{
+    if(Session){
+        [self postPath:@"/" parameters:[[[NSDictionary alloc] initWithObjects:@[@"race-end", Session] forKeys:@[@"type", @"sid"]] autorelease] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            block(responseObject, nil);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            block(nil,error);
+        }];
+    }
+}
+
 -(void)addRaceSummaryWitharr:(NSMutableArray *)arr{
     [arr addObject:[[[NSDictionary alloc] initWithObjects:@[@"race-summary", Session] forKeys:@[@"type", @"sid"]] autorelease]];
     return;
