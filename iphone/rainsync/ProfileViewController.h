@@ -16,7 +16,6 @@
 @interface ProfileViewController : UIViewController
 {
     NetUtility *net;
-    
     NSString *profilePath;
 }
 @property (retain, nonatomic) IBOutlet UILabel *Name;

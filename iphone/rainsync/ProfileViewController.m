@@ -96,19 +96,27 @@
                 [view release];
             }else{
                 
-            NSInteger state=[[res objectForKey:@"state"] intValue];
-            NSString *nick=[res objectForKey:@"nick"];
-            NSString *picture=[res objectForKey:@"picture"];
-            NSString *email=[res objectForKey:@"email"];
-            profilePath = [[NSString alloc] initWithString:picture];
-            
-            if(state==0){
-                [_Name setText:nick];
-                [_Email setText:email];
-                [_profileImageView setImageWithURL:[[NSURL alloc] initWithString:picture]];
-                NSLog([NSString stringWithFormat:@"STATE %d NICK %@ PICTURE %@ EMAIL %@", state, nick, picture, email]);
+                NSInteger state=[[res objectForKey:@"state"] intValue];
+
                 
-            }
+                if(state==0){
+                    NSString *nick=[res objectForKey:@"nick"];
+                    NSString *picture=[res objectForKey:@"picture"];
+                    NSString *email=[res objectForKey:@"email"];
+                    [_Name setText:nick];
+                    [_Email setText:email];
+                    profilePath=[[NSURL alloc] initWithString:picture];
+                    [_profileImageView setImageWithURL:profilePath];
+                    NSLog([NSString stringWithFormat:@"STATE %d NICK %@ PICTURE %@ EMAIL %@", state, nick, picture, email]);
+                    
+                }else{
+                    NSString * msg=[res objectForKey:@"msg"];
+                    if(msg){
+                    UIAlertView *view= [[UIAlertView alloc] initWithTitle:@"ERROR" message:msg delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                    [view show];
+                    [view release];
+                    }
+                }
                 
             }
 
