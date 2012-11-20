@@ -9,6 +9,7 @@
 #import "StaticViewController.h"
 #import "DetailViewController.h"
 #import "PrettyKit.h"
+#import "UIColor+ColorWithHex.h"
 
 #define start_color [UIColor colorWithHex:0x646464]
 #define end_color [UIColor colorWithHex:0x292929]
@@ -95,14 +96,26 @@
     static NSString *CellIdentifier = @"Cell";
     
     PrettyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+
+   
     if (cell == nil) {
         cell = [[PrettyTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
 //        cell.tableViewBackgroundColor = tableView.backgroundColor;
-        cell.gradientStartColor = start_color;
-        cell.gradientEndColor = end_color;
+        UIButton *myAccessoryButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, tableView.rowHeight + [PrettyCustomViewTableViewCell tableView:tableView neededHeightForIndexPath:indexPath] -4)];
+        [myAccessoryButton setImage:[UIImage imageNamed:@"customDisclosure"] forState:UIControlStateNormal];
+        
+        if (indexPath.row % 2) {
+            cell.contentView.backgroundColor = [UIColor colorWithHexString:@"0x222f38"];    // 밝은쪽 셀
+            [myAccessoryButton setBackgroundColor:[UIColor colorWithHexString:@"0x222f38"]];
+        }
+        else {
+            cell.contentView.backgroundColor = [UIColor colorWithHexString:@"0x1a2127"];    // 어두운쪽 셀
+            [myAccessoryButton setBackgroundColor:[UIColor colorWithHexString:@"0x1a2127"]];
+        }
+        [cell setAccessoryView:myAccessoryButton];
+        [myAccessoryButton release];
     }
-    
+
     NSUInteger row = [indexPath row];
     NSDictionary *rowData = [_recordings objectAtIndex:row];
     cell.textLabel.text = [Utility timeToDate:[[rowData objectForKey:@"start_date"] doubleValue]];
@@ -124,14 +137,15 @@
     cell.detailTextLabel.backgroundColor = [UIColor blackColor];
     cell.detailTextLabel.numberOfLines = 2;
     cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryType = UITableViewCellAccessoryNone;
     cell.tag = row;
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, tableView.rowHeight + [PrettyCustomViewTableViewCell tableView:tableView neededHeightForIndexPath:indexPath]-4, self.view.bounds.size.width, 2)];
     lineView.backgroundColor = [UIColor blackColor];
     [cell.contentView addSubview:lineView];
     [lineView release]; // 셀 구분지점에 검은색 줄 삽입
-        
+    
+    
     return cell;
 }
 

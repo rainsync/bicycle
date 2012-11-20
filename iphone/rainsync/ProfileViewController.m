@@ -43,6 +43,9 @@
     CALayer *layer = [_profileImageView layer];
     [layer setMasksToBounds:YES];
     [layer setCornerRadius:30.0];   // 프로필 사진에 레이어를 씌워 라운딩 처리
+    
+    [_profileTexture setFrame:CGRectMake(0, self.view.frame.size.height - 180, 320, 230)];
+    [_profileTexture setImage:[UIImage imageNamed:@"profileTexture"]];
 }
 
 - (IBAction)login:(id)sender {
@@ -59,9 +62,6 @@
         }else{
             [_disableView setHidden:TRUE];
             [self viewDidAppear:FALSE];
-            
-            self.navigationItem.rightBarButtonItem = self.editProfileButton;    // 로그인 했을때만 수정 가능
-            self.editProfileButton.title = @"수정";
         }
         [HUD hide:TRUE];
     }];
@@ -88,6 +88,8 @@
     {
         [_disableView setHidden:TRUE];
         
+        self.navigationItem.rightBarButtonItem = self.editProfileButton;    // 로그인 했을때만 수정 가능
+        self.editProfileButton.title = @"수정";
 
         [net accountProfilegGetWithblock:^(NSDictionary *res, NSError *error) {
             if(error){
@@ -147,6 +149,7 @@
     [_Age release];
     [_Region release];
     [_Bike release];
+    [_profileTexture release];
     [super dealloc];
 
 }
@@ -161,6 +164,7 @@
     [self setAge:nil];
     [self setRegion:nil];
     [self setBike:nil];
+    [self setProfileTexture:nil];
     [super viewDidUnload];
 }
 

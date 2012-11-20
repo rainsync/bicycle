@@ -211,7 +211,14 @@
         
         [ridingManager pauseRiding];
         paused =false;
-        [self.statusLabel setText:@"달리기"];
+
+        [self.statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
+        if ([ridingManager ridingType] == 0) {
+            [self.statusLabel setText:@"같이 달리기"];
+        } else {
+            [self.statusLabel setText:@"혼자 달리기"];
+        }
+
         [self.stopButton setEnabled:YES];
         [self.stopLabel setAlpha:1.0f];
 
@@ -229,12 +236,14 @@
 NSInteger type = [ridingManager ridingType];
 
     if (type==0) {
-       [_modeLabel setText:@"Single Riding"];
+        [_modeLabel setText:@"Single Riding"];
+        [self.statusLabel setText:@"혼자 달리기"];
         [_stopButton setImage:[UIImage imageNamed:@"stopSingleRiding"] forState:UIControlStateNormal];
-        [_statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];        
+        [_statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
     }
     else if(type==1){
         [_modeLabel setText:@"Group Riding"];
+        [self.statusLabel setText:@"같이 달리기"];
         [_stopButton setImage:[UIImage imageNamed:@"stopGroupRiding"] forState:UIControlStateNormal];
         [_statusButton setImage:[UIImage imageNamed:@"startGroupRiding"] forState:UIControlStateNormal];
         
@@ -368,13 +377,26 @@ NSInteger type = [ridingManager ridingType];
     rotationAnimation2.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     rotationAnimation2.delegate = self;
     
+    CABasicAnimation* rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.removedOnCompletion = NO;
+    rotationAnimation.fillMode = kCAFillModeForwards;
+    rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    rotationAnimation.delegate = self;
+    
     if (type==0) {
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"RidingType"];
-//        [_modeChangeButton setTitle:@"싱글모드로" forState:UIControlStateNormal];
+        
+        rotationAnimation.fromValue = [NSNumber numberWithInt:0];
+        rotationAnimation.toValue = [NSNumber numberWithFloat:M_PI * 2];//(1 * M_PI) * direction];
+        rotationAnimation.duration = 0.5f;
+        [_stopButton addAnimation:rotationAnimation forKey:@"rotateAnimation"];
+        [_statusButton addAnimation:rotationAnimation forKey:@"rotateAnimation"];
+        
         [_stopButton setImage:[UIImage imageNamed:@"stopGroupRiding"] forState:UIControlStateNormal];
         [_statusButton setImage:[UIImage imageNamed:@"startGroupRiding"] forState:UIControlStateNormal];
         [_modeLabel setText:@"Group Riding"];
-        
+        [self.statusLabel setText:@"같이 달리기"];
+                
         rotationAnimation2.fromValue = [NSNumber numberWithInt:0];
         rotationAnimation2.toValue = [NSNumber numberWithFloat:M_PI_2];//(1 * M_PI) * direction];
         rotationAnimation2.duration = 0.5f;
@@ -383,10 +405,17 @@ NSInteger type = [ridingManager ridingType];
     else if(type==1)
     {
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"RidingType"];
-//        [_modeChangeButton setTitle:@"그룹모드로" forState:UIControlStateNormal];
+
+        rotationAnimation.fromValue = [NSNumber numberWithFloat:M_PI * 2];
+        rotationAnimation.toValue = [NSNumber numberWithInt:0];//(1 * M_PI) * direction];
+        rotationAnimation.duration = 0.5f;
+        [_stopButton addAnimation:rotationAnimation forKey:@"rotateAnimation"];
+        [_statusButton addAnimation:rotationAnimation forKey:@"rotateAnimation"];
+        
         [_stopButton setImage:[UIImage imageNamed:@"stopSingleRiding"] forState:UIControlStateNormal];
         [_statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
         [_modeLabel setText:@"Single Riding"];
+        [self.statusLabel setText:@"혼자 달리기"];
         
         rotationAnimation2.fromValue = [NSNumber numberWithFloat:M_PI_2];
         rotationAnimation2.toValue = [NSNumber numberWithInt:0];//(1 * M_PI) * direction];
