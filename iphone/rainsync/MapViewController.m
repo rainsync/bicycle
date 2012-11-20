@@ -163,7 +163,7 @@
                     view = [[CrumbPathView alloc] initWithOverlay:overlay];
                     [view setColor:line_color[i]];
                     width+=1;
-                    [view setWidth:10/(1<<width)];
+                    [view setWidth:(double)10/(1<<width)];
                     
                     [[path objectAtIndex:i] replaceObjectAtIndex:1 withObject:view];
                     
