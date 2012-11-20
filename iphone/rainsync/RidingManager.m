@@ -201,57 +201,53 @@
     [self saveStatus];
     
     [ridingDB  saveLocation:_last_riding withLocation:locations];
-    if([self ridingType]==1){
-    [net raceRecordWithpos:locations Withblock:^(NSArray *res, NSError *error) {
-        for (NSMutableDictionary *dic in res) {
-            NSInteger state = [[dic objectForKey:@"state"] intValue];
-            if(state==0){
-                NSLog(@"record success!");
-                
-            }
-        }
 
+    
+    
+    if([self ridingType]==1){
+        NSMutableArray *arr =[[NSMutableArray alloc] init];
         
-    }];
+        if([locations count])
+        [net addRaceRecordWithpos:locations Witharr:arr];
+        
+        [net addRaceSummaryWitharr:arr];
+        
+        [net postWitharr:arr Withblock:^(NSString *msg, NSMutableDictionary *res, NSError *error) {
+            if(error){
+                
+            }else{
+            if([msg isEqualToString:@"race-summary"])
+            {
+                NSInteger state = [[res objectForKey:@"state"] intValue];
+                    if(state==0){
+                        NSMutableDictionary * dic =[res objectForKey:@"summary"];
+                        for (NSString *key in dic) {
+                            NSInteger uid = [key intValue];
+                            NSInteger num=[map getUserNum:uid];
+                            if(num==-1){
+                                num =[map createUser:uid];
+                            }
+                            
+                            NSMutableArray *pos_arr=[dic objectForKey:key];
+                            for (NSString *pos_str in pos_arr) {
+                                if(pos_str){
+                                    NSMutableArray *pos = [pos_str componentsSeparatedByString:@","];
+                                    double lat=[pos[0] doubleValue];
+                                    double lng=[pos[1] doubleValue];
+                                    [map addPoint:num withLocation:[[CLLocation alloc] initWithLatitude:lat longitude:lng]];
+                                }
+                            }
+                        
+                        }
+                    }
+                }
+            }
+
+        }];
+
     }
     
     [locations removeAllObjects];
-    
-    if([self ridingType]==1 && first_line){
-    [net raceSummaryWithblock:^(NSDictionary *res, NSError *error) {
-        NSInteger state = [[res objectForKey:@"state"] intValue];
-        if(state==0){
-            NSMutableDictionary * dic =[res objectForKey:@"summary"];
-            for (NSString *key in dic) {
-                NSLog(@"GGGGGG");
-                NSInteger uid = [key intValue];
-                NSInteger num=[map getUserNum:uid];
-                if(num==-1){
-                    num =[map createUser:uid];
-                    
-
-                    //add overlay noti
-                    
-                }
-                NSMutableArray *pos_arr=[dic objectForKey:key];
-                for (NSString *pos_str in pos_arr) {
-                    if(pos_str){
-                    NSMutableArray *pos = [pos_str componentsSeparatedByString:@","];
-                    //CLLocationCoordinate2D loc = CLLocationCoordinate2DMake([pos[0] doubleValue], [pos[1] doubleValue]);
-                    double lat=[pos[0] doubleValue];
-                    double lng=[pos[1] doubleValue];
-                    [map addPoint:num withLocation:[[CLLocation alloc] initWithLatitude:lat longitude:lng]];
-                    }
-                }
-                
-            }
-            
-            
-        }
-        
-    }];
-    }
-    
     
     for (id obj in targets) {
         if([obj respondsToSelector:@selector(updateTime:)])

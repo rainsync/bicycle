@@ -135,11 +135,14 @@
 
 -(void)addRaceRecordWithpos:(NSMutableArray*)pos_arr Witharr:(NSMutableArray *)arr
 {
-
+        NSMutableArray *buf =[[[NSMutableArray alloc] init] autorelease];
         for (CLLocation *loc in pos_arr) {            
-            NSDictionary * dic=[[[NSDictionary alloc] initWithObjects:@[@"race-record", Session, [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.latitude, loc.coordinate.longitude]] forKeys:@[@"type", @"sid", @"pos"]] autorelease];
-            [arr addObject:dic];
+            
+            [buf addObject:[NSString stringWithFormat:@"%lf,%lf",loc.coordinate.latitude, loc.coordinate.longitude]];
         }
+        NSDictionary * dic=[[[NSDictionary alloc] initWithObjects:@[@"race-record", Session,buf] forKeys:@[@"type", @"sid", @"pos"]] autorelease];
+        [arr addObject:dic];
+                        
         return;
 
 }
