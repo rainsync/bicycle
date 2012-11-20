@@ -29,7 +29,7 @@
     
     
 
-    queue = [[Queue alloc]init];
+
     fblogin = [[FBLogin alloc] init];
     Session=[self getSession];
     
@@ -40,7 +40,7 @@
 
 
 -(void)dealloc{
-    [queue release];
+    [fblogin dealloc];
     [super dealloc];
 }
 
@@ -128,28 +128,40 @@
     }
 }
 
--(void)raceSummaryWithblock:(void(^)(NSDictionary *res, NSError *error))block{
-    if(Session){
-        [self postPath:@"/" parameters:[[[NSDictionary alloc] initWithObjects:@[@"race-summary", Session] forKeys:@[@"type", @"sid"]] autorelease] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            block(responseObject, nil);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            block(nil,error);
-        }];
-    }
+-(void)addRaceSummaryWitharr:(NSMutableArray *)arr{
+    [arr addObject:[[[NSDictionary alloc] initWithObjects:@[@"race-summary", Session] forKeys:@[@"type", @"sid"]] autorelease]];
+    return;
 }
 
--(void)raceRecordWithpos:(NSMutableArray*)pos_arr Withblock:(void(^)(NSArray *res, NSError *error))block{
-    if(Session){
-        NSMutableArray * arr=[[[NSMutableArray alloc] init] autorelease];
+-(void)addRaceRecordWithpos:(NSMutableArray*)pos_arr Witharr:(NSMutableArray *)arr
+{
+
         for (CLLocation *loc in pos_arr) {            
-            NSDictionary * dic=[[[NSDictionary alloc] initWithObjects:@[@"race-record", Session, [NSString stringWithFormat:@"%0.6lf,%0.6lf",loc.coordinate.latitude, loc.coordinate.longitude]] forKeys:@[@"type", @"sid", @"pos"]] autorelease];
+            NSDictionary * dic=[[[NSDictionary alloc] initWithObjects:@[@"race-record", Session, [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.latitude, loc.coordinate.longitude]] forKeys:@[@"type", @"sid", @"pos"]] autorelease];
             [arr addObject:dic];
+        }
+        return;
+
+}
+
+-(void)postWitharr:(NSMutableArray *)arr Withblock:(void(^)(NSString* msg ,NSMutableDictionary *res, NSError *error))block
+{
+    if(Session){
+        Queue *queue = [[Queue alloc] init];
+        
+        for (NSDictionary *dic in arr) {
+            [queue push:[dic objectForKey:@"type"]];
         }
         
         [self postPath:@"/" parameters:arr success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            block(responseObject, nil);
+            for (int i=0; i<[queue count]; i++) {
+                block([queue pop], responseObject[i], nil);
+            }
+            [queue release];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            block(nil,error);
+            block(@"", nil,error);
+            [queue release];
         }];
     }
 }

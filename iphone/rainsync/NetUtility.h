@@ -38,9 +38,10 @@ enum req_type{
 -(void)accountAuthWith:(NSString*)accesstoken Withblock:(void(^)(NSDictionary *res, NSError *error))block;
 -(void)accountFriendListWithblock:(void(^)(NSDictionary *res, NSError *error))block;
 -(void)raceInfoWithblock:(void(^)(NSDictionary *res, NSError *error))block;
--(void)raceSummaryWithblock:(void(^)(NSDictionary *res, NSError *error))block;
 -(void)raceInviteWithtarget:(NSMutableArray *)arr Withblock:(void(^)(NSDictionary *res, NSError *error))block;
--(void)raceRecordWithpos:(NSMutableArray*)pos_arr Withblock:(void(^)(NSArray *res, NSError *error))block;
+-(void)addRaceSummaryWitharr:(NSMutableArray *)arr;
+-(void)addRaceRecordWithpos:(NSMutableArray*)pos_arr Witharr:(NSMutableArray *)arr;
+-(void)postWitharr:(NSMutableArray *)arr Withblock:(void(^)(NSString* msg ,NSMutableDictionary *res, NSError *error))block;
 -(void)loginFaceBookWithblock:(void(^)(FBSession *session, NSError* error))block;
 -(void)RegisterWithFaceBookAndLogin:(void(^)(NSError* error))block;
 
