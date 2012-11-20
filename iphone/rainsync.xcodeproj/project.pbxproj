@@ -156,6 +156,7 @@
 		5570A94E1635574F008E2F50 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A94D1635574F008E2F50 /* CoreLocation.framework */; };
 		5570A955163557FD008E2F50 /* CoreLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5570A954163557FC008E2F50 /* CoreLocationController.m */; };
 		5570A9571635765D008E2F50 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A9561635765D008E2F50 /* MapKit.framework */; };
+		557A2DAB165B6DF700BB4227 /* gangnam.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 557A2DAA165B6DF700BB4227 /* gangnam.gpx */; };
 		558A5A321642389C00BC22ED /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A5A311642389C00BC22ED /* Queue.m */; };
 		558A5A3316423F5E00BC22ED /* Queue.h in Sources */ = {isa = PBXBuildFile; fileRef = 558A5A301642389C00BC22ED /* Queue.h */; };
 		558A5A3416423F5E00BC22ED /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A5A311642389C00BC22ED /* Queue.m */; };
@@ -370,6 +371,7 @@
 		5570A953163557EE008E2F50 /* CoreLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreLocationController.h; sourceTree = "<group>"; };
 		5570A954163557FC008E2F50 /* CoreLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreLocationController.m; sourceTree = "<group>"; };
 		5570A9561635765D008E2F50 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		557A2DAA165B6DF700BB4227 /* gangnam.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gangnam.gpx; sourceTree = "<group>"; };
 		558A5A301642389C00BC22ED /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
 		558A5A311642389C00BC22ED /* Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Queue.m; sourceTree = "<group>"; };
 		55910F901637F4E800B007CA /* RidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RidingViewController.h; sourceTree = "<group>"; };
@@ -765,6 +767,7 @@
 				04C3C04F164BCC1100047992 /* SystemConfiguration.framework */,
 				04C3C04B164BCBD600047992 /* BugSense-iOS.framework */,
 				5513073B164956AF005653B1 /* fells_loop.gpx */,
+				557A2DAA165B6DF700BB4227 /* gangnam.gpx */,
 				5517E9251647987A00E2CDD3 /* libsqlite3.dylib */,
 				04ADF5B6163EABE000F825B4 /* MobileCoreServices.framework */,
 				5501C14E1636D4210073ACB1 /* AdSupport.framework */,
@@ -1026,6 +1029,7 @@
 				041C2DF4165AA20D0084765F /* pauseSingleRiding@2x.png in Resources */,
 				041C2DF6165AA2F10084765F /* modeChanger@2x.png in Resources */,
 				041C2DF8165AA5F90084765F /* dashboard@2x.png in Resources */,
+				557A2DAB165B6DF700BB4227 /* gangnam.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
