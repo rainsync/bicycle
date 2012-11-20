@@ -138,7 +138,7 @@
         NSMutableArray *buf =[[[NSMutableArray alloc] init] autorelease];
         for (CLLocation *loc in pos_arr) {            
             
-            [buf addObject:[NSString stringWithFormat:@"%lf,%lf",loc.coordinate.latitude, loc.coordinate.longitude]];
+            [buf addObject:[NSString stringWithFormat:@"%lf,%lf,%lf",loc.coordinate.latitude, loc.coordinate.longitude, loc.speed]];
         }
         NSDictionary * dic=[[[NSDictionary alloc] initWithObjects:@[@"race-record", Session,buf] forKeys:@[@"type", @"sid", @"pos"]] autorelease];
         [arr addObject:dic];
