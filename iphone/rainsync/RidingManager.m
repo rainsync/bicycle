@@ -270,10 +270,16 @@
     [locmanager stopUpdatingHeading];
     
 
-    
+
     if(timer){
         [timer invalidate];
         timer = nil;
+    }
+    
+    if([self ridingType]==1){
+        [net raceEndWithblock:^(NSDictionary *res, NSError *error) {
+            
+        }];
     }
     
     for (id obj in targets) {

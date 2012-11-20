@@ -98,8 +98,7 @@
     [self.stopButton setEnabled:NO];
     [self.stopLabel setAlpha:0.5f];
     
-    [self.modeChangeButton setEnabled:YES];
-    [self.modeChangeLabel setEnabled:1.0f];
+
 }
 
 //- (void)invited:(NSNotification*)noti{
@@ -136,7 +135,8 @@
             [self.stopLabel setAlpha:0.5f];
             
         }else{
-        [self.statusButton setImage:[UIImage imageNamed:@"pauseGroupRiding"] forState:UIControlStateNormal];
+            [self.statusButton setImage:[UIImage imageNamed:@"pauseGroupRiding"] forState:UIControlStateNormal];
+            
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
             hud.dimBackground=TRUE;
             [hud show:TRUE];
@@ -179,9 +179,6 @@
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"raceInit" object:nil userInfo:participants];
                             
                             
-                            
-                            [ridingManager loadStatus];
-                            [ridingManager startRiding];
                         }
                         
                         
@@ -203,29 +200,20 @@
         if([ridingManager ridingType]==0)
         {
             [self.statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
+            [self.statusLabel setText:@"혼자 달리기"];
         }
         else{
             [self.statusButton setImage:[UIImage imageNamed:@"startGroupRiding"] forState:UIControlStateNormal];
+            [self.statusLabel setText:@"같이 달리기"];
             
         }
         
         [ridingManager pauseRiding];
         paused =false;
 
-        [self.statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
-        if ([ridingManager ridingType] == 0) {
-            [self.statusLabel setText:@"같이 달리기"];
-        } else {
-            [self.statusLabel setText:@"혼자 달리기"];
-        }
-
         [self.stopButton setEnabled:YES];
         [self.stopLabel setAlpha:1.0f];
 
-        if (![ridingManager isRiding]) { // 일시정지지만 라이딩을 시작 안했을때만 모드 변경 가능
-            [self.modeChangeButton setEnabled:YES];
-            [self.modeChangeLabel setEnabled:1.0f];
-        }
     }
 }
 
@@ -366,7 +354,7 @@ NSInteger type = [ridingManager ridingType];
 - (IBAction)modeChange:(id)sender {
     
     //라이딩 시에는 모드를 바꿀 수 없게 함
-    if([ridingManager isRiding])
+    if(paused || [ridingManager isRiding])
         return;
     
     NSInteger type = [ridingManager ridingType];
