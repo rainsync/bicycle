@@ -59,9 +59,6 @@
         }else{
             [_disableView setHidden:TRUE];
             [self viewDidAppear:FALSE];
-            
-            self.navigationItem.rightBarButtonItem = self.editProfileButton;    // 로그인 했을때만 수정 가능
-            self.editProfileButton.title = @"수정";
         }
         [HUD hide:TRUE];
     }];
@@ -88,6 +85,8 @@
     {
         [_disableView setHidden:TRUE];
         
+        self.navigationItem.rightBarButtonItem = self.editProfileButton;    // 로그인 했을때만 수정 가능
+        self.editProfileButton.title = @"수정";
 
         [net accountProfilegGetWithblock:^(NSDictionary *res, NSError *error) {
             if(error){
