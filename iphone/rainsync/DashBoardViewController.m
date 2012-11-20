@@ -23,10 +23,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         first=true;
-        //0
-        
-        
-        group_ride_mode=0;
         net = [self.tabBarController getNetUtility];
         ridingManager=[self.tabBarController getRidingManager];
         
@@ -85,7 +81,11 @@
 
 - (IBAction)stopRiding:(id)sender {
     paused = false;
-    [self.statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
+    if([ridingManager ridingType]==0){
+        [self.statusButton setImage:[UIImage imageNamed:@"startSingleRiding"] forState:UIControlStateNormal];
+    }else{
+        [self.statusButton setImage:[UIImage imageNamed:@"startGroupRiding"] forState:UIControlStateNormal];
+    }
     
     [ridingManager stopRiding];
     timeLabel.image = [Utility numberImagify:@"00:00:00"];
@@ -110,10 +110,10 @@
     if(!paused){
         if([ridingManager ridingType]==0)
         {
-        [self.statusButton setImage:[UIImage imageNamed:@"pause_SingleRiding"] forState:UIControlStateNormal];
+        [self.statusButton setImage:[UIImage imageNamed:@"pauseSingleRiding"] forState:UIControlStateNormal];
             
         }else{
-        [self.statusButton setImage:[UIImage imageNamed:@"pause_GroupRiding"] forState:UIControlStateNormal];
+        [self.statusButton setImage:[UIImage imageNamed:@"pauseGroupRiding"] forState:UIControlStateNormal];
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
             hud.dimBackground=TRUE;
             [hud show:TRUE];
@@ -134,8 +134,6 @@
                     
                     if(state==0){
                         if([participants count]==0){
-                            //no one? thne invite!
-                            group_ride_mode=1;
                             GroupRideViewController *groupRideViewController = [GroupRideViewController alloc];
                             
                             //[self presentModalViewController:groupRideViewController animated:YES];
@@ -144,17 +142,18 @@
                             [groupRideViewController release];
                             
                         }else{
+                            NSLog(@"retain count %d", [participants retainCount]);
+                            
                             [participants retain];
                             [self.parentViewController setPage:2];
                             [[self.parentViewController.childViewControllers objectAtIndex:2] ShowMember:participants];
-                            group_ride_mode=2;
                             [ridingManager loadStatus];
                             [ridingManager startRiding];
                         }
                         
                         
                     }else{
-                        group_ride_mode=0;
+                        
                     }
                     [hud hide:TRUE];
                     

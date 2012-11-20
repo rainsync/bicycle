@@ -18,7 +18,6 @@
     bool paused;
     bool first;
     BOOL isSingleMode;
-    int group_ride_mode;
     RidingManager *ridingManager;
     NetUtility *net;
 
