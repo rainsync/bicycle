@@ -168,8 +168,14 @@
 
                             
                         }else{
-                            NSLog(@"retain count %d", [participants retainCount]);
+                            paused=true;
+                            [ridingManager loadStatus];
+                            [ridingManager startRiding];
+                            [self.statusLabel setText:@"멈추기"];
+                            [self.stopButton setEnabled:NO];
+                            [self.stopLabel setAlpha:0.5f];
                             
+                            NSLog(@"retain count %d", [participants retainCount]);
                             [participants retain];
                             [self.parentViewController setPage:2];
                             [[self.parentViewController.childViewControllers objectAtIndex:2] ShowMember:participants];
@@ -348,7 +354,11 @@ NSInteger type = [ridingManager ridingType];
 }
 
 - (IBAction)modeChange:(id)sender {
-
+    
+    //라이딩 시에는 모드를 바꿀 수 없게 함
+    if([ridingManager isRiding])
+        return;
+    
     NSInteger type = [ridingManager ridingType];
         
     CABasicAnimation* rotationAnimation2 = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
