@@ -10,17 +10,22 @@
 #import <Foundation/Foundation.h>
 #import "CrumbPath.h"
 #import "CrumbPathView.h"
+#import "PictureAnnotationView.h"
+
 #import <MapKit/MapKit.h>
 
-@interface MapManager : NSObject <MKMapViewDelegate>
+@interface RouteMapViewController : UIViewController <MKMapViewDelegate>
 {
     NSMutableArray *users;
     NSMutableArray *route_lines;
     NSMutableArray *route_views;
-
+    NSMutableArray *profile_annotation;
+    NSMutableArray *profile_views;
+    NSArray *line_color;
+    int width;
 
 }
-@property (nonatomic, retain) MKMapView *mapView;
+@property (nonatomic, retain) IBOutlet MKMapView *mapView;
 - (NSInteger) getUserNum:(NSInteger)userid;
 - (NSInteger) createUser:(NSInteger)userid;
 - (void) addPoint:(int)pos withLocation:(CLLocation *)newLocation;

@@ -11,7 +11,7 @@
 #import "RidingDB.h"
 #import "Utility.h"
 #import "NetUtility.h"
-#import "MapManager.h"
+
 @class RidingDB;
 
 @interface RidingManager : NSObject <CLLocationManagerDelegate, UIAlertViewDelegate>
@@ -28,8 +28,7 @@
     int weight;
     RidingDB *ridingDB;
     NetUtility *net;
-    MapManager *map;
-    BOOL first_line;
+    BOOL first;
     //inital speed
     
     

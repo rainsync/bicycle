@@ -22,15 +22,8 @@
     targets = [[NSMutableArray alloc] init];
     ridingDB = [[RidingDB alloc] init];
     net =[[NetUtility alloc]init];
-    map =[[MapManager alloc] init];
-    
-    NSInteger uid = 0;
-    NSInteger num=[map getUserNum:uid];
-    if(num==-1){
-        num =[map createUser:uid];
-    }
-    
-    first_line=false;
+
+
     return self;
 }
 
@@ -188,7 +181,7 @@
     
     timer = [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(checkTime:) userInfo:nil repeats:YES];
 
-    
+    first=false;
     
 }
 
@@ -212,6 +205,7 @@
         
         [net addRaceSummaryWitharr:arr];
         
+        if(first)
         [net postWitharr:arr Withblock:^(NSString *msg, NSMutableDictionary *res, NSError *error) {
             if(error){
                 
@@ -227,11 +221,6 @@
                         for (NSMutableDictionary *dic in arr) {
                             NSInteger uid = [[dic objectForKey:@"uid"] intValue];
                             
-                            NSInteger num=[map getUserNum:uid];
-                            if(num==-1){
-                                num =[map createUser:uid];
-                            }
-                            
                             NSMutableArray *pos_arr=[dic objectForKey:@"pos"];
                             
                             
@@ -241,7 +230,10 @@
                                     double lat=[pos[0] doubleValue];
                                     double lng=[pos[1] doubleValue];
                                     double speed=[pos[2] doubleValue];
-                                    [map addPoint:num withLocation:[[CLLocation alloc] initWithLatitude:lat longitude:lng]];
+                                    NSDictionary *dic = [[NSDictionary alloc] initWithObjects:@[[NSNumber numberWithInt:uid] ,[[CLLocation alloc] initWithLatitude:lat longitude:lng]] forKeys:@[@"uid", @"location"]];
+                                    
+                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"addPoint" object:nil userInfo:dic];
+                                    
                                 }
                             }
                         
@@ -265,7 +257,7 @@
 
 - (void)stopRiding
 {
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"clear" object:nil userInfo:nil];
     [locmanager stopUpdatingLocation];
     [locmanager stopUpdatingHeading];
     
@@ -359,10 +351,9 @@
     
     _current_location=newLocation;
     
-    
-
-    [map addPoint:0 withLocation:newLocation];
-    first_line=true;
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjects:@[[NSNumber numberWithInt:0] ,newLocation] forKeys:@[@"uid", @"location"]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"addPoint" object:nil userInfo:dic];
+    first = true;
     
     [locations addObject:newLocation];
     

@@ -9,19 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MKMapView.h>
 #import "RidingManager.h"
-#import "CrumbPath.h"
-#import "CrumbPathView.h"
+#import "RouteMapViewController.h"
 
-@interface MapViewController : UIViewController <MKMapViewDelegate, UIActionSheetDelegate>
+@interface MapViewController : RouteMapViewController <UIActionSheetDelegate>
 {
 
 
     RidingManager *ridingManager;
-    NSMutableArray *path;
-    NSArray *line_color;
     BOOL isHeading;
 }
-@property (retain, nonatomic) IBOutlet MKMapView *mapView;
 - (IBAction)changeMap:(id)sender;
 - (IBAction)setHeading:(id)sender;
 - (NSInteger)getUserNum:(NSString*)username;
