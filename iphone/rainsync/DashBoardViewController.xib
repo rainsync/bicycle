@@ -951,12 +951,12 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="background.png">{522, 783}</string>
-			<string key="circle_dash@2x.png">{320, 125}</string>
-			<string key="dashboard@2x.png">{670, 661}</string>
-			<string key="modeChanger@2x.png">{106, 106}</string>
-			<string key="startSingleRiding@2x.png">{162, 113}</string>
-			<string key="stopSingleRiding@2x.png">{132, 91}</string>
+			<string key="background.png">{16, 16}</string>
+			<string key="circle_dash@2x.png">{16, 16}</string>
+			<string key="dashboard@2x.png">{16, 16}</string>
+			<string key="modeChanger@2x.png">{16, 16}</string>
+			<string key="startSingleRiding@2x.png">{16, 16}</string>
+			<string key="stopSingleRiding@2x.png">{16, 16}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1929</string>
 	</data>
