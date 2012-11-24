@@ -1,10 +1,8 @@
 /*
-     File: CrumbPathView.h
- Abstract: 
- CrumbPathView is an MKOverlayView subclass that displays a path that changes over time.
- This class also demonstrates the fastest way to convert a list of MKMapPoints into a CGPath for drawing in an overlay view.
+     File: WeatherAnnotationView.m
+ Abstract: The UIView or MKAnnotationView for drawing each weather location's data.
  
-  Version: 1.5
+  Version: 1.1
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
  Inc. ("Apple") in consideration of your agreement to the following
@@ -44,19 +42,82 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
  
- Copyright (C) 2011 Apple Inc. All Rights Reserved.
+ Copyright (C) 2010 Apple Inc. All Rights Reserved.
  
  */
 
-#import <MapKit/MapKit.h>
+#import "PictureAnnotationView.h"
+#import "UIColor+ColorWithHex.h"
 
-@interface CrumbPathView : MKOverlayView
+extern int n;
+
+@implementation PictureAnnotationView
+
+- (id)initWithAnnotation:(id <MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier
 {
-    UIColor *color;
-    double width;
+    line_color = [[NSArray alloc] initWithArray:@[[UIColor redColor],[UIColor colorWithHexString:@"008fd5"], [UIColor colorWithHexString:@"e6a9b8"], [UIColor blackColor], [UIColor whiteColor]]];
     
+    self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
+    if (self != nil)
+    {
+        CGRect frame = self.frame;
+        frame.size = CGSizeMake(30.0, 30.0);
+        self.frame = frame;
+        self.backgroundColor = [UIColor clearColor];
+        self.centerOffset = CGPointMake(0, 0);
+        
+        color = line_color[n];
+        
+        if(n%2==0){
+            picture=[UIImage imageNamed:@"hidden.jpg"];
+            
+            self.centerOffset = CGPointMake(30 , 30);
+        }
+        else if(n%2==1){
+            picture=[UIImage imageNamed:@"nobody.jpg"];
+            self.centerOffset = CGPointMake(-30 , -30);
+        }
+        n++;
+        
+    }
+    return self;
 }
-- (id)initWithOverlay:(id <MKOverlay>)overlay;
--(void)setColor:(UIColor *)c;
--(void)setWidth:(double)w;
+
+- (void)setImage:(UIImage *)image
+{
+    picture = image;
+}
+
+- (void)setAnnotation:(id <MKAnnotation>)annotation
+{
+    [super setAnnotation:annotation];
+    
+    // this annotation view has custom drawing code.  So when we reuse an annotation view
+    // (through MapView's delegate "dequeueReusableAnnoationViewWithIdentifier" which returns non-nil)
+    // we need to have it redraw the new annotation data.
+    //
+    // for any other custom annotation view which has just contains a simple image, this won't be needed
+    //
+    [self setNeedsDisplay];
+}
+
+- (void)drawRect:(CGRect)rect
+{
+
+    if (picture != nil)
+    {
+
+    
+        [picture drawInRect:CGRectMake(0, 0, 30.0, 30.0)];
+        
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        // Draw a yellow hollow rectangle
+        CGFloat r,g,b,a;
+        [color getRed:&r green:&g blue:&b alpha:&a];
+        
+        CGContextSetRGBStrokeColor(ctx, r, g, b, a);
+        CGContextStrokeRectWithWidth(ctx, CGRectMake(0, 0, 30.0, 30.0),6);
+    }
+}
+
 @end

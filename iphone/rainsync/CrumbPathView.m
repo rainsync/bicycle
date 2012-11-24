@@ -63,8 +63,13 @@
 
 - (id)initWithOverlay:(id <MKOverlay>)overlay{
     [super initWithOverlay:overlay];
+    
     width=1;
     return self;
+}
+
+- (void)setImage:(UIImage *)image{
+
 }
 - (void)drawMapRect:(MKMapRect)mapRect
           zoomScale:(MKZoomScale)zoomScale
@@ -88,6 +93,7 @@
     
     if (path != nil)
     {
+        
         CGContextAddPath(context, path);
         float r=0,g=0,b=0,a=0;
         [color getRed:&r green:&g blue:&b alpha:&a];

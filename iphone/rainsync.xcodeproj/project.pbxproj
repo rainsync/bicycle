@@ -156,6 +156,9 @@
 		5570A94E1635574F008E2F50 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A94D1635574F008E2F50 /* CoreLocation.framework */; };
 		5570A955163557FD008E2F50 /* CoreLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5570A954163557FC008E2F50 /* CoreLocationController.m */; };
 		5570A9571635765D008E2F50 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5570A9561635765D008E2F50 /* MapKit.framework */; };
+		5578EA9A1660BB4F00926FC9 /* PictureAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5578EA991660BB4F00926FC9 /* PictureAnnotationView.m */; };
+		5578EA9F1660C66200926FC9 /* hidden.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5578EA9E1660C66200926FC9 /* hidden.jpg */; };
+		5578EAA11660CA6D00926FC9 /* hidden2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5578EAA01660CA6D00926FC9 /* hidden2.jpg */; };
 		557A2DAB165B6DF700BB4227 /* gangnam.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 557A2DAA165B6DF700BB4227 /* gangnam.gpx */; };
 		558A5A321642389C00BC22ED /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A5A311642389C00BC22ED /* Queue.m */; };
 		558A5A3316423F5E00BC22ED /* Queue.h in Sources */ = {isa = PBXBuildFile; fileRef = 558A5A301642389C00BC22ED /* Queue.h */; };
@@ -176,7 +179,7 @@
 		55B1D8071650FAB30032D86C /* FirstSettingViewController-568.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B1D8061650FAB30032D86C /* FirstSettingViewController-568.xib */; };
 		55B1D8091650FB5C0032D86C /* background-568@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55B1D8081650FB5C0032D86C /* background-568@2x.png */; };
 		55BAA8E6165358D900D4401E /* FBLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BAA8E5165358D900D4401E /* FBLogin.m */; };
-		55BBAAC91659FF0700770565 /* MapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAAC81659FF0600770565 /* MapManager.m */; };
+		55BBAAC91659FF0700770565 /* RouteMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAAC81659FF0600770565 /* RouteMapViewController.m */; };
 		55BCD6C5165620A100FA9133 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BCD6C4165620A100FA9133 /* MBProgressHUD.m */; };
 		55BCD6C6165620A100FA9133 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BCD6C4165620A100FA9133 /* MBProgressHUD.m */; };
 		55CAB2A0165006FF0052AB2E /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CAB29F165006FF0052AB2E /* Utility.m */; };
@@ -371,6 +374,10 @@
 		5570A953163557EE008E2F50 /* CoreLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreLocationController.h; sourceTree = "<group>"; };
 		5570A954163557FC008E2F50 /* CoreLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreLocationController.m; sourceTree = "<group>"; };
 		5570A9561635765D008E2F50 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		5578EA981660BB4A00926FC9 /* PictureAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureAnnotationView.h; sourceTree = "<group>"; };
+		5578EA991660BB4F00926FC9 /* PictureAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureAnnotationView.m; sourceTree = "<group>"; };
+		5578EA9E1660C66200926FC9 /* hidden.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hidden.jpg; sourceTree = "<group>"; };
+		5578EAA01660CA6D00926FC9 /* hidden2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hidden2.jpg; sourceTree = "<group>"; };
 		557A2DAA165B6DF700BB4227 /* gangnam.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gangnam.gpx; sourceTree = "<group>"; };
 		558A5A301642389C00BC22ED /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
 		558A5A311642389C00BC22ED /* Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Queue.m; sourceTree = "<group>"; };
@@ -391,8 +398,8 @@
 		55B1D8081650FB5C0032D86C /* background-568@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-568@2x.png"; sourceTree = "<group>"; };
 		55BAA8E4165358D900D4401E /* FBLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLogin.h; sourceTree = "<group>"; };
 		55BAA8E5165358D900D4401E /* FBLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLogin.m; sourceTree = "<group>"; };
-		55BBAAC71659FF0600770565 /* MapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapManager.h; sourceTree = "<group>"; };
-		55BBAAC81659FF0600770565 /* MapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapManager.m; sourceTree = "<group>"; };
+		55BBAAC71659FF0600770565 /* RouteMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteMapViewController.h; sourceTree = "<group>"; };
+		55BBAAC81659FF0600770565 /* RouteMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteMapViewController.m; sourceTree = "<group>"; };
 		55BCD6C3165620A100FA9133 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
 		55BCD6C4165620A100FA9133 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		55CAB29E165006FF0052AB2E /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
@@ -442,6 +449,8 @@
 			isa = PBXGroup;
 			children = (
 				55E607801658EE4400A4F1C9 /* nobody.jpg */,
+				5578EA9E1660C66200926FC9 /* hidden.jpg */,
+				5578EAA01660CA6D00926FC9 /* hidden2.jpg */,
 				0457896216426860008E56CA /* Facebook_icon.png */,
 				043E8A9B165A133B00D415E5 /* static@2x.png */,
 				043E8A9C165A133B00D415E5 /* profile3@2x.png */,
@@ -690,8 +699,8 @@
 				04E7584816529BF000D933FC /* UIColor+ColorWithHex.m */,
 				55BAA8E4165358D900D4401E /* FBLogin.h */,
 				55BAA8E5165358D900D4401E /* FBLogin.m */,
-				55BBAAC71659FF0600770565 /* MapManager.h */,
-				55BBAAC81659FF0600770565 /* MapManager.m */,
+				55BBAAC71659FF0600770565 /* RouteMapViewController.h */,
+				55BBAAC81659FF0600770565 /* RouteMapViewController.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -703,6 +712,8 @@
 				55337D14164BD089001019C2 /* CrumbPath.m */,
 				55337D15164BD089001019C2 /* CrumbPathView.h */,
 				55337D16164BD089001019C2 /* CrumbPathView.m */,
+				5578EA981660BB4A00926FC9 /* PictureAnnotationView.h */,
+				5578EA991660BB4F00926FC9 /* PictureAnnotationView.m */,
 				5570A94816355489008E2F50 /* MapViewController.h */,
 				5570A94916355489008E2F50 /* MapViewController.m */,
 				5570A94A16355489008E2F50 /* MapViewController.xib */,
@@ -1030,6 +1041,8 @@
 				041C2DF6165AA2F10084765F /* modeChanger@2x.png in Resources */,
 				041C2DF8165AA5F90084765F /* dashboard@2x.png in Resources */,
 				557A2DAB165B6DF700BB4227 /* gangnam.gpx in Resources */,
+				5578EA9F1660C66200926FC9 /* hidden.jpg in Resources */,
+				5578EAA11660CA6D00926FC9 /* hidden2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1115,7 +1128,8 @@
 				04E758621652B7AD00D933FC /* MemberCustomCell.m in Sources */,
 				55BAA8E6165358D900D4401E /* FBLogin.m in Sources */,
 				55BCD6C5165620A100FA9133 /* MBProgressHUD.m in Sources */,
-				55BBAAC91659FF0700770565 /* MapManager.m in Sources */,
+				55BBAAC91659FF0700770565 /* RouteMapViewController.m in Sources */,
+				5578EA9A1660BB4F00926FC9 /* PictureAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
