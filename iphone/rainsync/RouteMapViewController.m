@@ -23,6 +23,7 @@
         profile_annotation = [[NSMutableArray alloc]init];
         profile_views = [[NSMutableArray alloc]init];
     line_color = [[NSArray alloc] initWithArray:@[[UIColor redColor],[UIColor colorWithHexString:@"008fd5"], [UIColor colorWithHexString:@"e6a9b8"], [UIColor blackColor], [UIColor whiteColor]]];
+
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clear:) name:@"clear" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addPoint:) name:@"addPoint" object:nil];

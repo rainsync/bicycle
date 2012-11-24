@@ -49,6 +49,7 @@
 #import "PictureAnnotationView.h"
 #import "UIColor+ColorWithHex.h"
 
+
 extern int n;
 
 @implementation PictureAnnotationView
@@ -56,7 +57,7 @@ extern int n;
 - (id)initWithAnnotation:(id <MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier
 {
     line_color = [[NSArray alloc] initWithArray:@[[UIColor redColor],[UIColor colorWithHexString:@"008fd5"], [UIColor colorWithHexString:@"e6a9b8"], [UIColor blackColor], [UIColor whiteColor]]];
-    
+
     self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
     if (self != nil)
     {
@@ -65,7 +66,7 @@ extern int n;
         self.frame = frame;
         self.backgroundColor = [UIColor clearColor];
         self.centerOffset = CGPointMake(0, 0);
-        
+
         color = line_color[n];
         
         if(n%2==0){
@@ -76,6 +77,7 @@ extern int n;
         else if(n%2==1){
             picture=[UIImage imageNamed:@"nobody.jpg"];
             self.centerOffset = CGPointMake(-30 , -30);
+
         }
         n++;
         
@@ -106,8 +108,6 @@ extern int n;
 
     if (picture != nil)
     {
-
-    
         [picture drawInRect:CGRectMake(0, 0, 30.0, 30.0)];
         
         CGContextRef ctx = UIGraphicsGetCurrentContext();
@@ -117,6 +117,7 @@ extern int n;
         
         CGContextSetRGBStrokeColor(ctx, r, g, b, a);
         CGContextStrokeRectWithWidth(ctx, CGRectMake(0, 0, 30.0, 30.0),6);
+
     }
 }
 
